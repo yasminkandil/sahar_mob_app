@@ -13,20 +13,19 @@ class AddProductPage extends StatefulWidget {
 }
 
 class _AddProductPageState extends State<AddProductPage> {
-  String? _selectedValC = 'black';
-  String? _selectedValQ = 'Original';
-  String? _selectedValCat = 'Headphones';
+  String selectedValC = 'black';
+  String selectedValQ = 'Original';
+  String selectedValCat = 'Headphones';
 
   List Listcolors = ['black', 'blue'];
   List ListCateg = [
     'Headphones',
     'PowerBank',
-    'cables',
-    'Charger',
-    'Car Holder',
+    'Speakers',
+    'Chargers',
+    'Cables',
     'Memory',
-    'Maintainence',
-    'Speakers'
+    'Maintanance'
   ];
   List ListQuality = ['Original', 'HighCopy'];
 
@@ -54,19 +53,19 @@ class _AddProductPageState extends State<AddProductPage> {
                       hint: "colors",
                       icon: Icons.border_color,
                       listt: Listcolors,
-                      select: _selectedValQ,
+                      select: "black",
                     ),
                     _dropDown(
                       hint: "Quality",
-                      icon: Icons.border_color,
+                      icon: Icons.high_quality,
                       listt: ListQuality,
-                      select: _selectedValC,
+                      select: "Original",
                     ),
                     _dropDown(
                       hint: "Category",
-                      icon: Icons.border_color,
+                      icon: Icons.category,
                       listt: ListCateg,
-                      select: _selectedValCat,
+                      select: "Headphones",
                     ),
                     Expanded(
                       child: Center(
@@ -111,13 +110,16 @@ class _AddProductPageState extends State<AddProductPage> {
         decoration: InputDecoration(
           border: InputBorder.none,
           hintText: hint,
-          prefixIcon: Icon(icon),
+          prefixIcon: Icon(
+            icon,
+            color: Color.fromARGB(255, 249, 118, 3),
+          ),
         ),
       ),
     );
   }
 
-  Widget _dropDown({hint, icon, required List listt, required String? select}) {
+  Widget _dropDown({hint, icon, required List listt, required String select}) {
     return DropdownButtonFormField(
       value: select,
       items: listt
