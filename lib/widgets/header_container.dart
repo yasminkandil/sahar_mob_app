@@ -19,7 +19,7 @@ class HeaderContainer extends StatelessWidget {
       child: Stack(
         children: <Widget>[
           Center(
-            child: Image.asset("assets/noBack.png"),
+            child: Image.asset("assets/logoo.png"),
           ),
         ],
       ),
