@@ -46,8 +46,8 @@ class _EditProfileUIState extends State<EditProfileUI>
           child:Stack(
           children: [
             Container(
-              width: 130,
-              height: 130,
+              width: 140,
+              height: 140,
               decoration: BoxDecoration(
                 border:Border.all(width: 4,color: Colors.white),
                 boxShadow:[
