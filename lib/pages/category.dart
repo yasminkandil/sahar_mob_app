@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:sahar_mob_app/pages/login_page.dart';
 import 'package:sahar_mob_app/pages/regi_page.dart';
-import 'package:sahar_mob_app/style/colors.dart';
+import 'package:sahar_mob_app/utils/color.dart';
 import 'package:sahar_mob_app/style/style.dart';
+import 'package:sahar_mob_app/style/colors.dart';
 
 class CategoryPage extends StatelessWidget {
   const CategoryPage({super.key});
@@ -18,7 +19,7 @@ class CategoryPage extends StatelessWidget {
           height: size.height,
           width: size.width,
           decoration: const BoxDecoration(
-            color: Color.fromARGB(255, 90, 65, 65),
+            color: Color.fromARGB(255, 50, 49, 48),
           ),
           child: SafeArea(
             child: Align(
@@ -61,8 +62,7 @@ class CategoryPage extends StatelessWidget {
             height: size.height - (size.height / 5),
             width: size.width,
             decoration: BoxDecoration(
-                color: AppColors.orange,
-                borderRadius: BorderRadius.circular(40)),
+                color: orangeColors, borderRadius: BorderRadius.circular(40)),
             child: Column(children: [
               Row(
                 children: [
