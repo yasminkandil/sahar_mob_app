@@ -26,8 +26,7 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.blue,
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
-      home: ContactUs(),
-      //home: CategoryPage(),
+      home: CategoryPage(),
     );
   }
 }
