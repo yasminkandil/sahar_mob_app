@@ -12,6 +12,7 @@ import 'package:sahar_mob_app/style/style.dart';
 import 'pages/regi_page.dart';
 import 'pages/login_page.dart';
 import 'pages/add_product.dart';
+import 'pages/edit_product.dart';
 
 void main() {
   runApp(MyApp());
@@ -27,7 +28,7 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.blue,
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
-      home: CategoryPage(),
+      home: SafeArea(child: EditProductPage()),
     );
   }
 }
