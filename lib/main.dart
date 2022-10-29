@@ -33,11 +33,7 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.blue,
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
-<<<<<<< HEAD
-      home: SafeArea(child: ViewAccountPage()),
-=======
       home: SafeArea(child: AddOfferPage()),
->>>>>>> 4a84ed26965e36b6a995006587475adc3452c2f8
     );
   }
 }
