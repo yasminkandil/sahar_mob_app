@@ -8,12 +8,12 @@ import 'package:sahar_mob_app/utils/color.dart';
 import 'package:sahar_mob_app/widgets/btn_widget.dart';
 //import 'package:sahar_mob_app/widgets/header_container.dart';
 
-class AddCategPage extends StatefulWidget {
+class AddColorPage extends StatefulWidget {
   @override
-  _AddCategPageState createState() => _AddCategPageState();
+  _AddColorPageState createState() => _AddColorPageState();
 }
 
-class _AddCategPageState extends State<AddCategPage> {
+class _AddColorPageState extends State<AddColorPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -70,15 +70,14 @@ class _AddCategPageState extends State<AddCategPage> {
                 child: Column(
                   mainAxisSize: MainAxisSize.max,
                   children: <Widget>[
-                    _textInput(hint: "Category Name", icon: Icons.category),
-                    _textInput(hint: "Category Subtitle", icon: Icons.category),
+                    _textInput(hint: "Color Name", icon: Icons.category),
                     ListTile(
                       title: Row(
                         mainAxisSize: MainAxisSize.max,
                         children: <Widget>[
                           Expanded(
                             child: ButtonWidget2(
-                              btnText: "Add Category",
+                              btnText: "Add Color",
                               onClick: () {
                                 Navigator.pop(context);
                               },
@@ -86,7 +85,7 @@ class _AddCategPageState extends State<AddCategPage> {
                           ),
                           Expanded(
                             child: ButtonWidgetdelete(
-                              btnText: "Delete Category",
+                              btnText: "Delete Color",
                               onClick: () {
                                 Navigator.pop(context);
                               },
