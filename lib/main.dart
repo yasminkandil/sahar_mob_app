@@ -6,6 +6,7 @@ import 'package:sahar_mob_app/pages/regi_page.dart';
 import 'package:sahar_mob_app/pages/add_product.dart';
 import 'package:sahar_mob_app/pages/category.dart';
 import 'package:sahar_mob_app/pages/order_history.dart';
+import 'package:sahar_mob_app/pages/view_account.dart';
 import 'package:sahar_mob_app/style/colors.dart';
 import 'package:sahar_mob_app/style/style.dart';
 
@@ -28,7 +29,7 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.blue,
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
-      home: SafeArea(child: EditProductPage()),
+      home: SafeArea(child: ViewAccountPage()),
     );
   }
 }
