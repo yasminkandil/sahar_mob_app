@@ -14,6 +14,10 @@ import 'pages/regi_page.dart';
 import 'pages/login_page.dart';
 import 'pages/add_product.dart';
 import 'pages/edit_product.dart';
+import 'pages/add_category.dart';
+import 'pages/add_quality.dart';
+import 'pages/add_offer.dart';
+import 'pages/gallery.dart';
 
 void main() {
   runApp(MyApp());
@@ -29,7 +33,11 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.blue,
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
+<<<<<<< HEAD
       home: SafeArea(child: ViewAccountPage()),
+=======
+      home: SafeArea(child: AddOfferPage()),
+>>>>>>> 4a84ed26965e36b6a995006587475adc3452c2f8
     );
   }
 }
