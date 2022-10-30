@@ -38,16 +38,11 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.blue,
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
-<<<<<<< HEAD
-      home: SafeArea(child: RegisterPage()),
-=======
-<<<<<<< HEAD
+     // home: SafeArea(child: RegisterPage()),
       // home: Shop(),
-      home: AddProductPage(),
+     // home: AddProductPage(),
       //home: CategoryPage(),
-=======
       home: SafeArea(child: ViewAccountPage()),
->>>>>>> bf7641920686ce698e822447cb66838036e1323d
     );
   }
 }
@@ -94,7 +89,6 @@ class _CartAppState extends State<CartApp> {
           ],
         ),
       ),
->>>>>>> 12c0f6001f39dda883f5685615fe7436eb43d287
     );
   }
 }
