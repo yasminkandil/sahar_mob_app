@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:sahar_mob_app/pages/view_account.dart';
 import 'package:sahar_mob_app/utils/color.dart';
 import 'package:sahar_mob_app/widgets/header_container.dart';
 
@@ -24,7 +25,12 @@ class _EditProfileUIState extends State<EditProfileUI>
         icon: Icon(
           Icons.arrow_back,
           color:orangeColors,
-       ), onPressed: () {  },
+       ), onPressed: () {   Navigator.push(context,
+                  MaterialPageRoute(builder: (context) {
+                  return ViewAccountPage();
+                              }),
+                              );
+                              }, 
        ),
        actions: [
         IconButton(icon:Icon(

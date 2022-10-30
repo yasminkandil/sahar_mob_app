@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:sahar_mob_app/pages/edit_account.dart';
 import 'package:sahar_mob_app/utils/color.dart';
 import 'package:sahar_mob_app/widgets/header_container.dart';
 
@@ -138,7 +139,14 @@ class _ViewAccountPageState extends State<ViewAccountPage>
 
               ),
               ),
-              ElevatedButton(onPressed: (){}, 
+              ElevatedButton(onPressed: (){
+                Navigator.push(context,
+                  MaterialPageRoute(builder: (context) {
+                  return EditProfileUI();
+                              }),
+                              );
+                              },
+ 
               child: Text("Edit", style: TextStyle(
                 fontSize: 15,
                 letterSpacing: 2,
