@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 // import 'package:flutter/material.dart';
+=======
+/*import 'package:flutter/material.dart';
+>>>>>>> 77dd889f5a6f84e5bc74d30b62609993a27a0fbd
 
 // //import '../ProductModel.dart';
 // import 'package:sahar_mob_app/models/ProductModel.dart';
@@ -20,6 +24,7 @@
 //     ProductModel("CD", 3),
 //   ];
 
+<<<<<<< HEAD
 //   @override
 //   Widget build(BuildContext context) {
 //     return ListView.separated(
@@ -44,3 +49,30 @@
 //         itemCount: products.length);
 //   }
 // }
+=======
+  @override
+  Widget build(BuildContext context) {
+    return ListView.separated(
+        itemBuilder: (context, index) {
+          return ListTile(
+            title: Text(products[index].name),
+            trailing: Text(
+              "\$${products[index].price}",
+              style: TextStyle(
+                  color: Colors.redAccent,
+                  fontSize: 20,
+                  fontWeight: FontWeight.w500),
+            ),
+            onTap: () {
+              _valueSetter(products[index]);
+            },
+          );
+        },
+        separatorBuilder: (context, index) {
+          return Divider();
+        },
+        itemCount: products.length);
+  }
+}
+*/
+>>>>>>> 77dd889f5a6f84e5bc74d30b62609993a27a0fbd
