@@ -8,11 +8,8 @@ import 'package:sahar_mob_app/pages/regi_page.dart';
 import 'package:sahar_mob_app/pages/add_product.dart';
 import 'package:sahar_mob_app/pages/category.dart';
 import 'package:sahar_mob_app/pages/order_history.dart';
-<<<<<<< HEAD
 import 'package:sahar_mob_app/pages/products_powerbank.dart';
-=======
 import 'package:sahar_mob_app/pages/view_account.dart';
->>>>>>> 0b75c52a640cef9297ffa7698e7cb24f29ef439b
 import 'package:sahar_mob_app/style/colors.dart';
 import 'package:sahar_mob_app/style/style.dart';
 
@@ -44,18 +41,13 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.blue,
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
-<<<<<<< HEAD
-      home: PowerBank(),
-=======
+     // home: PowerBank(),
       //home: SafeArea(child: LoginPage()),
-      home: SafeArea(child: Admin()),
+     // home: SafeArea(child: Admin()),
       // home: Shop(),
       // home: AddProductPage(),
->>>>>>> 0b75c52a640cef9297ffa7698e7cb24f29ef439b
       //home: CategoryPage(),
-<<<<<<< HEAD
-      home: SafeArea(child: Navigation_bar()),
-=======
+      home: SafeArea(child: RegisterPage()),
       //home: SafeArea(child: ViewAccountPage()),
     );
   }
@@ -103,7 +95,6 @@ class _CartAppState extends State<CartApp> {
           ],
         ),
       ),
->>>>>>> 77dd889f5a6f84e5bc74d30b62609993a27a0fbd
     );
   }
 }*/

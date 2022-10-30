@@ -1,5 +1,5 @@
-import 'package:flutter/material.dart';
-import 'package:sahar_mob_app/constants.dart';
+/*import 'package:flutter/material.dart';
+//import 'package:sahar_mob_app/constants.dart';
 
 class Categorie extends StatefulWidget {
   const Categorie({super.key});
@@ -47,7 +47,7 @@ class _CategorieState extends State<Categorie> {
                   style: TextStyle(
                       fontWeight: FontWeight.bold,
                       color: selectedIndex == index
-                          ? kTextColor
+                          ? TextColor
                           : Color.fromARGB(72, 0, 0, 0))),
               Container(
                 margin: EdgeInsets.only(top: 15 / 4),
@@ -61,3 +61,4 @@ class _CategorieState extends State<Categorie> {
         ),
       );
 }
+/**/ */
