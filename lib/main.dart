@@ -33,7 +33,7 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.blue,
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
-      home: SafeArea(child: ViewAccountPage()),
+      home: SafeArea(child: RegisterPage()),
     );
   }
 }

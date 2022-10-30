@@ -125,7 +125,9 @@ class _AddProductPageState extends State<AddProductPage> {
                             style: TextStyle(color: Colors.black)),
                         TextSpan(
                             text: "Edit",
+                            
                             style: TextStyle(color: orangeColors)),
+                            
                       ]),
                     )
                   ],
