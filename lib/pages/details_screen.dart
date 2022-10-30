@@ -1,4 +1,9 @@
+<<<<<<< HEAD
 // import 'package:flutter/material.dart';
+=======
+
+/*import 'package:flutter/material.dart';
+>>>>>>> 0b75c52a640cef9297ffa7698e7cb24f29ef439b
 
 // import '../../models/Product.dart';
 // import 'body.dart';
@@ -26,5 +31,11 @@
 // class ProductDetailsArguments {
 //   final Product product;
 
+<<<<<<< HEAD
 //   ProductDetailsArguments({required this.product});
 // }
+=======
+  ProductDetailsArguments({required this.product});
+}
+*/
+>>>>>>> 0b75c52a640cef9297ffa7698e7cb24f29ef439b

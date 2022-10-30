@@ -12,7 +12,7 @@ class ContactUsForm extends State<ContactUs>
   Widget build(BuildContext context) {
     // TODO: implement build
     return Scaffold(
-      backgroundColor: Color.fromARGB(0, 255, 255, 255),
+      backgroundColor: Color.fromARGB(0, 240, 255, 255),
        body: Column(             
         crossAxisAlignment: CrossAxisAlignment.center,
 

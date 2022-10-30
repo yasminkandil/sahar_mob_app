@@ -1,33 +1,20 @@
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 //import 'package:image_picker/image_picker.dart';
 
 import 'package:sahar_mob_app/utils/color.dart';
 import 'package:sahar_mob_app/widgets/btn_widget.dart';
 //import 'package:sahar_mob_app/widgets/header_container.dart';
 
-class AddProductPage extends StatefulWidget {
+class AddOfferPage extends StatefulWidget {
   @override
-  _AddProductPageState createState() => _AddProductPageState();
+  _AddOfferPageState createState() => _AddOfferPageState();
 }
 
-class _AddProductPageState extends State<AddProductPage> {
-  String selectedValC = 'black';
-  String selectedValQ = 'Original';
-  String selectedValCat = 'Headphones';
-
-  List Listcolors = ['black', 'blue'];
-  List ListCateg = [
-    'Headphones',
-    'PowerBank',
-    'Speakers',
-    'Chargers',
-    'Cables',
-    'Memory',
-    'Maintanance'
-  ];
-  List ListQuality = ['Original', 'HighCopy'];
+class _AddOfferPageState extends State<AddOfferPage> {
+  TextEditingController dateInput = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -85,33 +72,79 @@ class _AddProductPageState extends State<AddProductPage> {
                 child: Column(
                   mainAxisSize: MainAxisSize.max,
                   children: <Widget>[
-                    _textInput(hint: "Product Name", icon: Icons.person),
-                    _textInput(hint: "Description", icon: Icons.person),
-                    _textInput(hint: "About", icon: Icons.email),
-                    _textInput(hint: "Price", icon: Icons.call),
-                    _textInput(hint: "Quantity", icon: Icons.location_city),
-                    _dropDown(
-                      hint: "colors",
-                      icon: Icons.border_color,
-                      listt: Listcolors,
-                      select: "black",
+                    _textInput(hint: "Offer Name", icon: Icons.edit),
+                    _textInput(hint: "Description", icon: Icons.edit),
+                    _textInput(hint: "Percentage", icon: Icons.percent),
+                    TextField(
+                      controller: dateInput,
+                      //editing controller of this TextField
+                      decoration: InputDecoration(
+                          icon: Icon(
+                              color: Colors.orange,
+                              Icons.calendar_today), //icon of text field
+                          labelText: "Enter Start Date" //label text of field
+                          ),
+
+                      //set it true, so that user will not able to edit text
+                      onTap: () async {
+                        DateTime? pickedDate = await showDatePicker(
+                            context: context,
+                            initialDate: DateTime.now(),
+                            firstDate: DateTime(2022),
+                            //DateTime.now() - not to allow to choose before today.
+                            lastDate: DateTime(2100));
+
+                        if (pickedDate != null) {
+                          print(
+                              pickedDate); //pickedDate output format => 2021-03-10 00:00:00.000
+                          String formattedDate =
+                              DateFormat('yyyy-MM-dd').format(pickedDate);
+                          print(
+                              formattedDate); //formatted date output using intl package =>  2021-03-16
+                          setState(() {
+                            dateInput.text =
+                                formattedDate; //set output date to TextField value.
+                          });
+                        } else {}
+                      },
                     ),
-                    _dropDown(
-                      hint: "Quality",
-                      icon: Icons.high_quality,
-                      listt: ListQuality,
-                      select: "Original",
-                    ),
-                    _dropDown(
-                      hint: "Category",
-                      icon: Icons.category,
-                      listt: ListCateg,
-                      select: "Headphones",
+                    TextField(
+                      controller: dateInput,
+                      //editing controller of this TextField
+                      decoration: InputDecoration(
+                          icon: Icon(
+                              color: Colors.orange,
+                              Icons.calendar_today), //icon of text field
+                          labelText: "Enter End Date" //label text of field
+                          ),
+
+                      //set it true, so that user will not able to edit text
+                      onTap: () async {
+                        DateTime? pickedDate = await showDatePicker(
+                            context: context,
+                            initialDate: DateTime.now(),
+                            firstDate: DateTime(2022),
+                            //DateTime.now() - not to allow to choose before today.
+                            lastDate: DateTime(2100));
+
+                        if (pickedDate != null) {
+                          print(
+                              pickedDate); //pickedDate output format => 2021-03-10 00:00:00.000
+                          String formattedDate =
+                              DateFormat('yyyy-MM-dd').format(pickedDate);
+                          print(
+                              formattedDate); //formatted date output using intl package =>  2021-03-16
+                          setState(() {
+                            dateInput.text =
+                                formattedDate; //set output date to TextField value.
+                          });
+                        } else {}
+                      },
                     ),
                     Expanded(
                       child: Center(
                         child: ButtonWidget(
-                          btnText: "Add Product",
+                          btnText: "Add Offer",
                           onClick: () {
                             Navigator.pop(context);
                           },
@@ -121,13 +154,11 @@ class _AddProductPageState extends State<AddProductPage> {
                     RichText(
                       text: TextSpan(children: [
                         TextSpan(
-                            text: "want to edit product ? ",
+                            text: "want to edit offer ? ",
                             style: TextStyle(color: Colors.black)),
                         TextSpan(
                             text: "Edit",
-                            
                             style: TextStyle(color: orangeColors)),
-                            
                       ]),
                     )
                   ],
@@ -159,35 +190,6 @@ class _AddProductPageState extends State<AddProductPage> {
           ),
         ),
       ),
-    );
-  }
-
-  Widget _dropDown({hint, icon, required List listt, required String select}) {
-    return DropdownButtonFormField(
-      value: select,
-      items: listt
-          .map((e) => DropdownMenuItem(
-                child: Text(e),
-                value: e,
-              ))
-          .toList(),
-      onChanged: (val) {
-        setState(() {
-          select = val as String;
-        });
-      },
-      icon: const Icon(
-        Icons.arrow_drop_down_circle,
-        color: Color.fromARGB(255, 249, 118, 3),
-      ),
-      dropdownColor: Color.fromARGB(255, 249, 118, 3),
-      decoration: InputDecoration(
-          labelText: hint,
-          prefixIcon: Icon(
-            icon,
-            color: Color.fromARGB(255, 249, 118, 3),
-          ),
-          border: UnderlineInputBorder()),
     );
   }
 }
