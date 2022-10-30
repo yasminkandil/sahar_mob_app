@@ -1,4 +1,4 @@
-class ProductModel {
+/*class ProductModel {
   String name;
   int price;
 
@@ -7,3 +7,4 @@ class ProductModel {
     this.price = price;
   }
 }
+*/
