@@ -10,6 +10,11 @@ import 'package:sahar_mob_app/pages/view_account.dart';
 import 'package:sahar_mob_app/style/colors.dart';
 import 'package:sahar_mob_app/style/style.dart';
 
+import 'package:sahar_mob_app/models/ProductModel.dart';
+import 'package:sahar_mob_app/screens/checkoutscreen.dart';
+import 'package:sahar_mob_app/screens/Productscreen.dart';
+import 'package:flutter/material.dart';
+
 import 'pages/regi_page.dart';
 import 'pages/login_page.dart';
 import 'pages/add_product.dart';
@@ -33,7 +38,63 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.blue,
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
+<<<<<<< HEAD
       home: SafeArea(child: RegisterPage()),
+=======
+<<<<<<< HEAD
+      // home: Shop(),
+      home: AddProductPage(),
+      //home: CategoryPage(),
+=======
+      home: SafeArea(child: ViewAccountPage()),
+>>>>>>> bf7641920686ce698e822447cb66838036e1323d
+    );
+  }
+}
+
+class CartApp extends StatefulWidget {
+  @override
+  _CartAppState createState() => _CartAppState();
+}
+
+class _CartAppState extends State<CartApp> {
+  List<ProductModel> cart = [];
+  int sum = 0;
+
+  @override
+  Widget build(BuildContext context) {
+    return DefaultTabController(
+      length: 2,
+      child: Scaffold(
+        appBar: AppBar(
+          title: Text("Cart App"),
+          bottom: TabBar(
+            tabs: <Widget>[
+              Tab(
+                text: "Products",
+              ),
+              Tab(
+                text: "Checkout",
+              ),
+            ],
+          ),
+        ),
+        body: TabBarView(
+          children: <Widget>[
+            ProductScreen((selectedProduct) {
+              setState(() {
+                cart.add(selectedProduct); //update
+                sum = 0;
+                cart.forEach((item) {
+                  sum = sum + item.price;
+                });
+              });
+            }),
+            CheckoutScreen(cart, sum),
+          ],
+        ),
+      ),
+>>>>>>> 12c0f6001f39dda883f5685615fe7436eb43d287
     );
   }
 }
