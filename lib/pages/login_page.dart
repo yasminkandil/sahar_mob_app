@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:sahar_mob_app/pages/category.dart';
 import 'package:sahar_mob_app/pages/regi_page.dart';
 import 'package:sahar_mob_app/utils/color.dart';
 import 'package:sahar_mob_app/widgets/btn_widget.dart';
@@ -41,7 +42,7 @@ class _LoginPageState extends State<LoginPage> {
                             Navigator.push(
                                 context,
                                 MaterialPageRoute(
-                                    builder: (context) => RegisterPage()));
+                                    builder: (context) => CategoryPage()));
                           },
                           btnText: "LOGIN",
                         ),
@@ -52,10 +53,14 @@ class _LoginPageState extends State<LoginPage> {
                         TextSpan(
                             text: "Don't have an account ? ",
                             style: TextStyle(color: Colors.black)),
+
                         TextSpan(
                             text: "Registor",
+                            
                             style: TextStyle(color: orangeColors)),
+                     
                       ]),
+                      
                     )
                   ],
                 ),

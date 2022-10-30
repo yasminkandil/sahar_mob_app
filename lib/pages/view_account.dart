@@ -1,15 +1,17 @@
 import 'package:flutter/material.dart';
-import 'package:sahar_mob_app/pages/view_account.dart';
+import 'package:sahar_mob_app/pages/edit_account.dart';
 import 'package:sahar_mob_app/utils/color.dart';
 import 'package:sahar_mob_app/widgets/header_container.dart';
 
+import '../widgets/btn_widget.dart';
 
-class EditProfileUI extends StatefulWidget {
+
+class ViewAccountPage extends StatefulWidget {
 
   @override
-  _EditProfileUIState createState() => _EditProfileUIState();
+  _ViewAccountPageState createState() => _ViewAccountPageState();
 }
-class _EditProfileUIState extends State<EditProfileUI>
+class _ViewAccountPageState extends State<ViewAccountPage>
 {
   bool isObscurePassword =true;
   @override
@@ -19,18 +21,13 @@ class _EditProfileUIState extends State<EditProfileUI>
     // TODO: implement build
     return Scaffold(
       appBar:AppBar(
-        title: Text('Edit Account'),
+        title: Text('Your Account'),
         backgroundColor: GreyColors,
        leading: IconButton(
         icon: Icon(
           Icons.arrow_back,
           color:orangeColors,
-       ), onPressed: () {   Navigator.push(context,
-                  MaterialPageRoute(builder: (context) {
-                  return ViewAccountPage();
-                              }),
-                              );
-                              }, 
+       ), onPressed: () {  },
        ),
        actions: [
         IconButton(icon:Icon(
@@ -99,16 +96,38 @@ class _EditProfileUIState extends State<EditProfileUI>
             ),
           ),
           SizedBox(height: 30),
-          buildTextField("Full Name","Salma",false),
-          buildTextField("Mail","balaa blaa",false),
-          buildTextField("Password","#####",true),
-          buildTextField("Location", "Cairo", false),
+
+         TextField(              
+                        decoration: const InputDecoration(
+                          hintText: "Full Name: Salma Osama",
+                          border: InputBorder.none,
+                        ),
+         ),
+           TextField(              
+                        decoration: const InputDecoration(
+                          hintText: "Email: Salma2001@gmail.com",
+                          border: InputBorder.none,
+                        ),
+         ),
+           TextField(              
+                        decoration: const InputDecoration(
+                          hintText: "Location: Cairo,Madinaty",
+                          border: InputBorder.none,
+                        ),
+         ),
+           TextField(              
+                        decoration: const InputDecoration(
+                          hintText: "Mobile Number: 01114458221",
+                          border: InputBorder.none,
+                        ),
+         ),
+         
           SizedBox(height: 30),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               OutlinedButton(onPressed: () {},
-              child: Text("CANCEL",style: TextStyle(
+              child: Text("Delete",style: TextStyle(
                 fontSize: 15,
                 letterSpacing: 2,
                 color: Colors.black)
@@ -120,11 +139,18 @@ class _EditProfileUIState extends State<EditProfileUI>
 
               ),
               ),
-              ElevatedButton(onPressed: (){}, 
-              child: Text("SAVE", style: TextStyle(
+              ElevatedButton(onPressed: (){
+                Navigator.push(context,
+                  MaterialPageRoute(builder: (context) {
+                  return EditProfileUI();
+                              }),
+                              );
+                              },
+ 
+              child: Text("Edit", style: TextStyle(
                 fontSize: 15,
                 letterSpacing: 2,
-                color: Colors.white)
+                color: Color.fromARGB(255, 0, 0, 0))
               ),
              
              style: ElevatedButton.styleFrom(
@@ -171,9 +197,11 @@ Widget buildTextField(String labelText, String placeholder, bool isPasswordTextF
       color: Colors.black
 
     )
- ) ,
+ ) ,    
   ),
+  
   );
+  
 }
 
 
