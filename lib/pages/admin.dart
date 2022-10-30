@@ -1,5 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:fluttertoast/fluttertoast.dart';
+import 'package:sahar_mob_app/pages/add_category.dart';
+import 'package:sahar_mob_app/pages/add_color.dart';
+import 'package:sahar_mob_app/pages/add_offer.dart';
+import 'package:sahar_mob_app/pages/add_product.dart';
+import 'package:sahar_mob_app/utils/color.dart';
 
 enum Page { dashboard, manage }
 
@@ -10,15 +14,8 @@ class Admin extends StatefulWidget {
 
 class _AdminState extends State<Admin> {
   Page _selectedPage = Page.dashboard;
-  MaterialColor active = Colors.red;
+  MaterialColor active = Colors.orange;
   MaterialColor notActive = Colors.grey;
-  TextEditingController categoryController = TextEditingController();
-  TextEditingController brandController = TextEditingController();
-  GlobalKey<FormState> _categoryFormKey = GlobalKey();
-  GlobalKey<FormState> _brandFormKey = GlobalKey();
-  //BrandService _brandService = BrandService();
-  //CategoryService _categoryService = CategoryService();
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -27,26 +24,25 @@ class _AdminState extends State<Admin> {
             children: <Widget>[
               Expanded(
                   child: ElevatedButton.icon(
+                      style: ButtonStyle(
+                        backgroundColor: MaterialStateProperty.all(
+                            Color.fromARGB(255, 234, 119, 18)),
+                      ),
                       onPressed: () {
                         setState(() => _selectedPage = Page.dashboard);
                       },
-                      icon: Icon(
-                        Icons.dashboard,
-                        color: _selectedPage == Page.dashboard
-                            ? active
-                            : notActive,
-                      ),
+                      icon: Icon(Icons.dashboard, color: Colors.white),
                       label: Text('Dashboard'))),
               Expanded(
                   child: ElevatedButton.icon(
+                      style: ButtonStyle(
+                        backgroundColor: MaterialStateProperty.all(
+                            Color.fromARGB(255, 234, 119, 18)),
+                      ),
                       onPressed: () {
                         setState(() => _selectedPage = Page.manage);
                       },
-                      icon: Icon(
-                        Icons.sort,
-                        color:
-                            _selectedPage == Page.manage ? active : notActive,
-                      ),
+                      icon: Icon(Icons.sort, color: Colors.white),
                       label: Text('Manage'))),
             ],
           ),
@@ -67,16 +63,16 @@ class _AdminState extends State<Admin> {
                 icon: Icon(
                   Icons.attach_money,
                   size: 30.0,
-                  color: Colors.green,
+                  color: Colors.black,
                 ),
                 label: Text('12,000',
                     textAlign: TextAlign.center,
-                    style: TextStyle(fontSize: 30.0, color: Colors.green)),
+                    style: TextStyle(fontSize: 30.0, color: orangeColors)),
               ),
               title: Text(
                 'Revenue',
                 textAlign: TextAlign.center,
-                style: TextStyle(fontSize: 24.0, color: Colors.grey),
+                style: TextStyle(fontSize: 24.0, color: Colors.black),
               ),
             ),
             Expanded(
@@ -93,9 +89,10 @@ class _AdminState extends State<Admin> {
                               icon: Icon(Icons.people_outline),
                               label: Text("Users")),
                           subtitle: Text(
-                            '7',
+                            '700',
                             textAlign: TextAlign.center,
-                            style: TextStyle(color: active, fontSize: 60.0),
+                            style:
+                                TextStyle(color: orangeColors, fontSize: 50.0),
                           )),
                     ),
                   ),
@@ -110,7 +107,8 @@ class _AdminState extends State<Admin> {
                           subtitle: Text(
                             '23',
                             textAlign: TextAlign.center,
-                            style: TextStyle(color: active, fontSize: 60.0),
+                            style:
+                                TextStyle(color: orangeColors, fontSize: 50.0),
                           )),
                     ),
                   ),
@@ -121,11 +119,12 @@ class _AdminState extends State<Admin> {
                           title: ElevatedButton.icon(
                               onPressed: null,
                               icon: Icon(Icons.track_changes),
-                              label: Text("Producs")),
+                              label: Text("Products")),
                           subtitle: Text(
                             '120',
                             textAlign: TextAlign.center,
-                            style: TextStyle(color: active, fontSize: 60.0),
+                            style:
+                                TextStyle(color: orangeColors, fontSize: 50.0),
                           )),
                     ),
                   ),
@@ -135,12 +134,13 @@ class _AdminState extends State<Admin> {
                       child: ListTile(
                           title: ElevatedButton.icon(
                               onPressed: null,
-                              icon: Icon(Icons.tag_faces),
-                              label: Text("Sold")),
+                              icon: Icon(Icons.date_range),
+                              label: Text("In Fix")),
                           subtitle: Text(
                             '13',
                             textAlign: TextAlign.center,
-                            style: TextStyle(color: active, fontSize: 60.0),
+                            style:
+                                TextStyle(color: orangeColors, fontSize: 50.0),
                           )),
                     ),
                   ),
@@ -155,7 +155,8 @@ class _AdminState extends State<Admin> {
                           subtitle: Text(
                             '5',
                             textAlign: TextAlign.center,
-                            style: TextStyle(color: active, fontSize: 60.0),
+                            style:
+                                TextStyle(color: orangeColors, fontSize: 50.0),
                           )),
                     ),
                   ),
@@ -170,7 +171,8 @@ class _AdminState extends State<Admin> {
                           subtitle: Text(
                             '0',
                             textAlign: TextAlign.center,
-                            style: TextStyle(color: active, fontSize: 60.0),
+                            style:
+                                TextStyle(color: orangeColors, fontSize: 50.0),
                           )),
                     ),
                   ),
@@ -179,15 +181,16 @@ class _AdminState extends State<Admin> {
             ),
           ],
         );
-        break;
       case Page.manage:
         return ListView(
           children: <Widget>[
             ListTile(
-              leading: Icon(Icons.add),
-              title: Text("Add product"),
-              onTap: () {},
-            ),
+                leading: Icon(Icons.add),
+                title: Text("Add product"),
+                onTap: () => Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => AddProductPage()),
+                    )),
             Divider(),
             ListTile(
               leading: Icon(Icons.change_history),
@@ -196,12 +199,12 @@ class _AdminState extends State<Admin> {
             ),
             Divider(),
             ListTile(
-              leading: Icon(Icons.add_circle),
-              title: Text("Add category"),
-              onTap: () {
-                _categoryAlert();
-              },
-            ),
+                leading: Icon(Icons.add_circle),
+                title: Text("Add category"),
+                onTap: () => Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => AddCategPage()),
+                    )),
             Divider(),
             ListTile(
               leading: Icon(Icons.category),
@@ -210,77 +213,48 @@ class _AdminState extends State<Admin> {
             ),
             Divider(),
             ListTile(
-              leading: Icon(Icons.add_circle_outline),
-              title: Text("Add brand"),
-              onTap: () {
-                _brandAlert();
-              },
-            ),
+                leading: Icon(Icons.add_circle_outline),
+                title: Text("Add Color"),
+                onTap: () => Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => AddColorPage()),
+                    )),
             Divider(),
             ListTile(
               leading: Icon(Icons.library_books),
-              title: Text("brand list"),
+              title: Text("Colors List"),
               onTap: () {},
             ),
             Divider(),
+            ListTile(
+                leading: Icon(Icons.add_circle_outline),
+                title: Text("Add Offer"),
+                onTap: () => Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => AddOfferPage()),
+                    )),
+            Divider(),
+            ListTile(
+              leading: Icon(Icons.library_books),
+              title: Text("offers List"),
+              onTap: () {},
+            ),
+            Divider(),
+            ListTile(
+                leading: Icon(Icons.add_circle_outline),
+                title: Text("Add Quality"),
+                onTap: () => Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => AddColorPage()),
+                    )),
+            Divider(),
+            ListTile(
+              leading: Icon(Icons.library_books),
+              title: Text("Qualities List"),
+              onTap: () {},
+            ),
           ],
         );
-        break;
-      default:
-        return Container();
     }
-  }
-
-  void _categoryAlert() {
-    var alert = new AlertDialog(
-      content: Form(
-        key: _categoryFormKey,
-        child: TextFormField(
-          decoration: InputDecoration(hintText: "add category"),
-        ),
-      ),
-      actions: <Widget>[
-        ElevatedButton(
-            onPressed: () {
-              Navigator.pop(context);
-            },
-            child: Text('ADD')),
-        ElevatedButton(
-            onPressed: () {
-              Navigator.pop(context);
-            },
-            child: Text('CANCEL')),
-      ],
-    );
-
-    showDialog(context: context, builder: (_) => alert);
-  }
-
-  void _brandAlert() {
-    var alert = new AlertDialog(
-      content: Form(
-        key: _brandFormKey,
-        child: TextFormField(
-          controller: brandController,
-          validator: (value) {},
-          decoration: InputDecoration(hintText: "add brand"),
-        ),
-      ),
-      actions: <Widget>[
-        ElevatedButton(
-            onPressed: () {
-              Fluttertoast.showToast(msg: 'brand added');
-              Navigator.pop(context);
-            },
-            child: Text('ADD')),
-        ElevatedButton(
-            onPressed: () {
-              Navigator.pop(context);
-            },
-            child: Text('CANCEL')),
-      ],
-    );
-
-    showDialog(context: context, builder: (_) => alert);
   }
 }
