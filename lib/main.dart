@@ -3,11 +3,12 @@ import 'package:sahar_mob_app/pages/contact_us.dart';
 import 'package:sahar_mob_app/pages/admin.dart';
 import 'package:sahar_mob_app/pages/edit_account.dart';
 import 'package:sahar_mob_app/pages/login_page.dart';
-import 'package:sahar_mob_app/pages/orders_admin.dart';
+import 'package:sahar_mob_app/pages/navbar.dart';
 import 'package:sahar_mob_app/pages/regi_page.dart';
 import 'package:sahar_mob_app/pages/add_product.dart';
 import 'package:sahar_mob_app/pages/category.dart';
 import 'package:sahar_mob_app/pages/order_history.dart';
+import 'package:sahar_mob_app/pages/products_powerbank.dart';
 import 'package:sahar_mob_app/pages/view_account.dart';
 import 'package:sahar_mob_app/style/colors.dart';
 import 'package:sahar_mob_app/style/style.dart';
@@ -25,7 +26,7 @@ import 'pages/add_category.dart';
 import 'pages/add_quality.dart';
 import 'pages/add_offer.dart';
 import 'pages/admin.dart';
-import 'pages/cart_view.dart';
+//import 'pages/cart_view.dart';
 import 'pages/calendar.dart';
 
 void main() {
@@ -42,11 +43,13 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.blue,
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
+      // home: PowerBank(),
       //home: SafeArea(child: LoginPage()),
-      home: SafeArea(child: Admin()),
+      // home: SafeArea(child: Admin()),
       // home: Shop(),
       // home: AddProductPage(),
       //home: CategoryPage(),
+      home: SafeArea(child: RegisterPage()),
       //home: SafeArea(child: ViewAccountPage()),
     );
   }
