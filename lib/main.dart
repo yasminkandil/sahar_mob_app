@@ -9,6 +9,9 @@ import 'package:sahar_mob_app/pages/order_history.dart';
 import 'package:sahar_mob_app/pages/view_account.dart';
 import 'package:sahar_mob_app/style/colors.dart';
 import 'package:sahar_mob_app/style/style.dart';
+import 'package:sahar_mob_app/pages/cart.dart';
+
+import 'package:sahar_mob_app/pages/cart.dart';
 
 import 'pages/regi_page.dart';
 import 'pages/login_page.dart';
@@ -28,12 +31,12 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      title: 'Login Design',
+      title: 'cart page',
       theme: ThemeData(
         primarySwatch: Colors.blue,
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
-      home: SafeArea(child: PaymentForm()),
+      home: SafeArea(child: CartView()),
     );
   }
 }
