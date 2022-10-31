@@ -1,7 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:sahar_mob_app/constants.dart';
+import 'package:sahar_mob_app/Providers/productprvider.dart';
+
 import 'package:sahar_mob_app/pages/components/componentsCategory.dart';
+
+import 'package:sahar_mob_app/pages/components/item_card.dart';
 import 'package:sahar_mob_app/products.dart';
+import 'package:sahar_mob_app/screens/details/details_screen.dart';
 
 class Body extends StatelessWidget {
   const Body({super.key});
@@ -20,25 +24,23 @@ class Body extends StatelessWidget {
                   ?.copyWith(fontWeight: FontWeight.bold)),
         ),
         Categorie(),
-        Column(
-          children: [
-            Container(
-              padding: EdgeInsets.all(35),
-              height: 180,
-              width: 160,
-              decoration: BoxDecoration(
-                  color: products[0].color,
-                  borderRadius: BorderRadius.circular(16)),
-              child: Image.asset(products[0].image),
-            ),
-            Padding(
-              padding: const EdgeInsets.symmetric(vertical: 10 / 4),
-              child: Text(
-                products[0].title,
-                style: TextStyle(color: Color.fromARGB(102, 0, 0, 0)),
+        Expanded(
+          child: Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 15),
+            child: GridView.builder(
+              itemCount: products.length,
+              gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                  crossAxisCount: 2, childAspectRatio: 0.75),
+              itemBuilder: (context, index) => Itemcard(
+                product: products[index],
+                press: () => Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) =>
+                            DetailScreen(product: products[index]))),
               ),
             ),
-          ],
+          ),
         )
       ],
     );
