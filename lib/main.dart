@@ -25,7 +25,7 @@ import 'pages/add_quality.dart';
 import 'pages/add_offer.dart';
 import 'pages/admin.dart';
 //import 'pages/cart_view.dart';
-import 'pages/calendar.dart';
+//import 'pages/calendar.dart';
 
 void main() {
   runApp(MyApp());
@@ -41,7 +41,17 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.blue,
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
-      home: PowerBank(),
+
+      home: SafeArea(child: CartItem()),
+
+      // home: PowerBank(),
+      //home: SafeArea(child: LoginPage()),
+      // home: SafeArea(child: Admin()),
+      // home: Shop(),
+      // home: AddProductPage(),
+      //home: CategoryPage(),
+      //home: SafeArea(child: RegisterPage()),
+      //home: SafeArea(child: ViewAccountPage()),
     );
   }
 }
