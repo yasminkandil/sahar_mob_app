@@ -32,6 +32,25 @@ class _EditProductPageState extends State<EditProductPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        title: Text('Edit Category'),
+        backgroundColor: GreyColors,
+        leading: IconButton(
+          icon: Icon(
+            Icons.arrow_back,
+            color: orangeColors,
+          ),
+          onPressed: () {},
+        ),
+        actions: [
+          IconButton(
+              icon: Icon(
+                Icons.settings,
+                color: GreyColors,
+              ),
+              onPressed: () {})
+        ],
+      ),
       //backgroundColor: Color.fromARGB(255, 103, 101, 101),
       body: Container(
         padding: EdgeInsets.only(bottom: 5),
