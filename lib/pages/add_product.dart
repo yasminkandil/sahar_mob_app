@@ -33,10 +33,11 @@ class _AddProductPageState extends State<AddProductPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Container(
-        padding: EdgeInsets.only(bottom: 20),
+        padding: EdgeInsets.only(bottom: 5),
         child: Column(
           children: <Widget>[
             // HeaderContainer("Register"),
+
             Center(
               child: Stack(
                 children: [
@@ -125,9 +126,7 @@ class _AddProductPageState extends State<AddProductPage> {
                             style: TextStyle(color: Colors.black)),
                         TextSpan(
                             text: "Edit",
-                            
                             style: TextStyle(color: orangeColors)),
-                            
                       ]),
                     )
                   ],
@@ -142,7 +141,7 @@ class _AddProductPageState extends State<AddProductPage> {
 
   Widget _textInput({controller, hint, icon}) {
     return Container(
-      margin: EdgeInsets.only(top: 8),
+      margin: EdgeInsets.only(top: 2),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.all(Radius.circular(20)),
         color: Colors.white,

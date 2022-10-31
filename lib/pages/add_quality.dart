@@ -2,6 +2,7 @@ import 'dart:math';
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
+import 'package:sahar_mob_app/pages/admin.dart';
 //import 'package:image_picker/image_picker.dart';
 
 import 'package:sahar_mob_app/utils/color.dart';
@@ -20,6 +21,32 @@ class _AddQualityPageState extends State<AddQualityPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        title: Text('Edit Account'),
+        backgroundColor: GreyColors,
+        leading: IconButton(
+          icon: Icon(
+            Icons.arrow_back,
+            color: orangeColors,
+          ),
+          onPressed: () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) {
+                return Admin();
+              }),
+            );
+          },
+        ),
+        actions: [
+          IconButton(
+              icon: Icon(
+                Icons.settings,
+                color: GreyColors,
+              ),
+              onPressed: () {})
+        ],
+      ),
       body: Container(
         padding: EdgeInsets.only(top: 20, bottom: 20),
         child: Column(

@@ -3,6 +3,7 @@ import 'package:sahar_mob_app/pages/contact_us.dart';
 import 'package:sahar_mob_app/pages/admin.dart';
 import 'package:sahar_mob_app/pages/edit_account.dart';
 import 'package:sahar_mob_app/pages/login_page.dart';
+import 'package:sahar_mob_app/pages/orders_admin.dart';
 import 'package:sahar_mob_app/pages/regi_page.dart';
 import 'package:sahar_mob_app/pages/add_product.dart';
 import 'package:sahar_mob_app/pages/category.dart';
@@ -24,6 +25,8 @@ import 'pages/add_category.dart';
 import 'pages/add_quality.dart';
 import 'pages/add_offer.dart';
 import 'pages/admin.dart';
+import 'pages/cart_view.dart';
+import 'pages/calendar.dart';
 
 void main() {
   runApp(MyApp());
