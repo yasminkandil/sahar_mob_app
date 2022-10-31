@@ -41,30 +41,7 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.blue,
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
-<<<<<<< HEAD
-      //home: PowerBank(),
-=======
-<<<<<<< HEAD
-      home: SafeArea(child: checkout()),
-=======
-<<<<<<< HEAD
       home: PowerBank(),
-=======
->>>>>>> 2e9d3fc516bc328a403aeb7731476e43973bd403
-      // home: PowerBank(),
-      //home: SafeArea(child: LoginPage()),
-      // home: SafeArea(child: Admin()),
-      // home: Shop(),
-      // home: AddProductPage(),
-      //home: CategoryPage(),
-      //home: SafeArea(child: RegisterPage()),
-      //home: SafeArea(child: ViewAccountPage()),
-<<<<<<< HEAD
-      //home:HomeNavbar()
-=======
->>>>>>> 0e5519c19ac58b68fdef929f859b5658cddd48b4
->>>>>>> eb71cd49a663703be5116579f7f2815f8b3cb95b
->>>>>>> 2e9d3fc516bc328a403aeb7731476e43973bd403
     );
   }
 }
