@@ -252,6 +252,7 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "1.1.1"
+<<<<<<< HEAD
   syncfusion_flutter_calendar:
     dependency: "direct main"
     description:
@@ -273,6 +274,8 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "20.3.52"
+=======
+>>>>>>> 84722ad48d2128066b3101173d47d57bf7d76081
   term_glyph:
     dependency: transitive
     description:
@@ -287,13 +290,6 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "0.4.12"
-  timezone:
-    dependency: transitive
-    description:
-      name: timezone
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "0.9.0"
   typed_data:
     dependency: transitive
     description:
