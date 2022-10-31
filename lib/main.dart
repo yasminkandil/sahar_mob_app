@@ -43,18 +43,16 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.blue,
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
-<<<<<<< HEAD
-      home: PowerBank(),
-=======
+      //home: PowerBank(),
       // home: PowerBank(),
       //home: SafeArea(child: LoginPage()),
       // home: SafeArea(child: Admin()),
       // home: Shop(),
       // home: AddProductPage(),
       //home: CategoryPage(),
-      home: SafeArea(child: RegisterPage()),
+      //home: SafeArea(child: RegisterPage()),
       //home: SafeArea(child: ViewAccountPage()),
->>>>>>> 0e5519c19ac58b68fdef929f859b5658cddd48b4
+      //home:HomeNavbar()
     );
   }
 }
