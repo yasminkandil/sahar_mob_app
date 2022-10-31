@@ -1,26 +1,27 @@
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/container.dart';
 import 'package:flutter/src/widgets/framework.dart';
-import 'package:flutter_svg/flutter_svg.dart';
+import 'package:sahar_mob_app/products.dart';
+import 'package:sahar_mob_app/screens/details/components/body.dart';
 
-import 'package:sahar_mob_app/utils/color.dart';
-import 'package:sahar_mob_app/pages/components/body.dart';
-
-class PowerBank extends StatelessWidget {
-  const PowerBank({super.key});
+class DetailScreen extends StatelessWidget {
+  final Product product;
+  const DetailScreen({super.key, required this.product});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: product.color,
       appBar: buildAppBar(context),
-      body: Body(),
+      body: Body(
+        product: product,
+      ),
     );
   }
 
   AppBar buildAppBar(BuildContext context) {
     return AppBar(
-      backgroundColor: orangeColors,
+      backgroundColor: product.color,
       elevation: 0,
       leading: IconButton(
         onPressed: () {

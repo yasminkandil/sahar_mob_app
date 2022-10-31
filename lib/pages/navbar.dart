@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:sahar_mob_app/pages/admin.dart';
+import 'package:sahar_mob_app/pages/cart.dart';
 import 'package:sahar_mob_app/pages/category.dart';
 import 'package:sahar_mob_app/pages/contact_us.dart';
 import 'package:sahar_mob_app/pages/edit_account.dart';
 import 'package:sahar_mob_app/pages/regi_page.dart';
 import 'package:sahar_mob_app/pages/view_account.dart';
 import 'package:sahar_mob_app/widgets/header_container.dart';
+import 'package:sahar_mob_app/pages/body.dart';
 
 import 'my_drawer_header.dart';
 
@@ -47,6 +49,8 @@ Widget MyDrawerList()
   padding: EdgeInsets.only(top: 15,),
   child:Column(
 children: [
+  menuItem(8,"Cart", Icons.shop_two_outlined,
+  currentPage==Sections.Cart?true:false),
    menuItem(7,"Sign Up", Icons.login_rounded,
   currentPage==Sections.Sign_Up?true:false),
   menuItem(1,"DashBoard", Icons.dashboard_outlined,
@@ -61,6 +65,7 @@ children: [
   currentPage==Sections.Notifications?true:false),
   menuItem(6,"Log Out", Icons.logout_rounded,
   currentPage==Sections.Log_Out?true:false),
+  
 
 ],
   ),
@@ -138,6 +143,15 @@ Widget menuItem(int id,String title,IconData icon, bool selected)
                     currentPage=Sections.Sign_Up;
 
         }
+        else if(id == 8)
+        {
+          Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => CartItem()),
+                    );
+                    currentPage=Sections.Cart;
+
+        }
       },
       child:Padding(
       padding: EdgeInsets.all(15.0),
@@ -165,5 +179,6 @@ enum Sections{
   Sign_Up,
   Categories,
   Edit_Profile,
-  Log_Out
+  Log_Out,
+  Cart
 }
