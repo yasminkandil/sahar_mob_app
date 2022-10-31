@@ -11,7 +11,7 @@ import 'package:sahar_mob_app/style/colors.dart';
 import 'package:sahar_mob_app/style/style.dart';
 import 'package:sahar_mob_app/pages/cart.dart';
 
-import 'package:sahar_mob_app/pages/cart.dart';
+import 'package:sahar_mob_app/pages/checkout.dart';
 
 import 'pages/regi_page.dart';
 import 'pages/login_page.dart';
@@ -36,7 +36,7 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.blue,
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
-      home: SafeArea(child: CartView()),
+      home: SafeArea(child: checkout()),
     );
   }
 }
