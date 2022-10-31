@@ -39,6 +39,12 @@ dependencies:
   cupertino_icons: ^1.0.2
   image_picker: ^0.8.5+3
   flutter_svg: ^1.1.6
+<<<<<<< HEAD
+=======
+
+  syncfusion_flutter_calendar: ^20.3.52
+
+>>>>>>> f0b0c6433555b36a63428c9163a32e69f4e45bd2
 
 
 dev_dependencies:
