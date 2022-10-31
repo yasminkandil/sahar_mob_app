@@ -12,11 +12,9 @@ import 'package:sahar_mob_app/pages/products_powerbank.dart';
 import 'package:sahar_mob_app/pages/view_account.dart';
 import 'package:sahar_mob_app/style/colors.dart';
 import 'package:sahar_mob_app/style/style.dart';
+import 'package:sahar_mob_app/pages/cart.dart';
 
-import 'package:sahar_mob_app/models/ProductModel.dart';
-import 'package:sahar_mob_app/screens/checkoutscreen.dart';
-import 'package:sahar_mob_app/screens/Productscreen.dart';
-import 'package:flutter/material.dart';
+import 'package:sahar_mob_app/pages/checkout.dart';
 
 import 'pages/regi_page.dart';
 import 'pages/login_page.dart';
@@ -38,12 +36,21 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      title: 'Login Design',
+      title: 'cart page',
       theme: ThemeData(
         primarySwatch: Colors.blue,
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
+<<<<<<< HEAD
       //home: PowerBank(),
+=======
+<<<<<<< HEAD
+      home: SafeArea(child: checkout()),
+=======
+<<<<<<< HEAD
+      home: PowerBank(),
+=======
+>>>>>>> 2e9d3fc516bc328a403aeb7731476e43973bd403
       // home: PowerBank(),
       //home: SafeArea(child: LoginPage()),
       // home: SafeArea(child: Admin()),
@@ -52,7 +59,12 @@ class MyApp extends StatelessWidget {
       //home: CategoryPage(),
       //home: SafeArea(child: RegisterPage()),
       //home: SafeArea(child: ViewAccountPage()),
+<<<<<<< HEAD
       //home:HomeNavbar()
+=======
+>>>>>>> 0e5519c19ac58b68fdef929f859b5658cddd48b4
+>>>>>>> eb71cd49a663703be5116579f7f2815f8b3cb95b
+>>>>>>> 2e9d3fc516bc328a403aeb7731476e43973bd403
     );
   }
 }

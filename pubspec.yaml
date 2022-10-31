@@ -40,10 +40,16 @@ dependencies:
   cupertino_icons: ^1.0.2
   image_picker: ^0.8.5+3
   flutter_svg: ^1.1.6
+<<<<<<< HEAD
+  font_awesome_flutter: ^10.2.1
+  provider: ^6.0.4
+  cloud_firestore: ^4.0.3
+=======
   gallery_view: ^1.0.0+1
   fluttertoast: ^8.1.1
   go_router: ^5.1.0
 
+>>>>>>> eb71cd49a663703be5116579f7f2815f8b3cb95b
 
 dev_dependencies:
   flutter_test:
