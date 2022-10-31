@@ -41,6 +41,7 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.blue,
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
+<<<<<<< HEAD
 
       home: SafeArea(child: CartItem()),
 
@@ -52,6 +53,9 @@ class MyApp extends StatelessWidget {
       //home: CategoryPage(),
       //home: SafeArea(child: RegisterPage()),
       //home: SafeArea(child: ViewAccountPage()),
+=======
+      home: PowerBank(),
+>>>>>>> 0db7a43008b93a811d99701c9ee043a14fea5b1c
     );
   }
 }
