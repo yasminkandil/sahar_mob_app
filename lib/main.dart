@@ -14,14 +14,9 @@ import 'package:sahar_mob_app/style/colors.dart';
 import 'package:sahar_mob_app/style/style.dart';
 import 'package:sahar_mob_app/pages/cart.dart';
 
-<<<<<<< HEAD
 import 'package:sahar_mob_app/models/ProductModel.dart';
-import 'package:sahar_mob_app/screens/checkoutscreen.dart';
-import 'package:sahar_mob_app/screens/Productscreen.dart';
-=======
 import 'package:sahar_mob_app/pages/checkout.dart';
 
->>>>>>> 2c9f708962dcc4f54bc84afda95feca25f7165c6
 import 'pages/regi_page.dart';
 import 'pages/login_page.dart';
 import 'pages/add_product.dart';
@@ -47,14 +42,11 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.blue,
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
-<<<<<<< HEAD
      
       // home: SafeArea(child: RegisterPage()),
             home: SafeArea(child: Navigation_bar()),
 
-=======
 
-      home: SafeArea(child: CartItem()),
 
       // home: PowerBank(),
       //home: SafeArea(child: LoginPage()),
@@ -64,7 +56,6 @@ class MyApp extends StatelessWidget {
       //home: CategoryPage(),
       //home: SafeArea(child: RegisterPage()),
       //home: SafeArea(child: ViewAccountPage()),
->>>>>>> 2c9f708962dcc4f54bc84afda95feca25f7165c6
     );
   }
 }

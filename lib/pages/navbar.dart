@@ -7,7 +7,7 @@ import 'package:sahar_mob_app/pages/edit_account.dart';
 import 'package:sahar_mob_app/pages/regi_page.dart';
 import 'package:sahar_mob_app/pages/view_account.dart';
 import 'package:sahar_mob_app/widgets/header_container.dart';
-import 'package:sahar_mob_app/pages/body.dart';
+import 'package:sahar_mob_app/pages/components/body.dart';
 
 import 'my_drawer_header.dart';
 
@@ -30,7 +30,9 @@ class Navigation_bar extends StatefulWidget {
         children: <Widget>[
             HeaderContainer("Login"),
             ]
+            
             ),
+            
       ) ,
       drawer: Drawer(
         child: SingleChildScrollView(
