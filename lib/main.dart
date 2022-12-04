@@ -14,6 +14,10 @@ import 'package:sahar_mob_app/style/colors.dart';
 import 'package:sahar_mob_app/style/style.dart';
 import 'package:sahar_mob_app/pages/cart.dart';
 
+<<<<<<< HEAD
+=======
+import 'package:sahar_mob_app/models/ProductModel.dart';
+>>>>>>> f0b0c6433555b36a63428c9163a32e69f4e45bd2
 import 'package:sahar_mob_app/pages/checkout.dart';
 
 import 'pages/regi_page.dart';
@@ -41,8 +45,16 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.blue,
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
+<<<<<<< HEAD
 
-      home: SafeArea(child: CartItem()),
+      home: SafeArea(child: Navigation_bar()),
+=======
+     
+      // home: SafeArea(child: RegisterPage()),
+            home: SafeArea(child: Navigation_bar()),
+
+
+>>>>>>> f0b0c6433555b36a63428c9163a32e69f4e45bd2
 
       // home: PowerBank(),
       //home: SafeArea(child: LoginPage()),

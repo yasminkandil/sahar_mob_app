@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:sahar_mob_app/pages/navbar.dart';
 import 'package:sahar_mob_app/utils/color.dart';
 
 class ContactUs extends StatefulWidget {
@@ -12,19 +13,31 @@ class ContactUsForm extends State<ContactUs>
   Widget build(BuildContext context) {
     // TODO: implement build
     return Scaffold(
-      backgroundColor: Color.fromARGB(0, 240, 255, 255),
+            appBar:AppBar(
+
+      backgroundColor: Colors.white,
+       leading: IconButton(
+        icon: Icon(
+          Icons.arrow_back,
+          color:orangeColors,
+       ), onPressed: () {   Navigator.push(context,
+                  MaterialPageRoute(builder: (context) {
+                  return Navigation_bar();
+                              }),
+                              );
+                              }, 
+       ),),
        body: Column(             
         crossAxisAlignment: CrossAxisAlignment.center,
 
         children: <Widget> [
-          Text("Contact",
+          Text("Contact Us",
           
           style: TextStyle(
             fontSize:32.0,
           fontWeight: FontWeight.bold,
           ),
           ),
-          Text("Blaa blaaa blaaa"),
           Padding(
             padding: const EdgeInsets.symmetric(
             horizontal:16.0),
@@ -36,7 +49,7 @@ class ContactUsForm extends State<ContactUs>
               TextField(
                 decoration: InputDecoration(
                   filled: true,
-                  fillColor:Colors.white  ,
+                  fillColor:orangeColors  ,
                   hintText: "Email",
                   border: InputBorder.none,
                 ),
@@ -47,7 +60,7 @@ class ContactUsForm extends State<ContactUs>
            maxLines: 7,
                 decoration: InputDecoration(
                   filled: true,
-                                    fillColor:Colors.white  ,
+                                    fillColor:orangeColors  ,
 
                   hintText: "Message",
                   border: InputBorder.none,
@@ -71,9 +84,9 @@ class ContactUsForm extends State<ContactUs>
       
         ],
       ),
-      );
+      
  
-    
+    );
   }
 
 }

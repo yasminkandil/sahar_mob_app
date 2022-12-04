@@ -3,6 +3,8 @@ import 'package:sahar_mob_app/pages/view_account.dart';
 import 'package:sahar_mob_app/utils/color.dart';
 import 'package:sahar_mob_app/widgets/header_container.dart';
 
+import 'navbar.dart';
+
 
 class EditProfileUI extends StatefulWidget {
 
@@ -107,7 +109,13 @@ class _EditProfileUIState extends State<EditProfileUI>
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              OutlinedButton(onPressed: () {},
+              OutlinedButton(onPressed: () {
+                 Navigator.push(context,
+                  MaterialPageRoute(builder: (context) {
+                  return Navigation_bar();
+                              }),
+                              );
+              },
               child: Text("CANCEL",style: TextStyle(
                 fontSize: 15,
                 letterSpacing: 2,
@@ -120,7 +128,13 @@ class _EditProfileUIState extends State<EditProfileUI>
 
               ),
               ),
-              ElevatedButton(onPressed: (){}, 
+              ElevatedButton(onPressed: (){
+                 Navigator.push(context,
+                  MaterialPageRoute(builder: (context) {
+                  return Navigation_bar();
+                              }),
+                              );
+              }, 
               child: Text("SAVE", style: TextStyle(
                 fontSize: 15,
                 letterSpacing: 2,

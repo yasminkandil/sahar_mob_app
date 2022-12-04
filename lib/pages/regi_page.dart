@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:sahar_mob_app/pages/login_page.dart';
+import 'package:sahar_mob_app/pages/navbar.dart';
 import 'package:sahar_mob_app/utils/color.dart';
 import 'package:sahar_mob_app/widgets/btn_widget.dart';
 import 'package:sahar_mob_app/widgets/header_container.dart';
@@ -12,7 +13,23 @@ class RegisterPage extends StatefulWidget {
 class _RegisterPageState extends State<RegisterPage> {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return Scaffold(  
+      
+          appBar:AppBar(
+backgroundColor: GreyColors,
+       leading: IconButton(
+        icon: Icon(
+          Icons.arrow_back,
+          color:orangeColors,
+       ), onPressed: () {   Navigator.push(context,
+                  MaterialPageRoute(builder: (context) {
+                  return Navigation_bar();
+                              }),
+                              );
+  
+  }
+  ),
+  ),
       body: Container(
         padding: EdgeInsets.only(bottom: 30),
         child: Column(
@@ -28,7 +45,7 @@ class _RegisterPageState extends State<RegisterPage> {
                     _textInput(hint: "First Name", icon: Icons.person),
                     _textInput(hint: "Last Name", icon: Icons.person),
                     _textInput(hint: "Email", icon: Icons.email),
-                    _textInput(hint: "Phone Number", icon: Icons.call),
+                    _textInput(hint: "Phon253e Number", icon: Icons.call),
                     _textInput(hint: "Address", icon: Icons.location_city),
                     _textInput(hint: "Password", icon: Icons.vpn_key),
                     _textInput(hint: "Confirm Password", icon: Icons.vpn_key),
@@ -65,7 +82,7 @@ return LoginPage();
       ),
     );
   }
-
+}
   Widget _textInput({controller, hint, icon}) {
     return Container(
       margin: EdgeInsets.only(top: 10),
@@ -84,4 +101,4 @@ return LoginPage();
       ),
     );
   }
-}
+

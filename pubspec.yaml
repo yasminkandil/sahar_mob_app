@@ -1,3 +1,4 @@
+  syncfusion_flutter_calendar: ^20.3.52
 name: sahar_mob_app
 description: A new Flutter project.
 
@@ -38,7 +39,16 @@ dependencies:
   cupertino_icons: ^1.0.2
   image_picker: ^0.8.5+3
   flutter_svg: ^1.1.6
+<<<<<<< HEAD
  
+=======
+<<<<<<< HEAD
+=======
+
+  syncfusion_flutter_calendar: ^20.3.52
+
+>>>>>>> f0b0c6433555b36a63428c9163a32e69f4e45bd2
+>>>>>>> 36671370084486bd9a626afda2e7de069486ee07
 
 
 dev_dependencies:

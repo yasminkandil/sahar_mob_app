@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:sahar_mob_app/pages/edit_account.dart';
+import 'package:sahar_mob_app/pages/navbar.dart';
 import 'package:sahar_mob_app/utils/color.dart';
 import 'package:sahar_mob_app/widgets/header_container.dart';
 
@@ -27,7 +28,13 @@ class _ViewAccountPageState extends State<ViewAccountPage>
         icon: Icon(
           Icons.arrow_back,
           color:orangeColors,
-       ), onPressed: () {  },
+       ), onPressed: () { 
+         Navigator.push(context,
+                  MaterialPageRoute(builder: (context) {
+                  return Navigation_bar();
+                              }),
+                              );
+        },
        ),
        actions: [
         IconButton(icon:Icon(
