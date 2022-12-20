@@ -5,12 +5,12 @@ import 'package:sahar_mob_app/utils/color.dart';
 import 'package:sahar_mob_app/widgets/btn_widget.dart';
 import 'package:sahar_mob_app/widgets/header_container.dart';
 
-class RegisterPage extends StatefulWidget {
+class viewOrderUser extends StatefulWidget {
   @override
-  _RegisterPageState createState() => _RegisterPageState();
+  _viewOrderUserState createState() => _viewOrderUserState();
 }
 
-class _RegisterPageState extends State<RegisterPage> {
+class _viewOrderUserState extends State<viewOrderUser> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(

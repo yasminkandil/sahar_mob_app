@@ -3,6 +3,7 @@ import 'package:sahar_mob_app/pages/regi_page.dart';
 import 'package:sahar_mob_app/utils/color.dart';
 import 'package:sahar_mob_app/widgets/btn_widget.dart';
 import 'package:sahar_mob_app/widgets/header_container.dart';
+import 'package:sahar_mob_app/pages/navbar.dart';
 
 class LoginPage extends StatefulWidget {
   @override
@@ -13,6 +14,22 @@ class _LoginPageState extends State<LoginPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        backgroundColor: GreyColors,
+        leading: IconButton(
+            icon: Icon(
+              Icons.arrow_back,
+              color: orangeColors,
+            ),
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) {
+                  return Navigation_bar();
+                }),
+              );
+            }),
+      ),
       body: Container(
         padding: EdgeInsets.only(bottom: 30),
         child: Column(

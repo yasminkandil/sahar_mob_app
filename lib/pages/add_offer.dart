@@ -21,7 +21,7 @@ class _AddOfferPageState extends State<AddOfferPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Edit Account'),
+        title: Text('Add Offer'),
         backgroundColor: GreyColors,
         leading: IconButton(
           icon: Icon(

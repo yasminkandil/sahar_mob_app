@@ -2,7 +2,7 @@ import 'dart:ui';
 
 import 'package:flutter/material.dart';
 //import 'package:image_picker/image_picker.dart';
-
+import 'package:sahar_mob_app/pages/admin.dart';
 import 'package:sahar_mob_app/utils/color.dart';
 import 'package:sahar_mob_app/widgets/btn_widget.dart';
 //import 'package:sahar_mob_app/widgets/header_container.dart';
@@ -32,6 +32,23 @@ class _AddProductPageState extends State<AddProductPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        title: Text('Add Product'),
+        backgroundColor: GreyColors,
+        leading: IconButton(
+            icon: Icon(
+              Icons.arrow_back,
+              color: orangeColors,
+            ),
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) {
+                  return Admin();
+                }),
+              );
+            }),
+      ),
       body: Container(
         padding: EdgeInsets.only(bottom: 5),
         child: Column(

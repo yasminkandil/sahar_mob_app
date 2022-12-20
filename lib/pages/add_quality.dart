@@ -22,7 +22,7 @@ class _AddQualityPageState extends State<AddQualityPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Edit Account'),
+        title: Text('Add Quality'),
         backgroundColor: GreyColors,
         leading: IconButton(
           icon: Icon(

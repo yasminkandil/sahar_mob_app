@@ -19,7 +19,7 @@ class _AddColorPageState extends State<AddColorPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Edit Account'),
+        title: Text('Add Color'),
         backgroundColor: GreyColors,
         leading: IconButton(
           icon: Icon(

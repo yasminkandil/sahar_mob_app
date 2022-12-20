@@ -114,5 +114,26 @@ class _CartItemState extends State<CartItem> {
         ),
       ],
     );
+    
   }
+  /*ListView(
+          children: const [
+            ListTile(
+              title: Text("Iphone case"),
+              subtitle: Text("200 LE"),
+              leading:
+                  Icon(Icons.arrow_forward_ios_rounded), //icon in the beginning
+            ),
+            ListTile(
+              title: Text("Airpodes"),
+              subtitle: Text("2500"),
+              trailing: Icon(Icons.auto_awesome), //icon in the end
+            ),
+            ListTile(
+              title: Text("Headphones"),
+              subtitle: Text("750"),
+              trailing: Icon(Icons.audiotrack), //icon in the end
+            ),
+          ],
+        ),*/
 }

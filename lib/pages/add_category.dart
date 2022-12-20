@@ -19,7 +19,7 @@ class _AddCategPageState extends State<AddCategPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Edit Account'),
+        title: Text('Add Category'),
         backgroundColor: GreyColors,
         leading: IconButton(
           icon: Icon(
