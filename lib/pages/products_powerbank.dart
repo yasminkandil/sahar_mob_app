@@ -20,6 +20,7 @@ class PowerBank extends StatelessWidget {
 
   AppBar buildAppBar(BuildContext context) {
     return AppBar(
+      title: Text("Shop"),
       backgroundColor: orangeColors,
       elevation: 0,
       leading: IconButton(

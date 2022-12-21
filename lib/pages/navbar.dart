@@ -8,6 +8,7 @@ import 'package:sahar_mob_app/pages/edit_account.dart';
 import 'package:sahar_mob_app/pages/products_powerbank.dart';
 import 'package:sahar_mob_app/pages/regi_page.dart';
 import 'package:sahar_mob_app/pages/view_account.dart';
+import 'package:sahar_mob_app/utils/color.dart';
 import 'package:sahar_mob_app/widgets/header_container.dart';
 //import 'package:sahar_mob_app/pages/body.dart';
 import 'package:sahar_mob_app/pages/components/body.dart';
@@ -26,7 +27,7 @@ class HomeNavbar extends State<Navigation_bar> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Colors.grey[700],
+        backgroundColor: GreyColors,
         title: Text("Menu"),
       ),
       body: Container(
