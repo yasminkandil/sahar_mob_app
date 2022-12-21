@@ -1,4 +1,6 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:sahar_mob_app/pages/products_powerbank.dart';
 import 'package:sahar_mob_app/pages/regi_page.dart';
 import 'package:sahar_mob_app/utils/color.dart';
 import 'package:sahar_mob_app/widgets/btn_widget.dart';
@@ -11,8 +13,26 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPageState extends State<LoginPage> {
+  static Future<User?> loginUsingEmailPassword({required String email, required String password,
+  required BuildContext context}) 
+  async { FirebaseAuth auth=FirebaseAuth.instance;
+  User? user;
+  try{
+    UserCredential userCredential= await auth.signInWithEmailAndPassword(email: email, password: password);
+    user=userCredential.user;
+  }on FirebaseAuthException catch(e){
+    if(e.code=="user-not-found")
+    {
+      print("No user found");
+    }
+  }
+return user;
+  }
   @override
   Widget build(BuildContext context) {
+    TextEditingController _emailController = TextEditingController();
+    TextEditingController _passwordController = TextEditingController();
+
     return Scaffold(
       appBar: AppBar(
         backgroundColor: GreyColors,
@@ -42,8 +62,8 @@ class _LoginPageState extends State<LoginPage> {
                 child: Column(
                   mainAxisSize: MainAxisSize.max,
                   children: <Widget>[
-                    _textInput(hint: "Email", icon: Icons.email),
-                    _textInput(hint: "Password", icon: Icons.vpn_key),
+                    _textInput(controller:_emailController, hint: "Email", icon: Icons.email),
+                    _textInput(controller:_passwordController, hint: "Password", icon: Icons.vpn_key),
                     Container(
                       margin: EdgeInsets.only(top: 10),
                       alignment: Alignment.centerRight,
@@ -54,11 +74,13 @@ class _LoginPageState extends State<LoginPage> {
                     Expanded(
                       child: Center(
                         child: ButtonWidget(
-                          onClick: () {
-                            Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) => RegisterPage()));
+                          onClick: () async {
+                            User?user = await loginUsingEmailPassword(email: _emailController.text, 
+                            password: _passwordController.text, context: context);
+                            print(user);
+                            if(user!=null)
+                          Navigator.of(context).pushReplacement(MaterialPageRoute(builder: 
+                          (context)=>PowerBank()));
                           },
                           btnText: "LOGIN",
                         ),

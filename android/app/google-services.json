@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "230588404523",
+    "project_id": "sahar-65555",
+    "storage_bucket": "sahar-65555.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:230588404523:android:b3cbeb56868d206d9fab6e",
+        "android_client_info": {
+          "package_name": "com.example.sahar_mob_app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "230588404523-64tp6acagg206rd8t7fl71683tg2jhra.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAoxAjO1EFr-C3BWJ3LUOK2iau7SuxDunk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "230588404523-64tp6acagg206rd8t7fl71683tg2jhra.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
