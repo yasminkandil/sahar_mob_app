@@ -13,21 +13,24 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPageState extends State<LoginPage> {
-  static Future<User?> loginUsingEmailPassword({required String email, required String password,
-  required BuildContext context}) 
-  async { FirebaseAuth auth=FirebaseAuth.instance;
-  User? user;
-  try{
-    UserCredential userCredential= await auth.signInWithEmailAndPassword(email: email, password: password);
-    user=userCredential.user;
-  }on FirebaseAuthException catch(e){
-    if(e.code=="user-not-found")
-    {
-      print("No user found");
+  static Future<User?> loginUsingEmailPassword(
+      {required String email,
+      required String password,
+      required BuildContext context}) async {
+    FirebaseAuth auth = FirebaseAuth.instance;
+    User? user;
+    try {
+      UserCredential userCredential = await auth.signInWithEmailAndPassword(
+          email: email, password: password);
+      user = userCredential.user;
+    } on FirebaseAuthException catch (e) {
+      if (e.code == "user-not-found") {
+        print("No user found");
+      }
     }
+    return user;
   }
-return user;
-  }
+
   @override
   Widget build(BuildContext context) {
     TextEditingController _emailController = TextEditingController();
@@ -62,8 +65,16 @@ return user;
                 child: Column(
                   mainAxisSize: MainAxisSize.max,
                   children: <Widget>[
-                    _textInput(controller:_emailController, hint: "Email", icon: Icons.email),
-                    _textInput(controller:_passwordController, hint: "Password", icon: Icons.vpn_key),
+                    _textInput(
+                        controller: _emailController,
+                        hint: "Email",
+                        icon: Icons.email,
+                        torf: false),
+                    _textInput(
+                        controller: _passwordController,
+                        hint: "Password",
+                        icon: Icons.vpn_key,
+                        torf: true),
                     Container(
                       margin: EdgeInsets.only(top: 10),
                       alignment: Alignment.centerRight,
@@ -75,12 +86,15 @@ return user;
                       child: Center(
                         child: ButtonWidget(
                           onClick: () async {
-                            User?user = await loginUsingEmailPassword(email: _emailController.text, 
-                            password: _passwordController.text, context: context);
+                            User? user = await loginUsingEmailPassword(
+                                email: _emailController.text,
+                                password: _passwordController.text,
+                                context: context);
                             print(user);
-                            if(user!=null)
-                          Navigator.of(context).pushReplacement(MaterialPageRoute(builder: 
-                          (context)=>PowerBank()));
+                            if (user != null)
+                              Navigator.of(context).pushReplacement(
+                                  MaterialPageRoute(
+                                      builder: (context) => PowerBank()));
                           },
                           btnText: "LOGIN",
                         ),
@@ -106,7 +120,7 @@ return user;
     );
   }
 
-  Widget _textInput({controller, hint, icon}) {
+  Widget _textInput({controller, hint, icon, torf}) {
     return Container(
       margin: EdgeInsets.only(top: 20),
       decoration: BoxDecoration(
@@ -115,6 +129,7 @@ return user;
       ),
       padding: EdgeInsets.only(left: 10),
       child: TextFormField(
+        obscureText: torf,
         controller: controller,
         decoration: InputDecoration(
           border: InputBorder.none,
