@@ -5,7 +5,9 @@ import 'package:sahar_mob_app/pages/navbar.dart';
 
 //import 'pages/cart_view.dart';
 //import 'pages/calendar.dart';
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  Firebase.initializeApp();
   runApp(MyApp());
 }
 
@@ -30,7 +32,6 @@ class HomePage extends StatefulWidget {
   @override
   State<HomePage> createState() => _HomePageState();
 }
-
 
 class _HomePageState extends State<HomePage> {
   Future<FirebaseApp> _initializeFirebase() async {
