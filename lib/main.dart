@@ -33,6 +33,11 @@ class HomePage extends StatefulWidget {
   State<HomePage> createState() => _HomePageState();
 }
 
+<<<<<<< HEAD
+=======
+
+
+>>>>>>> e7f1faf506a931441975774e04cb2e39b001e4b7
 class _HomePageState extends State<HomePage> {
   Future<FirebaseApp> _initializeFirebase() async {
     FirebaseApp firebaseApp = await Firebase.initializeApp();
