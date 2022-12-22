@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:sahar_mob_app/pages/edit_account.dart';
 import 'package:sahar_mob_app/pages/navbar.dart';
@@ -14,11 +15,29 @@ class ViewAccountPage extends StatefulWidget {
 }
 class _ViewAccountPageState extends State<ViewAccountPage>
 {
+
   bool isObscurePassword =true;
   @override
   Widget build(BuildContext context) {
     
-    
+    // final user = FirebaseAuth.instance.currentUser;
+/* if (user != null) {
+    // Name, email address, and profile photo URL
+    final name = user.displayName;
+    final email = user.email;
+    print(email);
+*/
+    //final photoUrl = user.photoURL;
+
+    // Check if user's email is verified
+//final emailVerified = user.emailVerified;
+
+    // The user's ID, unique to the Firebase project. Do NOT use this value to
+    // authenticate with your backend server, if you have one. Use
+    // User.getIdToken() instead.
+   // final uid = user.uid;
+// }
+
     // TODO: implement build
     return Scaffold(
       appBar:AppBar(
@@ -211,6 +230,11 @@ Widget buildTextField(String labelText, String placeholder, bool isPasswordTextF
   
 }
 
+  }
+  
+  @override
+  Widget build(BuildContext context) {
+    // TODO: implement build
+    throw UnimplementedError();
+  }
 
-
-}
