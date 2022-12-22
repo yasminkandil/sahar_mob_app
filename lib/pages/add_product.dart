@@ -98,55 +98,59 @@ class _AddProductPageState extends State<AddProductPage> {
             ),
             Expanded(
               flex: 1,
-              child: Container(
-                margin: EdgeInsets.only(left: 20, right: 20, top: 30),
-                child: Column(
-                  mainAxisSize: MainAxisSize.max,
-                  children: <Widget>[
-                    _textInput(hint: "Product Name", icon: Icons.person),
-                    _textInput(hint: "Description", icon: Icons.person),
-                    _textInput(hint: "About", icon: Icons.email),
-                    _textInput(hint: "Price", icon: Icons.call),
-                    _textInput(hint: "Quantity", icon: Icons.location_city),
-                    _dropDown(
-                      hint: "colors",
-                      icon: Icons.border_color,
-                      listt: Listcolors,
-                      select: "black",
-                    ),
-                    _dropDown(
-                      hint: "Quality",
-                      icon: Icons.high_quality,
-                      listt: ListQuality,
-                      select: "Original",
-                    ),
-                    _dropDown(
-                      hint: "Category",
-                      icon: Icons.category,
-                      listt: ListCateg,
-                      select: "Headphones",
-                    ),
-                    Expanded(
-                      child: Center(
-                        child: ButtonWidget(
-                          btnText: "Add Product",
-                          onClick: () {
-                            Navigator.pop(context);
-                          },
+              child: SingleChildScrollView(
+                child: IntrinsicHeight(
+                  child: Container(
+                    margin: EdgeInsets.only(left: 20, right: 20, top: 30),
+                    child: Column(
+                      mainAxisSize: MainAxisSize.max,
+                      children: <Widget>[
+                        _textInput(hint: "Product Name", icon: Icons.person),
+                        _textInput(hint: "Description", icon: Icons.person),
+                        _textInput(hint: "About", icon: Icons.email),
+                        _textInput(hint: "Price", icon: Icons.call),
+                        _textInput(hint: "Quantity", icon: Icons.location_city),
+                        _dropDown(
+                          hint: "colors",
+                          icon: Icons.border_color,
+                          listt: Listcolors,
+                          select: "black",
                         ),
-                      ),
+                        _dropDown(
+                          hint: "Quality",
+                          icon: Icons.high_quality,
+                          listt: ListQuality,
+                          select: "Original",
+                        ),
+                        _dropDown(
+                          hint: "Category",
+                          icon: Icons.category,
+                          listt: ListCateg,
+                          select: "Headphones",
+                        ),
+                        Expanded(
+                          child: Center(
+                            child: ButtonWidget(
+                              btnText: "Add Product",
+                              onClick: () {
+                                Navigator.pop(context);
+                              },
+                            ),
+                          ),
+                        ),
+                        RichText(
+                          text: TextSpan(children: [
+                            TextSpan(
+                                text: "want to edit product ? ",
+                                style: TextStyle(color: Colors.black)),
+                            TextSpan(
+                                text: "Edit",
+                                style: TextStyle(color: orangeColors)),
+                          ]),
+                        )
+                      ],
                     ),
-                    RichText(
-                      text: TextSpan(children: [
-                        TextSpan(
-                            text: "want to edit product ? ",
-                            style: TextStyle(color: Colors.black)),
-                        TextSpan(
-                            text: "Edit",
-                            style: TextStyle(color: orangeColors)),
-                      ]),
-                    )
-                  ],
+                  ),
                 ),
               ),
             )

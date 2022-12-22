@@ -1,7 +1,7 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
-import 'package:sahar_mob_app/pages/login_page.dart';
 import 'package:sahar_mob_app/pages/navbar.dart';
 import 'package:sahar_mob_app/pages/products_powerbank.dart';
 import 'package:sahar_mob_app/utils/color.dart';
@@ -18,7 +18,20 @@ class _RegisterPageState extends State<RegisterPage> {
   @override
   void initState() {
     super.initState();
-    dbRef = FirebaseDatabase.instance.ref().child("Users");
+    dbRef = FirebaseDatabase.instance.ref().child("users");
+  }
+
+  Future addUserDetails(String firstname, String lastname, String userEmail,
+      String useraddress, String userPhoneNumber) async {
+    await FirebaseFirestore.instance.collection('users').doc().set({
+      'firstname': firstname,
+      'lastname': lastname,
+      'email': userEmail,
+      'mobile': int.parse(userPhoneNumber),
+      'address': useraddress,
+    });
+
+    print('NEW USER REGISTERED WITH ID:');
   }
 
   @override
@@ -30,6 +43,7 @@ class _RegisterPageState extends State<RegisterPage> {
     final _confirmPassController = TextEditingController();
     final _mobileController = TextEditingController();
     final _addrController = TextEditingController();
+
     return Scaffold(
       appBar: AppBar(
         backgroundColor: GreyColors,
@@ -52,89 +66,132 @@ class _RegisterPageState extends State<RegisterPage> {
         child: Column(
           children: <Widget>[
             HeaderContainer("Register"),
+            Center(
+              child: Stack(
+                children: [
+                  Container(
+                    width: 110,
+                    height: 110,
+                    decoration: BoxDecoration(
+                        border: Border.all(width: 4, color: Colors.white),
+                        boxShadow: [
+                          BoxShadow(
+                              spreadRadius: 2,
+                              blurRadius: 10,
+                              color: Colors.black.withOpacity(0.1))
+                        ],
+                        shape: BoxShape.circle,
+                        image: DecorationImage(
+                            fit: BoxFit.cover,
+                            image: NetworkImage(
+                                'https://www.google.com/search?q=profile+photo+&tbm=isch&ved=2ahUKEwis27rOz_76AhVFexoKHU2PBGoQ2-cCegQIABAA&oq=profile+photo+&gs_lcp=CgNpbWcQAzIECAAQQzIFCAAQgAQyBQgAEIAEMgUIABCABDIFCAAQgAQyBQgAEIAEMgUIABCABDIFCAAQgAQyBQgAEIAEMgUIABCABDoGCAAQBxAeULwEWLwEYKoIaABwAHgAgAGZAYgBkwKSAQMwLjKYAQCgAQGqAQtnd3Mtd2l6LWltZ8ABAQ&sclient=img&ei=d4lZY-zDCsX2ac2ektAG&bih=657&biw=1366#imgrc=nfkyptoYx2OzJM'))),
+                  ),
+                  Positioned(
+                    bottom: 0,
+                    right: 0,
+                    child: Container(
+                        height: 40,
+                        width: 40,
+                        decoration: BoxDecoration(
+                            shape: BoxShape.circle,
+                            border: Border.all(
+                              width: 4,
+                              color: Colors.white,
+                            ),
+                            color: Colors.orange),
+                        child: Icon(
+                          Icons.edit,
+                          color: Colors.white,
+                        )),
+                  )
+                ],
+              ),
+            ),
             Expanded(
               flex: 1,
-              child: Container(
-                margin: EdgeInsets.only(left: 20, right: 20, top: 20),
-                child: Column(
-                  mainAxisSize: MainAxisSize.max,
-                  children: <Widget>[
-                    _textInput(
-                        controller: _fisrtController,
-                        hint: "First Name",
-                        icon: Icons.person,
-                        torf: false),
-                    _textInput(
-                        controller: _lastController,
-                        hint: "Last Name",
-                        icon: Icons.person,
-                        torf: false),
-                    _textInput(
-                        controller: _emailController,
-                        hint: "Email",
-                        icon: Icons.email,
-                        torf: false),
-                    _textInput(
-                        controller: _mobileController,
-                        hint: "Phone Number",
-                        icon: Icons.call,
-                        torf: false),
-                    _textInput(
-                        controller: _addrController,
-                        hint: "Address",
-                        icon: Icons.location_city,
-                        torf: false),
-                    _textInput(
-                        controller: _passwordController,
-                        hint: "Password",
-                        icon: Icons.vpn_key,
-                        torf: true),
-                    _textInput(
-                        controller: _confirmPassController,
-                        hint: "Confirm Password",
-                        icon: Icons.vpn_key,
-                        torf: true),
-                    Expanded(
-                      child: Center(
-                        child: ButtonWidget(
-                          btnText: "REGISTER",
-                          onClick: () {
-                            Map<String, String> users = {
-                              "Firstname": _fisrtController.text,
-                              "Lastname": _lastController.text,
-                              "Email": _emailController.text,
-                              "Address": _addrController.text,
-                              "Mobile": _mobileController.text
-                            };
-                            dbRef.push().set(users);
-                            FirebaseAuth.instance
-                                .createUserWithEmailAndPassword(
-                                    email: _emailController.text,
-                                    password: _passwordController.text)
-                                .then(
-                              (value) {
-                                print("Created new account");
-                                Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                        builder: (context) => PowerBank()));
+              child: SingleChildScrollView(
+                child: IntrinsicHeight(
+                  child: Container(
+                    margin: EdgeInsets.only(left: 20, right: 20, top: 20),
+                    child: Column(
+                      mainAxisSize: MainAxisSize.max,
+                      children: <Widget>[
+                        _textInput(
+                            controller: _fisrtController,
+                            hint: "First Name",
+                            icon: Icons.person,
+                            torf: false),
+                        _textInput(
+                            controller: _lastController,
+                            hint: "Last Name",
+                            icon: Icons.person,
+                            torf: false),
+                        _textInput(
+                            controller: _emailController,
+                            hint: "Email",
+                            icon: Icons.email,
+                            torf: false),
+                        _textInput(
+                            controller: _mobileController,
+                            hint: "Phone Number",
+                            icon: Icons.call,
+                            torf: false),
+                        _textInput(
+                            controller: _addrController,
+                            hint: "Address",
+                            icon: Icons.location_city,
+                            torf: false),
+                        _textInput(
+                            controller: _passwordController,
+                            hint: "Password",
+                            icon: Icons.vpn_key,
+                            torf: true),
+                        _textInput(
+                            controller: _confirmPassController,
+                            hint: "Confirm Password",
+                            icon: Icons.vpn_key,
+                            torf: true),
+                        Expanded(
+                          child: Center(
+                            child: ButtonWidget(
+                              btnText: "REGISTER",
+                              onClick: () {
+                                addUserDetails(
+                                    _fisrtController.text,
+                                    _lastController.text,
+                                    _emailController.text,
+                                    _addrController.text,
+                                    _mobileController.text);
+                                FirebaseAuth.instance
+                                    .createUserWithEmailAndPassword(
+                                        email: _emailController.text,
+                                        password: _passwordController.text)
+                                    .then(
+                                  (value) {
+                                    print("Created new account");
+                                    Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                            builder: (context) => PowerBank()));
+                                  },
+                                );
                               },
-                            );
-                          },
+                            ),
+                          ),
                         ),
-                      ),
+                        RichText(
+                          text: TextSpan(children: [
+                            TextSpan(
+                                text: "Already a member ? ",
+                                style: TextStyle(color: Colors.black)),
+                            TextSpan(
+                                text: "Login",
+                                style: TextStyle(color: orangeColors)),
+                          ]),
+                        )
+                      ],
                     ),
-                    RichText(
-                      text: TextSpan(children: [
-                        TextSpan(
-                            text: "Already a member ? ",
-                            style: TextStyle(color: Colors.black)),
-                        TextSpan(
-                            text: "Login",
-                            style: TextStyle(color: orangeColors)),
-                      ]),
-                    )
-                  ],
+                  ),
                 ),
               ),
             )
