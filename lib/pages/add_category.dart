@@ -1,6 +1,7 @@
 import 'dart:math';
 import 'dart:ui';
 
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:sahar_mob_app/pages/admin.dart';
 //import 'package:image_picker/image_picker.dart';
@@ -15,6 +16,15 @@ class AddCategPage extends StatefulWidget {
 }
 
 class _AddCategPageState extends State<AddCategPage> {
+  final _nameController = TextEditingController();
+  final _subtitleController = TextEditingController();
+  Future addCategory(String name, String subtitle) async {
+    await FirebaseFirestore.instance.collection('categories').doc().set({
+      'name': name,
+      'subtitle': subtitle,
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -99,9 +109,14 @@ class _AddCategPageState extends State<AddCategPage> {
                     child: Column(
                       mainAxisSize: MainAxisSize.max,
                       children: <Widget>[
-                        _textInput(hint: "Category Name", icon: Icons.category),
                         _textInput(
-                            hint: "Category Subtitle", icon: Icons.category),
+                            controller: _nameController,
+                            hint: "Category Name",
+                            icon: Icons.category),
+                        _textInput(
+                            controller: _subtitleController,
+                            hint: "Category Subtitle",
+                            icon: Icons.category),
                         ListTile(
                           title: Row(
                             mainAxisSize: MainAxisSize.max,
@@ -110,6 +125,8 @@ class _AddCategPageState extends State<AddCategPage> {
                                 child: ButtonWidget2(
                                   btnText: "Add Category",
                                   onClick: () {
+                                    addCategory(_nameController.text,
+                                        _subtitleController.text);
                                     Navigator.pop(context);
                                   },
                                 ),

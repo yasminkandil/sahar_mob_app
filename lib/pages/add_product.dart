@@ -1,5 +1,7 @@
 import 'dart:ui';
 
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 //import 'package:image_picker/image_picker.dart';
 import 'package:sahar_mob_app/pages/admin.dart';
@@ -13,11 +15,19 @@ class AddProductPage extends StatefulWidget {
 }
 
 class _AddProductPageState extends State<AddProductPage> {
-  String selectedValC = 'black';
+  String selectedValC = 'Black';
   String selectedValQ = 'Original';
   String selectedValCat = 'Headphones';
+  final _nameController = TextEditingController();
+  final _descriptionController = TextEditingController();
+  final _aboutController = TextEditingController();
+  final _priceController = TextEditingController();
+  final _qualityController = TextEditingController();
+  final _quantityController = TextEditingController();
+  final _colorController = TextEditingController();
+  final _categController = TextEditingController();
 
-  List Listcolors = ['black', 'blue'];
+  List Listcolors = ['Black', 'Blue'];
   List ListCateg = [
     'Headphones',
     'PowerBank',
@@ -28,9 +38,50 @@ class _AddProductPageState extends State<AddProductPage> {
     'Maintanance'
   ];
   List ListQuality = ['Original', 'HighCopy'];
+  Future addProduct(
+      String name,
+      String description,
+      String about,
+      String quality,
+      String color,
+      String category,
+      String price,
+      String quantity) async {
+    await FirebaseFirestore.instance.collection('products').doc().set({
+      'name': name,
+      'description': description,
+      'about': about,
+      'quality': quality,
+      'color': color,
+      'category': category,
+      'price': int.parse(price),
+      'quantity': int.parse(quantity)
+    });
+  }
+
+  late String Cvalue;
+
+  String getCValue() {
+    return Cvalue;
+  }
+
+  late String Categvalue;
+
+  String getCategValue() {
+    return Categvalue;
+  }
+
+  late String Qvalue;
+
+  String getQValue() {
+    return Qvalue;
+  }
 
   @override
   Widget build(BuildContext context) {
+    Widget colorr;
+    Widget qualityy;
+    Widget categoryy;
     return Scaffold(
       appBar: AppBar(
         title: Text('Add Product'),
@@ -53,8 +104,6 @@ class _AddProductPageState extends State<AddProductPage> {
         padding: EdgeInsets.only(bottom: 5),
         child: Column(
           children: <Widget>[
-            // HeaderContainer("Register"),
-
             Center(
               child: Stack(
                 children: [
@@ -105,34 +154,118 @@ class _AddProductPageState extends State<AddProductPage> {
                     child: Column(
                       mainAxisSize: MainAxisSize.max,
                       children: <Widget>[
-                        _textInput(hint: "Product Name", icon: Icons.person),
-                        _textInput(hint: "Description", icon: Icons.person),
-                        _textInput(hint: "About", icon: Icons.email),
-                        _textInput(hint: "Price", icon: Icons.call),
-                        _textInput(hint: "Quantity", icon: Icons.location_city),
-                        _dropDown(
-                          hint: "colors",
-                          icon: Icons.border_color,
-                          listt: Listcolors,
-                          select: "black",
+                        _textInput(
+                            controller: _nameController,
+                            hint: "Product Name",
+                            icon: Icons.edit_attributes_outlined),
+                        _textInput(
+                            controller: _descriptionController,
+                            hint: "Description",
+                            icon: Icons.edit_attributes_outlined),
+                        _textInput(
+                            controller: _aboutController,
+                            hint: "About",
+                            icon: Icons.edit_attributes_outlined),
+                        _textInput(
+                            controller: _priceController,
+                            hint: "Price",
+                            icon: Icons.money),
+                        _textInput(
+                            controller: _quantityController,
+                            hint: "Quantity",
+                            icon: Icons.numbers),
+                        DropdownButtonFormField(
+                          value: selectedValC,
+                          items: Listcolors.map((e) => DropdownMenuItem(
+                                child: Text(e),
+                                value: e,
+                              )).toList(),
+                          onChanged: (val) {
+                            setState(() {
+                              selectedValC = val as String;
+                              Cvalue = selectedValC;
+                              getCValue();
+                            });
+                          },
+                          icon: const Icon(
+                            Icons.arrow_drop_down_circle,
+                            color: Color.fromARGB(255, 249, 118, 3),
+                          ),
+                          dropdownColor: Color.fromARGB(255, 249, 118, 3),
+                          decoration: const InputDecoration(
+                              labelText: "Colors",
+                              prefixIcon: Icon(
+                                Icons.color_lens,
+                                color: Color.fromARGB(255, 249, 118, 3),
+                              ),
+                              border: UnderlineInputBorder()),
                         ),
-                        _dropDown(
-                          hint: "Quality",
-                          icon: Icons.high_quality,
-                          listt: ListQuality,
-                          select: "Original",
+                        DropdownButtonFormField(
+                          value: selectedValQ,
+                          items: ListQuality.map((e) => DropdownMenuItem(
+                                child: Text(e),
+                                value: e,
+                              )).toList(),
+                          onChanged: (val) {
+                            setState(() {
+                              selectedValQ = val as String;
+                              Qvalue = selectedValQ;
+                              getQValue();
+                            });
+                          },
+                          icon: const Icon(
+                            Icons.arrow_drop_down_circle,
+                            color: Color.fromARGB(255, 249, 118, 3),
+                          ),
+                          dropdownColor: Color.fromARGB(255, 249, 118, 3),
+                          decoration: const InputDecoration(
+                              labelText: "Quality",
+                              prefixIcon: Icon(
+                                Icons.high_quality,
+                                color: Color.fromARGB(255, 249, 118, 3),
+                              ),
+                              border: UnderlineInputBorder()),
                         ),
-                        _dropDown(
-                          hint: "Category",
-                          icon: Icons.category,
-                          listt: ListCateg,
-                          select: "Headphones",
+                        DropdownButtonFormField(
+                          value: selectedValCat,
+                          items: ListCateg.map((e) => DropdownMenuItem(
+                                child: Text(e),
+                                value: e,
+                              )).toList(),
+                          onChanged: (val) {
+                            setState(() {
+                              selectedValCat = val as String;
+                              Categvalue = selectedValCat;
+                              getCategValue();
+                            });
+                          },
+                          icon: const Icon(
+                            Icons.arrow_drop_down_circle,
+                            color: Color.fromARGB(255, 249, 118, 3),
+                          ),
+                          dropdownColor: Color.fromARGB(255, 249, 118, 3),
+                          decoration: const InputDecoration(
+                              labelText: "Categories",
+                              prefixIcon: Icon(
+                                Icons.category,
+                                color: Color.fromARGB(255, 249, 118, 3),
+                              ),
+                              border: UnderlineInputBorder()),
                         ),
                         Expanded(
                           child: Center(
                             child: ButtonWidget(
                               btnText: "Add Product",
                               onClick: () {
+                                addProduct(
+                                    _nameController.text,
+                                    _descriptionController.text,
+                                    _aboutController.text,
+                                    getQValue(),
+                                    getCValue(),
+                                    getCategValue(),
+                                    _priceController.text,
+                                    _quantityController.text);
                                 Navigator.pop(context);
                               },
                             ),
@@ -179,35 +312,6 @@ class _AddProductPageState extends State<AddProductPage> {
           ),
         ),
       ),
-    );
-  }
-
-  Widget _dropDown({hint, icon, required List listt, required String select}) {
-    return DropdownButtonFormField(
-      value: select,
-      items: listt
-          .map((e) => DropdownMenuItem(
-                child: Text(e),
-                value: e,
-              ))
-          .toList(),
-      onChanged: (val) {
-        setState(() {
-          select = val as String;
-        });
-      },
-      icon: const Icon(
-        Icons.arrow_drop_down_circle,
-        color: Color.fromARGB(255, 249, 118, 3),
-      ),
-      dropdownColor: Color.fromARGB(255, 249, 118, 3),
-      decoration: InputDecoration(
-          labelText: hint,
-          prefixIcon: Icon(
-            icon,
-            color: Color.fromARGB(255, 249, 118, 3),
-          ),
-          border: UnderlineInputBorder()),
     );
   }
 }
