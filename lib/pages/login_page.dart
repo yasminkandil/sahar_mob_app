@@ -60,57 +60,61 @@ class _LoginPageState extends State<LoginPage> {
             HeaderContainer("Login"),
             Expanded(
               flex: 1,
-              child: Container(
-                margin: EdgeInsets.only(left: 20, right: 20, top: 30),
-                child: Column(
-                  mainAxisSize: MainAxisSize.max,
-                  children: <Widget>[
-                    _textInput(
-                        controller: _emailController,
-                        hint: "Email",
-                        icon: Icons.email,
-                        torf: false),
-                    _textInput(
-                        controller: _passwordController,
-                        hint: "Password",
-                        icon: Icons.vpn_key,
-                        torf: true),
-                    Container(
-                      margin: EdgeInsets.only(top: 10),
-                      alignment: Alignment.centerRight,
-                      child: Text(
-                        "Forgot Password?",
-                      ),
-                    ),
-                    Expanded(
-                      child: Center(
-                        child: ButtonWidget(
-                          onClick: () async {
-                            User? user = await loginUsingEmailPassword(
-                                email: _emailController.text,
-                                password: _passwordController.text,
-                                context: context);
-                            print(user);
-                            if (user != null)
-                              Navigator.of(context).pushReplacement(
-                                  MaterialPageRoute(
-                                      builder: (context) => PowerBank()));
-                          },
-                          btnText: "LOGIN",
+              child: SingleChildScrollView(
+                child: IntrinsicHeight(
+                  child: Container(
+                    margin: EdgeInsets.only(left: 20, right: 20, top: 30),
+                    child: Column(
+                      mainAxisSize: MainAxisSize.max,
+                      children: <Widget>[
+                        _textInput(
+                            controller: _emailController,
+                            hint: "Email",
+                            icon: Icons.email,
+                            torf: false),
+                        _textInput(
+                            controller: _passwordController,
+                            hint: "Password",
+                            icon: Icons.vpn_key,
+                            torf: true),
+                        Container(
+                          margin: EdgeInsets.only(top: 10),
+                          alignment: Alignment.centerRight,
+                          child: Text(
+                            "Forgot Password?",
+                          ),
                         ),
-                      ),
+                        Expanded(
+                          child: Center(
+                            child: ButtonWidget(
+                              onClick: () async {
+                                User? user = await loginUsingEmailPassword(
+                                    email: _emailController.text,
+                                    password: _passwordController.text,
+                                    context: context);
+                                print(user);
+                                if (user != null)
+                                  Navigator.of(context).pushReplacement(
+                                      MaterialPageRoute(
+                                          builder: (context) => PowerBank()));
+                              },
+                              btnText: "LOGIN",
+                            ),
+                          ),
+                        ),
+                        RichText(
+                          text: TextSpan(children: [
+                            TextSpan(
+                                text: "Don't have an account ? ",
+                                style: TextStyle(color: Colors.black)),
+                            TextSpan(
+                                text: "Registor",
+                                style: TextStyle(color: orangeColors)),
+                          ]),
+                        )
+                      ],
                     ),
-                    RichText(
-                      text: TextSpan(children: [
-                        TextSpan(
-                            text: "Don't have an account ? ",
-                            style: TextStyle(color: Colors.black)),
-                        TextSpan(
-                            text: "Registor",
-                            style: TextStyle(color: orangeColors)),
-                      ]),
-                    )
-                  ],
+                  ),
                 ),
               ),
             )

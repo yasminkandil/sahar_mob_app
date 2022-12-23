@@ -92,37 +92,42 @@ class _AddCategPageState extends State<AddCategPage> {
             ),
             Expanded(
               flex: 1,
-              child: Container(
-                margin: EdgeInsets.only(left: 20, right: 20, top: 30),
-                child: Column(
-                  mainAxisSize: MainAxisSize.max,
-                  children: <Widget>[
-                    _textInput(hint: "Category Name", icon: Icons.category),
-                    _textInput(hint: "Category Subtitle", icon: Icons.category),
-                    ListTile(
-                      title: Row(
-                        mainAxisSize: MainAxisSize.max,
-                        children: <Widget>[
-                          Expanded(
-                            child: ButtonWidget2(
-                              btnText: "Add Category",
-                              onClick: () {
-                                Navigator.pop(context);
-                              },
-                            ),
+              child: SingleChildScrollView(
+                child: IntrinsicHeight(
+                  child: Container(
+                    margin: EdgeInsets.only(left: 20, right: 20, top: 30),
+                    child: Column(
+                      mainAxisSize: MainAxisSize.max,
+                      children: <Widget>[
+                        _textInput(hint: "Category Name", icon: Icons.category),
+                        _textInput(
+                            hint: "Category Subtitle", icon: Icons.category),
+                        ListTile(
+                          title: Row(
+                            mainAxisSize: MainAxisSize.max,
+                            children: <Widget>[
+                              Expanded(
+                                child: ButtonWidget2(
+                                  btnText: "Add Category",
+                                  onClick: () {
+                                    Navigator.pop(context);
+                                  },
+                                ),
+                              ),
+                              Expanded(
+                                child: ButtonWidgetdelete(
+                                  btnText: "Delete Category",
+                                  onClick: () {
+                                    Navigator.pop(context);
+                                  },
+                                ),
+                              ),
+                            ],
                           ),
-                          Expanded(
-                            child: ButtonWidgetdelete(
-                              btnText: "Delete Category",
-                              onClick: () {
-                                Navigator.pop(context);
-                              },
-                            ),
-                          ),
-                        ],
-                      ),
+                        ),
+                      ],
                     ),
-                  ],
+                  ),
                 ),
               ),
             )

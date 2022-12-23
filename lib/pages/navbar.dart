@@ -5,6 +5,7 @@ import 'package:sahar_mob_app/pages/category.dart';
 import 'package:sahar_mob_app/pages/checkout.dart';
 import 'package:sahar_mob_app/pages/contact_us.dart';
 import 'package:sahar_mob_app/pages/edit_account.dart';
+import 'package:sahar_mob_app/pages/login_page.dart';
 import 'package:sahar_mob_app/pages/products_powerbank.dart';
 import 'package:sahar_mob_app/pages/regi_page.dart';
 import 'package:sahar_mob_app/pages/view_account.dart';
@@ -57,6 +58,8 @@ class HomeNavbar extends State<Navigation_bar> {
         children: [
           menuItem(9, "CheckOut", Icons.check_outlined,
               currentPage == Sections.CheckOut ? true : false),
+          menuItem(10, "Login", Icons.login_rounded,
+              currentPage == Sections.login ? true : false),
           menuItem(8, "Cart", Icons.shop_two_outlined,
               currentPage == Sections.Cart ? true : false),
           menuItem(7, "Sign Up", Icons.login_rounded,
@@ -137,6 +140,12 @@ class HomeNavbar extends State<Navigation_bar> {
               MaterialPageRoute(builder: (context) => checkout()),
             );
             currentPage = Sections.CheckOut;
+          } else if (id == 10) {
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => LoginPage()),
+            );
+            currentPage = Sections.login;
           }
         },
         child: Padding(
@@ -174,5 +183,6 @@ enum Sections {
   Edit_Profile,
   Log_Out,
   Cart,
-  CheckOut
+  CheckOut,
+  login
 }
