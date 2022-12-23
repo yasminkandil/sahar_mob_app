@@ -96,7 +96,8 @@ class _LoginPageState extends State<LoginPage> {
                                 if (user != null)
                                   Navigator.of(context).pushReplacement(
                                       MaterialPageRoute(
-                                          builder: (context) => PowerBank()));
+                                          builder: (context) =>
+                                              Navigation_bar()));
                               },
                               btnText: "LOGIN",
                             ),
