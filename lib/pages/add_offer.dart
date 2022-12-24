@@ -1,5 +1,6 @@
 import 'dart:ui';
 
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:sahar_mob_app/pages/admin.dart';
@@ -15,7 +16,22 @@ class AddOfferPage extends StatefulWidget {
 }
 
 class _AddOfferPageState extends State<AddOfferPage> {
-  TextEditingController dateInput = TextEditingController();
+  TextEditingController dateIn = TextEditingController();
+  TextEditingController dateOut = TextEditingController();
+  final _nameController = TextEditingController();
+  final _descriptionController = TextEditingController();
+  final _percentageController = TextEditingController();
+
+  Future addOffer(String name, String description, String percentage,
+      String datein, String dateout) async {
+    await FirebaseFirestore.instance.collection('offers').doc().set({
+      'name': name,
+      'description': description,
+      'percentage': int.parse(percentage),
+      'datein': datein,
+      'dateout': dateout,
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -101,13 +117,22 @@ class _AddOfferPageState extends State<AddOfferPage> {
                     child: Column(
                       mainAxisSize: MainAxisSize.max,
                       children: <Widget>[
-                        _textInput(hint: "Offer Name", icon: Icons.edit),
-                        _textInput(hint: "Description", icon: Icons.edit),
-                        _textInput(hint: "Percentage", icon: Icons.percent),
+                        _textInput(
+                            controller: _nameController,
+                            hint: "Offer Name",
+                            icon: Icons.edit),
+                        _textInput(
+                            controller: _descriptionController,
+                            hint: "Description",
+                            icon: Icons.edit),
+                        _textInput(
+                            controller: _percentageController,
+                            hint: "Percentage",
+                            icon: Icons.percent),
                         TextField(
-                          controller: dateInput,
+                          controller: dateIn,
                           //editing controller of this TextField
-                          decoration: InputDecoration(
+                          decoration: const InputDecoration(
                               icon: Icon(
                                   color: Colors.orange,
                                   Icons.calendar_today), //icon of text field
@@ -132,14 +157,14 @@ class _AddOfferPageState extends State<AddOfferPage> {
                               print(
                                   formattedDate); //formatted date output using intl package =>  2021-03-16
                               setState(() {
-                                dateInput.text =
+                                dateIn.text =
                                     formattedDate; //set output date to TextField value.
                               });
                             } else {}
                           },
                         ),
                         TextField(
-                          controller: dateInput,
+                          controller: dateOut,
                           //editing controller of this TextField
                           decoration: InputDecoration(
                               icon: Icon(
@@ -165,7 +190,7 @@ class _AddOfferPageState extends State<AddOfferPage> {
                               print(
                                   formattedDate); //formatted date output using intl package =>  2021-03-16
                               setState(() {
-                                dateInput.text =
+                                dateOut.text =
                                     formattedDate; //set output date to TextField value.
                               });
                             } else {}
@@ -176,6 +201,12 @@ class _AddOfferPageState extends State<AddOfferPage> {
                             child: ButtonWidget(
                               btnText: "Add Offer",
                               onClick: () {
+                                addOffer(
+                                    _nameController.text,
+                                    _descriptionController.text,
+                                    _percentageController.text,
+                                    dateIn.text,
+                                    dateOut.text);
                                 Navigator.pop(context);
                               },
                             ),

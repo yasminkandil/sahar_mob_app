@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'package:sahar_mob_app/pages/components/componentsCategory.dart';
-import 'package:sahar_mob_app/products.dart';
+import 'package:sahar_mob_app/product_powerbank.dart';
 import 'package:sahar_mob_app/screens/details/details_screen.dart';
 
 class Itemcard extends StatelessWidget {

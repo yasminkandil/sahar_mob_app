@@ -6,9 +6,11 @@ import 'package:sahar_mob_app/pages/checkout.dart';
 import 'package:sahar_mob_app/pages/contact_us.dart';
 import 'package:sahar_mob_app/pages/edit_account.dart';
 import 'package:sahar_mob_app/pages/login_page.dart';
-import 'package:sahar_mob_app/pages/products_powerbank.dart';
+import 'package:sahar_mob_app/pages/products_all.dart';
+import 'package:sahar_mob_app/product_powerbank.dart';
 import 'package:sahar_mob_app/pages/regi_page.dart';
 import 'package:sahar_mob_app/pages/view_account.dart';
+import 'package:sahar_mob_app/product_powerbank.dart';
 import 'package:sahar_mob_app/utils/color.dart';
 import 'package:sahar_mob_app/widgets/header_container.dart';
 //import 'package:sahar_mob_app/pages/body.dart';
@@ -101,7 +103,7 @@ class HomeNavbar extends State<Navigation_bar> {
           } else if (id == 3) {
             Navigator.push(
               context,
-              MaterialPageRoute(builder: (context) => PowerBank()),
+              MaterialPageRoute(builder: (context) => Products()),
             );
             currentPage = Sections.Categories;
           } else if (id == 4) {

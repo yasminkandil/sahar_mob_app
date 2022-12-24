@@ -8,6 +8,7 @@ import 'package:sahar_mob_app/pages/calendar.dart';
 import 'package:sahar_mob_app/pages/orders_admin.dart';
 import 'package:sahar_mob_app/pages/products_powerbank.dart';
 import 'package:sahar_mob_app/pages/view_product.dart';
+import 'package:sahar_mob_app/pages/products_all.dart';
 import 'package:sahar_mob_app/utils/color.dart';
 import 'package:sahar_mob_app/pages/navbar.dart';
 
@@ -283,7 +284,7 @@ class _AdminState extends State<Admin> {
                 title: Text("In Fix"),
                 onTap: () => Navigator.push(
                       context,
-                      MaterialPageRoute(builder: (context) => PowerBank()),
+                      MaterialPageRoute(builder: (context) => Products()),
                     )),
             Divider(),
             ListTile(
