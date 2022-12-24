@@ -38,12 +38,14 @@ dependencies:
   cupertino_icons: ^1.0.2
   firebase_core: ^2.4.0
   firebase_auth: ^4.2.1
-  image_picker: ^0.8.5+3
   flutter_svg: ^1.1.6
   syncfusion_flutter_calendar: ^20.3.52
   firebase_database: ^10.0.8
-  firebase_storage: ^11.0.6
   cloud_firestore: ^4.1.0
+  flutter_riverpod: ^2.1.1
+  image_picker: ^0.8.6
+  permission_handler: ^10.2.0
+  firebase_storage: ^11.0.9
 
 
 dev_dependencies:

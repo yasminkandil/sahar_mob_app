@@ -1,7 +1,14 @@
+import 'dart:io';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_database/firebase_database.dart';
+import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
+import 'package:image_picker/image_picker.dart';
+import 'package:permission_handler/permission_handler.dart';
+import 'package:sahar_mob_app/models/uploadimage.dart';
+import 'package:sahar_mob_app/pages/login_page.dart';
 import 'package:sahar_mob_app/pages/navbar.dart';
 import 'package:sahar_mob_app/pages/products_powerbank.dart';
 import 'package:sahar_mob_app/utils/color.dart';
@@ -15,10 +22,48 @@ class RegisterPage extends StatefulWidget {
 
 class _RegisterPageState extends State<RegisterPage> {
   late DatabaseReference dbRef;
+  late String imageUrl;
   @override
   void initState() {
     super.initState();
     dbRef = FirebaseDatabase.instance.ref().child("users");
+    //uploadImage();
+  }
+
+  uploadImage() async {
+    final _storage = FirebaseStorage.instance;
+    final _picker = ImagePicker();
+    PickedFile? image;
+
+    //Check Permissions
+    await Permission.photos.request();
+
+    var permissionStatus = await Permission.photos.status;
+
+    if (permissionStatus.isGranted) {
+      //Select Image
+      image = await _picker.getImage(source: ImageSource.gallery);
+      var file = File(image!.path);
+
+      if (image != null) {
+        //Upload to Firebase
+        var snapshot = await _storage
+            .ref()
+            .child('folderName/imageName')
+            .putFile(file)
+            .whenComplete(() => null);
+
+        var downloadUrl = await snapshot.ref.getDownloadURL();
+
+        setState(() {
+          imageUrl = downloadUrl;
+        });
+      } else {
+        print('No Path Received');
+      }
+    } else {
+      print('Grant Permissions and try again');
+    }
   }
 
   Future addUserDetails(String firstname, String lastname, String userEmail,
@@ -99,9 +144,14 @@ class _RegisterPageState extends State<RegisterPage> {
                               color: Colors.white,
                             ),
                             color: Colors.orange),
-                        child: Icon(
-                          Icons.edit,
-                          color: Colors.white,
+                        child: TextButton(
+                          child: const Icon(
+                            Icons.upload,
+                            color: Colors.white,
+                          ),
+                          onPressed: () {
+                            uploadImage();
+                          },
                         )),
                   )
                 ],
@@ -179,15 +229,22 @@ class _RegisterPageState extends State<RegisterPage> {
                             ),
                           ),
                         ),
-                        RichText(
-                          text: TextSpan(children: [
-                            TextSpan(
-                                text: "Already a member ? ",
-                                style: TextStyle(color: Colors.black)),
-                            TextSpan(
-                                text: "Login",
-                                style: TextStyle(color: orangeColors)),
-                          ]),
+                        InkWell(
+                          child: RichText(
+                            text: TextSpan(children: [
+                              TextSpan(
+                                  text: "Already a member ? ",
+                                  style: TextStyle(color: Colors.black)),
+                              TextSpan(
+                                  text: "Login",
+                                  style: TextStyle(
+                                    color: orangeColors,
+                                  )),
+                            ]),
+                          ),
+                          onTap: () => Navigator.of(context).push(
+                              MaterialPageRoute(
+                                  builder: (context) => LoginPage())),
                         )
                       ],
                     ),

@@ -1,5 +1,8 @@
+// ignore_for_file: dead_code
+
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:sahar_mob_app/pages/forgot_pass.dart';
 import 'package:sahar_mob_app/pages/products_powerbank.dart';
 import 'package:sahar_mob_app/pages/regi_page.dart';
 import 'package:sahar_mob_app/utils/color.dart';
@@ -33,9 +36,9 @@ class _LoginPageState extends State<LoginPage> {
 
   @override
   Widget build(BuildContext context) {
-    TextEditingController _emailController = TextEditingController();
-    TextEditingController _passwordController = TextEditingController();
-
+    TextEditingController emailController = TextEditingController();
+    TextEditingController passwordController = TextEditingController();
+    bool obscureText = true;
     return Scaffold(
       appBar: AppBar(
         backgroundColor: GreyColors,
@@ -54,7 +57,7 @@ class _LoginPageState extends State<LoginPage> {
             }),
       ),
       body: Container(
-        padding: EdgeInsets.only(bottom: 30),
+        padding: const EdgeInsets.only(bottom: 30),
         child: Column(
           children: <Widget>[
             HeaderContainer("Login"),
@@ -63,55 +66,92 @@ class _LoginPageState extends State<LoginPage> {
               child: SingleChildScrollView(
                 child: IntrinsicHeight(
                   child: Container(
-                    margin: EdgeInsets.only(left: 20, right: 20, top: 30),
+                    margin: const EdgeInsets.only(left: 20, right: 20, top: 30),
                     child: Column(
                       mainAxisSize: MainAxisSize.max,
                       children: <Widget>[
                         _textInput(
-                            controller: _emailController,
+                            controller: emailController,
                             hint: "Email",
                             icon: Icons.email,
                             torf: false),
-                        _textInput(
-                            controller: _passwordController,
-                            hint: "Password",
-                            icon: Icons.vpn_key,
-                            torf: true),
                         Container(
-                          margin: EdgeInsets.only(top: 10),
-                          alignment: Alignment.centerRight,
-                          child: Text(
-                            "Forgot Password?",
+                          margin: const EdgeInsets.only(top: 20),
+                          decoration: const BoxDecoration(
+                            borderRadius: BorderRadius.all(Radius.circular(20)),
+                            color: Colors.white,
                           ),
+                          padding: const EdgeInsets.only(left: 10),
+                          child: TextFormField(
+                            controller: passwordController,
+                            obscureText: obscureText,
+                            decoration: InputDecoration(
+                                border: InputBorder.none,
+                                hintText: "Password",
+                                prefixIcon: const Icon(Icons.vpn_key),
+                                suffixIcon: GestureDetector(
+                                  onTap: () {
+                                    setState(() {
+                                      obscureText = !obscureText;
+                                    });
+                                  },
+                                  child: obscureText
+                                      ? const Icon(Icons.visibility_off)
+                                      : const Icon(Icons.visibility),
+                                )),
+                          ),
+                        ),
+                        Container(
+                          margin: const EdgeInsets.only(top: 10),
+                          alignment: Alignment.centerRight,
+                          child: TextButton(
+                              child: const Text(
+                                  style: TextStyle(
+                                      color: Color.fromARGB(255, 232, 127, 14)),
+                                  "Forgot Password?"),
+                              onPressed: () {
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(builder: (context) {
+                                    return const ForgotPass();
+                                  }),
+                                );
+                              }),
                         ),
                         Expanded(
                           child: Center(
                             child: ButtonWidget(
                               onClick: () async {
                                 User? user = await loginUsingEmailPassword(
-                                    email: _emailController.text,
-                                    password: _passwordController.text,
+                                    email: emailController.text,
+                                    password: passwordController.text,
                                     context: context);
                                 print(user);
-                                if (user != null)
+                                if (user != null) {
                                   Navigator.of(context).pushReplacement(
                                       MaterialPageRoute(
                                           builder: (context) =>
                                               Navigation_bar()));
+                                }
                               },
                               btnText: "LOGIN",
                             ),
                           ),
                         ),
-                        RichText(
-                          text: TextSpan(children: [
-                            TextSpan(
-                                text: "Don't have an account ? ",
-                                style: TextStyle(color: Colors.black)),
-                            TextSpan(
-                                text: "Registor",
-                                style: TextStyle(color: orangeColors)),
-                          ]),
+                        InkWell(
+                          child: RichText(
+                            text: TextSpan(children: [
+                              const TextSpan(
+                                  text: "Don't have an account ? ",
+                                  style: TextStyle(color: Colors.black)),
+                              TextSpan(
+                                  text: "Register",
+                                  style: TextStyle(color: orangeColors)),
+                            ]),
+                          ),
+                          onTap: () => Navigator.of(context).push(
+                              MaterialPageRoute(
+                                  builder: (context) => RegisterPage())),
                         )
                       ],
                     ),
@@ -127,12 +167,12 @@ class _LoginPageState extends State<LoginPage> {
 
   Widget _textInput({controller, hint, icon, torf}) {
     return Container(
-      margin: EdgeInsets.only(top: 20),
-      decoration: BoxDecoration(
+      margin: const EdgeInsets.only(top: 20),
+      decoration: const BoxDecoration(
         borderRadius: BorderRadius.all(Radius.circular(20)),
         color: Colors.white,
       ),
-      padding: EdgeInsets.only(left: 10),
+      padding: const EdgeInsets.only(left: 10),
       child: TextFormField(
         obscureText: torf,
         controller: controller,
