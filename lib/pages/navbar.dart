@@ -5,14 +5,12 @@ import 'package:sahar_mob_app/pages/category.dart';
 import 'package:sahar_mob_app/pages/checkout.dart';
 import 'package:sahar_mob_app/pages/contact_us.dart';
 import 'package:sahar_mob_app/pages/edit_account.dart';
-<<<<<<< HEAD
-import 'package:sahar_mob_app/pages/products_all.dart';
-=======
 import 'package:sahar_mob_app/pages/login_page.dart';
-import 'package:sahar_mob_app/pages/products_powerbank.dart';
->>>>>>> a1e3ad1b47f0a9733b074c7e5c9ea74547dcd253
+import 'package:sahar_mob_app/pages/products_all.dart';
+import 'package:sahar_mob_app/product_powerbank.dart';
 import 'package:sahar_mob_app/pages/regi_page.dart';
 import 'package:sahar_mob_app/pages/view_account.dart';
+import 'package:sahar_mob_app/product_powerbank.dart';
 import 'package:sahar_mob_app/utils/color.dart';
 import 'package:sahar_mob_app/widgets/header_container.dart';
 //import 'package:sahar_mob_app/pages/body.dart';
@@ -105,11 +103,7 @@ class HomeNavbar extends State<Navigation_bar> {
           } else if (id == 3) {
             Navigator.push(
               context,
-<<<<<<< HEAD
               MaterialPageRoute(builder: (context) => Products()),
-=======
-              MaterialPageRoute(builder: (context) => PowerBank()),
->>>>>>> a1e3ad1b47f0a9733b074c7e5c9ea74547dcd253
             );
             currentPage = Sections.Categories;
           } else if (id == 4) {
