@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:sahar_mob_app/pages/components/componentsCategory.dart';
 
 import 'package:sahar_mob_app/pages/components/item_card.dart';
-import 'package:sahar_mob_app/products.dart';
+import 'package:sahar_mob_app/product_powerbank.dart';
 import 'package:sahar_mob_app/screens/details/details_screen.dart';
 
 class Body extends StatelessWidget {
@@ -21,16 +21,16 @@ class Body extends StatelessWidget {
           child: Padding(
             padding: const EdgeInsets.symmetric(horizontal: 15),
             child: GridView.builder(
-              itemCount: products.length,
+              itemCount: all.length,
               gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                   crossAxisCount: 2, childAspectRatio: 0.75),
               itemBuilder: (context, index) => Itemcard(
-                product: products[index],
+                product: all[index][index],
                 press: () => Navigator.push(
                     context,
                     MaterialPageRoute(
                         builder: (context) =>
-                            DetailScreen(product: products[index]))),
+                            DetailScreen(product: all[index][index]))),
               ),
             ),
           ),

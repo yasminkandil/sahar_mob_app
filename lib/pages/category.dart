@@ -96,18 +96,18 @@ class CategoryPage extends StatelessWidget {
                     Column(
                       children: [
                         shortproducts(
-                            background: AppColors.purple,
+                            background: Color.fromARGB(255, 68, 69, 71),
                             title: 'Cover Cases',
                             subtitle: "12 Products",
                             image: 'assets/covercase.png'),
                         longproducts(
-                            background: AppColors.red,
+                            background: Color.fromARGB(255, 79, 75, 75),
                             title: 'Power Banks',
                             subtitle: "10 Products",
                             image: 'assets/powerbank.png'),
                         SizedBox(height: 12),
                         shortbottomproducts(
-                            background: AppColors.pink,
+                            background: Color.fromARGB(255, 73, 69, 69),
                             title: 'Head Phones',
                             subtitle: "8 Products",
                             image: 'assets/headphone.png')
@@ -116,18 +116,18 @@ class CategoryPage extends StatelessWidget {
                     Column(
                       children: [
                         shortproducts(
-                            background: AppColors.red,
+                            background: Color.fromARGB(255, 60, 57, 57),
                             title: 'Screen Protectors',
                             subtitle: "4 Products",
                             image: 'assets/protector.png'),
                         longproducts(
-                            background: AppColors.green,
+                            background: Color.fromARGB(255, 66, 63, 63),
                             title: 'EarPhones',
                             subtitle: "8 Products",
                             image: 'assets/headphones.png'),
                         SizedBox(height: 12),
                         shortbottomproducts(
-                            background: AppColors.brown,
+                            background: Color.fromARGB(255, 63, 60, 60),
                             title: 'Cables',
                             subtitle: "8 Products",
                             image: 'assets/cables.png')
