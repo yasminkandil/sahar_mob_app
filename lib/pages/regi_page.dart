@@ -14,6 +14,7 @@ import 'package:sahar_mob_app/pages/products_powerbank.dart';
 import 'package:sahar_mob_app/utils/color.dart';
 import 'package:sahar_mob_app/widgets/btn_widget.dart';
 import 'package:sahar_mob_app/widgets/header_container.dart';
+import 'package:path/path.dart' as p;
 
 class RegisterPage extends StatefulWidget {
   @override
@@ -22,12 +23,25 @@ class RegisterPage extends StatefulWidget {
 
 class _RegisterPageState extends State<RegisterPage> {
   late DatabaseReference dbRef;
-  late String imageUrl;
+  var imageUrl;
+  var downloadUrl;
+  var imagee;
+  var greyimage =
+      'https://www.google.com/search?q=profile+photo+&tbm=isch&ved=2ahUKEwis27rOz_76AhVFexoKHU2PBGoQ2-cCegQIABAA&oq=profile+photo+&gs_lcp=CgNpbWcQAzIECAAQQzIFCAAQgAQyBQgAEIAEMgUIABCABDIFCAAQgAQyBQgAEIAEMgUIABCABDIFCAAQgAQyBQgAEIAEMgUIABCABDoGCAAQBxAeULwEWLwEYKoIaABwAHgAgAGZAYgBkwKSAQMwLjKYAQCgAQGqAQtnd3Mtd2l6LWltZ8ABAQ&sclient=img&ei=d4lZY-zDCsX2ac2ektAG&bih=657&biw=1366#imgrc=nfkyptoYx2OzJM';
   @override
   void initState() {
     super.initState();
     dbRef = FirebaseDatabase.instance.ref().child("users");
+    //greyimage = imageUrl;
     //uploadImage();
+  }
+
+  setImage(String imagee) {
+    imagee = imagee;
+  }
+
+  getImage() {
+    return imagee;
   }
 
   uploadImage() async {
@@ -40,41 +54,39 @@ class _RegisterPageState extends State<RegisterPage> {
 
     var permissionStatus = await Permission.photos.status;
 
-    if (permissionStatus.isGranted) {
-      //Select Image
-      image = await _picker.getImage(source: ImageSource.gallery);
-      var file = File(image!.path);
+    //Select Image
+    image = await _picker.getImage(source: ImageSource.gallery);
+    var file = File(image!.path);
 
-      if (image != null) {
-        //Upload to Firebase
-        var snapshot = await _storage
-            .ref()
-            .child('folderName/imageName')
-            .putFile(file)
-            .whenComplete(() => null);
+    if (image != null) {
+      //Upload to Firebase
+      var snapshot =
+          await _storage.ref().child(p.basename(image.path)).putFile(file);
 
-        var downloadUrl = await snapshot.ref.getDownloadURL();
+      downloadUrl = await snapshot.ref.getDownloadURL();
 
-        setState(() {
-          imageUrl = downloadUrl;
-        });
-      } else {
-        print('No Path Received');
-      }
+      setState(() {
+        imageUrl = downloadUrl;
+        greyimage = imageUrl;
+        setImage(imageUrl);
+      });
     } else {
-      print('Grant Permissions and try again');
+      print('No Path Received');
     }
   }
 
   Future addUserDetails(String firstname, String lastname, String userEmail,
-      String useraddress, String userPhoneNumber) async {
-    await FirebaseFirestore.instance.collection('users').doc().set({
-      'firstname': firstname,
-      'lastname': lastname,
-      'email': userEmail,
-      'mobile': int.parse(userPhoneNumber),
-      'address': useraddress,
-    });
+      String useraddress, String userPhoneNumber, String userImage) async {
+    await FirebaseFirestore.instance.collection('users').add(
+      {
+        'firstname': firstname,
+        'lastname': lastname,
+        'email': userEmail,
+        'mobile': int.parse(userPhoneNumber),
+        'address': useraddress,
+        'image': userImage,
+      },
+    );
 
     print('NEW USER REGISTERED WITH ID:');
   }
@@ -127,9 +139,7 @@ class _RegisterPageState extends State<RegisterPage> {
                         ],
                         shape: BoxShape.circle,
                         image: DecorationImage(
-                            fit: BoxFit.cover,
-                            image: NetworkImage(
-                                'https://www.google.com/search?q=profile+photo+&tbm=isch&ved=2ahUKEwis27rOz_76AhVFexoKHU2PBGoQ2-cCegQIABAA&oq=profile+photo+&gs_lcp=CgNpbWcQAzIECAAQQzIFCAAQgAQyBQgAEIAEMgUIABCABDIFCAAQgAQyBQgAEIAEMgUIABCABDIFCAAQgAQyBQgAEIAEMgUIABCABDoGCAAQBxAeULwEWLwEYKoIaABwAHgAgAGZAYgBkwKSAQMwLjKYAQCgAQGqAQtnd3Mtd2l6LWltZ8ABAQ&sclient=img&ei=d4lZY-zDCsX2ac2ektAG&bih=657&biw=1366#imgrc=nfkyptoYx2OzJM'))),
+                            fit: BoxFit.cover, image: NetworkImage(greyimage))),
                   ),
                   Positioned(
                     bottom: 0,
@@ -211,7 +221,8 @@ class _RegisterPageState extends State<RegisterPage> {
                                     _lastController.text,
                                     _emailController.text,
                                     _addrController.text,
-                                    _mobileController.text);
+                                    _mobileController.text,
+                                    imageUrl);
                                 FirebaseAuth.instance
                                     .createUserWithEmailAndPassword(
                                         email: _emailController.text,
@@ -222,7 +233,8 @@ class _RegisterPageState extends State<RegisterPage> {
                                     Navigator.push(
                                         context,
                                         MaterialPageRoute(
-                                            builder: (context) => Navigation_bar()));
+                                            builder: (context) =>
+                                                Navigation_bar()));
                                   },
                                 );
                               },

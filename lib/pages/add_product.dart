@@ -1,12 +1,17 @@
+import 'dart:io';
 import 'dart:ui';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_database/firebase_database.dart';
+import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
+import 'package:image_picker/image_picker.dart';
+import 'package:permission_handler/permission_handler.dart';
 //import 'package:image_picker/image_picker.dart';
 import 'package:sahar_mob_app/pages/admin.dart';
 import 'package:sahar_mob_app/utils/color.dart';
 import 'package:sahar_mob_app/widgets/btn_widget.dart';
+import "package:path/path.dart" as p;
 //import 'package:sahar_mob_app/widgets/header_container.dart';
 
 class AddProductPage extends StatefulWidget {
@@ -38,6 +43,11 @@ class _AddProductPageState extends State<AddProductPage> {
     'Maintanance'
   ];
   List ListQuality = ['Original', 'HighCopy'];
+  var imageUrl;
+  var downloadUrl;
+  var imagee;
+  var greyimage =
+      'https://www.google.com/search?q=profile+photo+&tbm=isch&ved=2ahUKEwis27rOz_76AhVFexoKHU2PBGoQ2-cCegQIABAA&oq=profile+photo+&gs_lcp=CgNpbWcQAzIECAAQQzIFCAAQgAQyBQgAEIAEMgUIABCABDIFCAAQgAQyBQgAEIAEMgUIABCABDIFCAAQgAQyBQgAEIAEMgUIABCABDoGCAAQBxAeULwEWLwEYKoIaABwAHgAgAGZAYgBkwKSAQMwLjKYAQCgAQGqAQtnd3Mtd2l6LWltZ8ABAQ&sclient=img&ei=d4lZY-zDCsX2ac2ektAG&bih=657&biw=1366#imgrc=nfkyptoYx2OzJM';
   Future addProduct(
       String name,
       String description,
@@ -46,7 +56,8 @@ class _AddProductPageState extends State<AddProductPage> {
       String color,
       String category,
       String price,
-      String quantity) async {
+      String quantity,
+      String prodimage) async {
     await FirebaseFirestore.instance.collection('products').doc().set({
       'name': name,
       'description': description,
@@ -55,7 +66,8 @@ class _AddProductPageState extends State<AddProductPage> {
       'color': color,
       'category': category,
       'price': int.parse(price),
-      'quantity': int.parse(quantity)
+      'quantity': int.parse(quantity),
+      'image': prodimage,
     });
   }
 
@@ -75,6 +87,46 @@ class _AddProductPageState extends State<AddProductPage> {
 
   String getQValue() {
     return Qvalue;
+  }
+
+  setImage(String imagee) {
+    imagee = imagee;
+  }
+
+  getImage() {
+    return imagee;
+  }
+
+  uploadImage() async {
+    final _storage = FirebaseStorage.instance;
+    final _picker = ImagePicker();
+    PickedFile? image;
+
+    //Check Permissions
+    await Permission.photos.request();
+
+    var permissionStatus = await Permission.photos.status;
+
+    //Select Image
+    image = await _picker.getImage(source: ImageSource.gallery);
+    var file = File(image!.path);
+
+    if (image != null) {
+      //Upload to Firebase
+      var snapshot =
+          await _storage.ref().child(p.basename(image.path)).putFile(file);
+
+      var downloadUrl = await snapshot.ref.getDownloadURL();
+
+      setState(() {
+        imageUrl = downloadUrl;
+        greyimage = imageUrl;
+        setImage(imageUrl);
+        getImage();
+      });
+    } else {
+      print('No Path Received');
+    }
   }
 
   @override
@@ -120,9 +172,7 @@ class _AddProductPageState extends State<AddProductPage> {
                         ],
                         shape: BoxShape.circle,
                         image: DecorationImage(
-                            fit: BoxFit.cover,
-                            image: NetworkImage(
-                                'https://www.google.com/search?q=profile+photo+&tbm=isch&ved=2ahUKEwis27rOz_76AhVFexoKHU2PBGoQ2-cCegQIABAA&oq=profile+photo+&gs_lcp=CgNpbWcQAzIECAAQQzIFCAAQgAQyBQgAEIAEMgUIABCABDIFCAAQgAQyBQgAEIAEMgUIABCABDIFCAAQgAQyBQgAEIAEMgUIABCABDoGCAAQBxAeULwEWLwEYKoIaABwAHgAgAGZAYgBkwKSAQMwLjKYAQCgAQGqAQtnd3Mtd2l6LWltZ8ABAQ&sclient=img&ei=d4lZY-zDCsX2ac2ektAG&bih=657&biw=1366#imgrc=nfkyptoYx2OzJM'))),
+                            fit: BoxFit.cover, image: NetworkImage(greyimage))),
                   ),
                   Positioned(
                     right: 0,
@@ -137,9 +187,16 @@ class _AddProductPageState extends State<AddProductPage> {
                               color: Colors.white,
                             ),
                             color: Colors.orange),
-                        child: Icon(
-                          Icons.upload,
-                          color: Colors.white,
+                        child: TextButton(
+                          child: Center(
+                            child: Icon(
+                              Icons.upload,
+                              color: Colors.white,
+                            ),
+                          ),
+                          onPressed: () {
+                            uploadImage();
+                          },
                         )),
                   )
                 ],
@@ -265,7 +322,8 @@ class _AddProductPageState extends State<AddProductPage> {
                                     getCValue(),
                                     getCategValue(),
                                     _priceController.text,
-                                    _quantityController.text);
+                                    _quantityController.text,
+                                    greyimage);
                                 Navigator.pop(context);
                               },
                             ),
