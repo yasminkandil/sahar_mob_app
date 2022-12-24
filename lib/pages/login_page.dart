@@ -94,6 +94,7 @@ class _LoginPageState extends State<LoginPage> {
                                     context: context);
                                 print(user);
                                 if (user != null)
+                                  // ignore: curly_braces_in_flow_control_structures
                                   Navigator.of(context).pushReplacement(
                                       MaterialPageRoute(
                                           builder: (context) =>
