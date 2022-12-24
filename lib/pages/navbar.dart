@@ -4,14 +4,12 @@ import 'package:sahar_mob_app/pages/cart.dart';
 import 'package:sahar_mob_app/pages/category.dart';
 import 'package:sahar_mob_app/pages/contact_us.dart';
 import 'package:sahar_mob_app/pages/edit_account.dart';
+import 'package:sahar_mob_app/pages/products_all.dart';
 import 'package:sahar_mob_app/pages/regi_page.dart';
 import 'package:sahar_mob_app/pages/view_account.dart';
 import 'package:sahar_mob_app/widgets/header_container.dart';
-<<<<<<< HEAD
 //import 'package:sahar_mob_app/pages/body.dart';
-=======
 import 'package:sahar_mob_app/pages/components/body.dart';
->>>>>>> f0b0c6433555b36a63428c9163a32e69f4e45bd2
 
 import 'my_drawer_header.dart';
 
@@ -26,7 +24,6 @@ class HomeNavbar extends State<Navigation_bar> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-<<<<<<< HEAD
       appBar: AppBar(
         backgroundColor: Colors.grey[700],
         title: Text("Menu"),
@@ -36,19 +33,6 @@ class HomeNavbar extends State<Navigation_bar> {
           HeaderContainer("Login"),
         ]),
       ),
-=======
-      appBar:AppBar(backgroundColor: Colors.grey[700],
-      title: Text("Menu"),),
-      body: Container( 
-        child:Column(
-        children: <Widget>[
-            HeaderContainer("Login"),
-            ]
-            
-            ),
-            
-      ) ,
->>>>>>> f0b0c6433555b36a63428c9163a32e69f4e45bd2
       drawer: Drawer(
         child: SingleChildScrollView(
             child: Container(
@@ -110,7 +94,7 @@ class HomeNavbar extends State<Navigation_bar> {
           } else if (id == 3) {
             Navigator.push(
               context,
-              MaterialPageRoute(builder: (context) => CategoryPage()),
+              MaterialPageRoute(builder: (context) => Products()),
             );
             currentPage = Sections.Categories;
           } else if (id == 4) {
