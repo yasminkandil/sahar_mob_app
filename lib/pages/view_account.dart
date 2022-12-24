@@ -79,14 +79,14 @@ Future getDocId() async{
        Column( 
         mainAxisAlignment: MainAxisAlignment.center,
       children: [
-      /*  Text('Signed in as:${userr.email}',
+      Text('Signed in as:${userr.email}',
         style: TextStyle(fontSize: 20),),
         MaterialButton(onPressed: (){
           FirebaseAuth.instance.signOut();
 
         },
         color: Colors.deepPurple,
-        child: Text('sign out'),),*/
+        child: Text('sign out'),),
         Expanded(
           child: 
           FutureBuilder(

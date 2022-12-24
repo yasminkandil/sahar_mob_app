@@ -7,6 +7,7 @@ import 'package:sahar_mob_app/pages/add_quality.dart';
 import 'package:sahar_mob_app/pages/calendar.dart';
 import 'package:sahar_mob_app/pages/orders_admin.dart';
 import 'package:sahar_mob_app/pages/products_powerbank.dart';
+import 'package:sahar_mob_app/pages/view_product.dart';
 import 'package:sahar_mob_app/utils/color.dart';
 import 'package:sahar_mob_app/pages/navbar.dart';
 
@@ -215,7 +216,10 @@ class _AdminState extends State<Admin> {
             ListTile(
               leading: Icon(Icons.change_history),
               title: Text("Products list"),
-              onTap: () {},
+              onTap: () => Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => const ViewProductPage())
+              ),
             ),
             Divider(),
             ListTile(

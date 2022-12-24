@@ -11,20 +11,23 @@ GetUserName({required this.documentId});
   Widget build(BuildContext context) {
 
     CollectionReference users=
-    FirebaseFirestore.instance.collection('user');
+    FirebaseFirestore.instance.collection('users');
     
     return FutureBuilder<DocumentSnapshot>
     (
       future: users.doc(documentId).get(),
-      builder: (context, snapshot){
+      builder:((context, snapshot){
        if(snapshot.connectionState == ConnectionState.done)
        {
-     Map<String, dynamic> data = 
-             snapshot.data!.data() as Map<String,dynamic>;
+          Map<String, dynamic> data = 
+             snapshot?.data?.data()!=null?
+             snapshot?.data!.data()! 
+              as Map<String,dynamic>:<String,dynamic>{}; 
              return Text('First Name : ${data['firstname']}');
        }
        return Text('loading..'); 
-    },);
+    }),
+    );
   
   }
 }
