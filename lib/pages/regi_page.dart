@@ -222,7 +222,7 @@ class _RegisterPageState extends State<RegisterPage> {
                                     Navigator.push(
                                         context,
                                         MaterialPageRoute(
-                                            builder: (context) => PowerBank()));
+                                            builder: (context) => Navigation_bar()));
                                   },
                                 );
                               },

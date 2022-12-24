@@ -1,240 +1,190 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:sahar_mob_app/pages/edit_account.dart';
-import 'package:sahar_mob_app/pages/navbar.dart';
+import 'package:sahar_mob_app/read%20data/get_user_name.dart';
 import 'package:sahar_mob_app/utils/color.dart';
 import 'package:sahar_mob_app/widgets/header_container.dart';
 
-import '../widgets/btn_widget.dart';
-
-
 class ViewAccountPage extends StatefulWidget {
+  const ViewAccountPage({super.key});
 
   @override
   _ViewAccountPageState createState() => _ViewAccountPageState();
 }
-class _ViewAccountPageState extends State<ViewAccountPage>
-{
 
-  bool isObscurePassword =true;
+class _ViewAccountPageState extends State<ViewAccountPage> {
+  //final FirebaseAuth _auth = FirebaseAuth.instance;
+ 
+  final userr =FirebaseAuth.instance.currentUser!;
+  // bashoof ehh el user el online 3shan a select data beta3to mn database
+  /*
+  Future _getDataFromDatabase() async {
+    await FirebaseFirestore.instance.collection('users')
+        .doc(FirebaseAuth.instance.currentUser!.email)
+        .get().then((snapshot) async {
+      if (snapshot.exists) {
+        setState(() {
+          // bakhod data mn database w store it
+          address = snapshot.data()!['address'];
+          email = snapshot.data()!['email'];
+          firstname = snapshot.data()!['firstname'];
+          lastname = snapshot.data()!['lastname'];
+          mobile = snapshot.data()!['mobile'];
+        });
+      }
+    });
+  }*/
+List<String> docIDs = [];
+Future getDocId() async{
+  await FirebaseFirestore.instance.collection('users').get().
+  then((snapshot) => snapshot.docs.forEach((document) {
+    print(document.reference);
+    docIDs.add(document.reference.id);
+  }),
+  );
+}
+ /* @override
+  void initState() {
+    super.initState();
+    setState(() {});
+    //getData();
+  }
+*/
+ /* void getData() async {
+    User? user = _auth.currentUser;
+    _uid = user?.uid;
+    print('user.email ${user?.email}');
+   final DocumentSnapshot userDoc = (user!.isAnonymous
+        ? null
+        : await FirebaseFirestore.instance.collection('users').doc(_uid).get()) as DocumentSnapshot<Object?>;
+
+      setState(() {
+      _firstname = userDoc.get('firstname');
+      _lastname = userDoc.get('lastname');
+      _email = user.email;
+    });
+  }*/
+
   @override
   Widget build(BuildContext context) {
-    
-    // final user = FirebaseAuth.instance.currentUser;
-/* if (user != null) {
-    // Name, email address, and profile photo URL
-    final name = user.displayName;
-    final email = user.email;
-    print(email);
-*/
-    //final photoUrl = user.photoURL;
-
-    // Check if user's email is verified
-//final emailVerified = user.emailVerified;
-
-    // The user's ID, unique to the Firebase project. Do NOT use this value to
-    // authenticate with your backend server, if you have one. Use
-    // User.getIdToken() instead.
-   // final uid = user.uid;
-// }
-
-    // TODO: implement build
     return Scaffold(
-      appBar:AppBar(
+      appBar: AppBar(
         title: Text('Your Account'),
         backgroundColor: GreyColors,
-       leading: IconButton(
-        icon: Icon(
-          Icons.arrow_back,
-          color:orangeColors,
-       ), onPressed: () { 
-         Navigator.push(context,
-                  MaterialPageRoute(builder: (context) {
-                  return Navigation_bar();
-                              }),
-                              );
-        },
-       ),
-       actions: [
-        IconButton(icon:Icon(
-          Icons.settings,
-          color: GreyColors,),
-          onPressed: (){}
-        ) 
-      
-       ], ) ,
-       body: Container(
-        padding: EdgeInsets.only(left: 15, top: 20, right: 15),
-        child: GestureDetector(onTap:() 
-        {
-          FocusScope.of(context).unfocus();
-        },
-        child: ListView(
-          children: [
-          Center(
-          child:Stack(
-          children: [
-            Container(
-              width: 140,
-              height: 140,
-              decoration: BoxDecoration(
-                border:Border.all(width: 4,color: Colors.white),
-                boxShadow:[
-                  BoxShadow(
-                    spreadRadius: 2,
-                    blurRadius: 10,
-                    color: Colors.black.withOpacity(0.1)
-                  )
-                ],
-                shape: BoxShape.circle,
-                image: DecorationImage(
-                  fit:BoxFit.cover, 
-                  image: NetworkImage(
-                    'https://www.google.com/search?q=profile+photo+&tbm=isch&ved=2ahUKEwis27rOz_76AhVFexoKHU2PBGoQ2-cCegQIABAA&oq=profile+photo+&gs_lcp=CgNpbWcQAzIECAAQQzIFCAAQgAQyBQgAEIAEMgUIABCABDIFCAAQgAQyBQgAEIAEMgUIABCABDIFCAAQgAQyBQgAEIAEMgUIABCABDoGCAAQBxAeULwEWLwEYKoIaABwAHgAgAGZAYgBkwKSAQMwLjKYAQCgAQGqAQtnd3Mtd2l6LWltZ8ABAQ&sclient=img&ei=d4lZY-zDCsX2ac2ektAG&bih=657&biw=1366#imgrc=nfkyptoYx2OzJM'
-                  
-                  )
-                )
-
-                ),
-                 
-                ),
-         Positioned(
-          bottom: 0,
-          right: 0,
-         child: Container(
-          height:40,
-          width: 40,
-          decoration: BoxDecoration(
-            shape: BoxShape.circle,
-            border: Border.all(
-              width: 4,
-              color: Colors.white,
-            ),
-            color: Colors.orange),
-            child:Icon(
-              Icons.edit,
-              color: Colors.white,
-            )
-          ),
-          )
-          
-          ],
-            ),
-          ),
-          SizedBox(height: 30),
-
-         TextField(              
-                        decoration: const InputDecoration(
-                          hintText: "Full Name: Salma Osama",
-                          border: InputBorder.none,
-                        ),
-         ),
-           TextField(              
-                        decoration: const InputDecoration(
-                          hintText: "Email: Salma2001@gmail.com",
-                          border: InputBorder.none,
-                        ),
-         ),
-           TextField(              
-                        decoration: const InputDecoration(
-                          hintText: "Location: Cairo,Madinaty",
-                          border: InputBorder.none,
-                        ),
-         ),
-           TextField(              
-                        decoration: const InputDecoration(
-                          hintText: "Mobile Number: 01114458221",
-                          border: InputBorder.none,
-                        ),
-         ),
-         
-          SizedBox(height: 30),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              OutlinedButton(onPressed: () {},
-              child: Text("Delete",style: TextStyle(
-                fontSize: 15,
-                letterSpacing: 2,
-                color: Colors.black)
-              ),
-              style: ElevatedButton.styleFrom(
-                primary: orangeColors,
-                padding: EdgeInsets.symmetric(horizontal: 50),
-                shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20))
-
-              ),
-              ),
-              ElevatedButton(onPressed: (){
-                Navigator.push(context,
-                  MaterialPageRoute(builder: (context) {
-                  return EditProfileUI();
-                              }),
-                              );
-                              },
- 
-              child: Text("Edit", style: TextStyle(
-                fontSize: 15,
-                letterSpacing: 2,
-                color: Color.fromARGB(255, 0, 0, 0))
-              ),
-             
-             style: ElevatedButton.styleFrom(
-              primary: orangeColors,
-              padding: EdgeInsets.symmetric(horizontal: 50),
-              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20))), 
-              )
-            ]
-          )
-
-
-          ],
-       
-        ),
-        ),
-        ),
-    );
-    throw UnimplementedError();
-  }
-  
-Widget buildTextField(String labelText, String placeholder, bool isPasswordTextField)
-{
-   return Container(
-      margin: EdgeInsets.only(top: 10),
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.all(Radius.circular(20)),
-        color: Colors.white,
+        centerTitle: true,
       ),
-      padding: EdgeInsets.only(left: 10),
-       child: TextFormField(autocorrect: isObscurePassword ? true:false,
- decoration:InputDecoration(
-  suffixIcon: isPasswordTextField?
-  IconButton(icon:Icon(Icons.remove_red_eye,color:Colors.grey),
-    onPressed: () {} 
-    ): null,
-    contentPadding: EdgeInsets.only(bottom: 5),
-    labelText: labelText,
-    floatingLabelBehavior: FloatingLabelBehavior.always,
-    hintStyle: TextStyle(
-      fontSize: 16,
-                      letterSpacing: 2,
+      body: Center(
+        child:
+       Column( 
+        mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+      /*  Text('Signed in as:${userr.email}',
+        style: TextStyle(fontSize: 20),),
+        MaterialButton(onPressed: (){
+          FirebaseAuth.instance.signOut();
 
-      fontWeight: FontWeight.bold,
-      color: Colors.black
+        },
+        color: Colors.deepPurple,
+        child: Text('sign out'),),*/
+        Expanded(
+          child: 
+          FutureBuilder(
+                        future: getDocId(),
+            builder: (context, snapshot)
+           {
+           return ListView.builder(
+          itemCount: docIDs.length,
+          itemBuilder:
+         (context, index) {
 
-    )
- ) ,    
-  ),
+          return ListTile(
+            title: GetUserName(documentId: docIDs[index],)
+         // Text(docIDs[index]),
+          ); 
+          },
+        
+        );
+           },
+        ),
+        ),
+      ],
+      ),
+      ),
+     /* body: Column(
+        crossAxisAlignment: CrossAxisAlignment.center,
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          GestureDetector(
+            onTap: () {},
+            child: CircleAvatar(
+              backgroundColor: Colors.white,
+              minRadius: 60.0,
+              child: CircleAvatar(
+                radius: 50.0,
+              ),
+            ),
+          ),
+          const SizedBox(
+            height: 10.0,
+          ),
+          Row(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              userListTile('Email', _email ?? '', 0, context),
+              /*
+              Text(
+                'Email:'_email ?? '',
+                style: TextStyle(
+                  fontSize: 25.0,
+                  fontWeight: FontWeight.bold,
+                  color: Colors.black,
+                ),
+              ),
+              IconButton(
+                  onPressed: (){
   
-  );
-  
+                       }, 
+                       icon: const Icon(Icons.edit),),
+          ], ),
+
+              const SizedBox(
+                height: 10.0,
+              ),
+              Text(
+                'First Name:' + _firstname!,
+                style: TextStyle(
+                  fontSize: 25.0,
+                  fontWeight: FontWeight.bold,
+                  color: Colors.black,
+                ),
+              ),  */
+              IconButton(
+                onPressed: () {},
+                icon: const Icon(Icons.edit),
+              ),
+            ],
+          ),
+        ],
+      ),*/
+    );
+  }
+/*
+  List<IconData> _userTileIcons = [
+    Icons.email,
+    Icons.phone,
+    Icons.local_shipping,
+    Icons.watch_later,
+    Icons.exit_to_app_rounded
+  ];
+
+  Widget userListTile(
+      String title, String subTitle, int index, BuildContext context) {
+    return ListTile(
+      title: Text(title),
+      subtitle: Text(subTitle),
+      leading: Icon(_userTileIcons[index]),
+    );
+  }*/
 }
-
-  }
-  
-  @override
-  Widget build(BuildContext context) {
-    // TODO: implement build
-    throw UnimplementedError();
-  }
-
