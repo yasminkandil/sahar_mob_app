@@ -1,5 +1,6 @@
 import 'dart:ui';
 
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:sahar_mob_app/pages/admin.dart';
@@ -15,13 +16,28 @@ class AddOfferPage extends StatefulWidget {
 }
 
 class _AddOfferPageState extends State<AddOfferPage> {
-  TextEditingController dateInput = TextEditingController();
+  TextEditingController dateIn = TextEditingController();
+  TextEditingController dateOut = TextEditingController();
+  final _nameController = TextEditingController();
+  final _descriptionController = TextEditingController();
+  final _percentageController = TextEditingController();
+
+  Future addOffer(String name, String description, String percentage,
+      String datein, String dateout) async {
+    await FirebaseFirestore.instance.collection('offers').doc().set({
+      'name': name,
+      'description': description,
+      'percentage': int.parse(percentage),
+      'datein': datein,
+      'dateout': dateout,
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Edit Account'),
+        title: Text('Add Offer'),
         backgroundColor: GreyColors,
         leading: IconButton(
           icon: Icon(
@@ -94,101 +110,121 @@ class _AddOfferPageState extends State<AddOfferPage> {
             ),
             Expanded(
               flex: 1,
-              child: Container(
-                margin: EdgeInsets.only(left: 20, right: 20, top: 30),
-                child: Column(
-                  mainAxisSize: MainAxisSize.max,
-                  children: <Widget>[
-                    _textInput(hint: "Offer Name", icon: Icons.edit),
-                    _textInput(hint: "Description", icon: Icons.edit),
-                    _textInput(hint: "Percentage", icon: Icons.percent),
-                    TextField(
-                      controller: dateInput,
-                      //editing controller of this TextField
-                      decoration: InputDecoration(
-                          icon: Icon(
-                              color: Colors.orange,
-                              Icons.calendar_today), //icon of text field
-                          labelText: "Enter Start Date" //label text of field
-                          ),
+              child: SingleChildScrollView(
+                child: IntrinsicHeight(
+                  child: Container(
+                    margin: EdgeInsets.only(left: 20, right: 20, top: 30),
+                    child: Column(
+                      mainAxisSize: MainAxisSize.max,
+                      children: <Widget>[
+                        _textInput(
+                            controller: _nameController,
+                            hint: "Offer Name",
+                            icon: Icons.edit),
+                        _textInput(
+                            controller: _descriptionController,
+                            hint: "Description",
+                            icon: Icons.edit),
+                        _textInput(
+                            controller: _percentageController,
+                            hint: "Percentage",
+                            icon: Icons.percent),
+                        TextField(
+                          controller: dateIn,
+                          //editing controller of this TextField
+                          decoration: const InputDecoration(
+                              icon: Icon(
+                                  color: Colors.orange,
+                                  Icons.calendar_today), //icon of text field
+                              labelText:
+                                  "Enter Start Date" //label text of field
+                              ),
 
-                      //set it true, so that user will not able to edit text
-                      onTap: () async {
-                        DateTime? pickedDate = await showDatePicker(
-                            context: context,
-                            initialDate: DateTime.now(),
-                            firstDate: DateTime(2022),
-                            //DateTime.now() - not to allow to choose before today.
-                            lastDate: DateTime(2100));
+                          //set it true, so that user will not able to edit text
+                          onTap: () async {
+                            DateTime? pickedDate = await showDatePicker(
+                                context: context,
+                                initialDate: DateTime.now(),
+                                firstDate: DateTime(2022),
+                                //DateTime.now() - not to allow to choose before today.
+                                lastDate: DateTime(2100));
 
-                        if (pickedDate != null) {
-                          print(
-                              pickedDate); //pickedDate output format => 2021-03-10 00:00:00.000
-                          String formattedDate =
-                              DateFormat('yyyy-MM-dd').format(pickedDate);
-                          print(
-                              formattedDate); //formatted date output using intl package =>  2021-03-16
-                          setState(() {
-                            dateInput.text =
-                                formattedDate; //set output date to TextField value.
-                          });
-                        } else {}
-                      },
-                    ),
-                    TextField(
-                      controller: dateInput,
-                      //editing controller of this TextField
-                      decoration: InputDecoration(
-                          icon: Icon(
-                              color: Colors.orange,
-                              Icons.calendar_today), //icon of text field
-                          labelText: "Enter End Date" //label text of field
-                          ),
-
-                      //set it true, so that user will not able to edit text
-                      onTap: () async {
-                        DateTime? pickedDate = await showDatePicker(
-                            context: context,
-                            initialDate: DateTime.now(),
-                            firstDate: DateTime(2022),
-                            //DateTime.now() - not to allow to choose before today.
-                            lastDate: DateTime(2100));
-
-                        if (pickedDate != null) {
-                          print(
-                              pickedDate); //pickedDate output format => 2021-03-10 00:00:00.000
-                          String formattedDate =
-                              DateFormat('yyyy-MM-dd').format(pickedDate);
-                          print(
-                              formattedDate); //formatted date output using intl package =>  2021-03-16
-                          setState(() {
-                            dateInput.text =
-                                formattedDate; //set output date to TextField value.
-                          });
-                        } else {}
-                      },
-                    ),
-                    Expanded(
-                      child: Center(
-                        child: ButtonWidget(
-                          btnText: "Add Offer",
-                          onClick: () {
-                            Navigator.pop(context);
+                            if (pickedDate != null) {
+                              print(
+                                  pickedDate); //pickedDate output format => 2021-03-10 00:00:00.000
+                              String formattedDate =
+                                  DateFormat('yyyy-MM-dd').format(pickedDate);
+                              print(
+                                  formattedDate); //formatted date output using intl package =>  2021-03-16
+                              setState(() {
+                                dateIn.text =
+                                    formattedDate; //set output date to TextField value.
+                              });
+                            } else {}
                           },
                         ),
-                      ),
+                        TextField(
+                          controller: dateOut,
+                          //editing controller of this TextField
+                          decoration: InputDecoration(
+                              icon: Icon(
+                                  color: Colors.orange,
+                                  Icons.calendar_today), //icon of text field
+                              labelText: "Enter End Date" //label text of field
+                              ),
+
+                          //set it true, so that user will not able to edit text
+                          onTap: () async {
+                            DateTime? pickedDate = await showDatePicker(
+                                context: context,
+                                initialDate: DateTime.now(),
+                                firstDate: DateTime(2022),
+                                //DateTime.now() - not to allow to choose before today.
+                                lastDate: DateTime(2100));
+
+                            if (pickedDate != null) {
+                              print(
+                                  pickedDate); //pickedDate output format => 2021-03-10 00:00:00.000
+                              String formattedDate =
+                                  DateFormat('yyyy-MM-dd').format(pickedDate);
+                              print(
+                                  formattedDate); //formatted date output using intl package =>  2021-03-16
+                              setState(() {
+                                dateOut.text =
+                                    formattedDate; //set output date to TextField value.
+                              });
+                            } else {}
+                          },
+                        ),
+                        Expanded(
+                          child: Center(
+                            child: ButtonWidget(
+                              btnText: "Add Offer",
+                              onClick: () {
+                                addOffer(
+                                    _nameController.text,
+                                    _descriptionController.text,
+                                    _percentageController.text,
+                                    dateIn.text,
+                                    dateOut.text);
+                                Navigator.pop(context);
+                              },
+                            ),
+                          ),
+                        ),
+                        RichText(
+                          text: TextSpan(children: [
+                            TextSpan(
+                                text: "want to edit offer ? ",
+                                style: TextStyle(color: Colors.black)),
+                            TextSpan(
+                                text: "Edit",
+                                style: TextStyle(color: orangeColors)),
+                          ]),
+                        )
+                      ],
                     ),
-                    RichText(
-                      text: TextSpan(children: [
-                        TextSpan(
-                            text: "want to edit offer ? ",
-                            style: TextStyle(color: Colors.black)),
-                        TextSpan(
-                            text: "Edit",
-                            style: TextStyle(color: orangeColors)),
-                      ]),
-                    )
-                  ],
+                  ),
                 ),
               ),
             )

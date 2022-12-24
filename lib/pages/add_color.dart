@@ -1,6 +1,7 @@
 import 'dart:math';
 import 'dart:ui';
 
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:sahar_mob_app/pages/admin.dart';
 //import 'package:image_picker/image_picker.dart';
@@ -15,11 +16,18 @@ class AddColorPage extends StatefulWidget {
 }
 
 class _AddColorPageState extends State<AddColorPage> {
+  final _colorController = TextEditingController();
+  Future addColor(String color) async {
+    await FirebaseFirestore.instance.collection('colors').doc().set({
+      'color': color,
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Edit Account'),
+        title: Text('Add Color'),
         backgroundColor: GreyColors,
         leading: IconButton(
           icon: Icon(
@@ -97,7 +105,10 @@ class _AddColorPageState extends State<AddColorPage> {
                 child: Column(
                   mainAxisSize: MainAxisSize.max,
                   children: <Widget>[
-                    _textInput(hint: "Color Name", icon: Icons.category),
+                    _textInput(
+                        controller: _colorController,
+                        hint: "Color Name",
+                        icon: Icons.category),
                     ListTile(
                       title: Row(
                         mainAxisSize: MainAxisSize.max,
@@ -106,6 +117,7 @@ class _AddColorPageState extends State<AddColorPage> {
                             child: ButtonWidget2(
                               btnText: "Add Color",
                               onClick: () {
+                                addColor(_colorController.text);
                                 Navigator.pop(context);
                               },
                             ),

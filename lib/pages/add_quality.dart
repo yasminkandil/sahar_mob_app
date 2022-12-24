@@ -1,6 +1,7 @@
 import 'dart:math';
 import 'dart:ui';
 
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:sahar_mob_app/pages/admin.dart';
 //import 'package:image_picker/image_picker.dart';
@@ -15,14 +16,18 @@ class AddQualityPage extends StatefulWidget {
 }
 
 class _AddQualityPageState extends State<AddQualityPage> {
-  List ListQuality = ['Original', 'HighCopy'];
-  String selectedValQ = 'Original';
+  final _nameController = TextEditingController();
+  Future addQuality(String name) async {
+    await FirebaseFirestore.instance.collection('qualties').doc().set({
+      'name': name,
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Edit Account'),
+        title: Text('Add Quality'),
         backgroundColor: GreyColors,
         leading: IconButton(
           icon: Icon(
@@ -58,27 +63,26 @@ class _AddQualityPageState extends State<AddQualityPage> {
                 child: Column(
                   mainAxisSize: MainAxisSize.max,
                   children: <Widget>[
-                    _dropDown(
-                      hint: "Quality",
-                      icon: Icons.high_quality,
-                      listt: ListQuality,
-                      select: "Original",
-                    ),
+                    _textInput(
+                        controller: _nameController,
+                        hint: "Quality",
+                        icon: Icons.category),
                     ListTile(
                       title: Row(
                         mainAxisSize: MainAxisSize.max,
                         children: <Widget>[
                           Expanded(
                             child: ButtonWidget2(
-                              btnText: "Add Quality",
+                              btnText: "Add Color",
                               onClick: () {
+                                addQuality(_nameController.text);
                                 Navigator.pop(context);
                               },
                             ),
                           ),
                           Expanded(
                             child: ButtonWidgetdelete(
-                              btnText: "Delete Quality",
+                              btnText: "Delete Color",
                               onClick: () {
                                 Navigator.pop(context);
                               },
@@ -97,32 +101,25 @@ class _AddQualityPageState extends State<AddQualityPage> {
     );
   }
 
-  Widget _dropDown({hint, icon, required List listt, required String select}) {
-    return DropdownButtonFormField(
-      value: select,
-      items: listt
-          .map((e) => DropdownMenuItem(
-                child: Text(e),
-                value: e,
-              ))
-          .toList(),
-      onChanged: (val) {
-        setState(() {
-          select = val as String;
-        });
-      },
-      icon: const Icon(
-        Icons.arrow_drop_down_circle,
-        color: Color.fromARGB(255, 249, 118, 3),
+  Widget _textInput({controller, hint, icon}) {
+    return Container(
+      margin: EdgeInsets.only(top: 8),
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.all(Radius.circular(20)),
+        color: Colors.white,
       ),
-      dropdownColor: Color.fromARGB(255, 249, 118, 3),
-      decoration: InputDecoration(
-          labelText: hint,
+      padding: EdgeInsets.only(left: 10),
+      child: TextFormField(
+        controller: controller,
+        decoration: InputDecoration(
+          border: InputBorder.none,
+          hintText: hint,
           prefixIcon: Icon(
             icon,
             color: Color.fromARGB(255, 249, 118, 3),
           ),
-          border: UnderlineInputBorder()),
+        ),
+      ),
     );
   }
 }

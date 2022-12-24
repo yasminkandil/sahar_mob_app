@@ -102,65 +102,72 @@ class _EditProductPageState extends State<EditProductPage> {
             ),
             Expanded(
               flex: 1,
-              child: Container(
-                margin: EdgeInsets.only(left: 20, right: 20, top: 10),
-                child: Column(
-                  mainAxisSize: MainAxisSize.max,
-                  children: <Widget>[
-                    _textInput(
-                        hint: "PowerBank",
-                        icon: Icons.edit,
-                        label: "Product Name"),
-                    _textInput(
-                        hint: "samsung",
-                        icon: Icons.edit,
-                        label: "Description"),
-                    _textInput(
-                        hint: "fastcharger", icon: Icons.edit, label: "About"),
-                    _textInput(hint: "369", icon: Icons.money, label: "Price"),
-                    _textInput(
-                        hint: "30", icon: Icons.numbers, label: "Quantity"),
-                    _dropDown(
-                      hint: "colors",
-                      icon: Icons.border_color,
-                      listt: Listcolors,
-                      select: "black",
-                    ),
-                    _dropDown(
-                      hint: "Quality",
-                      icon: Icons.high_quality,
-                      listt: ListQuality,
-                      select: "Original",
-                    ),
-                    _dropDown(
-                      hint: "Category",
-                      icon: Icons.category,
-                      listt: ListCateg,
-                      select: "Headphones",
-                    ),
-                    ListTile(
-                      title: Row(
-                        children: <Widget>[
-                          Expanded(
-                            child: ButtonWidget2(
-                              btnText: "Edit Product",
-                              onClick: () {
-                                Navigator.pop(context);
-                              },
-                            ),
+              child: SingleChildScrollView(
+                child: IntrinsicHeight(
+                  child: Container(
+                    margin: EdgeInsets.only(left: 20, right: 20, top: 10),
+                    child: Column(
+                      mainAxisSize: MainAxisSize.max,
+                      children: <Widget>[
+                        _textInput(
+                            hint: "PowerBank",
+                            icon: Icons.edit,
+                            label: "Product Name"),
+                        _textInput(
+                            hint: "samsung",
+                            icon: Icons.edit,
+                            label: "Description"),
+                        _textInput(
+                            hint: "fastcharger",
+                            icon: Icons.edit,
+                            label: "About"),
+                        _textInput(
+                            hint: "369", icon: Icons.money, label: "Price"),
+                        _textInput(
+                            hint: "30", icon: Icons.numbers, label: "Quantity"),
+                        _dropDown(
+                          hint: "colors",
+                          icon: Icons.border_color,
+                          listt: Listcolors,
+                          select: "black",
+                        ),
+                        _dropDown(
+                          hint: "Quality",
+                          icon: Icons.high_quality,
+                          listt: ListQuality,
+                          select: "Original",
+                        ),
+                        _dropDown(
+                          hint: "Category",
+                          icon: Icons.category,
+                          listt: ListCateg,
+                          select: "Headphones",
+                        ),
+                        ListTile(
+                          title: Row(
+                            children: <Widget>[
+                              Expanded(
+                                child: ButtonWidget2(
+                                  btnText: "Edit Product",
+                                  onClick: () {
+                                    Navigator.pop(context);
+                                  },
+                                ),
+                              ),
+                              Expanded(
+                                child: ButtonWidgetdelete(
+                                  btnText: "Delete Product",
+                                  onClick: () {
+                                    Navigator.pop(context);
+                                  },
+                                ),
+                              ),
+                            ],
                           ),
-                          Expanded(
-                            child: ButtonWidgetdelete(
-                              btnText: "Delete Product",
-                              onClick: () {
-                                Navigator.pop(context);
-                              },
-                            ),
-                          ),
-                        ],
-                      ),
+                        ),
+                      ],
                     ),
-                  ],
+                  ),
                 ),
               ),
             )

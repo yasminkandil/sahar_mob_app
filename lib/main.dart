@@ -1,8 +1,6 @@
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
-import 'package:sahar_mob_app/pages/contact_us.dart';
-import 'package:sahar_mob_app/pages/admin.dart';
-import 'package:sahar_mob_app/pages/edit_account.dart';
-import 'package:sahar_mob_app/pages/login_page.dart';
+
 import 'package:sahar_mob_app/pages/navbar.dart';
 import 'package:sahar_mob_app/pages/regi_page.dart';
 import 'package:sahar_mob_app/pages/add_product.dart';
@@ -25,10 +23,12 @@ import 'pages/add_category.dart';
 import 'pages/add_quality.dart';
 import 'pages/add_offer.dart';
 import 'pages/admin.dart';
+
 //import 'pages/cart_view.dart';
 //import 'pages/calendar.dart';
-
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  Firebase.initializeApp();
   runApp(MyApp());
 }
 
@@ -37,13 +37,11 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      title: 'cart page',
+      title: 'Sahar',
       theme: ThemeData(
         primarySwatch: Colors.blue,
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
-
-      home: SafeArea(child: Navigation_bar()),
 
       // home: SafeArea(child: RegisterPage()),
       //home: SafeArea(child: Navigation_bar()),
@@ -56,6 +54,38 @@ class MyApp extends StatelessWidget {
       //home: CategoryPage(),
       //home: SafeArea(child: RegisterPage()),
       //home: SafeArea(child: ViewAccountPage()),
+      home: const SafeArea(child: HomePage()),
+    );
+  }
+}
+
+class HomePage extends StatefulWidget {
+  const HomePage({super.key});
+
+  @override
+  State<HomePage> createState() => _HomePageState();
+}
+
+class _HomePageState extends State<HomePage> {
+  Future<FirebaseApp> _initializeFirebase() async {
+    FirebaseApp firebaseApp = await Firebase.initializeApp();
+    return firebaseApp;
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      body: FutureBuilder(
+        future: _initializeFirebase(),
+        builder: ((context, snapshot) {
+          if (snapshot.connectionState == ConnectionState.done) {
+            return Navigation_bar();
+          }
+          return const Center(
+            child: CircularProgressIndicator(),
+          );
+        }),
+      ),
     );
   }
 }

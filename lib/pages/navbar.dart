@@ -2,11 +2,18 @@ import 'package:flutter/material.dart';
 import 'package:sahar_mob_app/pages/admin.dart';
 import 'package:sahar_mob_app/pages/cart.dart';
 import 'package:sahar_mob_app/pages/category.dart';
+import 'package:sahar_mob_app/pages/checkout.dart';
 import 'package:sahar_mob_app/pages/contact_us.dart';
 import 'package:sahar_mob_app/pages/edit_account.dart';
+<<<<<<< HEAD
 import 'package:sahar_mob_app/pages/products_all.dart';
+=======
+import 'package:sahar_mob_app/pages/login_page.dart';
+import 'package:sahar_mob_app/pages/products_powerbank.dart';
+>>>>>>> a1e3ad1b47f0a9733b074c7e5c9ea74547dcd253
 import 'package:sahar_mob_app/pages/regi_page.dart';
 import 'package:sahar_mob_app/pages/view_account.dart';
+import 'package:sahar_mob_app/utils/color.dart';
 import 'package:sahar_mob_app/widgets/header_container.dart';
 //import 'package:sahar_mob_app/pages/body.dart';
 import 'package:sahar_mob_app/pages/components/body.dart';
@@ -25,12 +32,12 @@ class HomeNavbar extends State<Navigation_bar> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Colors.grey[700],
+        backgroundColor: GreyColors,
         title: Text("Menu"),
       ),
       body: Container(
         child: Column(children: <Widget>[
-          HeaderContainer("Login"),
+          HeaderContainer("Home Page"),
         ]),
       ),
       drawer: Drawer(
@@ -53,6 +60,10 @@ class HomeNavbar extends State<Navigation_bar> {
       ),
       child: Column(
         children: [
+          menuItem(9, "CheckOut", Icons.check_outlined,
+              currentPage == Sections.CheckOut ? true : false),
+          menuItem(10, "Login", Icons.login_rounded,
+              currentPage == Sections.login ? true : false),
           menuItem(8, "Cart", Icons.shop_two_outlined,
               currentPage == Sections.Cart ? true : false),
           menuItem(7, "Sign Up", Icons.login_rounded,
@@ -94,7 +105,11 @@ class HomeNavbar extends State<Navigation_bar> {
           } else if (id == 3) {
             Navigator.push(
               context,
+<<<<<<< HEAD
               MaterialPageRoute(builder: (context) => Products()),
+=======
+              MaterialPageRoute(builder: (context) => PowerBank()),
+>>>>>>> a1e3ad1b47f0a9733b074c7e5c9ea74547dcd253
             );
             currentPage = Sections.Categories;
           } else if (id == 4) {
@@ -127,6 +142,18 @@ class HomeNavbar extends State<Navigation_bar> {
               MaterialPageRoute(builder: (context) => CartItem()),
             );
             currentPage = Sections.Cart;
+          } else if (id == 9) {
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => checkout()),
+            );
+            currentPage = Sections.CheckOut;
+          } else if (id == 10) {
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => LoginPage()),
+            );
+            currentPage = Sections.login;
           }
         },
         child: Padding(
@@ -163,5 +190,7 @@ enum Sections {
   Categories,
   Edit_Profile,
   Log_Out,
-  Cart
+  Cart,
+  CheckOut,
+  login
 }

@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:sahar_mob_app/pages/admin.dart';
-import 'package:sahar_mob_app/pages/edit_account.dart';
+import 'package:sahar_mob_app/pages/view_order_user.dart';
 import 'package:sahar_mob_app/utils/color.dart';
 import 'package:sahar_mob_app/widgets/header_container.dart';
-
 import '../widgets/btn_widget.dart';
 
 class ViewOrdersPage extends StatefulWidget {
@@ -51,38 +50,35 @@ class _ViewOrdersPageState extends State<ViewOrdersPage> {
           },
           child: ListView(
             children: [
-              TextField(
-                  decoration: const InputDecoration(
-                      hintText: "order by: Salma2001@gmail.com",
-                      border: InputBorder.none,
-                      icon: Icon(
-                        Icons.remove_red_eye,
-                        color: Colors.green,
-                      ))),
-              TextField(
-                  decoration: const InputDecoration(
-                      hintText: "order by: Salma2001@gmail.com",
-                      border: InputBorder.none,
-                      icon: Icon(
-                        Icons.remove_red_eye,
-                        color: Colors.green,
-                      ))),
-              TextField(
-                  decoration: const InputDecoration(
-                      hintText: "order by: Salma2001@gmail.com",
-                      border: InputBorder.none,
-                      icon: Icon(
-                        Icons.remove_red_eye,
-                        color: Colors.green,
-                      ))),
-              TextField(
-                  decoration: const InputDecoration(
-                      hintText: "order by: Salma2001@gmail.com",
-                      border: InputBorder.none,
-                      icon: Icon(
-                        Icons.remove_red_eye,
-                        color: Colors.green,
-                      ))),
+              Row(
+                children: [
+                  Expanded(
+                      child: ElevatedButton.icon(
+                          style: ButtonStyle(
+                            backgroundColor: MaterialStateProperty.all(
+                                Color.fromARGB(255, 234, 119, 18)),
+                          ),
+                          onPressed: () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(builder: (context) {
+                                return Admin();
+                              }),
+                            );
+                          },
+                          icon: Icon(Icons.sort, color: Colors.white),
+                          label: Text('Manage'))),
+                  TextField(
+                      decoration: const InputDecoration(
+                          hintText: "order by: Salma2001@gmail.com",
+                          border: InputBorder.none,
+                          enabled: false,
+                          icon: Icon(
+                            Icons.remove_red_eye,
+                            color: Colors.green,
+                          ))),
+                ],
+              ),
             ],
           ),
         ),

@@ -3,10 +3,12 @@ import 'package:sahar_mob_app/pages/add_category.dart';
 import 'package:sahar_mob_app/pages/add_color.dart';
 import 'package:sahar_mob_app/pages/add_offer.dart';
 import 'package:sahar_mob_app/pages/add_product.dart';
+import 'package:sahar_mob_app/pages/add_quality.dart';
 import 'package:sahar_mob_app/pages/calendar.dart';
 import 'package:sahar_mob_app/pages/orders_admin.dart';
 import 'package:sahar_mob_app/pages/products_all.dart';
 import 'package:sahar_mob_app/utils/color.dart';
+import 'package:sahar_mob_app/pages/navbar.dart';
 
 enum Page { dashboard, manage }
 
@@ -23,6 +25,21 @@ class _AdminState extends State<Admin> {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
+          backgroundColor: GreyColors,
+          leading: IconButton(
+              icon: Icon(
+                Icons.arrow_back,
+                color: orangeColors,
+              ),
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) {
+                    return Navigation_bar();
+                  }),
+                );
+              }),
+
           title: Row(
             children: <Widget>[
               Expanded(
@@ -49,8 +66,8 @@ class _AdminState extends State<Admin> {
                       label: Text('Manage'))),
             ],
           ),
-          elevation: 0.0,
-          backgroundColor: Colors.white,
+          //elevation: 0.0,
+          //backgroundColor: Colors.white,
         ),
         body: _loadScreen());
   }
@@ -248,7 +265,7 @@ class _AdminState extends State<Admin> {
                 title: Text("Add Quality"),
                 onTap: () => Navigator.push(
                       context,
-                      MaterialPageRoute(builder: (context) => AddColorPage()),
+                      MaterialPageRoute(builder: (context) => AddQualityPage()),
                     )),
             Divider(),
             ListTile(
@@ -266,7 +283,7 @@ class _AdminState extends State<Admin> {
                     )),
             Divider(),
             ListTile(
-                leading: Icon(Icons.date_range),
+                leading: Icon(Icons.library_books),
                 title: Text("Orders"),
                 onTap: () => Navigator.push(
                       context,
