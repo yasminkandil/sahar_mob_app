@@ -14,30 +14,26 @@ class ViewProductPage extends StatefulWidget {
 }
 
 class _ViewProductPageState extends State<ViewProductPage> {
- 
-  final pro =FirebaseFirestore.instance.collection('products');
+  final pro = FirebaseFirestore.instance.collection('products');
 
-List<String> prod = [];
-Future getDocProd() async{
-  await FirebaseFirestore.instance.collection('products').get().
-  then((snapshot) => snapshot.docs.forEach((document) {
-    //print(document.reference);
-    prod.add(document.reference.path);
-  }),
-  );
-}
-  @override
+  List<String> prod = [];
+  Future getDocProd() async {
+    await FirebaseFirestore.instance.collection('products').get().then(
+          (snapshot) => snapshot.docs.forEach((document) {
+            print(document.reference);
+            prod.add(document.reference.id);
+          }),
+        );
+  }
+  /* @override
   void initState() {
     super.initState();
     setState(() {});
     //getData();
   }
-
- 
-
+*/
   @override
   Widget build(BuildContext context) {
-    
     return Scaffold(
       appBar: AppBar(
         title: Text('Product List'),
@@ -45,43 +41,42 @@ Future getDocProd() async{
         centerTitle: true,
       ),
       body: Center(
-        child:
-       Column( 
-        mainAxisAlignment: MainAxisAlignment.center,
-      children: [
-      Text('Products:${pro.id}',
-        style: TextStyle(fontSize: 20),),
-        MaterialButton(onPressed: (){
-         // FirebaseAuth.instance.signOut();
-
-        },
-        color: Colors.deepPurple,
-        child: Text('Products'),),
-        Expanded(
-          child: 
-          FutureBuilder(
-                        future: getDocProd(),
-            builder: (context, snapshot)
-           {
-           return ListView.builder(
-          itemCount: prod.length,
-          itemBuilder:
-         (context, index) {
-
-          return ListTile(
-            title:GetProductName(salma: prod[index])
-         // Text(docIDs[index]),
-          ); 
-          },
-        
-        );
-           },
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+           /* MaterialButton(
+              onPressed: () {},
+              color: Colors.deepPurple,
+              child: Text('Products'),
+            ),*/
+            Expanded(
+              child: FutureBuilder(
+                future: getDocProd(),
+                builder: (context, snapshot) {
+                  return ListView.builder(
+                    
+                  itemCount: prod.length,
+                    itemBuilder: (context, index) {
+                      return ListTile(
+                        
+          leading: IconButton(
+                  onPressed: (){
+  
+                       }, 
+                       icon: const Icon(Icons.edit),),
+          
+                          title: GetProductName(salma: prod[index]));
+                  
+                 
+                    },
+                  );
+                   
+                },
+              ),
+            ),
+          ],
         ),
-        ),
-      ],
       ),
-      ),
-    
     );
   }
 }
