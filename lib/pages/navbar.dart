@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:sahar_mob_app/models/auth_service.dart';
 import 'package:sahar_mob_app/pages/admin.dart';
 import 'package:sahar_mob_app/pages/cart.dart';
 import 'package:sahar_mob_app/pages/category.dart';
 import 'package:sahar_mob_app/pages/checkout.dart';
 import 'package:sahar_mob_app/pages/contact_us.dart';
 import 'package:sahar_mob_app/pages/edit_account.dart';
+import 'package:sahar_mob_app/pages/gallary.dart';
 import 'package:sahar_mob_app/pages/login_page.dart';
 import 'package:sahar_mob_app/pages/products_all.dart';
 import 'package:sahar_mob_app/product_powerbank.dart';
@@ -25,7 +27,7 @@ class Navigation_bar extends StatefulWidget {
 }
 
 class HomeNavbar extends State<Navigation_bar> {
-  var currentPage = Sections.Dashboard;
+  var currentPage = Sections.Categories;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -60,14 +62,14 @@ class HomeNavbar extends State<Navigation_bar> {
         children: [
           menuItem(9, "CheckOut", Icons.check_outlined,
               currentPage == Sections.CheckOut ? true : false),
+          menuItem(11, "Gallery", Icons.browse_gallery,
+              currentPage == Sections.gallery ? true : false),
           menuItem(10, "Login", Icons.login_rounded,
               currentPage == Sections.login ? true : false),
           menuItem(8, "Cart", Icons.shop_two_outlined,
               currentPage == Sections.Cart ? true : false),
           menuItem(7, "Sign Up", Icons.login_rounded,
               currentPage == Sections.Sign_Up ? true : false),
-          menuItem(1, "DashBoard", Icons.dashboard_outlined,
-              currentPage == Sections.Dashboard ? true : false),
           menuItem(2, "Contact US", Icons.people_alt_outlined,
               currentPage == Sections.contacts ? true : false),
           menuItem(3, "Categories", Icons.category_rounded,
@@ -88,13 +90,7 @@ class HomeNavbar extends State<Navigation_bar> {
       color: selected ? Colors.grey : Colors.transparent,
       child: InkWell(
         onTap: () {
-          if (id == 1) {
-            Navigator.push(
-              context,
-              MaterialPageRoute(builder: (context) => Admin()),
-            );
-            currentPage = Sections.Dashboard;
-          } else if (id == 2) {
+          if (id == 2) {
             Navigator.push(
               context,
               MaterialPageRoute(builder: (context) => ContactUs()),
@@ -119,11 +115,12 @@ class HomeNavbar extends State<Navigation_bar> {
             );
             currentPage = Sections.Edit_Profile;
           } else if (id == 6) {
+            AuthService().signOut();
             Navigator.push(
               context,
-              MaterialPageRoute(builder: (context) => Navigation_bar()),
+              MaterialPageRoute(builder: (context) => LoginPage()),
             );
-            currentPage = Sections.Log_Out;
+            currentPage = Sections.login;
           } else if (id == 7) {
             Navigator.push(
               context,
@@ -148,6 +145,12 @@ class HomeNavbar extends State<Navigation_bar> {
               MaterialPageRoute(builder: (context) => LoginPage()),
             );
             currentPage = Sections.login;
+          } else if (id == 11) {
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => gallery()),
+            );
+            currentPage = Sections.gallery;
           }
         },
         child: Padding(
@@ -177,7 +180,6 @@ class HomeNavbar extends State<Navigation_bar> {
 }
 
 enum Sections {
-  Dashboard,
   contacts,
   Notifications,
   Sign_Up,
@@ -186,5 +188,6 @@ enum Sections {
   Log_Out,
   Cart,
   CheckOut,
-  login
+  login,
+  gallery
 }
