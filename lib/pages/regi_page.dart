@@ -14,6 +14,7 @@ import 'package:sahar_mob_app/pages/products_powerbank.dart';
 import 'package:sahar_mob_app/utils/color.dart';
 import 'package:sahar_mob_app/widgets/btn_widget.dart';
 import 'package:sahar_mob_app/widgets/header_container.dart';
+import 'package:path/path.dart' as p;
 
 class RegisterPage extends StatefulWidget {
   @override
@@ -21,13 +22,38 @@ class RegisterPage extends StatefulWidget {
 }
 
 class _RegisterPageState extends State<RegisterPage> {
+  late String fnameerrormssg = "Enter First Name";
+  late String lnameerrormssg = "Enter Last Name";
+  late String emailerrormssg = "Enter Email Correctly";
+  late String addrerrormssg = "Enter Address";
+  late String mobileerrormssg = "Enter Mobile Number Correctly";
+  late String eregexp =
+      r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+";
+  late String aregexp = r'^[a-z A-Z]+$';
+  late String mregexp = r'^[+]*[(]{0,1}[0-9]{1,4}[)]{0,1}[-\s\./0-9]+$';
+  final formKey = GlobalKey<FormState>();
+  final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
+
   late DatabaseReference dbRef;
-  late String imageUrl;
+  var imageUrl;
+  var downloadUrl;
+  var imagee;
+  var greyimage =
+      'https://www.google.com/search?q=profile+photo+&tbm=isch&ved=2ahUKEwis27rOz_76AhVFexoKHU2PBGoQ2-cCegQIABAA&oq=profile+photo+&gs_lcp=CgNpbWcQAzIECAAQQzIFCAAQgAQyBQgAEIAEMgUIABCABDIFCAAQgAQyBQgAEIAEMgUIABCABDIFCAAQgAQyBQgAEIAEMgUIABCABDoGCAAQBxAeULwEWLwEYKoIaABwAHgAgAGZAYgBkwKSAQMwLjKYAQCgAQGqAQtnd3Mtd2l6LWltZ8ABAQ&sclient=img&ei=d4lZY-zDCsX2ac2ektAG&bih=657&biw=1366#imgrc=nfkyptoYx2OzJM';
   @override
   void initState() {
     super.initState();
     dbRef = FirebaseDatabase.instance.ref().child("users");
+    //greyimage = imageUrl;
     //uploadImage();
+  }
+
+  setImage(String imagee) {
+    imagee = imagee;
+  }
+
+  getImage() {
+    return imagee;
   }
 
   uploadImage() async {
@@ -40,41 +66,39 @@ class _RegisterPageState extends State<RegisterPage> {
 
     var permissionStatus = await Permission.photos.status;
 
-    if (permissionStatus.isGranted) {
-      //Select Image
-      image = await _picker.getImage(source: ImageSource.gallery);
-      var file = File(image!.path);
+    //Select Image
+    image = await _picker.getImage(source: ImageSource.gallery);
+    var file = File(image!.path);
 
-      if (image != null) {
-        //Upload to Firebase
-        var snapshot = await _storage
-            .ref()
-            .child('folderName/imageName')
-            .putFile(file)
-            .whenComplete(() => null);
+    if (image != null) {
+      //Upload to Firebase
+      var snapshot =
+          await _storage.ref().child(p.basename(image.path)).putFile(file);
 
-        var downloadUrl = await snapshot.ref.getDownloadURL();
+      downloadUrl = await snapshot.ref.getDownloadURL();
 
-        setState(() {
-          imageUrl = downloadUrl;
-        });
-      } else {
-        print('No Path Received');
-      }
+      setState(() {
+        imageUrl = downloadUrl;
+        greyimage = imageUrl;
+        setImage(imageUrl);
+      });
     } else {
-      print('Grant Permissions and try again');
+      print('No Path Received');
     }
   }
 
   Future addUserDetails(String firstname, String lastname, String userEmail,
-      String useraddress, String userPhoneNumber) async {
-    await FirebaseFirestore.instance.collection('users').doc().set({
-      'firstname': firstname,
-      'lastname': lastname,
-      'email': userEmail,
-      'mobile': int.parse(userPhoneNumber),
-      'address': useraddress,
-    });
+      String useraddress, String userPhoneNumber, String userImage) async {
+    await FirebaseFirestore.instance.collection('users').add(
+      {
+        'firstname': firstname,
+        'lastname': lastname,
+        'email': userEmail,
+        'mobile': int.parse(userPhoneNumber),
+        'address': useraddress,
+        'image': userImage,
+      },
+    );
 
     print('NEW USER REGISTERED WITH ID:');
   }
@@ -89,6 +113,7 @@ class _RegisterPageState extends State<RegisterPage> {
     final _mobileController = TextEditingController();
     final _addrController = TextEditingController();
 
+    bool obscureText = true;
     return Scaffold(
       appBar: AppBar(
         backgroundColor: GreyColors,
@@ -108,158 +133,239 @@ class _RegisterPageState extends State<RegisterPage> {
       ),
       body: Container(
         padding: EdgeInsets.only(bottom: 20),
-        child: Column(
-          children: <Widget>[
-            HeaderContainer("Register"),
-            Center(
-              child: Stack(
-                children: [
-                  Container(
-                    width: 110,
-                    height: 110,
-                    decoration: BoxDecoration(
-                        border: Border.all(width: 4, color: Colors.white),
-                        boxShadow: [
-                          BoxShadow(
-                              spreadRadius: 2,
-                              blurRadius: 10,
-                              color: Colors.black.withOpacity(0.1))
-                        ],
-                        shape: BoxShape.circle,
-                        image: DecorationImage(
-                            fit: BoxFit.cover,
-                            image: NetworkImage(
-                                'https://www.google.com/search?q=profile+photo+&tbm=isch&ved=2ahUKEwis27rOz_76AhVFexoKHU2PBGoQ2-cCegQIABAA&oq=profile+photo+&gs_lcp=CgNpbWcQAzIECAAQQzIFCAAQgAQyBQgAEIAEMgUIABCABDIFCAAQgAQyBQgAEIAEMgUIABCABDIFCAAQgAQyBQgAEIAEMgUIABCABDoGCAAQBxAeULwEWLwEYKoIaABwAHgAgAGZAYgBkwKSAQMwLjKYAQCgAQGqAQtnd3Mtd2l6LWltZ8ABAQ&sclient=img&ei=d4lZY-zDCsX2ac2ektAG&bih=657&biw=1366#imgrc=nfkyptoYx2OzJM'))),
-                  ),
-                  Positioned(
-                    bottom: 0,
-                    right: 0,
-                    child: Container(
-                        height: 40,
-                        width: 40,
-                        decoration: BoxDecoration(
-                            shape: BoxShape.circle,
-                            border: Border.all(
-                              width: 4,
+        child: Form(
+          key: formKey,
+          child: Column(
+            children: <Widget>[
+              HeaderContainer("Register"),
+              Center(
+                child: Stack(
+                  children: [
+                    Container(
+                      width: 110,
+                      height: 110,
+                      decoration: BoxDecoration(
+                          border: Border.all(width: 4, color: Colors.white),
+                          boxShadow: [
+                            BoxShadow(
+                                spreadRadius: 2,
+                                blurRadius: 10,
+                                color: Colors.black.withOpacity(0.1))
+                          ],
+                          shape: BoxShape.circle,
+                          image: DecorationImage(
+                              fit: BoxFit.cover,
+                              image: NetworkImage(greyimage))),
+                    ),
+                    Positioned(
+                      bottom: 0,
+                      right: 0,
+                      child: Container(
+                          height: 40,
+                          width: 40,
+                          decoration: BoxDecoration(
+                              shape: BoxShape.circle,
+                              border: Border.all(
+                                width: 4,
+                                color: Colors.white,
+                              ),
+                              color: Colors.orange),
+                          child: TextButton(
+                            child: const Icon(
+                              Icons.upload,
                               color: Colors.white,
                             ),
-                            color: Colors.orange),
-                        child: TextButton(
-                          child: const Icon(
-                            Icons.upload,
-                            color: Colors.white,
-                          ),
-                          onPressed: () {
-                            uploadImage();
-                          },
-                        )),
-                  )
-                ],
+                            onPressed: () {
+                              uploadImage();
+                            },
+                          )),
+                    )
+                  ],
+                ),
               ),
-            ),
-            Expanded(
-              flex: 1,
-              child: SingleChildScrollView(
-                child: IntrinsicHeight(
-                  child: Container(
-                    margin: EdgeInsets.only(left: 20, right: 20, top: 20),
-                    child: Column(
-                      mainAxisSize: MainAxisSize.max,
-                      children: <Widget>[
-                        _textInput(
-                            controller: _fisrtController,
-                            hint: "First Name",
-                            icon: Icons.person,
-                            torf: false),
-                        _textInput(
-                            controller: _lastController,
-                            hint: "Last Name",
-                            icon: Icons.person,
-                            torf: false),
-                        _textInput(
-                            controller: _emailController,
-                            hint: "Email",
-                            icon: Icons.email,
-                            torf: false),
-                        _textInput(
-                            controller: _mobileController,
-                            hint: "Phone Number",
-                            icon: Icons.call,
-                            torf: false),
-                        _textInput(
-                            controller: _addrController,
-                            hint: "Address",
-                            icon: Icons.location_city,
-                            torf: false),
-                        _textInput(
-                            controller: _passwordController,
-                            hint: "Password",
-                            icon: Icons.vpn_key,
-                            torf: true),
-                        _textInput(
-                            controller: _confirmPassController,
-                            hint: "Confirm Password",
-                            icon: Icons.vpn_key,
-                            torf: true),
-                        Expanded(
-                          child: Center(
-                            child: ButtonWidget(
-                              btnText: "REGISTER",
-                              onClick: () {
-                                addUserDetails(
-                                    _fisrtController.text,
-                                    _lastController.text,
-                                    _emailController.text,
-                                    _addrController.text,
-                                    _mobileController.text);
-                                FirebaseAuth.instance
-                                    .createUserWithEmailAndPassword(
-                                        email: _emailController.text,
-                                        password: _passwordController.text)
-                                    .then(
-                                  (value) {
-                                    print("Created new account");
-                                    Navigator.push(
-                                        context,
-                                        MaterialPageRoute(
-                                            builder: (context) => Navigation_bar()));
-                                  },
-                                );
+              Expanded(
+                flex: 1,
+                child: SingleChildScrollView(
+                  child: IntrinsicHeight(
+                    child: Container(
+                      margin: EdgeInsets.only(left: 20, right: 20, top: 20),
+                      child: Column(
+                        mainAxisSize: MainAxisSize.max,
+                        children: <Widget>[
+                          _textInput(
+                              controller: _fisrtController,
+                              hint: "First Name",
+                              icon: Icons.person,
+                              torf: false,
+                              errormssg: fnameerrormssg,
+                              regexp: aregexp),
+                          _textInput(
+                              controller: _lastController,
+                              hint: "Last Name",
+                              icon: Icons.person,
+                              torf: false,
+                              errormssg: lnameerrormssg,
+                              regexp: aregexp),
+                          _textInput(
+                              controller: _emailController,
+                              hint: "Email",
+                              icon: Icons.email,
+                              torf: false,
+                              errormssg: emailerrormssg,
+                              regexp: eregexp),
+                          _textInput(
+                              controller: _mobileController,
+                              hint: "Phone Number",
+                              icon: Icons.call,
+                              torf: false,
+                              errormssg: mobileerrormssg,
+                              regexp: mregexp),
+                          _textInput(
+                              controller: _addrController,
+                              hint: "Address",
+                              icon: Icons.location_city,
+                              torf: false,
+                              errormssg: addrerrormssg,
+                              regexp: aregexp),
+                          Container(
+                            margin: const EdgeInsets.only(top: 20),
+                            decoration: const BoxDecoration(
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(20)),
+                              color: Colors.white,
+                            ),
+                            padding: const EdgeInsets.only(left: 10),
+                            child: TextFormField(
+                              controller: _passwordController,
+                              obscureText: obscureText,
+                              decoration: InputDecoration(
+                                  border: InputBorder.none,
+                                  hintText: "Password",
+                                  prefixIcon: const Icon(Icons.vpn_key),
+                                  suffixIcon: InkWell(
+                                    onTap: () {
+                                      setState(() {
+                                        obscureText = !obscureText;
+                                      });
+                                    },
+                                    child: Icon(obscureText
+                                        ? Icons.visibility
+                                        : Icons.visibility_off),
+                                  )),
+                              validator: (value) {
+                                if (value!.isEmpty ||
+                                    _passwordController.text.length < 6) {
+                                  return "Password must not be less than 6 characters";
+                                } else {
+                                  return null;
+                                }
                               },
                             ),
                           ),
-                        ),
-                        InkWell(
-                          child: RichText(
-                            text: TextSpan(children: [
-                              TextSpan(
-                                  text: "Already a member ? ",
-                                  style: TextStyle(color: Colors.black)),
-                              TextSpan(
-                                  text: "Login",
-                                  style: TextStyle(
-                                    color: orangeColors,
+                          Container(
+                            margin: const EdgeInsets.only(top: 20),
+                            decoration: const BoxDecoration(
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(20)),
+                              color: Colors.white,
+                            ),
+                            padding: const EdgeInsets.only(left: 10),
+                            child: TextFormField(
+                              controller: _confirmPassController,
+                              obscureText: obscureText,
+                              decoration: InputDecoration(
+                                  border: InputBorder.none,
+                                  hintText: "Password",
+                                  prefixIcon: const Icon(Icons.vpn_key),
+                                  suffixIcon: InkWell(
+                                    onTap: () {
+                                      setState(() {
+                                        obscureText = !obscureText;
+                                      });
+                                    },
+                                    child: Icon(obscureText
+                                        ? Icons.visibility
+                                        : Icons.visibility_off),
                                   )),
-                            ]),
+                              validator: (value) {
+                                if (value!.isEmpty ||
+                                    _passwordController.text !=
+                                        _confirmPassController.text) {
+                                  return "Password and Confirm Password Don't Match";
+                                } else {
+                                  return null;
+                                }
+                              },
+                            ),
                           ),
-                          onTap: () => Navigator.of(context).push(
-                              MaterialPageRoute(
-                                  builder: (context) => LoginPage())),
-                        )
-                      ],
+                          Expanded(
+                            child: Center(
+                              child: ButtonWidget(
+                                btnText: "REGISTER",
+                                onClick: () {
+                                  if (formKey.currentState!.validate()) {
+                                    final snackBar = SnackBar(
+                                        content: Text("Account Created.."));
+                                    ScaffoldMessenger.of(context)
+                                        .showSnackBar(snackBar);
+                                    addUserDetails(
+                                        _fisrtController.text,
+                                        _lastController.text,
+                                        _emailController.text,
+                                        _addrController.text,
+                                        _mobileController.text,
+                                        greyimage);
+                                    FirebaseAuth.instance
+                                        .createUserWithEmailAndPassword(
+                                            email: _emailController.text,
+                                            password: _passwordController.text)
+                                        .then(
+                                      (value) {
+                                        print("Created new account");
+                                        Navigator.push(
+                                            context,
+                                            MaterialPageRoute(
+                                                builder: (context) =>
+                                                    Navigation_bar()));
+                                      },
+                                    );
+                                  }
+                                },
+                              ),
+                            ),
+                          ),
+                          InkWell(
+                            child: RichText(
+                              text: TextSpan(children: [
+                                TextSpan(
+                                    text: "Already a member ? ",
+                                    style: TextStyle(color: Colors.black)),
+                                TextSpan(
+                                    text: "Login",
+                                    style: TextStyle(
+                                      color: orangeColors,
+                                    )),
+                              ]),
+                            ),
+                            onTap: () => Navigator.of(context).push(
+                                MaterialPageRoute(
+                                    builder: (context) => LoginPage())),
+                          )
+                        ],
+                      ),
                     ),
                   ),
                 ),
-              ),
-            )
-          ],
+              )
+            ],
+          ),
         ),
       ),
     );
   }
 }
 
-Widget _textInput({controller, hint, icon, torf}) {
+Widget _textInput({controller, hint, icon, torf, errormssg, regexp}) {
   return Container(
     margin: EdgeInsets.only(top: 5),
     decoration: BoxDecoration(
@@ -275,6 +381,14 @@ Widget _textInput({controller, hint, icon, torf}) {
         hintText: hint,
         prefixIcon: Icon(icon),
       ),
+      validator: (value) {
+        bool Valid = RegExp(regexp).hasMatch(value!);
+        if (value.isEmpty || !Valid) {
+          return errormssg;
+        } else {
+          return null;
+        }
+      },
     ),
   );
 }
