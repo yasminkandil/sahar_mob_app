@@ -48,7 +48,7 @@ class Body extends StatelessWidget {
                             width: 58,
                             decoration: BoxDecoration(
                                 borderRadius: BorderRadius.circular(18),
-                                border: Border.all(color: product.color)),
+                                border: Border.all(color: Colors.red)),
                             child: IconButton(
                               icon: Icon(
                                 Icons.add_shopping_cart_outlined,
@@ -62,7 +62,7 @@ class Body extends StatelessWidget {
                                 child: FloatingActionButton(
                                   shape: RoundedRectangleBorder(
                                       borderRadius: BorderRadius.circular(18)),
-                                  backgroundColor: product.color,
+                                  backgroundColor: Colors.red,
                                   onPressed: () {},
                                   child: Text("BUY NOW",
                                       style: TextStyle(

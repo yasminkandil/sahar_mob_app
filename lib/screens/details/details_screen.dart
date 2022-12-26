@@ -11,7 +11,7 @@ class DetailScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: product.color,
+      backgroundColor: Colors.red,
       appBar: buildAppBar(context),
       body: Body(
         product: product,
@@ -21,7 +21,7 @@ class DetailScreen extends StatelessWidget {
 
   AppBar buildAppBar(BuildContext context) {
     return AppBar(
-      backgroundColor: product.color,
+      backgroundColor: Colors.red,
       elevation: 0,
       leading: IconButton(
         onPressed: () {
