@@ -39,12 +39,12 @@ class Itemcard extends StatelessWidget {
           Padding(
             padding: const EdgeInsets.symmetric(vertical: 10 / 4),
             child: Text(
-              "${product.title}",
+              "${product.name}",
               style: TextStyle(color: Color.fromARGB(102, 0, 0, 0)),
             ),
           ),
           Text(
-            product.price.toString() + "LE",
+            "${product.price}" + "LE",
             style: TextStyle(fontWeight: FontWeight.bold),
           )
         ],

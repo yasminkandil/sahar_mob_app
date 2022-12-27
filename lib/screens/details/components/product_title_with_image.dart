@@ -20,11 +20,11 @@ class ProductTitleWithImage extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
           Text(
-            "Samsung Power Bank",
+            "${product.name}",
             style: TextStyle(color: Colors.white),
           ),
           Text(
-            "${product.title}",
+            "${product.name}",
             style: Theme.of(context)
                 .textTheme
                 .headline4

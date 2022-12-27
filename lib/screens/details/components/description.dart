@@ -19,7 +19,7 @@ class description extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 10),
       child: Text(
-        product.description.toString(),
+        "${product.descreption}",
         style: TextStyle(height: 1.5),
       ),
     );

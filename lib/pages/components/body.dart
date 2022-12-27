@@ -24,7 +24,7 @@ class Body extends StatelessWidget {
           child: Padding(
             padding: const EdgeInsets.symmetric(horizontal: 15),
             child: GridView.builder(
-              itemCount: product!.length,
+              itemCount: product?.length,
               gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                   crossAxisCount: 2, childAspectRatio: 0.75),
               itemBuilder: (context, index) => Itemcard(

@@ -27,7 +27,7 @@ class productinfo extends StatelessWidget {
                 children: [
                   TextSpan(text: "Capacity\n"),
                   TextSpan(
-                      text: "${product.capacity}",
+                      text: "${product.quantity}",
                       style: Theme.of(context)
                           .textTheme
                           .headline5
