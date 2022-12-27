@@ -1,7 +1,7 @@
 import 'package:sahar_mob_app/models/cart_model.dart';
 import 'package:sahar_mob_app/models/db_helper.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:sahar_mob_app/shared_preferences.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class CartProvider with ChangeNotifier {
   DBHelper db = DBHelper();
