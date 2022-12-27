@@ -24,7 +24,7 @@ class ProductTitleWithImage extends StatelessWidget {
             style: TextStyle(color: Colors.white),
           ),
           Text(
-            product.title,
+            "${product.title}",
             style: Theme.of(context)
                 .textTheme
                 .headline4
@@ -49,7 +49,7 @@ class ProductTitleWithImage extends StatelessWidget {
               ),
               Expanded(
                   child: Image.asset(
-                product.image,
+                product.image.toString(),
                 fit: BoxFit.fitWidth,
               ))
             ],

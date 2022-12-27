@@ -32,20 +32,19 @@ class Itemcard extends StatelessWidget {
               height: 180,
               width: 160,
               decoration: BoxDecoration(
-                  color: product.color,
-                  borderRadius: BorderRadius.circular(16)),
-              child: Image.asset(product.image),
+                  color: Colors.black, borderRadius: BorderRadius.circular(16)),
+              //child: Image.asset(product.image.toString()),
             ),
           ),
           Padding(
             padding: const EdgeInsets.symmetric(vertical: 10 / 4),
             child: Text(
-              product.title,
+              "${product.title}",
               style: TextStyle(color: Color.fromARGB(102, 0, 0, 0)),
             ),
           ),
           Text(
-            "${product.price} LE",
+            product.price.toString() + "LE",
             style: TextStyle(fontWeight: FontWeight.bold),
           )
         ],
