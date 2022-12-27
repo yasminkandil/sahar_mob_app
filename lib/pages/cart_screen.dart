@@ -1,11 +1,16 @@
 import 'package:badges/badges.dart';
-import 'package:sahar_mob_app/models/cart_model.dart';
-import 'package:sahar_mob_app/models/db_helper.dart';
 
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
+import 'package:badges/badges.dart';
+
+import 'package:sahar_mob_app/models/cart_model.dart';
 import 'package:sahar_mob_app/cart_provider.dart';
+import 'package:sahar_mob_app/models/db_helper.dart';
+import 'package:sahar_mob_app/pages/cart_screen.dart';
+
+import 'package:flutter/material.dart';
 
 class CartScreen extends StatefulWidget {
   const CartScreen({Key? key}) : super(key: key);
