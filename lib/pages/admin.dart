@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:sahar_mob_app/pages/add_category.dart';
 import 'package:sahar_mob_app/pages/add_color.dart';
+import 'package:sahar_mob_app/pages/add_gallery.dart';
 import 'package:sahar_mob_app/pages/add_offer.dart';
 import 'package:sahar_mob_app/pages/add_product.dart';
 import 'package:sahar_mob_app/pages/add_quality.dart';
@@ -280,10 +281,10 @@ class _AdminState extends State<Admin> {
             Divider(),
             ListTile(
                 leading: Icon(Icons.date_range),
-                title: Text("In Fix"),
+                title: Text("Add in gallery"),
                 onTap: () => Navigator.push(
                       context,
-                      MaterialPageRoute(builder: (context) => Products()),
+                      MaterialPageRoute(builder: (context) => AddGallery()),
                     )),
             Divider(),
             ListTile(

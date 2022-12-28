@@ -42,18 +42,6 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.blue,
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
-
-      // home: SafeArea(child: RegisterPage()),
-      //home: SafeArea(child: Navigation_bar()),
-
-      // home: PowerBank(),
-      //home: SafeArea(child: LoginPage()),
-      // home: SafeArea(child: Admin()),
-      // home: Shop(),
-      // home: AddProductPage(),
-      //home: CategoryPage(),
-      //home: SafeArea(child: RegisterPage()),
-      //home: SafeArea(child: ViewAccountPage()),
       home: const SafeArea(child: HomePage()),
     );
   }
