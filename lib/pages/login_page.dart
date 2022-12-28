@@ -85,7 +85,7 @@ class _LoginPageState extends State<LoginPage> {
                       child: Column(
                         mainAxisSize: MainAxisSize.max,
                         children: <Widget>[
-                          _textInput(
+                          textInput(
                               controller: emailController,
                               hint: "Email",
                               icon: Icons.email,
@@ -233,7 +233,7 @@ class _LoginPageState extends State<LoginPage> {
     );
   }
 
-  Widget _textInput({controller, hint, icon, torf}) {
+  Widget textInput({controller, hint, icon, torf}) {
     return Container(
       margin: const EdgeInsets.only(top: 20),
       decoration: const BoxDecoration(

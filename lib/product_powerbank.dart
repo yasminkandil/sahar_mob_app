@@ -13,15 +13,17 @@ import 'package:flutter/material.dart';
 import 'package:sahar_mob_app/pages/products_all.dart';
 
 class Product {
-  String? image, title, description, capacity;
-  String? price, id;
+  String? brand, category, descreption, image, name;
+  int? price, quantity;
 
   Product({
-    required this.title,
+    required this.brand,
+    required this.category,
+    required this.descreption,
+    required this.image,
+    required this.name,
     required this.price,
-    required this.description,
-    //required this.image,
-    required this.capacity,
+    required this.quantity,
   });
 }
 
@@ -116,74 +118,22 @@ class Product {
 //   }
 // }
 
-class Databaseservice {
-  late final CollectionReference products =
-      FirebaseFirestore.instance.collection('products');
-
-  Stream<QuerySnapshot> get product {
-    return products.snapshots();
-  }
-
-  // getcount(products) {
-  //   return products.count();
-  // }
-
-  Future gettitle() async {
-    DocumentReference docRef =
-        FirebaseFirestore.instance.collection('products').doc("name");
-    String prodtitle = "";
-
-    docRef.get().then((DocumentSnapshot snapshot) {
-      Map<String, dynamic> data = snapshot.data() != null
-          ? snapshot.data()! as Map<String, dynamic>
-          : <String, dynamic>{};
-
-      var prodtitle = "${data['name']}";
-
-      return prodtitle;
-    });
-  }
-
-  // Future<String> getimage() async {
-  //   DocumentReference documentReference = products.doc();
-  //   String prodimage = "";
-  //   await documentReference.get().then((snapshot) {
-  //     prodimage = snapshot['image'].toString();
-  //   });
-  //   return prodimage;
-  // }
-
-  getdescription() async {
-    DocumentReference docRef =
-        FirebaseFirestore.instance.collection('products').doc('descreption');
-    String proddescreption = "";
-
-    docRef.get().then((DocumentSnapshot snapshot) {
-      Map<String, dynamic> data = snapshot.data() != null
-          ? snapshot.data()! as Map<String, dynamic>
-          : <String, dynamic>{};
-
-      String proddescreption = "${data['descreption']}";
-    });
-    return proddescreption;
-  }
-
-  getprice() async {
-    DocumentReference docRef =
-        FirebaseFirestore.instance.collection('products').doc('price');
-    String prodprice = "";
-    docRef.get().then((DocumentSnapshot snapshot) {
-      var prodprice = snapshot.toString();
-    });
-    return prodprice;
+class Getproducts {
+  Future getname() async {
+    final DocumentSnapshot documentSnapshot =
+        await FirebaseFirestore.instance.collection('products').doc().get();
+    return documentSnapshot;
   }
 }
+////////////////////////////////////////////////////////////////////////////////////////////
 
 // Databaseservice productt = Databaseservice();
 
-Productss pp = Productss(
-  salma: gettitle(),
-);
+// Productss pp = Productss(
+//   salma: gettitle(),
+// );
+
+///////////////////////////////geters
 
 gettitle() {
   DocumentReference docRef =
@@ -195,45 +145,126 @@ gettitle() {
         ? snapshot.data()! as Map<String, dynamic>
         : <String, dynamic>{};
 
-    var prodtitle = "${data['price']}";
+    String prodtitle = data["name"];
 
     return prodtitle;
   });
 }
 
+getdescription() {
+  DocumentReference docRef =
+      FirebaseFirestore.instance.collection('products').doc();
+  String proddescreption = "";
+
+  docRef.get().then((DocumentSnapshot snapshot) {
+    Map<String, dynamic> data = snapshot.data() != null
+        ? snapshot.data()! as Map<String, dynamic>
+        : <String, dynamic>{};
+
+    String proddescreption = "${data['description']}";
+
+    return proddescreption;
+  });
+}
+
+getprice() {
+  DocumentReference docRef =
+      FirebaseFirestore.instance.collection('products').doc();
+
+  docRef.get().then((DocumentSnapshot snapshot) {
+    Map<String, dynamic> data = snapshot.data() != null
+        ? snapshot.data()! as Map<String, dynamic>
+        : <String, dynamic>{};
+
+    String prodprice = data['price'].toString();
+
+    return prodprice;
+  });
+}
+
+getimage() {
+  DocumentReference docRef =
+      FirebaseFirestore.instance.collection('products').doc();
+
+  docRef.get().then((DocumentSnapshot snapshot) {
+    Map<String, dynamic> data = snapshot.data() != null
+        ? snapshot.data()! as Map<String, dynamic>
+        : <String, dynamic>{};
+
+    String prodimage = data['image'].toString();
+
+    return prodimage;
+  });
+}
+
+getcategory() {
+  DocumentReference docRef =
+      FirebaseFirestore.instance.collection('products').doc();
+
+  docRef.get().then((DocumentSnapshot snapshot) {
+    Map<String, dynamic> data = snapshot.data() != null
+        ? snapshot.data()! as Map<String, dynamic>
+        : <String, dynamic>{};
+
+    String prodcat = data['category'].toString();
+
+    return prodcat;
+  });
+}
+
+getquantity() {
+  DocumentReference docRef =
+      FirebaseFirestore.instance.collection('products').doc();
+
+  docRef.get().then((DocumentSnapshot snapshot) {
+    Map<String, dynamic> data = snapshot.data() != null
+        ? snapshot.data()! as Map<String, dynamic>
+        : <String, dynamic>{};
+
+    String prodimage = data['quantity'].toString();
+
+    return prodimage;
+  });
+}
+
+///////////////////////////////////////////////////////////////
+///
+Getproducts pp = Getproducts();
 List<Product>? product = [
   Product(
-      title: pp.salma,
-      price: "${pp.salma}",
-      description: pp.toString(),
-      //image: "${productt.getimage()}",
-      capacity: pp.toString())
+      brand: "",
+      name: "gettitle()",
+      category: "getcategory()",
+      descreption: "getdescription()",
+      image: "getimage()",
+      price: 0,
+      quantity: 0)
 ];
 
-class Productss extends StatelessWidget {
-  var salma;
-  Productss({required this.salma});
-  @override
-  Widget build(BuildContext context) {
-    CollectionReference products =
-        FirebaseFirestore.instance.collection('products');
-    final pro = FirebaseFirestore.instance.collection('products');
+// class Productss extends StatelessWidget {
+//   var salma;
+//   Productss({required this.salma});
+//   @override
+//   Widget build(BuildContext context) {
+//     CollectionReference products =
+//         FirebaseFirestore.instance.collection('products');
+//     final pro = FirebaseFirestore.instance.collection('products');
 
-    return FutureBuilder<DocumentSnapshot>(
-      future: products.doc(salma).get(),
-      builder: ((context, snapshot) {
-        if (snapshot.connectionState == ConnectionState.done) {
-          Map<String, dynamic> data = snapshot.data?.data() != null
-              ? snapshot.data!.data()! as Map<String, dynamic>
-              : <String, dynamic>{};
-          return data['price'];
-        } else {
-          return Text("LOadin...");
-        }
-      }),
-    );
-  }
-}
+//     return FutureBuilder<DocumentSnapshot>(
+//       future: products.doc(salma).get(),
+//       builder: ((context, snapshot) {
+//         if (snapshot.connectionState == ConnectionState.done) {
+//           Map<String, dynamic> data = snapshot.data?.data() != null
+//               ? snapshot.data!.data()! as Map<String, dynamic>
+//               : <String, dynamic>{};
+//           return data['name'];
+//         } else {
+//           return Text("LOadin...");
+//         }
+//       }),
+//     );
+//   }
+// }
 
 // List<Productt> product = [
 //   Productt(
