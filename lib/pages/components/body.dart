@@ -9,10 +9,24 @@ import 'package:sahar_mob_app/pages/components/componentsCategory.dart';
 import 'package:sahar_mob_app/pages/components/item_card.dart';
 import 'package:sahar_mob_app/product_powerbank.dart';
 import 'package:sahar_mob_app/screens/details/details_screen.dart';
-import 'package:provider/provider.dart';
 
-class Body extends StatelessWidget {
+class Body extends StatefulWidget {
   const Body({super.key});
+
+  @override
+  State<Body> createState() => _BodyState();
+}
+
+class _BodyState extends State<Body> {
+  List<String> prod = [];
+  Future getDocProd() async {
+    await FirebaseFirestore.instance.collection('products').get().then(
+          (snapshot) => snapshot.docs.forEach((document) {
+            print(document.reference);
+            prod.add(document.reference.id);
+          }),
+        );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -21,22 +35,28 @@ class Body extends StatelessWidget {
       children: <Widget>[
         Categorie(),
         Expanded(
-          child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 15),
-            child: GridView.builder(
-              itemCount: product?.length,
-              gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                  crossAxisCount: 2, childAspectRatio: 0.75),
-              itemBuilder: (context, index) => Itemcard(
-                product: product![index],
-                press: () => Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) =>
-                            DetailScreen(product: product![index]))),
-              ),
-            ),
-          ),
+          child: FutureBuilder(
+              future: getDocProd(),
+              builder: (context, snapshot) {
+                return Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 15),
+                  child: GridView.builder(
+                    itemCount: prod.length,
+                    gridDelegate:
+                        const SliverGridDelegateWithFixedCrossAxisCount(
+                            crossAxisCount: 2, childAspectRatio: 0.75),
+                    itemBuilder: (context, index) => Itemcard(
+                      salma: prod[index],
+                      product: product![index],
+                      press: () => Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) =>
+                                  DetailScreen(salma: prod[index]))),
+                    ),
+                  ),
+                );
+              }),
         )
       ],
     );

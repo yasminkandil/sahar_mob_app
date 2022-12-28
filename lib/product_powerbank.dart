@@ -118,66 +118,11 @@ class Product {
 //   }
 // }
 
-class Databaseservice {
-  late final CollectionReference products =
-      FirebaseFirestore.instance.collection('products');
-
-  Stream<QuerySnapshot> get product {
-    return products.snapshots();
-  }
-
-  // getcount(products) {
-  //   return products.count();
-  // }
-
-  Future gettitle() async {
-    DocumentReference docRef =
-        FirebaseFirestore.instance.collection('products').doc("name");
-    String prodtitle = "";
-
-    docRef.get().then((DocumentSnapshot snapshot) {
-      Map<String, dynamic> data = snapshot.data() != null
-          ? snapshot.data()! as Map<String, dynamic>
-          : <String, dynamic>{};
-
-      var prodtitle = "${data['name']}";
-
-      return prodtitle;
-    });
-  }
-
-  Future<String> getimage() async {
-    DocumentReference documentReference = products.doc();
-    String prodimage = "";
-    await documentReference.get().then((snapshot) {
-      prodimage = snapshot['image'].toString();
-    });
-    return prodimage;
-  }
-
-  getdescription() async {
-    DocumentReference docRef =
-        FirebaseFirestore.instance.collection('products').doc('descreption');
-    String proddescreption = "";
-
-    docRef.get().then((DocumentSnapshot snapshot) {
-      Map<String, dynamic> data = snapshot.data() != null
-          ? snapshot.data()! as Map<String, dynamic>
-          : <String, dynamic>{};
-
-      String proddescreption = "${data['descreption']}";
-    });
-    return proddescreption;
-  }
-
-  getprice() async {
-    DocumentReference docRef =
-        FirebaseFirestore.instance.collection('products').doc('price');
-    String prodprice = "";
-    docRef.get().then((DocumentSnapshot snapshot) {
-      var prodprice = snapshot.toString();
-    });
-    return prodprice;
+class Getproducts {
+  Future getname() async {
+    final DocumentSnapshot documentSnapshot =
+        await FirebaseFirestore.instance.collection('products').doc().get();
+    return documentSnapshot;
   }
 }
 ////////////////////////////////////////////////////////////////////////////////////////////
@@ -283,15 +228,17 @@ getquantity() {
 }
 
 ///////////////////////////////////////////////////////////////
+///
+Getproducts pp = Getproducts();
 List<Product>? product = [
   Product(
-      brand: gettitle(),
-      name: gettitle(),
-      category: getcategory(),
-      descreption: getdescription(),
-      image: getimage(),
-      price: getprice(),
-      quantity: getquantity())
+      brand: "",
+      name: "gettitle()",
+      category: "getcategory()",
+      descreption: "getdescription()",
+      image: "getimage()",
+      price: 0,
+      quantity: 0)
 ];
 
 // class Productss extends StatelessWidget {

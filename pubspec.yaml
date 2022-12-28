@@ -46,22 +46,8 @@ dependencies:
   image_picker: ^0.8.6
   permission_handler: ^10.2.0
   firebase_storage: ^11.0.9
-  provider: ^6.0.5
-  
   firebase_helpers: ^0.6.0
   google_sign_in: ^5.4.2
-<<<<<<< HEAD
-=======
-<<<<<<< HEAD
-  provider: ^6.0.5
-  badges: ^2.0.3
-  shared_preferences: ^2.0.15
-  sqflite: ^2.2.2
-  path_provider: ^2.0.11
-=======
->>>>>>> a2751480180a115413c025cdcb16b4ab10127de1
->>>>>>> de90b8f85bf9f57704b0710cb427ef08342c0449
->>>>>>> 1262f12f9137bf61d93dbf963bf4c4d308ce1de3
 
 
 dev_dependencies:

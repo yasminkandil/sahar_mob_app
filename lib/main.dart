@@ -1,5 +1,6 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import 'package:sahar_mob_app/pages/navbar.dart';
 import 'package:sahar_mob_app/pages/regi_page.dart';
@@ -28,8 +29,8 @@ import 'pages/admin.dart';
 //import 'pages/calendar.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  Firebase.initializeApp();
-  runApp(MyApp());
+  await Firebase.initializeApp();
+  runApp(ProviderScope(child: MyApp()));
 }
 
 class MyApp extends StatelessWidget {
