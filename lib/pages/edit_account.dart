@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:sahar_mob_app/pages/view_account.dart';
+import 'package:sahar_mob_app/pages/view_order_user.dart';
 import 'package:sahar_mob_app/utils/color.dart';
 import 'package:sahar_mob_app/widgets/header_container.dart';
 
@@ -29,7 +30,7 @@ class _EditProfileUIState extends State<EditProfileUI>
           color:orangeColors,
        ), onPressed: () {   Navigator.push(context,
                   MaterialPageRoute(builder: (context) {
-                  return ViewAccountPage();
+                  return viewOrderUser();
                               }),
                               );
                               }, 
