@@ -5,23 +5,23 @@ import 'package:sahar_mob_app/product_powerbank.dart';
 import 'package:sahar_mob_app/screens/details/components/body.dart';
 
 class DetailScreen extends StatelessWidget {
-  final Product product;
-  const DetailScreen({super.key, required this.product});
+  final String salma;
+  const DetailScreen({super.key, required this.salma});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: product.color,
+      backgroundColor: Colors.red,
       appBar: buildAppBar(context),
       body: Body(
-        product: product,
+        salma: salma,
       ),
     );
   }
 
   AppBar buildAppBar(BuildContext context) {
     return AppBar(
-      backgroundColor: product.color,
+      backgroundColor: Colors.red,
       elevation: 0,
       leading: IconButton(
         onPressed: () {

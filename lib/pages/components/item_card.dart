@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 
 import 'package:sahar_mob_app/pages/components/componentsCategory.dart';
@@ -7,49 +8,61 @@ import 'package:sahar_mob_app/screens/details/details_screen.dart';
 class Itemcard extends StatelessWidget {
   final Product product;
   final Function press;
+  final String salma;
   const Itemcard({
-    Key? key,
+    required this.salma,
     required this.product,
     required this.press,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
-    return GestureDetector(
-      onTap: () {
-        Navigator.push(context, MaterialPageRoute(builder: (context) {
-          return DetailScreen(
-            product: product,
-          );
+    CollectionReference products =
+        FirebaseFirestore.instance.collection('products');
+    final pro = FirebaseFirestore.instance.collection('products');
+
+    return FutureBuilder<DocumentSnapshot>(
+        future:
+            FirebaseFirestore.instance.collection('products').doc(salma).get(),
+        builder: ((context, snapshot) {
+          if (snapshot.connectionState == ConnectionState.done) {
+            Map<String, dynamic> data = snapshot.data?.data() != null
+                ? snapshot.data!.data()! as Map<String, dynamic>
+                : <String, dynamic>{};
+            return GestureDetector(
+              onTap: () {
+                Navigator.push(context, MaterialPageRoute(builder: (context) {
+                  return DetailScreen(
+                    salma: salma,
+                  );
+                }));
+              },
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Expanded(
+                    child: Container(
+                      padding: EdgeInsets.all(35),
+                      height: 180,
+                      width: 160,
+                      decoration: BoxDecoration(
+                          color: Colors.black,
+                          borderRadius: BorderRadius.circular(16)),
+                      //child: Image.asset(product.image.toString()),
+                    ),
+                  ),
+                  Padding(
+                      padding: const EdgeInsets.symmetric(vertical: 10 / 4),
+                      child: Text("${data['name']}")),
+                  Text(
+                    "${data['price']}" + "LE",
+                    style: TextStyle(fontWeight: FontWeight.bold),
+                  )
+                ],
+              ),
+            );
+          }
+          return Text('loading..');
         }));
-      },
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Expanded(
-            child: Container(
-              padding: EdgeInsets.all(35),
-              height: 180,
-              width: 160,
-              decoration: BoxDecoration(
-                  color: product.color,
-                  borderRadius: BorderRadius.circular(16)),
-              child: Image.asset(product.image),
-            ),
-          ),
-          Padding(
-            padding: const EdgeInsets.symmetric(vertical: 10 / 4),
-            child: Text(
-              product.title,
-              style: TextStyle(color: Color.fromARGB(102, 0, 0, 0)),
-            ),
-          ),
-          Text(
-            "${product.price} LE",
-            style: TextStyle(fontWeight: FontWeight.bold),
-          )
-        ],
-      ),
-    );
   }
 }

@@ -4,7 +4,6 @@ import 'package:sahar_mob_app/pages/add_color.dart';
 import 'package:sahar_mob_app/pages/add_offer.dart';
 import 'package:sahar_mob_app/pages/add_product.dart';
 import 'package:sahar_mob_app/pages/add_quality.dart';
-import 'package:sahar_mob_app/pages/calendar.dart';
 import 'package:sahar_mob_app/pages/orders_admin.dart';
 import 'package:sahar_mob_app/pages/products_powerbank.dart';
 import 'package:sahar_mob_app/pages/view_product.dart';
@@ -218,9 +217,9 @@ class _AdminState extends State<Admin> {
               leading: Icon(Icons.change_history),
               title: Text("Products list"),
               onTap: () => Navigator.push(
-                      context,
-                      MaterialPageRoute(builder: (context) => const ViewProductPage())
-              ),
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => const ViewProductPage())),
             ),
             Divider(),
             ListTile(
