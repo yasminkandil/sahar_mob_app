@@ -29,8 +29,7 @@ class description extends StatelessWidget {
             Map<String, dynamic> data = snapshot.data?.data() != null
                 ? snapshot.data!.data()! as Map<String, dynamic>
                 : <String, dynamic>{};
-            child:
-            Padding(
+            return Padding(
               padding: const EdgeInsets.symmetric(vertical: 10),
               child: Text(
                 "${data['description']}",

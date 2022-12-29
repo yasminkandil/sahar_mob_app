@@ -64,9 +64,9 @@ class ProductTitleWithImage extends StatelessWidget {
                           width: 3,
                         ),
                         Expanded(
-                            child: Image.asset(
-                          "${data['image']}",
+                            child: Image(
                           fit: BoxFit.fitWidth,
+                          image: NetworkImage("${data["image"]}"),
                         ))
                       ],
                     )
