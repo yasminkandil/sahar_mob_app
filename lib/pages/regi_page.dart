@@ -1,4 +1,5 @@
 import 'dart:io';
+import 'dart:math';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -10,6 +11,7 @@ import 'package:permission_handler/permission_handler.dart';
 import 'package:sahar_mob_app/models/uploadimage.dart';
 import 'package:sahar_mob_app/pages/login_page.dart';
 import 'package:sahar_mob_app/pages/navbar.dart';
+import 'package:sahar_mob_app/pages/view_account.dart';
 import 'package:sahar_mob_app/pages/products_powerbank.dart';
 import 'package:sahar_mob_app/utils/color.dart';
 import 'package:sahar_mob_app/widgets/btn_widget.dart';
@@ -56,6 +58,15 @@ class _RegisterPageState extends State<RegisterPage> {
     return imagee;
   }
 
+  int randomm() {
+    var rng = Random();
+    int num = 0;
+    for (var i = 0; i < 10; i++) {
+      num = rng.nextInt(100);
+    }
+    return num;
+  }
+
   uploadImage() async {
     final _storage = FirebaseStorage.instance;
     final _picker = ImagePicker();
@@ -87,9 +98,15 @@ class _RegisterPageState extends State<RegisterPage> {
     }
   }
 
-  Future addUserDetails(String firstname, String lastname, String userEmail,
-      String useraddress, String userPhoneNumber, String userImage) async {
-    await FirebaseFirestore.instance.collection('users').add(
+  Future addUserDetails(
+      String firstname,
+      String lastname,
+      String userEmail,
+      String useraddress,
+      String userPhoneNumber,
+      String userImage,
+      String id) async {
+    await FirebaseFirestore.instance.collection('users').doc(id).set(
       {
         'firstname': firstname,
         'lastname': lastname,
@@ -97,6 +114,7 @@ class _RegisterPageState extends State<RegisterPage> {
         'mobile': int.parse(userPhoneNumber),
         'address': useraddress,
         'image': userImage,
+        'id': id,
       },
     );
 
@@ -302,33 +320,33 @@ class _RegisterPageState extends State<RegisterPage> {
                             child: Center(
                               child: ButtonWidget(
                                 btnText: "REGISTER",
-                                onClick: () {
+                                onClick: () async {
                                   if (formKey.currentState!.validate()) {
-                                    final snackBar = SnackBar(
-                                        content: Text("Account Created.."));
-                                    ScaffoldMessenger.of(context)
-                                        .showSnackBar(snackBar);
-                                    addUserDetails(
-                                        _fisrtController.text,
-                                        _lastController.text,
-                                        _emailController.text,
-                                        _addrController.text,
-                                        _mobileController.text,
-                                        greyimage);
-                                    FirebaseAuth.instance
+                                    await FirebaseAuth.instance
                                         .createUserWithEmailAndPassword(
                                             email: _emailController.text,
-                                            password: _passwordController.text)
-                                        .then(
-                                      (value) {
-                                        print("Created new account");
-                                        Navigator.push(
-                                            context,
-                                            MaterialPageRoute(
-                                                builder: (context) =>
-                                                    Navigation_bar()));
-                                      },
-                                    );
+                                            password: _passwordController.text);
+                                    //var uId = userr.uid;
+                                    addUserDetails(
+                                            _fisrtController.text,
+                                            _lastController.text,
+                                            _emailController.text,
+                                            _addrController.text,
+                                            _mobileController.text,
+                                            greyimage,
+                                            userId)
+                                        .then((value) {
+                                      print("Created new account");
+                                      final snackBar = SnackBar(
+                                          content: Text("Account Created.."));
+                                      ScaffoldMessenger.of(context)
+                                          .showSnackBar(snackBar);
+                                      Navigator.push(
+                                          context,
+                                          MaterialPageRoute(
+                                              builder: (context) =>
+                                                  Navigation_bar()));
+                                    });
                                   }
                                 },
                               ),

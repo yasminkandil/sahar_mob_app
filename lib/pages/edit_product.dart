@@ -1,11 +1,9 @@
 import 'dart:ui';
 
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-//import 'package:image_picker/image_picker.dart';
-
 import 'package:sahar_mob_app/utils/color.dart';
 import 'package:sahar_mob_app/widgets/btn_widget.dart';
-//import 'package:sahar_mob_app/widgets/header_container.dart';
 
 class EditProductPage extends StatefulWidget {
   @override
@@ -13,10 +11,72 @@ class EditProductPage extends StatefulWidget {
 }
 
 class _EditProductPageState extends State<EditProductPage> {
+  
   String selectedValC = 'black';
   String selectedValQ = 'Original';
   String selectedValCat = 'Headphones';
+ final CollectionReference _products =
+      FirebaseFirestore.instance.collection('products');
+  final TextEditingController _nameController = TextEditingController();
+  final TextEditingController _priceController = TextEditingController();
+ Future<void> update([DocumentSnapshot? documentSnapshot]) async {
+    if (documentSnapshot != null) {
 
+      _nameController.text = documentSnapshot['name'];
+      _priceController.text = documentSnapshot['price'].toString();
+    }
+
+    await showModalBottomSheet(
+        isScrollControlled: true,
+        context: context,
+        builder: (BuildContext ctx) {
+          return Padding(
+            padding: EdgeInsets.only(
+                top: 20,
+                left: 20,
+                right: 20,
+                bottom: MediaQuery.of(ctx).viewInsets.bottom + 20),
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                TextField(
+                  controller: _nameController,
+                  decoration: const InputDecoration(labelText: 'Name'),
+                ),
+                TextField(
+                  keyboardType:
+                      const TextInputType.numberWithOptions(decimal: true),
+                  controller: _priceController,
+                  decoration: const InputDecoration(
+                    labelText: 'Price',
+                  ),
+                ),
+                const SizedBox(
+                  height: 20,
+                ),
+                ElevatedButton(
+                  child: const Text( 'Update'),
+                  onPressed: () async {
+                    final String name = _nameController.text;
+                    final double? price =
+                        double.tryParse(_priceController.text);
+                    if (price != null) {
+
+                        await _products
+                            .doc(documentSnapshot!.id)
+                            .update({"name": name, "price": price});
+                      _nameController.text = '';
+                      _priceController.text = '';
+                        Navigator.of(context).pop();
+                    }
+                  },
+                )
+              ],
+            ),
+          );
+        });
+  }
   List Listcolors = ['black', 'blue'];
   List ListCateg = [
     'Headphones',

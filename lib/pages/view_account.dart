@@ -2,189 +2,293 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:sahar_mob_app/pages/edit_account.dart';
-import 'package:sahar_mob_app/read%20data/get_user_name.dart';
+import 'package:sahar_mob_app/pages/navbar.dart';
+import 'package:sahar_mob_app/pages/regi_page.dart';
 import 'package:sahar_mob_app/utils/color.dart';
 import 'package:sahar_mob_app/widgets/header_container.dart';
+
+import '../widgets/btn_widget.dart';
 
 class ViewAccountPage extends StatefulWidget {
   const ViewAccountPage({super.key});
 
   @override
-  _ViewAccountPageState createState() => _ViewAccountPageState();
+  State<ViewAccountPage> createState() => _ViewAccountPageState();
 }
+
+final user = FirebaseAuth.instance.currentUser!;
+String userId = user.uid;
 
 class _ViewAccountPageState extends State<ViewAccountPage> {
-  //final FirebaseAuth _auth = FirebaseAuth.instance;
- 
-  final userr =FirebaseAuth.instance.currentUser!;
-  // bashoof ehh el user el online 3shan a select data beta3to mn database
-  /*
-  Future _getDataFromDatabase() async {
-    await FirebaseFirestore.instance.collection('users')
-        .doc(FirebaseAuth.instance.currentUser!.email)
-        .get().then((snapshot) async {
-      if (snapshot.exists) {
-        setState(() {
-          // bakhod data mn database w store it
-          address = snapshot.data()!['address'];
-          email = snapshot.data()!['email'];
-          firstname = snapshot.data()!['firstname'];
-          lastname = snapshot.data()!['lastname'];
-          mobile = snapshot.data()!['mobile'];
-        });
-      }
-    });
-  }*/
-List<String> docIDs = [];
-Future getDocId() async{
-  await FirebaseFirestore.instance.collection('users').get().
-  then((snapshot) => snapshot.docs.forEach((document) {
-    print(document.reference);
-    docIDs.add(document.reference.id);
-  }),
-  );
-}
- /* @override
-  void initState() {
-    super.initState();
-    setState(() {});
-    //getData();
-  }
-*/
- /* void getData() async {
-    User? user = _auth.currentUser;
-    _uid = user?.uid;
-    print('user.email ${user?.email}');
-   final DocumentSnapshot userDoc = (user!.isAnonymous
-        ? null
-        : await FirebaseFirestore.instance.collection('users').doc(_uid).get()) as DocumentSnapshot<Object?>;
+  final _emailController = TextEditingController();
+  final _fisrtController = TextEditingController();
+  final _lastController = TextEditingController();
+  final _mobileController = TextEditingController();
+  final _addrController = TextEditingController();
+  //final userr = FirebaseAuth.instance.currentUser!;
+  //String myDocId = userr.uid;
+  Future updateUserDetails(String firstname, String lastname,
+      String useraddress, String userPhoneNumber, String userImage) async {
+    final updateUser =
+        FirebaseFirestore.instance.collection('users').doc(userId);
+    updateUser.update(
+      {
+        'firstname': firstname.trim(),
+        'lastname': lastname.trim(),
+        'mobile': int.parse(userPhoneNumber.trim()),
+        'address': useraddress.trim(),
+        'image': userImage,
+      },
+    );
 
-      setState(() {
-      _firstname = userDoc.get('firstname');
-      _lastname = userDoc.get('lastname');
-      _email = user.email;
-    });
-  }*/
+    print('NEW USER REGISTERED WITH ID:');
+  }
 
   @override
   Widget build(BuildContext context) {
+    final userr = FirebaseAuth.instance.currentUser!;
+
     return Scaffold(
       appBar: AppBar(
         title: Text('Your Account'),
         backgroundColor: GreyColors,
-        centerTitle: true,
-      ),
-      body: Center(
-        child:
-       Column( 
-        mainAxisAlignment: MainAxisAlignment.center,
-      children: [
-      Text('Signed in as:${userr.email}',
-        style: TextStyle(fontSize: 20),),
-        MaterialButton(onPressed: (){
-          FirebaseAuth.instance.signOut();
-
-        },
-        color: Colors.deepPurple,
-        child: Text('sign out'),),
-        Expanded(
-          child: 
-          FutureBuilder(
-                        future: getDocId(),
-            builder: (context, snapshot)
-           {
-           return ListView.builder(
-          itemCount: docIDs.length,
-          itemBuilder:
-         (context, index) {
-
-          return ListTile(
-            title: GetUserName(documentId: docIDs[index],)
-         // Text(docIDs[index]),
-          ); 
+        leading: IconButton(
+          icon: Icon(
+            Icons.arrow_back,
+            color: orangeColors,
+          ),
+          onPressed: () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) {
+                return Navigation_bar();
+              }),
+            );
           },
-        
-        );
-           },
         ),
-        ),
-      ],
-      ),
-      ),
-     /* body: Column(
-        crossAxisAlignment: CrossAxisAlignment.center,
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          GestureDetector(
-            onTap: () {},
-            child: CircleAvatar(
-              backgroundColor: Colors.white,
-              minRadius: 60.0,
-              child: CircleAvatar(
-                radius: 50.0,
+        actions: [
+          IconButton(
+              icon: Icon(
+                Icons.settings,
+                color: GreyColors,
               ),
-            ),
-          ),
-          const SizedBox(
-            height: 10.0,
-          ),
-          Row(
-            crossAxisAlignment: CrossAxisAlignment.center,
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              userListTile('Email', _email ?? '', 0, context),
-              /*
-              Text(
-                'Email:'_email ?? '',
-                style: TextStyle(
-                  fontSize: 25.0,
-                  fontWeight: FontWeight.bold,
-                  color: Colors.black,
-                ),
-              ),
-              IconButton(
-                  onPressed: (){
-  
-                       }, 
-                       icon: const Icon(Icons.edit),),
-          ], ),
-
-              const SizedBox(
-                height: 10.0,
-              ),
-              Text(
-                'First Name:' + _firstname!,
-                style: TextStyle(
-                  fontSize: 25.0,
-                  fontWeight: FontWeight.bold,
-                  color: Colors.black,
-                ),
-              ),  */
-              IconButton(
-                onPressed: () {},
-                icon: const Icon(Icons.edit),
-              ),
-            ],
-          ),
+              onPressed: () {})
         ],
-      ),*/
+      ),
+      body: Container(
+        child: Padding(
+            padding: const EdgeInsets.only(left: 10.0),
+            child: StreamBuilder(
+                stream: FirebaseFirestore.instance
+                    .collection('users')
+                    .where('email', isEqualTo: userr.email)
+                    .snapshots(),
+                builder: (context, AsyncSnapshot snapshot) {
+                  if (snapshot.hasData) {
+                    return ListView.builder(
+                        itemCount: snapshot.data!.docs.length,
+                        itemBuilder: (context, index) {
+                          var data = snapshot.data!.docs[index];
+                          return Column(
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              const SizedBox(
+                                height: 10.0,
+                              ),
+                              Center(
+                                child: Stack(
+                                  children: [
+                                    Container(
+                                      width: 110,
+                                      height: 110,
+                                      decoration: BoxDecoration(
+                                          border: Border.all(
+                                              width: 4, color: Colors.white),
+                                          boxShadow: [
+                                            BoxShadow(
+                                                spreadRadius: 2,
+                                                blurRadius: 10,
+                                                color: Colors.black
+                                                    .withOpacity(0.1))
+                                          ],
+                                          shape: BoxShape.circle,
+                                          image: DecorationImage(
+                                              fit: BoxFit.cover,
+                                              image: NetworkImage(
+                                                  '${data['image']}'))),
+                                    ),
+                                    Positioned(
+                                      bottom: 0,
+                                      right: 0,
+                                      child: Container(
+                                          height: 40,
+                                          width: 40,
+                                          decoration: BoxDecoration(
+                                              shape: BoxShape.circle,
+                                              border: Border.all(
+                                                width: 4,
+                                                color: Colors.white,
+                                              ),
+                                              color: Colors.orange),
+                                          child: TextButton(
+                                            child: const Icon(
+                                              Icons.edit,
+                                              color: Colors.white,
+                                            ),
+                                            onPressed: () {
+                                              //uploadImage();
+                                            },
+                                          )),
+                                    )
+                                  ],
+                                ),
+                              ),
+                              const SizedBox(
+                                height: 10.0,
+                              ),
+// -- IMAGE with ICON
+                              const SizedBox(height: 50),
+                              Form(
+                                child: Column(children: [
+                                  Text(
+                                    "First Name:",
+                                    style: TextStyle(
+                                        color: Colors.deepOrange,
+                                        fontSize: 15,
+                                        fontWeight: FontWeight.bold),
+                                  ),
+                                  TextFormField(
+                                    decoration: InputDecoration(
+                                        border: OutlineInputBorder(),
+
+                                        //labelText: "First Name : ",
+                                        hintText: '${data['firstname']}'),
+                                    controller: _fisrtController,
+                                  ),
+                                  SizedBox(
+                                    height: 10.0,
+                                  ),
+                                  Text(
+                                    "Last Name:",
+                                    style: TextStyle(
+                                        color: Colors.deepOrange,
+                                        fontSize: 15,
+                                        fontWeight: FontWeight.bold),
+                                  ),
+                                  TextFormField(
+                                    decoration: InputDecoration(
+                                        border: OutlineInputBorder(),
+                                        //   labelText: "Last Name",
+                                        hintText: '${data['lastname']}\n'),
+                                    controller: _lastController,
+                                  ),
+                                  SizedBox(
+                                    height: 10.0,
+                                  ),
+                                  Text(
+                                    "Email:",
+                                    style: TextStyle(
+                                        color: Colors.deepOrange,
+                                        fontSize: 15,
+                                        fontWeight: FontWeight.bold),
+                                  ),
+                                  TextFormField(
+                                    decoration: InputDecoration(
+                                        border: OutlineInputBorder(),
+                                        // labelText: "Email : ",
+                                        hintText: '${data['email']}\n'),
+                                    controller: _emailController,
+                                    enabled: false,
+                                  ),
+                                  SizedBox(
+                                    height: 10.0,
+                                  ),
+                                  Text(
+                                    "Address:",
+                                    style: TextStyle(
+                                        color: Colors.deepOrange,
+                                        fontSize: 15,
+                                        fontWeight: FontWeight.bold),
+                                  ),
+                                  TextFormField(
+                                    decoration: InputDecoration(
+                                        // border: InputBorder.none,
+                                        border: OutlineInputBorder(),
+                                        //labelText: "Address",
+                                        hintText: '${data['address']}\n'),
+                                    controller: _addrController,
+                                  ),
+                                  SizedBox(
+                                    height: 10.0,
+                                  ),
+                                  Text(
+                                    "Mobile:",
+                                    style: TextStyle(
+                                        color: Colors.deepOrange,
+                                        fontSize: 15,
+                                        fontWeight: FontWeight.bold),
+                                  ),
+                                  TextFormField(
+                                    decoration: InputDecoration(
+                                        // border: InputBorder.none,
+                                        border: OutlineInputBorder(),
+                                        //labelText: "Address",
+                                        hintText: '${data['mobile']}\n'),
+                                    controller: _mobileController,
+                                  ),
+                                  SizedBox(
+                                    height: 10.0,
+                                  ),
+                                  ButtonWidget(
+                                    btnText: "Edit account",
+                                    onClick: () {
+                                      updateUserDetails(
+                                              _fisrtController.text,
+                                              _lastController.text,
+                                              _addrController.text,
+                                              _mobileController.text,
+                                              '${data['image']}')
+                                          .then(
+                                        (value) {
+                                          print("updated account");
+                                          Navigator.push(
+                                              context,
+                                              MaterialPageRoute(
+                                                  builder: (context) =>
+                                                      Navigation_bar()));
+                                        },
+                                      );
+                                      /* final updateUser = FirebaseFirestore
+                                          .instance
+                                          .collection('users')
+                                          .doc();
+                                      updateUser.update(
+                                        {
+                                          'firstname':
+                                              _fisrtController.text.trim(),
+                                          'lastname':
+                                              _lastController.text.trim(),
+                                          'email': _emailController.text.trim(),
+                                          'mobile': int.parse(
+                                              _mobileController.text.trim()),
+                                          'address':
+                                              _addrController.text.trim(),
+                                          'image': '${data['image']}',
+                                        },
+                                      );*/
+                                    },
+                                  ),
+                                ]),
+                              ),
+                            ],
+                          );
+                        });
+                  } else {
+                    return Text('loading..');
+                  }
+                })),
+      ),
     );
   }
-/*
-  List<IconData> _userTileIcons = [
-    Icons.email,
-    Icons.phone,
-    Icons.local_shipping,
-    Icons.watch_later,
-    Icons.exit_to_app_rounded
-  ];
-
-  Widget userListTile(
-      String title, String subTitle, int index, BuildContext context) {
-    return ListTile(
-      title: Text(title),
-      subtitle: Text(subTitle),
-      leading: Icon(_userTileIcons[index]),
-    );
-  }*/
 }

@@ -17,6 +17,7 @@ class _ViewProductPageState extends State<ViewProductPage> {
   final pro = FirebaseFirestore.instance.collection('products');
 
   List<String> prod = [];
+
   Future getDocProd() async {
     await FirebaseFirestore.instance.collection('products').get().then(
           (snapshot) => snapshot.docs.forEach((document) {
@@ -25,13 +26,14 @@ class _ViewProductPageState extends State<ViewProductPage> {
           }),
         );
   }
-  /* @override
+
+  @override
   void initState() {
     super.initState();
     setState(() {});
     //getData();
   }
-*/
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -44,7 +46,7 @@ class _ViewProductPageState extends State<ViewProductPage> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-           /* MaterialButton(
+            /* MaterialButton(
               onPressed: () {},
               color: Colors.deepPurple,
               child: Text('Products'),
@@ -53,24 +55,38 @@ class _ViewProductPageState extends State<ViewProductPage> {
               child: FutureBuilder(
                 future: getDocProd(),
                 builder: (context, snapshot) {
+                    Map<String, dynamic> data = snapshot.data?.data() != null
+              ? snapshot.data!.data()! as Map<String, dynamic>
+              : <String, dynamic>{};
                   return ListView.builder(
-                    
-                  itemCount: prod.length,
+                    itemCount: prod.length,
                     itemBuilder: (context, index) {
-                      return ListTile(
-                        
-          leading: IconButton(
-                  onPressed: (){
-  
-                       }, 
-                       icon: const Icon(Icons.edit),),
-          
-                          title: GetProductName(salma: prod[index]));
-                  
-                 
+                      return Container(
+                        child: Column(
+                          children: <Widget>[  ElevatedButton(
+                              onPressed: () {},
+                              child: Row(
+                                mainAxisSize: MainAxisSize.min,
+                                children: [
+                                  Text('Product Number ${data['id']}\n'), // <-- Text
+                                  SizedBox(
+                                    width: 2,
+                                  ),
+                                  Icon(
+                                    // <-- Icon
+                                    Icons.edit,
+                                    size: 10.0,
+                                  ),
+                                ],
+                              ),
+                            ),
+                            ListTile(title: GetProductName(salma: prod[index])),
+                         
+                          ],
+                        ),
+                      );
                     },
                   );
-                   
                 },
               ),
             ),
