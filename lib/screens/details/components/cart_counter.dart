@@ -26,7 +26,7 @@ class _CartCounterState extends State<CartCounter> {
             press: () {
               if (numofItems > 1) {
                 setState(() {
-                  numofItems--;
+                  numofItems -= 1;
                 });
               }
             }),
@@ -41,7 +41,7 @@ class _CartCounterState extends State<CartCounter> {
             icon: Icons.add,
             press: () {
               setState(() {
-                numofItems++;
+                numofItems += 1;
               });
             })
       ],
