@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:sahar_mob_app/pages/navbar.dart';
 import 'package:sahar_mob_app/utils/color.dart';
-import 'details_page.dart';
+import 'gallery_details_page.dart';
 
 List<ImageDetails> _images = [
   ImageDetails(

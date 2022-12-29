@@ -1,4 +1,4 @@
-import 'package:flutter/foundation.dart';
+/*import 'package:flutter/foundation.dart';
 import 'package:sahar_mob_app/db/products.dart';
 import 'package:sahar_mob_app/models/ProductModel.dart';
 
@@ -19,4 +19,4 @@ class AppProvider with ChangeNotifier {
     _sproducts = await _productService.getsaleProducts();
     notifyListeners();
   }
-}
+}*/
