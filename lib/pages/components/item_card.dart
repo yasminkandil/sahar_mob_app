@@ -6,12 +6,10 @@ import 'package:sahar_mob_app/product_powerbank.dart';
 import 'package:sahar_mob_app/screens/details/details_screen.dart';
 
 class Itemcard extends StatelessWidget {
-  final Product product;
   final Function press;
   final String salma;
   const Itemcard({
     required this.salma,
-    required this.product,
     required this.press,
   });
 
@@ -48,7 +46,9 @@ class Itemcard extends StatelessWidget {
                       decoration: BoxDecoration(
                           color: Colors.black,
                           borderRadius: BorderRadius.circular(16)),
-                      //child: Image.asset(product.image.toString()),
+                      child: Image(
+                          fit: BoxFit.fitWidth,
+                          image: NetworkImage("${data["image"]}")),
                     ),
                   ),
                   Padding(

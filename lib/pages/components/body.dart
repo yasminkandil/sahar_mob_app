@@ -47,7 +47,6 @@ class _BodyState extends State<Body> {
                             crossAxisCount: 2, childAspectRatio: 0.75),
                     itemBuilder: (context, index) => Itemcard(
                       salma: prod[index],
-                      product: product![index],
                       press: () => Navigator.push(
                           context,
                           MaterialPageRoute(
