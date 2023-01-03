@@ -38,10 +38,11 @@ class HomeNavbar extends State<Navigation_bar> {
           IconButton(
             onPressed: () {
               // method to show the search bar
-             showSearch(
-                context: context, delegate:
-               CustomSearchDelegate()
-              );
+                //context: context, delegate:
+ Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => FirebaseSearchScreen()),
+            );            
             },
             icon: const Icon(Icons.search),
           ),
@@ -55,10 +56,7 @@ class HomeNavbar extends State<Navigation_bar> {
             IconButton(
             onPressed: () {
               // method to show the search bar
-             showSearch(
-                context: context, delegate:
-               CustomSearchDelegate()
-              );
+            
             },
             icon: const Icon(Icons.shopping_bag),
           )
@@ -73,6 +71,7 @@ class HomeNavbar extends State<Navigation_bar> {
         child: SingleChildScrollView(
             child: Container(
           child: Column(children: [
+            // Malhashh lazmaa walla ehhh!!!!!!!!
             MyHeaderDrawer(),
             MyDrawerList(),
           ]),
