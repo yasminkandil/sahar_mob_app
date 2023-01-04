@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/container.dart';
@@ -16,6 +17,18 @@ class AddGallery extends StatefulWidget {
 
   @override
   State<AddGallery> createState() => _AddGalleryState();
+}
+
+Future addgalleryDetails(
+  String GImage,
+) async {
+  await FirebaseFirestore.instance.collection('gallery').doc().set(
+    {
+      'imagePath': GImage,
+    },
+  );
+
+  print('NEW USER REGISTERED WITH ID:');
 }
 
 class _AddGalleryState extends State<AddGallery> {
@@ -125,6 +138,7 @@ class _AddGalleryState extends State<AddGallery> {
                           ),
                           onPressed: () {
                             uploadImage();
+                            addgalleryDetails(greyimage);
                           },
                         )),
                   )

@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:sahar_mob_app/pages/edit_account.dart';
+import 'package:sahar_mob_app/pages/edit_product.dart';
 import 'package:sahar_mob_app/read%20data/get_product_name.dart';
 import 'package:sahar_mob_app/utils/color.dart';
 import 'package:sahar_mob_app/widgets/header_container.dart';
@@ -55,20 +56,31 @@ class _ViewProductPageState extends State<ViewProductPage> {
               child: FutureBuilder(
                 future: getDocProd(),
                 builder: (context, snapshot) {
-                    Map<String, dynamic> data = snapshot.data?.data() != null
-              ? snapshot.data!.data()! as Map<String, dynamic>
-              : <String, dynamic>{};
+                  Map<String, dynamic> data = snapshot.data?.data() != null
+                      ? snapshot.data!.data()! as Map<String, dynamic>
+                      : <String, dynamic>{};
                   return ListView.builder(
                     itemCount: prod.length,
                     itemBuilder: (context, index) {
                       return Container(
                         child: Column(
-                          children: <Widget>[  ElevatedButton(
-                              onPressed: () {},
+                          children: <Widget>[
+                            ElevatedButton(
+                              onPressed: () {
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) => EditProductPage(
+                                      salma: prod[index],
+                                    ),
+                                  ),
+                                );
+                              },
                               child: Row(
                                 mainAxisSize: MainAxisSize.min,
                                 children: [
-                                  Text('Product Number ${data['id']}\n'), // <-- Text
+                                  Text(
+                                      'Product Number ${prod[index]}\n'), // <-- Text
                                   SizedBox(
                                     width: 2,
                                   ),
@@ -81,7 +93,6 @@ class _ViewProductPageState extends State<ViewProductPage> {
                               ),
                             ),
                             ListTile(title: GetProductName(salma: prod[index])),
-                         
                           ],
                         ),
                       );

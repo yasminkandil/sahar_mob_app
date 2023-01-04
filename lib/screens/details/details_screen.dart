@@ -3,6 +3,7 @@ import 'package:flutter/src/widgets/container.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:sahar_mob_app/product_powerbank.dart';
 import 'package:sahar_mob_app/screens/details/components/body.dart';
+import 'package:sahar_mob_app/utils/color.dart';
 
 class DetailScreen extends StatelessWidget {
   final String salma;
@@ -11,7 +12,7 @@ class DetailScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.red,
+      backgroundColor: GreyLightColors,
       appBar: buildAppBar(context),
       body: Body(
         salma: salma,
@@ -21,7 +22,7 @@ class DetailScreen extends StatelessWidget {
 
   AppBar buildAppBar(BuildContext context) {
     return AppBar(
-      backgroundColor: Colors.red,
+      backgroundColor: GreyLightColors,
       elevation: 0,
       leading: IconButton(
         onPressed: () {
