@@ -1,6 +1,7 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:sahar_mob_app/pages/home_page.dart';
 
 import 'package:sahar_mob_app/pages/navbar.dart';
 
@@ -48,7 +49,7 @@ class _HomePageState extends State<HomePage> {
         future: _initializeFirebase(),
         builder: ((context, snapshot) {
           if (snapshot.connectionState == ConnectionState.done) {
-            return Navigation_bar();
+            return MyHomePage();
           }
           return const Center(
             child: CircularProgressIndicator(),

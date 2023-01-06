@@ -8,6 +8,8 @@ import 'package:sahar_mob_app/pages/admin.dart';
 
 import 'package:sahar_mob_app/utils/color.dart';
 import 'package:sahar_mob_app/widgets/btn_widget.dart';
+
+import '../widgets/textInput.dart';
 //import 'package:sahar_mob_app/widgets/header_container.dart';
 
 class AddQualityPage extends StatefulWidget {
@@ -63,7 +65,7 @@ class _AddQualityPageState extends State<AddQualityPage> {
                 child: Column(
                   mainAxisSize: MainAxisSize.max,
                   children: <Widget>[
-                    _textInput(
+                    TextInput(
                         controller: _nameController,
                         hint: "Quality",
                         icon: Icons.category),
@@ -96,28 +98,6 @@ class _AddQualityPageState extends State<AddQualityPage> {
               ),
             )
           ],
-        ),
-      ),
-    );
-  }
-
-  Widget _textInput({controller, hint, icon}) {
-    return Container(
-      margin: EdgeInsets.only(top: 8),
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.all(Radius.circular(20)),
-        color: Colors.white,
-      ),
-      padding: EdgeInsets.only(left: 10),
-      child: TextFormField(
-        controller: controller,
-        decoration: InputDecoration(
-          border: InputBorder.none,
-          hintText: hint,
-          prefixIcon: Icon(
-            icon,
-            color: Color.fromARGB(255, 249, 118, 3),
-          ),
         ),
       ),
     );

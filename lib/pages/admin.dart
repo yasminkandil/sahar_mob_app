@@ -7,6 +7,7 @@ import 'package:sahar_mob_app/pages/add_product.dart';
 import 'package:sahar_mob_app/pages/add_quality.dart';
 import 'package:sahar_mob_app/pages/orders_admin.dart';
 
+import 'package:sahar_mob_app/pages/users_admin.dart';
 import 'package:sahar_mob_app/pages/view_product.dart';
 import 'package:sahar_mob_app/pages/products_all.dart';
 import 'package:sahar_mob_app/utils/color.dart';
@@ -207,7 +208,7 @@ class _AdminState extends State<Admin> {
         return ListView(
           children: <Widget>[
             ListTile(
-                leading: Icon(Icons.add),
+                leading: Icon(Icons.add_circle_outline),
                 title: Text("Add product"),
                 onTap: () => Navigator.push(
                       context,
@@ -215,7 +216,7 @@ class _AdminState extends State<Admin> {
                     )),
             Divider(),
             ListTile(
-              leading: Icon(Icons.change_history),
+              leading: Icon(Icons.library_books),
               title: Text("Products list"),
               onTap: () => Navigator.push(
                   context,
@@ -224,7 +225,7 @@ class _AdminState extends State<Admin> {
             ),
             Divider(),
             ListTile(
-                leading: Icon(Icons.add_circle),
+                leading: Icon(Icons.add_circle_outline),
                 title: Text("Add category"),
                 onTap: () => Navigator.push(
                       context,
@@ -232,7 +233,7 @@ class _AdminState extends State<Admin> {
                     )),
             Divider(),
             ListTile(
-              leading: Icon(Icons.category),
+              leading: Icon(Icons.library_books),
               title: Text("Category list"),
               onTap: () {},
             ),
@@ -280,7 +281,7 @@ class _AdminState extends State<Admin> {
             ),
             Divider(),
             ListTile(
-                leading: Icon(Icons.date_range),
+                leading: Icon(Icons.add_circle_outline),
                 title: Text("Add in gallery"),
                 onTap: () => Navigator.push(
                       context,
@@ -293,6 +294,14 @@ class _AdminState extends State<Admin> {
                 onTap: () => Navigator.push(
                       context,
                       MaterialPageRoute(builder: (context) => ViewOrdersPage()),
+                    )),
+            Divider(),
+            ListTile(
+                leading: Icon(Icons.library_books),
+                title: Text("Users"),
+                onTap: () => Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => ViewUsersPage()),
                     )),
           ],
         );
