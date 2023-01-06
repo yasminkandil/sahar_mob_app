@@ -6,7 +6,7 @@ import 'package:sahar_mob_app/pages/add_offer.dart';
 import 'package:sahar_mob_app/pages/add_product.dart';
 import 'package:sahar_mob_app/pages/add_quality.dart';
 import 'package:sahar_mob_app/pages/orders_admin.dart';
-import 'package:sahar_mob_app/pages/products_powerbank.dart';
+
 import 'package:sahar_mob_app/pages/view_product.dart';
 import 'package:sahar_mob_app/pages/products_all.dart';
 import 'package:sahar_mob_app/utils/color.dart';
