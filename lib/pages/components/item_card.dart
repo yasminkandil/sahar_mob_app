@@ -44,7 +44,7 @@ class Itemcard extends StatelessWidget {
                       height: 180,
                       width: 160,
                       decoration: BoxDecoration(
-                          color: Colors.black,
+                          color: Color.fromARGB(255, 103, 103, 103),
                           borderRadius: BorderRadius.circular(16)),
                       child: Image(
                           fit: BoxFit.fitWidth,

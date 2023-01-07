@@ -10,7 +10,7 @@ import 'package:sahar_mob_app/admin/view_categories.dart';
 import 'package:sahar_mob_app/admin/view_colors.dart';
 import 'package:sahar_mob_app/admin/view_offers.dart';
 import 'package:sahar_mob_app/admin/view_qualties.dart';
-import 'package:sahar_mob_app/pages/products_powerbank.dart';
+//import 'package:sahar_mob_app/pages/products_powerbank.dart';
 import 'package:sahar_mob_app/admin/users_admin.dart';
 import 'package:sahar_mob_app/admin/view_product.dart';
 import 'package:sahar_mob_app/pages/products_all.dart';

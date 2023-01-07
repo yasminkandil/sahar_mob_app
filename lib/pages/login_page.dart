@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:sahar_mob_app/models/auth_service.dart';
 import 'package:sahar_mob_app/admin/admin.dart';
 import 'package:sahar_mob_app/pages/forgot_pass.dart';
-import 'package:sahar_mob_app/pages/products_powerbank.dart';
+
 import 'package:sahar_mob_app/pages/regi_page.dart';
 import 'package:sahar_mob_app/utils/color.dart';
 import 'package:sahar_mob_app/widgets/btn_widget.dart';
