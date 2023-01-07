@@ -3,7 +3,7 @@ import 'dart:ui';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:sahar_mob_app/pages/admin.dart';
+import 'package:sahar_mob_app/admin/admin.dart';
 //import 'package:image_picker/image_picker.dart';
 
 import 'package:sahar_mob_app/utils/color.dart';

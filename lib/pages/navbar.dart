@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:sahar_mob_app/pages/admin.dart';
+import 'package:sahar_mob_app/admin/admin.dart';
 import 'package:sahar_mob_app/pages/cart.dart';
 import 'package:sahar_mob_app/pages/category.dart';
 import 'package:sahar_mob_app/pages/checkout.dart';
@@ -34,29 +34,27 @@ class HomeNavbar extends State<Navigation_bar> {
       appBar: AppBar(
         backgroundColor: GreyColors,
         title: Text("Menu"),
- actions: [
+        actions: [
           IconButton(
             onPressed: () {
               // method to show the search bar
-                //context: context, delegate:
- Navigator.push(
-              context,
-              MaterialPageRoute(builder: (context) => FirebaseSearchScreen()),
-            );            
+              //context: context, delegate:
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => FirebaseSearchScreen()),
+              );
             },
             icon: const Icon(Icons.search),
           ),
-            IconButton(
+          IconButton(
             onPressed: () {
               // method to show the search bar
-            
             },
             icon: const Icon(Icons.notifications),
           ),
-            IconButton(
+          IconButton(
             onPressed: () {
               // method to show the search bar
-            
             },
             icon: const Icon(Icons.shopping_bag),
           )
@@ -77,9 +75,8 @@ class HomeNavbar extends State<Navigation_bar> {
           ]),
         )),
       ),
-     
-  );
-     // TODO: implement build
+    );
+    // TODO: implement build
   }
 
   Widget MyDrawerList() {

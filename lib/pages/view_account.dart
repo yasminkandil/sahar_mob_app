@@ -240,7 +240,7 @@ class _ViewAccountPageState extends State<ViewAccountPage> {
                                   SizedBox(
                                     height: 10.0,
                                   ),
-                                  ButtonWidget(
+                                  /*ButtonWidget(
                                     btnText: "Edit account",
                                     onClick: () {
                                       updateUserDetails(
@@ -259,25 +259,51 @@ class _ViewAccountPageState extends State<ViewAccountPage> {
                                                       Navigation_bar()));
                                         },
                                       );
-                                      /* final updateUser = FirebaseFirestore
-                                          .instance
-                                          .collection('users')
-                                          .doc();
-                                      updateUser.update(
-                                        {
-                                          'firstname':
-                                              _fisrtController.text.trim(),
-                                          'lastname':
-                                              _lastController.text.trim(),
-                                          'email': _emailController.text.trim(),
-                                          'mobile': int.parse(
-                                              _mobileController.text.trim()),
-                                          'address':
-                                              _addrController.text.trim(),
-                                          'image': '${data['image']}',
-                                        },
-                                      );*/
+                                     
                                     },
+                                  ),*/
+                                  ListTile(
+                                    title: Row(
+                                      children: <Widget>[
+                                        Expanded(
+                                          child: ButtonWidget2(
+                                            btnText: "Edit Account",
+                                            onClick: () {
+                                              updateUserDetails(
+                                                      _fisrtController.text,
+                                                      _lastController.text,
+                                                      _addrController.text,
+                                                      _mobileController.text,
+                                                      '${data['image']}')
+                                                  .then(
+                                                (value) {
+                                                  print("updated account");
+                                                  Navigator.push(
+                                                      context,
+                                                      MaterialPageRoute(
+                                                          builder: (context) =>
+                                                              Navigation_bar()));
+                                                },
+                                              );
+                                            },
+                                          ),
+                                        ),
+                                        Expanded(
+                                          child: ButtonWidgetdelete(
+                                            btnText: "Delete Account",
+                                            onClick: () {
+                                              final deleteprod =
+                                                  FirebaseFirestore.instance
+                                                      .collection('users')
+                                                      .doc(userId)
+                                                      .delete()
+                                                      .then((value) => Navigator
+                                                          .pop(context));
+                                            },
+                                          ),
+                                        ),
+                                      ],
+                                    ),
                                   ),
                                 ]),
                               ),

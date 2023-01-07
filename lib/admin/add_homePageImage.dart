@@ -8,7 +8,7 @@ import 'package:flutter/src/widgets/framework.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:path/path.dart' as p;
-import 'package:sahar_mob_app/pages/admin.dart';
+import 'package:sahar_mob_app/admin/admin.dart';
 import 'package:sahar_mob_app/utils/color.dart';
 import 'package:sahar_mob_app/widgets/header_container.dart';
 
@@ -22,13 +22,13 @@ class AddGallery extends StatefulWidget {
 Future addgalleryDetails(
   String GImage,
 ) async {
-  await FirebaseFirestore.instance.collection('gallery').doc().set(
+  await FirebaseFirestore.instance.collection('homePage').doc().set(
     {
-      'imagePath': GImage,
+      'image': GImage,
     },
   );
 
-  print('NEW USER REGISTERED WITH ID:');
+  print('NEW IMAGE ADDED');
 }
 
 class _AddGalleryState extends State<AddGallery> {
@@ -99,7 +99,7 @@ class _AddGalleryState extends State<AddGallery> {
         padding: EdgeInsets.only(bottom: 20),
         child: Column(
           children: <Widget>[
-            HeaderContainer("Register"),
+            HeaderContainer("Add Images To HomePage"),
             Center(
               child: Stack(
                 children: [

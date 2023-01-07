@@ -1,26 +1,30 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:sahar_mob_app/admin/add_offer.dart';
+import 'package:sahar_mob_app/admin/add_product.dart';
+import 'package:sahar_mob_app/admin/edit_offer.dart';
 import 'package:sahar_mob_app/pages/edit_account.dart';
-import 'package:sahar_mob_app/pages/edit_product.dart';
+import 'package:sahar_mob_app/admin/edit_product.dart';
+import 'package:sahar_mob_app/read%20data/get_offers.dart';
 import 'package:sahar_mob_app/read%20data/get_product_name.dart';
 import 'package:sahar_mob_app/utils/color.dart';
 import 'package:sahar_mob_app/widgets/header_container.dart';
 
-class ViewProductPage extends StatefulWidget {
-  const ViewProductPage({super.key});
+class ViewOffersPage extends StatefulWidget {
+  const ViewOffersPage({super.key});
 
   @override
-  _ViewProductPageState createState() => _ViewProductPageState();
+  _ViewOffersPageState createState() => _ViewOffersPageState();
 }
 
-class _ViewProductPageState extends State<ViewProductPage> {
-  final pro = FirebaseFirestore.instance.collection('products');
+class _ViewOffersPageState extends State<ViewOffersPage> {
+  final pro = FirebaseFirestore.instance.collection('offers');
 
   List<String> prod = [];
 
   Future getDocProd() async {
-    await FirebaseFirestore.instance.collection('products').get().then(
+    await FirebaseFirestore.instance.collection('offers').get().then(
           (snapshot) => snapshot.docs.forEach((document) {
             print(document.reference);
             prod.add(document.reference.id);
@@ -39,7 +43,7 @@ class _ViewProductPageState extends State<ViewProductPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Product List'),
+        title: Text('Offers List'),
         backgroundColor: GreyColors,
         centerTitle: true,
       ),
@@ -47,11 +51,6 @@ class _ViewProductPageState extends State<ViewProductPage> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            /* MaterialButton(
-              onPressed: () {},
-              color: Colors.deepPurple,
-              child: Text('Products'),
-            ),*/
             Expanded(
               child: FutureBuilder(
                 future: getDocProd(),
@@ -66,12 +65,15 @@ class _ViewProductPageState extends State<ViewProductPage> {
                         child: Column(
                           children: <Widget>[
                             ElevatedButton(
+                              style: ElevatedButton.styleFrom(
+                                backgroundColor: GreyLightColors,
+                              ),
                               onPressed: () {
                                 Navigator.push(
                                   context,
                                   MaterialPageRoute(
-                                    builder: (context) => EditProductPage(
-                                      salma: prod[index],
+                                    builder: (context) => EditOfferPage(
+                                      offer: prod[index],
                                     ),
                                   ),
                                 );
@@ -79,20 +81,16 @@ class _ViewProductPageState extends State<ViewProductPage> {
                               child: Row(
                                 mainAxisSize: MainAxisSize.min,
                                 children: [
-                                  Text(
-                                      'Product Number ${prod[index]}\n'), // <-- Text
-                                  SizedBox(
-                                    width: 2,
-                                  ),
+                                  Text("Edit "),
                                   Icon(
                                     // <-- Icon
                                     Icons.edit,
-                                    size: 10.0,
+                                    size: 15.0,
                                   ),
                                 ],
                               ),
                             ),
-                            ListTile(title: GetProductName(salma: prod[index])),
+                            ListTile(title: GetOffersPage(offer: prod[index])),
                           ],
                         ),
                       );
@@ -101,6 +99,22 @@ class _ViewProductPageState extends State<ViewProductPage> {
                 },
               ),
             ),
+            Center(
+              child: InkWell(
+                child: RichText(
+                  text: TextSpan(children: [
+                    TextSpan(
+                        text: "To add new offer click ",
+                        style: TextStyle(color: Colors.black, fontSize: 25)),
+                    TextSpan(
+                        text: "here",
+                        style: TextStyle(color: orangeColors, fontSize: 25)),
+                  ]),
+                ),
+                onTap: () => Navigator.of(context).push(
+                    MaterialPageRoute(builder: (context) => AddOfferPage())),
+              ),
+            )
           ],
         ),
       ),
