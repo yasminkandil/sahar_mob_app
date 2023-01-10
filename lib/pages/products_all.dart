@@ -7,13 +7,15 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:sahar_mob_app/utils/color.dart';
 import 'package:sahar_mob_app/pages/components/body.dart';
 
+import '../widgets/app_bar.dart';
+
 class Products extends StatelessWidget {
   const Products({super.key});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: buildAppBar(context),
+      appBar: CustomAppBar(text: "Shop"),
       body: Body(),
     );
   }

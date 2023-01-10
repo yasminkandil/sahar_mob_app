@@ -9,6 +9,7 @@ import 'package:sahar_mob_app/admin/admin.dart';
 import 'package:sahar_mob_app/utils/color.dart';
 import 'package:sahar_mob_app/widgets/btn_widget.dart';
 
+import '../widgets/app_bar.dart';
 import '../widgets/textInput.dart';
 //import 'package:sahar_mob_app/widgets/header_container.dart';
 
@@ -28,78 +29,11 @@ class _AddColorPageState extends State<AddColorPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text('Add Color'),
-        backgroundColor: GreyColors,
-        leading: IconButton(
-          icon: Icon(
-            Icons.arrow_back,
-            color: orangeColors,
-          ),
-          onPressed: () {
-            Navigator.push(
-              context,
-              MaterialPageRoute(builder: (context) {
-                return Admin();
-              }),
-            );
-          },
-        ),
-        actions: [
-          IconButton(
-              icon: Icon(
-                Icons.settings,
-                color: GreyColors,
-              ),
-              onPressed: () {})
-        ],
-      ),
+      appBar: CustomAppBar(text: "Add Color"),
       body: Container(
         padding: EdgeInsets.only(top: 20, bottom: 20),
         child: Column(
           children: <Widget>[
-            // HeaderContainer("Register"),
-            Center(
-              child: Stack(
-                children: [
-                  Container(
-                    width: 140,
-                    height: 110,
-                    decoration: BoxDecoration(
-                        border: Border.all(width: 4, color: Colors.white),
-                        boxShadow: [
-                          BoxShadow(
-                              spreadRadius: 2,
-                              blurRadius: 10,
-                              color: Colors.black.withOpacity(0.1))
-                        ],
-                        shape: BoxShape.circle,
-                        image: DecorationImage(
-                            fit: BoxFit.cover,
-                            image: NetworkImage(
-                                'https://www.google.com/search?q=profile+photo+&tbm=isch&ved=2ahUKEwis27rOz_76AhVFexoKHU2PBGoQ2-cCegQIABAA&oq=profile+photo+&gs_lcp=CgNpbWcQAzIECAAQQzIFCAAQgAQyBQgAEIAEMgUIABCABDIFCAAQgAQyBQgAEIAEMgUIABCABDIFCAAQgAQyBQgAEIAEMgUIABCABDoGCAAQBxAeULwEWLwEYKoIaABwAHgAgAGZAYgBkwKSAQMwLjKYAQCgAQGqAQtnd3Mtd2l6LWltZ8ABAQ&sclient=img&ei=d4lZY-zDCsX2ac2ektAG&bih=657&biw=1366#imgrc=nfkyptoYx2OzJM'))),
-                  ),
-                  Positioned(
-                    right: 0,
-                    bottom: 0,
-                    child: Container(
-                        height: 30,
-                        width: 30,
-                        decoration: BoxDecoration(
-                            shape: BoxShape.circle,
-                            border: Border.all(
-                              width: 2,
-                              color: Colors.white,
-                            ),
-                            color: Colors.orange),
-                        child: Icon(
-                          Icons.upload,
-                          color: Colors.white,
-                        )),
-                  )
-                ],
-              ),
-            ),
             Expanded(
               flex: 1,
               child: Container(

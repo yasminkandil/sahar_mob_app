@@ -4,6 +4,8 @@ import 'package:sahar_mob_app/utils/color.dart';
 import 'package:sahar_mob_app/widgets/btn_widget.dart';
 import 'package:sahar_mob_app/widgets/header_container.dart';
 
+import '../widgets/app_bar.dart';
+
 class checkout extends StatefulWidget {
   @override
   _CheckoutState createState() => _CheckoutState();
@@ -13,6 +15,7 @@ class _CheckoutState extends State<checkout> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: CustomAppBar(text: "Checkout"),
       body: Container(
         padding: EdgeInsets.only(bottom: 30),
         child: Column(

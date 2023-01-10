@@ -9,6 +9,7 @@ import 'package:sahar_mob_app/admin/admin.dart';
 import 'package:sahar_mob_app/utils/color.dart';
 import 'package:sahar_mob_app/widgets/btn_widget.dart';
 
+import '../widgets/app_bar.dart';
 import '../widgets/textInput.dart';
 //import 'package:sahar_mob_app/widgets/header_container.dart';
 
@@ -28,32 +29,7 @@ class _AddQualityPageState extends State<AddQualityPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text('Add Quality'),
-        backgroundColor: GreyColors,
-        leading: IconButton(
-          icon: Icon(
-            Icons.arrow_back,
-            color: orangeColors,
-          ),
-          onPressed: () {
-            Navigator.push(
-              context,
-              MaterialPageRoute(builder: (context) {
-                return Admin();
-              }),
-            );
-          },
-        ),
-        actions: [
-          IconButton(
-              icon: Icon(
-                Icons.settings,
-                color: GreyColors,
-              ),
-              onPressed: () {})
-        ],
-      ),
+      appBar: CustomAppBar(text: "Add Quality"),
       body: Container(
         padding: EdgeInsets.only(top: 20, bottom: 20),
         child: Column(

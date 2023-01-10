@@ -7,6 +7,8 @@ import 'package:sahar_mob_app/models/product_model.dart';
 import 'package:sahar_mob_app/utils/color.dart';
 import 'package:sahar_mob_app/widgets/btn_widget.dart';
 
+import '../widgets/app_bar.dart';
+
 class OrderDetailsPage extends StatelessWidget {
   final String orderss;
   OrderDetailsPage({required this.orderss});
@@ -27,27 +29,7 @@ class OrderDetailsPage extends StatelessWidget {
               ? snapshot.data!.data()! as Map<String, dynamic>
               : <String, dynamic>{};
           return Scaffold(
-            appBar: AppBar(
-              title: Text('Orders Details'),
-              backgroundColor: GreyColors,
-              leading: IconButton(
-                icon: Icon(
-                  Icons.arrow_back,
-                  color: orangeColors,
-                ),
-                onPressed: () {
-                  Navigator.pop(context);
-                },
-              ),
-              actions: [
-                IconButton(
-                    icon: Icon(
-                      Icons.settings,
-                      color: GreyColors,
-                    ),
-                    onPressed: () {})
-              ],
-            ),
+            appBar: CustomAppBar(text: "Order Details"),
             //backgroundColor: Color.fromARGB(255, 103, 101, 101),
             body: Padding(
               padding: const EdgeInsets.all(

@@ -10,6 +10,7 @@ import 'package:permission_handler/permission_handler.dart';
 import 'package:path/path.dart' as p;
 import 'package:sahar_mob_app/admin/admin.dart';
 import 'package:sahar_mob_app/utils/color.dart';
+import 'package:sahar_mob_app/widgets/app_bar.dart';
 import 'package:sahar_mob_app/widgets/header_container.dart';
 
 class AddGallery extends StatefulWidget {
@@ -79,22 +80,7 @@ class _AddGalleryState extends State<AddGallery> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        backgroundColor: GreyColors,
-        leading: IconButton(
-            icon: Icon(
-              Icons.arrow_back,
-              color: orangeColors,
-            ),
-            onPressed: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(builder: (context) {
-                  return Admin();
-                }),
-              );
-            }),
-      ),
+      appBar: CustomAppBar(text: "Add Gallery Image"),
       body: Container(
         padding: EdgeInsets.only(bottom: 20),
         child: Column(

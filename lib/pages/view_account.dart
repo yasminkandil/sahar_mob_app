@@ -1,12 +1,20 @@
+import 'dart:io';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
+import 'package:image_picker/image_picker.dart';
+import 'package:permission_handler/permission_handler.dart';
+import 'package:sahar_mob_app/models/user_model.dart';
 import 'package:sahar_mob_app/pages/edit_account.dart';
 import 'package:sahar_mob_app/pages/navbar.dart';
 import 'package:sahar_mob_app/pages/regi_page.dart';
 import 'package:sahar_mob_app/utils/color.dart';
 import 'package:sahar_mob_app/widgets/header_container.dart';
-
+import 'package:sahar_mob_app/widgets/reg_textinput.dart';
+import 'package:path/path.dart' as p;
+import '../widgets/app_bar.dart';
 import '../widgets/btn_widget.dart';
 
 class ViewAccountPage extends StatefulWidget {
@@ -18,30 +26,52 @@ class ViewAccountPage extends StatefulWidget {
 
 final user = FirebaseAuth.instance.currentUser!;
 String userId = user.uid;
+Future updateUserDetails(String firstname, String lastname, String useraddress,
+    String userPhoneNumber, String userImage) async {
+  final updateUser = FirebaseFirestore.instance.collection('users').doc(userId);
+  updateUser.update(
+    {
+      'firstname': firstname.trim(),
+      'lastname': lastname.trim(),
+      'mobile': int.parse(userPhoneNumber.trim()),
+      'address': useraddress.trim(),
+      'image': userImage,
+    },
+  );
+
+  print('USER UPDATED');
+}
 
 class _ViewAccountPageState extends State<ViewAccountPage> {
-  final _emailController = TextEditingController();
-  final _fisrtController = TextEditingController();
-  final _lastController = TextEditingController();
-  final _mobileController = TextEditingController();
-  final _addrController = TextEditingController();
-  //final userr = FirebaseAuth.instance.currentUser!;
-  //String myDocId = userr.uid;
-  Future updateUserDetails(String firstname, String lastname,
-      String useraddress, String userPhoneNumber, String userImage) async {
-    final updateUser =
-        FirebaseFirestore.instance.collection('users').doc(userId);
-    updateUser.update(
-      {
-        'firstname': firstname.trim(),
-        'lastname': lastname.trim(),
-        'mobile': int.parse(userPhoneNumber.trim()),
-        'address': useraddress.trim(),
-        'image': userImage,
-      },
-    );
+  uploadImage() async {
+    final _storage = FirebaseStorage.instance;
+    final _picker = ImagePicker();
+    PickedFile? image;
 
-    print('NEW USER REGISTERED WITH ID:');
+    //Check Permissions
+    await Permission.photos.request();
+
+    var permissionStatus = await Permission.photos.status;
+
+    //Select Image
+    image = await _picker.getImage(source: ImageSource.gallery);
+    var file = File(image!.path);
+
+    if (image != null) {
+      //Upload to Firebase
+      var snapshot =
+          await _storage.ref().child(p.basename(image.path)).putFile(file);
+
+      downloadUrl = await snapshot.ref.getDownloadURL();
+
+      setState(() {
+        imageUrl = downloadUrl;
+        greyimage = imageUrl;
+        setImage(imageUrl);
+      });
+    } else {
+      print('No Path Received');
+    }
   }
 
   @override
@@ -49,32 +79,7 @@ class _ViewAccountPageState extends State<ViewAccountPage> {
     final userr = FirebaseAuth.instance.currentUser!;
 
     return Scaffold(
-      appBar: AppBar(
-        title: Text('Your Account'),
-        backgroundColor: GreyColors,
-        leading: IconButton(
-          icon: Icon(
-            Icons.arrow_back,
-            color: orangeColors,
-          ),
-          onPressed: () {
-            Navigator.push(
-              context,
-              MaterialPageRoute(builder: (context) {
-                return Navigation_bar();
-              }),
-            );
-          },
-        ),
-        actions: [
-          IconButton(
-              icon: Icon(
-                Icons.settings,
-                color: GreyColors,
-              ),
-              onPressed: () {})
-        ],
-      ),
+      appBar: CustomAppBar(text: "View Account"),
       body: Container(
         child: Padding(
             padding: const EdgeInsets.only(left: 10.0),
@@ -137,7 +142,7 @@ class _ViewAccountPageState extends State<ViewAccountPage> {
                                               color: Colors.white,
                                             ),
                                             onPressed: () {
-                                              //uploadImage();
+                                              uploadImage();
                                             },
                                           )),
                                     )
@@ -158,13 +163,14 @@ class _ViewAccountPageState extends State<ViewAccountPage> {
                                         fontSize: 15,
                                         fontWeight: FontWeight.bold),
                                   ),
-                                  TextFormField(
-                                    decoration: InputDecoration(
-                                        border: OutlineInputBorder(),
-
-                                        //labelText: "First Name : ",
-                                        hintText: '${data['firstname']}'),
-                                    controller: _fisrtController,
+                                  RegTextInput(
+                                    controller: fisrtController,
+                                    hint: '${data['firstname']}',
+                                    icon: Icons.person,
+                                    torf: false,
+                                    errormssg: fnameerrormssg,
+                                    regexp: aregexp,
+                                    enable: true,
                                   ),
                                   SizedBox(
                                     height: 10.0,
@@ -176,12 +182,14 @@ class _ViewAccountPageState extends State<ViewAccountPage> {
                                         fontSize: 15,
                                         fontWeight: FontWeight.bold),
                                   ),
-                                  TextFormField(
-                                    decoration: InputDecoration(
-                                        border: OutlineInputBorder(),
-                                        //   labelText: "Last Name",
-                                        hintText: '${data['lastname']}\n'),
-                                    controller: _lastController,
+                                  RegTextInput(
+                                    controller: lastController,
+                                    hint: '${data['lastname']}',
+                                    icon: Icons.person,
+                                    torf: false,
+                                    errormssg: lnameerrormssg,
+                                    regexp: aregexp,
+                                    enable: true,
                                   ),
                                   SizedBox(
                                     height: 10.0,
@@ -193,13 +201,14 @@ class _ViewAccountPageState extends State<ViewAccountPage> {
                                         fontSize: 15,
                                         fontWeight: FontWeight.bold),
                                   ),
-                                  TextFormField(
-                                    decoration: InputDecoration(
-                                        border: OutlineInputBorder(),
-                                        // labelText: "Email : ",
-                                        hintText: '${data['email']}\n'),
-                                    controller: _emailController,
-                                    enabled: false,
+                                  RegTextInput(
+                                    controller: emailController,
+                                    hint: '${data['email']}',
+                                    icon: Icons.email,
+                                    torf: false,
+                                    errormssg: emailerrormssg,
+                                    regexp: eregexp,
+                                    enable: false,
                                   ),
                                   SizedBox(
                                     height: 10.0,
@@ -211,13 +220,14 @@ class _ViewAccountPageState extends State<ViewAccountPage> {
                                         fontSize: 15,
                                         fontWeight: FontWeight.bold),
                                   ),
-                                  TextFormField(
-                                    decoration: InputDecoration(
-                                        // border: InputBorder.none,
-                                        border: OutlineInputBorder(),
-                                        //labelText: "Address",
-                                        hintText: '${data['address']}\n'),
-                                    controller: _addrController,
+                                  RegTextInput(
+                                    controller: addrController,
+                                    hint: '${data['address']}',
+                                    icon: Icons.location_city,
+                                    torf: false,
+                                    errormssg: addrerrormssg,
+                                    regexp: aregexp,
+                                    enable: true,
                                   ),
                                   SizedBox(
                                     height: 10.0,
@@ -229,39 +239,18 @@ class _ViewAccountPageState extends State<ViewAccountPage> {
                                         fontSize: 15,
                                         fontWeight: FontWeight.bold),
                                   ),
-                                  TextFormField(
-                                    decoration: InputDecoration(
-                                        // border: InputBorder.none,
-                                        border: OutlineInputBorder(),
-                                        //labelText: "Address",
-                                        hintText: '${data['mobile']}\n'),
-                                    controller: _mobileController,
+                                  RegTextInput(
+                                    controller: mobileController,
+                                    hint: '${data['mobile']}',
+                                    icon: Icons.call,
+                                    torf: false,
+                                    errormssg: mobileerrormssg,
+                                    regexp: mregexp,
+                                    enable: true,
                                   ),
                                   SizedBox(
                                     height: 10.0,
                                   ),
-                                  /*ButtonWidget(
-                                    btnText: "Edit account",
-                                    onClick: () {
-                                      updateUserDetails(
-                                              _fisrtController.text,
-                                              _lastController.text,
-                                              _addrController.text,
-                                              _mobileController.text,
-                                              '${data['image']}')
-                                          .then(
-                                        (value) {
-                                          print("updated account");
-                                          Navigator.push(
-                                              context,
-                                              MaterialPageRoute(
-                                                  builder: (context) =>
-                                                      Navigation_bar()));
-                                        },
-                                      );
-                                     
-                                    },
-                                  ),*/
                                   ListTile(
                                     title: Row(
                                       children: <Widget>[
@@ -270,10 +259,10 @@ class _ViewAccountPageState extends State<ViewAccountPage> {
                                             btnText: "Edit Account",
                                             onClick: () {
                                               updateUserDetails(
-                                                      _fisrtController.text,
-                                                      _lastController.text,
-                                                      _addrController.text,
-                                                      _mobileController.text,
+                                                      fisrtController.text,
+                                                      lastController.text,
+                                                      addrController.text,
+                                                      mobileController.text,
                                                       '${data['image']}')
                                                   .then(
                                                 (value) {

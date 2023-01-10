@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:sahar_mob_app/pages/navbar.dart';
 import 'package:sahar_mob_app/read%20data/get_gallery_data.dart';
 import 'package:sahar_mob_app/utils/color.dart';
+import '../widgets/app_bar.dart';
 import 'gallery_details_page.dart';
 
 final pro = FirebaseFirestore.instance.collection('gallery');
@@ -22,22 +23,7 @@ class gallery extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        backgroundColor: GreyColors,
-        leading: IconButton(
-            icon: Icon(
-              Icons.arrow_back,
-              color: orangeColors,
-            ),
-            onPressed: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(builder: (context) {
-                  return Navigation_bar();
-                }),
-              );
-            }),
-      ),
+      appBar: CustomAppBar(text: "Gallary"),
       backgroundColor: orangeColors,
       body: SafeArea(
         child: Column(

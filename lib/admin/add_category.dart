@@ -7,6 +7,7 @@ import 'package:sahar_mob_app/admin/admin.dart';
 //import 'package:image_picker/image_picker.dart';
 
 import 'package:sahar_mob_app/utils/color.dart';
+import 'package:sahar_mob_app/widgets/app_bar.dart';
 import 'package:sahar_mob_app/widgets/btn_widget.dart';
 
 import '../widgets/textInput.dart';
@@ -30,32 +31,7 @@ class _AddCategPageState extends State<AddCategPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text('Add Category'),
-        backgroundColor: GreyColors,
-        leading: IconButton(
-          icon: Icon(
-            Icons.arrow_back,
-            color: orangeColors,
-          ),
-          onPressed: () {
-            Navigator.push(
-              context,
-              MaterialPageRoute(builder: (context) {
-                return Admin();
-              }),
-            );
-          },
-        ),
-        actions: [
-          IconButton(
-              icon: Icon(
-                Icons.settings,
-                color: GreyColors,
-              ),
-              onPressed: () {})
-        ],
-      ),
+      appBar: CustomAppBar(text: "Add Category"),
       body: Container(
         padding: EdgeInsets.only(top: 20, bottom: 20),
         child: Column(
