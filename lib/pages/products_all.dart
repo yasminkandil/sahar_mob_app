@@ -10,13 +10,15 @@ import 'package:sahar_mob_app/pages/components/body.dart';
 import '../widgets/app_bar.dart';
 
 class Products extends StatelessWidget {
-  const Products({super.key});
-
+  Products({super.key, required this.cat});
+  String cat;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: CustomAppBar(text: "Shop"),
-      body: Body(),
+      body: Body(
+        cat: cat,
+      ),
     );
   }
 

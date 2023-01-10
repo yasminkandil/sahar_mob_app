@@ -131,7 +131,10 @@ class HomeNavbar extends State<Navigation_bar> {
           } else if (id == 3) {
             Navigator.push(
               context,
-              MaterialPageRoute(builder: (context) => Products()),
+              MaterialPageRoute(
+                  builder: (context) => Products(
+                        cat: 'Cables',
+                      )),
             );
             currentPage = Sections.Categories;
           } else if (id == 4) {
