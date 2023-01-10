@@ -12,6 +12,8 @@ import 'package:sahar_mob_app/widgets/btn_widget.dart';
 import 'package:sahar_mob_app/widgets/header_container.dart';
 import 'package:sahar_mob_app/pages/navbar.dart';
 
+import '../widgets/app_bar.dart';
+
 class LoginPage extends StatefulWidget {
   @override
   _LoginPageState createState() => _LoginPageState();
@@ -52,22 +54,7 @@ class _LoginPageState extends State<LoginPage> {
     bool obscureText = true;
     return Scaffold(
       key: _scaffoldKey,
-      appBar: AppBar(
-        backgroundColor: GreyColors,
-        leading: IconButton(
-            icon: Icon(
-              Icons.arrow_back,
-              color: orangeColors,
-            ),
-            onPressed: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(builder: (context) {
-                  return Navigation_bar();
-                }),
-              );
-            }),
-      ),
+      appBar: CustomAppBar(text: ""),
       body: Container(
         padding: const EdgeInsets.only(bottom: 30),
         child: Form(

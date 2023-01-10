@@ -11,6 +11,7 @@ import 'package:sahar_mob_app/widgets/btn_widget.dart';
 import "package:path/path.dart" as p;
 import 'package:sahar_mob_app/widgets/textInput.dart';
 import '../models/product_model.dart' as pp;
+import '../widgets/app_bar.dart';
 
 class AddProductPage extends StatefulWidget {
   @override
@@ -56,23 +57,7 @@ class _AddProductPageState extends State<AddProductPage> {
     Widget qualityy;
     Widget categoryy;
     return Scaffold(
-      appBar: AppBar(
-        title: Text('Add Product'),
-        backgroundColor: GreyColors,
-        leading: IconButton(
-            icon: Icon(
-              Icons.arrow_back,
-              color: orangeColors,
-            ),
-            onPressed: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(builder: (context) {
-                  return Admin();
-                }),
-              );
-            }),
-      ),
+      appBar: CustomAppBar(text: "Add Product"),
       body: Container(
         padding: EdgeInsets.only(bottom: 5),
         child: Column(

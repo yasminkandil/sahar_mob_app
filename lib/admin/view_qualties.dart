@@ -4,6 +4,8 @@ import 'package:sahar_mob_app/admin/add_quality.dart';
 import 'package:sahar_mob_app/read%20data/get_qualties.dart';
 import 'package:sahar_mob_app/utils/color.dart';
 
+import '../widgets/app_bar.dart';
+
 class ViewQualitiesPage extends StatefulWidget {
   const ViewQualitiesPage({super.key});
 
@@ -34,11 +36,7 @@ class _ViewQualitiesPageState extends State<ViewQualitiesPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text('Qualities List'),
-        backgroundColor: GreyColors,
-        centerTitle: true,
-      ),
+      appBar: CustomAppBar(text: "View Qualties"),
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,

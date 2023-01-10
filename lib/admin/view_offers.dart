@@ -11,6 +11,8 @@ import 'package:sahar_mob_app/read%20data/get_product_name.dart';
 import 'package:sahar_mob_app/utils/color.dart';
 import 'package:sahar_mob_app/widgets/header_container.dart';
 
+import '../widgets/app_bar.dart';
+
 class ViewOffersPage extends StatefulWidget {
   const ViewOffersPage({super.key});
 
@@ -42,11 +44,7 @@ class _ViewOffersPageState extends State<ViewOffersPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text('Offers List'),
-        backgroundColor: GreyColors,
-        centerTitle: true,
-      ),
+      appBar: CustomAppBar(text: "View Offers"),
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,

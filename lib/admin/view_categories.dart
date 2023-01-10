@@ -4,6 +4,8 @@ import 'package:sahar_mob_app/admin/add_category.dart';
 import 'package:sahar_mob_app/read%20data/get_categories.dart';
 import 'package:sahar_mob_app/utils/color.dart';
 
+import '../widgets/app_bar.dart';
+
 class ViewCategoriesPage extends StatefulWidget {
   const ViewCategoriesPage({super.key});
 
@@ -34,11 +36,7 @@ class _ViewCategoriesPageState extends State<ViewCategoriesPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text('categories List'),
-        backgroundColor: GreyColors,
-        centerTitle: true,
-      ),
+      appBar: CustomAppBar(text: "View Categories"),
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
@@ -59,6 +57,13 @@ class _ViewCategoriesPageState extends State<ViewCategoriesPage> {
                             ListTile(
                                 title:
                                     GetCategoriesPage(category: prod[index])),
+                            Divider(
+                              color: orangeColors, //color of divider
+                              height: 10, //height spacing of divider
+                              thickness: 3, //thickness of divier line
+                              indent: 25, //spacing at the start of divider
+                              endIndent: 25, //spacing at the end of divider
+                            )
                           ],
                         ),
                       );

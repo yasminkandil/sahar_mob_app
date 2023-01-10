@@ -8,6 +8,8 @@ import 'package:sahar_mob_app/read%20data/get_product_name.dart';
 import 'package:sahar_mob_app/utils/color.dart';
 import 'package:sahar_mob_app/widgets/header_container.dart';
 
+import '../widgets/app_bar.dart';
+
 class ViewProductPage extends StatefulWidget {
   const ViewProductPage({super.key});
 
@@ -39,11 +41,7 @@ class _ViewProductPageState extends State<ViewProductPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text('Product List'),
-        backgroundColor: GreyColors,
-        centerTitle: true,
-      ),
+      appBar: CustomAppBar(text: "View Products"),
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
@@ -97,6 +95,13 @@ class _ViewProductPageState extends State<ViewProductPage> {
                               ),
                             ),
                             ListTile(title: GetProductName(salma: prod[index])),
+                            Divider(
+                              color: orangeColors, //color of divider
+                              height: 10, //height spacing of divider
+                              thickness: 3, //thickness of divier line
+                              indent: 25, //spacing at the start of divider
+                              endIndent: 25, //spacing at the end of divider
+                            )
                           ],
                         ),
                       );

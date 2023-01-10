@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:sahar_mob_app/pages/navbar.dart';
 import 'package:sahar_mob_app/utils/color.dart';
 
+import '../widgets/app_bar.dart';
+
 class ContactUs extends StatefulWidget {
   @override
   ContactUsForm createState() => ContactUsForm();
@@ -12,24 +14,7 @@ class ContactUsForm extends State<ContactUs> {
   Widget build(BuildContext context) {
     // TODO: implement build
     return Scaffold(
-      appBar: AppBar(
-        title: Text('Contact Us'),
-        backgroundColor: GreyColors,
-        leading: IconButton(
-          icon: Icon(
-            Icons.arrow_back,
-            color: orangeColors,
-          ),
-          onPressed: () {
-            Navigator.push(
-              context,
-              MaterialPageRoute(builder: (context) {
-                return Navigation_bar();
-              }),
-            );
-          },
-        ),
-      ),
+      appBar: CustomAppBar(text: "Contact Us"),
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.center,
         children: <Widget>[

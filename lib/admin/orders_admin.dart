@@ -6,6 +6,7 @@ import 'package:sahar_mob_app/pages/view_order_user.dart';
 import 'package:sahar_mob_app/read%20data/get_orders.dart';
 import 'package:sahar_mob_app/utils/color.dart';
 import 'package:sahar_mob_app/widgets/header_container.dart';
+import '../widgets/app_bar.dart';
 import '../widgets/btn_widget.dart';
 
 class ViewOrdersPage extends StatelessWidget {
@@ -26,32 +27,7 @@ class ViewOrdersPage extends StatelessWidget {
   Widget build(BuildContext context) {
     // TODO: implement build
     return Scaffold(
-      appBar: AppBar(
-        title: Text('View orders'),
-        backgroundColor: GreyColors,
-        leading: IconButton(
-          icon: Icon(
-            Icons.arrow_back,
-            color: orangeColors,
-          ),
-          onPressed: () {
-            Navigator.push(
-              context,
-              MaterialPageRoute(builder: (context) {
-                return Admin();
-              }),
-            );
-          },
-        ),
-        actions: [
-          IconButton(
-              icon: Icon(
-                Icons.settings,
-                color: GreyColors,
-              ),
-              onPressed: () {})
-        ],
-      ),
+      appBar: CustomAppBar(text: "Orders List"),
       body: FutureBuilder(
         future: getDocorder(),
         builder: (context, snapshot) {
@@ -86,7 +62,7 @@ class ViewOrdersPage extends StatelessWidget {
                             Icons.remove_red_eye,
                             size: 20.0,
                           ),
-                          Text('View Order ${order[index]}\n'), // <-- Text
+                          Text('View Order ${order[index]}'), // <-- Text
                           SizedBox(
                             width: 2,
                           ),
@@ -94,6 +70,13 @@ class ViewOrdersPage extends StatelessWidget {
                       ),
                     ),
                     ListTile(title: GetOrders(orderss: order[index])),
+                    Divider(
+                      color: orangeColors, //color of divider
+                      height: 10, //height spacing of divider
+                      thickness: 3, //thickness of divier line
+                      indent: 25, //spacing at the start of divider
+                      endIndent: 25, //spacing at the end of divider
+                    )
                   ],
                 ),
               );

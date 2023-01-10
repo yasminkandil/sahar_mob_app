@@ -7,6 +7,8 @@ import 'package:sahar_mob_app/read%20data/get_colors.dart';
 
 import 'package:sahar_mob_app/utils/color.dart';
 
+import '../widgets/app_bar.dart';
+
 class ViewcolorsPage extends StatefulWidget {
   const ViewcolorsPage({super.key});
 
@@ -37,11 +39,7 @@ class _ViewcolorsPageState extends State<ViewcolorsPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text('Colors List'),
-        backgroundColor: GreyColors,
-        centerTitle: true,
-      ),
+      appBar: CustomAppBar(text: "View Colors"),
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
@@ -60,6 +58,13 @@ class _ViewcolorsPageState extends State<ViewcolorsPage> {
                         child: Column(
                           children: <Widget>[
                             ListTile(title: GetColorsPage(color: prod[index])),
+                            Divider(
+                              color: orangeColors, //color of divider
+                              height: 10, //height spacing of divider
+                              thickness: 3, //thickness of divier line
+                              indent: 25, //spacing at the start of divider
+                              endIndent: 25, //spacing at the end of divider
+                            )
                           ],
                         ),
                       );

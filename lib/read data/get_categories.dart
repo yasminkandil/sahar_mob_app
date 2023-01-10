@@ -24,12 +24,15 @@ class GetCategoriesPage extends StatelessWidget {
           return Row(
             children: [
               Container(
-                height: 70,
-                width: 70,
+                height: 90,
+                width: 90,
                 child: Image.network(data['image']),
               ),
+              SizedBox(
+                width: 10,
+              ),
               RichText(
-                textScaleFactor: 2,
+                textScaleFactor: 1.5,
                 text: TextSpan(
                   style: TextStyle(
                       color: Colors.black,
