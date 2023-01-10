@@ -97,7 +97,7 @@ class buildCategory extends StatelessWidget {
                     context,
                     MaterialPageRoute(
                       builder: (context) => Products(
-                        cat: 'Cables',
+                        cat: 'Covers',
                       ),
                     ),
                   );
@@ -106,11 +106,10 @@ class buildCategory extends StatelessWidget {
                     context,
                     MaterialPageRoute(
                       builder: (context) => Products(
-                        cat: 'Cables',
+                        cat: 'Headphones',
                       ),
                     ),
                   );
-                  selectedIndex = data['name'];
                 }
               },
               child: Padding(

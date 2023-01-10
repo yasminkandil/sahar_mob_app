@@ -79,7 +79,7 @@ class _BodyState extends State<Body> {
                                 ),
                                 Expanded(
                                   child: SizedBox(
-                                      height: 50,
+                                      height: 38,
                                       child: FloatingActionButton(
                                         shape: RoundedRectangleBorder(
                                             borderRadius:
