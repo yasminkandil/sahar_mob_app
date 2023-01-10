@@ -60,7 +60,7 @@ class buildCategory extends StatelessWidget {
           );
     }
 
-    int selectedIndex = 0;
+    String selectedIndex = "";
     return FutureBuilder(
         future: FirebaseFirestore.instance
             .collection('categories')
@@ -77,16 +77,40 @@ class buildCategory extends StatelessWidget {
                   Navigator.push(
                     context,
                     MaterialPageRoute(
-                      builder: (context) => Products(),
+                      builder: (context) => Products(
+                        cat: 'Powerbank',
+                      ),
                     ),
                   );
+                  selectedIndex = data['name'];
                 } else if (data['name'] == 'Cabels') {
                   Navigator.push(
                     context,
                     MaterialPageRoute(
-                      builder: (context) => ContactUs(),
+                      builder: (context) => Products(
+                        cat: 'Cables',
+                      ),
                     ),
                   );
+                } else if (data['name'] == 'Covers') {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => Products(
+                        cat: 'Cables',
+                      ),
+                    ),
+                  );
+                } else if (data['name'] == 'Headphones') {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => Products(
+                        cat: 'Cables',
+                      ),
+                    ),
+                  );
+                  selectedIndex = data['name'];
                 }
               },
               child: Padding(
@@ -97,14 +121,14 @@ class buildCategory extends StatelessWidget {
                     Text("${data['name']}",
                         style: TextStyle(
                             fontWeight: FontWeight.bold,
-                            color: selectedIndex == data['name']
+                            color: selectedIndex == data
                                 ? Color.fromARGB(72, 0, 0, 0)
                                 : Color.fromARGB(72, 0, 0, 0))),
                     Container(
                       margin: EdgeInsets.only(top: 15 / 4),
                       height: 2,
                       width: 30,
-                      color: selectedIndex == data['name']
+                      color: selectedIndex == data
                           ? Colors.black
                           : Colors.transparent,
                     )

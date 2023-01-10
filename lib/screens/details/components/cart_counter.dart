@@ -21,15 +21,15 @@ class _CartCounterState extends State<CartCounter> {
   Widget build(BuildContext context) {
     return Row(
       children: <Widget>[
-        buildButton(
-            icon: Icons.remove,
-            press: () {
+        IconButton(
+            onPressed: (() {
               if (numofItems > 1) {
                 setState(() {
-                  numofItems -= 1;
+                  numofItems--;
                 });
               }
             }),
+            icon: Icon(Icons.remove)),
         Padding(
           padding: const EdgeInsets.symmetric(horizontal: 15 / 2),
           child: Text(
@@ -37,13 +37,13 @@ class _CartCounterState extends State<CartCounter> {
             style: Theme.of(context).textTheme.headline6,
           ),
         ),
-        buildButton(
-            icon: Icons.add,
-            press: () {
+        IconButton(
+            onPressed: (() {
               setState(() {
-                numofItems += 1;
+                numofItems++;
               });
-            })
+            }),
+            icon: Icon(Icons.add)),
       ],
     );
   }
