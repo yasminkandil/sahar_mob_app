@@ -3,38 +3,34 @@ import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:sahar_mob_app/admin/add_category.dart';
 import 'package:sahar_mob_app/admin/add_product.dart';
-import 'package:sahar_mob_app/pages/gallery_details_page.dart';
-import 'package:sahar_mob_app/pages/navbar.dart';
 import 'package:sahar_mob_app/utils/color.dart';
 
-class GetGallery extends StatelessWidget {
-  final String imagee;
+class GetOrders extends StatelessWidget {
+  final String orderss;
 
-  GetGallery({required this.imagee});
-
-  // const GetUserName({super.key});
+  const GetOrders({required this.orderss});
 
   @override
   Widget build(BuildContext context) {
     CollectionReference products =
-        FirebaseFirestore.instance.collection('gallery');
+        FirebaseFirestore.instance.collection('orders');
 
     return FutureBuilder<DocumentSnapshot>(
-      future: products.doc(imagee).get(),
+      future: products.doc(orderss).get(),
       builder: ((context, snapshot) {
         if (snapshot.connectionState == ConnectionState.done) {
           Map<String, dynamic> data = snapshot.data?.data() != null
               ? snapshot.data!.data()! as Map<String, dynamic>
               : <String, dynamic>{};
-          return Container(
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(15),
-              image: DecorationImage(
-                image: NetworkImage(data['imagePath']),
-                fit: BoxFit.cover,
-              ),
-            ),
-          );
+          return ListTile(
+              title: Text(data['orderBy']),
+              subtitle: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Text(data['orderStatus']),
+                  // IconButton(onPressed: onPressed, icon: Icon(Icons.remove_red_eye))
+                ],
+              ));
         }
         return Text('loading..');
       }),

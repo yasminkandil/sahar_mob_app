@@ -1,14 +1,18 @@
 import 'package:flutter/material.dart';
-import 'package:sahar_mob_app/pages/add_category.dart';
-import 'package:sahar_mob_app/pages/add_color.dart';
-import 'package:sahar_mob_app/pages/add_gallery.dart';
-import 'package:sahar_mob_app/pages/add_offer.dart';
-import 'package:sahar_mob_app/pages/add_product.dart';
-import 'package:sahar_mob_app/pages/add_quality.dart';
-import 'package:sahar_mob_app/pages/orders_admin.dart';
-
-import 'package:sahar_mob_app/pages/users_admin.dart';
-import 'package:sahar_mob_app/pages/view_product.dart';
+import 'package:sahar_mob_app/admin/add_category.dart';
+import 'package:sahar_mob_app/admin/add_color.dart';
+import 'package:sahar_mob_app/admin/add_gallery.dart';
+import 'package:sahar_mob_app/admin/add_offer.dart';
+import 'package:sahar_mob_app/admin/add_product.dart';
+import 'package:sahar_mob_app/admin/add_quality.dart';
+import 'package:sahar_mob_app/admin/orders_admin.dart';
+import 'package:sahar_mob_app/admin/view_categories.dart';
+import 'package:sahar_mob_app/admin/view_colors.dart';
+import 'package:sahar_mob_app/admin/view_offers.dart';
+import 'package:sahar_mob_app/admin/view_qualties.dart';
+//import 'package:sahar_mob_app/pages/products_powerbank.dart';
+import 'package:sahar_mob_app/admin/users_admin.dart';
+import 'package:sahar_mob_app/admin/view_product.dart';
 import 'package:sahar_mob_app/pages/products_all.dart';
 import 'package:sahar_mob_app/utils/color.dart';
 import 'package:sahar_mob_app/pages/navbar.dart';
@@ -126,7 +130,7 @@ class _AdminState extends State<Admin> {
                           title: ElevatedButton.icon(
                               onPressed: null,
                               icon: Icon(Icons.category),
-                              label: Text("Categories")),
+                              label: Text("Categorie")),
                           subtitle: Text(
                             '23',
                             textAlign: TextAlign.center,
@@ -176,7 +180,7 @@ class _AdminState extends State<Admin> {
                               icon: Icon(Icons.shopping_cart),
                               label: Text("Orders")),
                           subtitle: Text(
-                            '5',
+                            '500',
                             textAlign: TextAlign.center,
                             style:
                                 TextStyle(color: orangeColors, fontSize: 50.0),
@@ -235,7 +239,10 @@ class _AdminState extends State<Admin> {
             ListTile(
               leading: Icon(Icons.library_books),
               title: Text("Category list"),
-              onTap: () {},
+              onTap: () => Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => ViewCategoriesPage()),
+              ),
             ),
             Divider(),
             ListTile(
@@ -249,7 +256,10 @@ class _AdminState extends State<Admin> {
             ListTile(
               leading: Icon(Icons.library_books),
               title: Text("Colors List"),
-              onTap: () {},
+              onTap: () => Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => ViewcolorsPage()),
+              ),
             ),
             Divider(),
             ListTile(
@@ -262,8 +272,11 @@ class _AdminState extends State<Admin> {
             Divider(),
             ListTile(
               leading: Icon(Icons.library_books),
-              title: Text("offers List"),
-              onTap: () {},
+              title: Text("Offers List"),
+              onTap: () => Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => const ViewOffersPage())),
             ),
             Divider(),
             ListTile(
@@ -277,7 +290,10 @@ class _AdminState extends State<Admin> {
             ListTile(
               leading: Icon(Icons.library_books),
               title: Text("Qualities List"),
-              onTap: () {},
+              onTap: () => Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => ViewQualitiesPage()),
+              ),
             ),
             Divider(),
             ListTile(
@@ -290,7 +306,7 @@ class _AdminState extends State<Admin> {
             Divider(),
             ListTile(
                 leading: Icon(Icons.library_books),
-                title: Text("Orders"),
+                title: Text("Orders List"),
                 onTap: () => Navigator.push(
                       context,
                       MaterialPageRoute(builder: (context) => ViewOrdersPage()),
@@ -298,7 +314,7 @@ class _AdminState extends State<Admin> {
             Divider(),
             ListTile(
                 leading: Icon(Icons.library_books),
-                title: Text("Users"),
+                title: Text("Users List"),
                 onTap: () => Navigator.push(
                       context,
                       MaterialPageRoute(builder: (context) => ViewUsersPage()),

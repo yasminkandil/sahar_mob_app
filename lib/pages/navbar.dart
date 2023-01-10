@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:sahar_mob_app/pages/admin.dart';
+import 'package:sahar_mob_app/admin/admin.dart';
 import 'package:sahar_mob_app/pages/cart.dart';
 import 'package:sahar_mob_app/pages/category.dart';
 import 'package:sahar_mob_app/pages/checkout.dart';
