@@ -2,6 +2,7 @@
 
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:sahar_mob_app/home/home_page.dart';
 import 'package:sahar_mob_app/models/auth_service.dart';
 import 'package:sahar_mob_app/pages/admin.dart';
 import 'package:sahar_mob_app/pages/forgot_pass.dart';
@@ -10,7 +11,7 @@ import 'package:sahar_mob_app/pages/regi_page.dart';
 import 'package:sahar_mob_app/utils/color.dart';
 import 'package:sahar_mob_app/widgets/btn_widget.dart';
 import 'package:sahar_mob_app/widgets/header_container.dart';
-import 'package:sahar_mob_app/pages/navbar.dart';
+import 'package:sahar_mob_app/home/navbar.dart';
 
 class LoginPage extends StatefulWidget {
   @override
@@ -63,7 +64,7 @@ class _LoginPageState extends State<LoginPage> {
               Navigator.push(
                 context,
                 MaterialPageRoute(builder: (context) {
-                  return Navigation_bar();
+                  return MyHomePage();
                 }),
               );
             }),
@@ -162,7 +163,7 @@ class _LoginPageState extends State<LoginPage> {
                                     Navigator.of(context).pushReplacement(
                                         MaterialPageRoute(
                                             builder: (context) =>
-                                                Navigation_bar()));
+                                                MyHomePage()));
                                   }
                                   if (formKey.currentState!.validate()) {
                                     final snackBar =
@@ -187,7 +188,7 @@ class _LoginPageState extends State<LoginPage> {
                               AuthService().signInWithGoogle();
                               Navigator.of(context).pushReplacement(
                                   MaterialPageRoute(
-                                      builder: (context) => Navigation_bar()));
+                                      builder: (context) => MyHomePage()));
                             },
                             child: Row(
                               mainAxisSize: MainAxisSize.min,

@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:sahar_mob_app/home/home_page.dart';
 import 'package:sahar_mob_app/pages/view_account.dart';
 import 'package:sahar_mob_app/pages/view_order_user.dart';
 import 'package:sahar_mob_app/utils/color.dart';
 import 'package:sahar_mob_app/widgets/header_container.dart';
 
-import 'navbar.dart';
+import '../home/navbar.dart';
 
 
 class EditProfileUI extends StatefulWidget {
@@ -116,7 +117,7 @@ class _EditProfileUIState extends State<EditProfileUI>
                   OutlinedButton(onPressed: () {
                      Navigator.push(context,
                       MaterialPageRoute(builder: (context) {
-                      return Navigation_bar();
+                      return MyHomePage();
                                   }),
                                   );
                   },
@@ -135,7 +136,7 @@ class _EditProfileUIState extends State<EditProfileUI>
                   ElevatedButton(onPressed: (){
                      Navigator.push(context,
                       MaterialPageRoute(builder: (context) {
-                      return Navigation_bar();
+                      return MyHomePage();
                                   }),
                                   );
                   }, 

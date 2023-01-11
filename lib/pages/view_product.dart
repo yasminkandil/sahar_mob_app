@@ -12,12 +12,9 @@ class ViewProductPage extends StatefulWidget {
   @override
   _ViewProductPageState createState() => _ViewProductPageState();
 }
-
 class _ViewProductPageState extends State<ViewProductPage> {
   final pro = FirebaseFirestore.instance.collection('products');
-
   List<String> prod = [];
-
   Future getDocProd() async {
     await FirebaseFirestore.instance.collection('products').get().then(
           (snapshot) => snapshot.docs.forEach((document) {
@@ -26,14 +23,11 @@ class _ViewProductPageState extends State<ViewProductPage> {
           }),
         );
   }
-
   @override
   void initState() {
     super.initState();
     setState(() {});
-    //getData();
   }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(

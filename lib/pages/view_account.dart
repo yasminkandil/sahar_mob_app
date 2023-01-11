@@ -1,8 +1,9 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:sahar_mob_app/home/home_page.dart';
 import 'package:sahar_mob_app/pages/edit_account.dart';
-import 'package:sahar_mob_app/pages/navbar.dart';
+import 'package:sahar_mob_app/home/navbar.dart';
 import 'package:sahar_mob_app/pages/regi_page.dart';
 import 'package:sahar_mob_app/utils/color.dart';
 import 'package:sahar_mob_app/widgets/header_container.dart';
@@ -29,19 +30,23 @@ class _ViewAccountPageState extends State<ViewAccountPage> {
   //String myDocId = userr.uid;
   Future updateUserDetails(String firstname, String lastname,
       String useraddress, String userPhoneNumber, String userImage) async {
-    final updateUser =
-        FirebaseFirestore.instance.collection('users').doc(userId);
-    updateUser.update(
-      {
-        'firstname': firstname.trim(),
-        'lastname': lastname.trim(),
-        'mobile': int.parse(userPhoneNumber.trim()),
-        'address': useraddress.trim(),
-        'image': userImage,
-      },
-    );
+    try {
+      final updateUser =
+          FirebaseFirestore.instance.collection('users').doc(userId);
+      updateUser.update(
+        {
+          'firstname': firstname.trim(),
+          'lastname': lastname.trim(),
+          'mobile': int.parse(userPhoneNumber.trim()),
+          'address': useraddress.trim(),
+          'image': userImage,
+        },
+      );
 
-    print('NEW USER REGISTERED WITH ID:');
+      print('NEW USER REGISTERED WITH ID:');
+    } catch (e) {
+      print(e);
+    }
   }
 
   @override
@@ -61,7 +66,7 @@ class _ViewAccountPageState extends State<ViewAccountPage> {
             Navigator.push(
               context,
               MaterialPageRoute(builder: (context) {
-                return Navigation_bar();
+                return MyHomePage();
               }),
             );
           },
@@ -84,7 +89,12 @@ class _ViewAccountPageState extends State<ViewAccountPage> {
                     .where('email', isEqualTo: userr.email)
                     .snapshots(),
                 builder: (context, AsyncSnapshot snapshot) {
-                  if (snapshot.hasData) {
+                   if (snapshot.hasError) {
+                    return Center(
+                      child: Text('You need to sign in to view your account.'),
+                    );
+                  }
+                 else if (snapshot.hasData) {
                     return ListView.builder(
                         itemCount: snapshot.data!.docs.length,
                         itemBuilder: (context, index) {
@@ -256,7 +266,7 @@ class _ViewAccountPageState extends State<ViewAccountPage> {
                                               context,
                                               MaterialPageRoute(
                                                   builder: (context) =>
-                                                      Navigation_bar()));
+                                                      MyHomePage()));
                                         },
                                       );
                                       /* final updateUser = FirebaseFirestore
@@ -284,9 +294,10 @@ class _ViewAccountPageState extends State<ViewAccountPage> {
                             ],
                           );
                         });
-                  } else {
-                    return Text('loading..');
-                  }
+                  } 
+                   else {
+            return  Center(child: CircularProgressIndicator());
+          }
                 })),
       ),
     );

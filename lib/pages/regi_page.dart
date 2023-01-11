@@ -8,9 +8,10 @@ import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:permission_handler/permission_handler.dart';
+import 'package:sahar_mob_app/home/home_page.dart';
 import 'package:sahar_mob_app/models/uploadimage.dart';
 import 'package:sahar_mob_app/pages/login_page.dart';
-import 'package:sahar_mob_app/pages/navbar.dart';
+import 'package:sahar_mob_app/home/navbar.dart';
 import 'package:sahar_mob_app/pages/view_account.dart';
 import 'package:sahar_mob_app/pages/products_powerbank.dart';
 import 'package:sahar_mob_app/utils/color.dart';
@@ -144,7 +145,7 @@ class _RegisterPageState extends State<RegisterPage> {
               Navigator.push(
                 context,
                 MaterialPageRoute(builder: (context) {
-                  return Navigation_bar();
+                  return MyHomePage();
                 }),
               );
             }),
@@ -345,7 +346,7 @@ class _RegisterPageState extends State<RegisterPage> {
                                           context,
                                           MaterialPageRoute(
                                               builder: (context) =>
-                                                  Navigation_bar()));
+                                                  MyHomePage()));
                                     });
                                   }
                                 },

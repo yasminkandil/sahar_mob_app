@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:sahar_mob_app/pages/navbar.dart';
+import 'package:sahar_mob_app/home/home_page.dart';
+import 'package:sahar_mob_app/home/navbar.dart';
 import 'package:sahar_mob_app/utils/color.dart';
 
 class ContactUs extends StatefulWidget {
@@ -24,7 +25,7 @@ class ContactUsForm extends State<ContactUs> {
             Navigator.push(
               context,
               MaterialPageRoute(builder: (context) {
-                return Navigation_bar();
+                return MyHomePage();
               }),
             );
           },

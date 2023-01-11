@@ -1,9 +1,9 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:sahar_mob_app/pages/home_page.dart';
+import 'package:sahar_mob_app/home/home_page.dart';
 
-import 'package:sahar_mob_app/pages/navbar.dart';
+import 'package:sahar_mob_app/home/navbar.dart';
 
 
 //import 'pages/cart_view.dart';
@@ -24,7 +24,7 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.blue,
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
-      home: const SafeArea(child: HomePage()),
+      home: const SafeArea(child: MyHomePage()),
     );
   }
 }

@@ -1,6 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:sahar_mob_app/pages/navbar.dart';
+import 'package:sahar_mob_app/home/home_page.dart';
+import 'package:sahar_mob_app/home/navbar.dart';
 import 'package:sahar_mob_app/pages/regi_page.dart';
 import 'package:sahar_mob_app/utils/color.dart';
 import 'package:sahar_mob_app/widgets/btn_widget.dart';
@@ -30,7 +31,7 @@ class _ForgotPassState extends State<ForgotPass> {
               Navigator.push(
                 context,
                 MaterialPageRoute(builder: (context) {
-                  return Navigation_bar();
+                  return MyHomePage();
                 }),
               );
             }),

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:sahar_mob_app/home/home_page.dart';
 import 'package:sahar_mob_app/pages/add_category.dart';
 import 'package:sahar_mob_app/pages/add_color.dart';
 import 'package:sahar_mob_app/pages/add_gallery.dart';
@@ -10,7 +11,7 @@ import 'package:sahar_mob_app/pages/products_powerbank.dart';
 import 'package:sahar_mob_app/pages/view_product.dart';
 import 'package:sahar_mob_app/pages/products_all.dart';
 import 'package:sahar_mob_app/utils/color.dart';
-import 'package:sahar_mob_app/pages/navbar.dart';
+import 'package:sahar_mob_app/home/navbar.dart';
 
 enum Page { dashboard, manage }
 
@@ -37,7 +38,7 @@ class _AdminState extends State<Admin> {
                 Navigator.push(
                   context,
                   MaterialPageRoute(builder: (context) {
-                    return Navigation_bar();
+                    return MyHomePage();
                   }),
                 );
               }),

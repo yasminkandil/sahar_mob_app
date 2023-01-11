@@ -3,7 +3,7 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:sahar_mob_app/utils/color.dart';
 
-import 'login_page.dart';
+import '../pages/login_page.dart';
 
 class SplashPage extends StatefulWidget {
   @override

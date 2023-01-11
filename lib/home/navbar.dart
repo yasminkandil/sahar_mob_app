@@ -5,6 +5,7 @@ import 'package:sahar_mob_app/pages/category.dart';
 import 'package:sahar_mob_app/pages/checkout.dart';
 import 'package:sahar_mob_app/pages/contact_us.dart';
 import 'package:sahar_mob_app/pages/edit_account.dart';
+import 'package:sahar_mob_app/home/home_screen.dart';
 import 'package:sahar_mob_app/pages/login_page.dart';
 import 'package:sahar_mob_app/pages/products_all.dart';
 import 'package:sahar_mob_app/product_powerbank.dart';
@@ -12,18 +13,14 @@ import 'package:sahar_mob_app/pages/regi_page.dart';
 import 'package:sahar_mob_app/pages/view_account.dart';
 import 'package:sahar_mob_app/product_powerbank.dart';
 import 'package:sahar_mob_app/utils/color.dart';
-//import 'package:sahar_mob_app/widgets/footer.dart';
 import 'package:sahar_mob_app/widgets/header_container.dart';
-//import 'package:sahar_mob_app/pages/body.dart';
 import 'package:sahar_mob_app/pages/components/body.dart';
-
 import '../controllers/search_delegate.dart';
-import 'my_drawer_header.dart';
-
+import '../pages/my_drawer_header.dart';
 class Navigation_bar extends StatefulWidget {
+  
   @override
   HomeNavbar createState() => HomeNavbar();
-  // TODO: implement createState
 }
 
 class HomeNavbar extends State<Navigation_bar> {
@@ -37,8 +34,6 @@ class HomeNavbar extends State<Navigation_bar> {
  actions: [
           IconButton(
             onPressed: () {
-              // method to show the search bar
-                //context: context, delegate:
  Navigator.push(
               context,
               MaterialPageRoute(builder: (context) => FirebaseSearchScreen()),
@@ -47,25 +42,24 @@ class HomeNavbar extends State<Navigation_bar> {
             icon: const Icon(Icons.search),
           ),
             IconButton(
-            onPressed: () {
-              // method to show the search bar
-            
+            onPressed: () {            
             },
             icon: const Icon(Icons.notifications),
           ),
             IconButton(
-            onPressed: () {
-              // method to show the search bar
-            
+            onPressed: () {            
             },
             icon: const Icon(Icons.shopping_bag),
           )
         ],
       ),
-      body: Container(
-        child: Column(children: <Widget>[
-          HeaderContainer("Home Page"),
-        ]),
+      body: SingleChildScrollView(
+        child: Container(
+          child: Column(children: <Widget>[
+            HeaderContainer("Home Page"),
+            HomeScreen(salma:'salma'),
+          ]),
+        ),
       ),
       drawer: Drawer(
         child: SingleChildScrollView(
@@ -79,9 +73,7 @@ class HomeNavbar extends State<Navigation_bar> {
       ),
      
   );
-     // TODO: implement build
   }
-
   Widget MyDrawerList() {
     return Container(
       padding: EdgeInsets.only(
@@ -113,7 +105,6 @@ class HomeNavbar extends State<Navigation_bar> {
       ),
     );
   }
-
   Widget menuItem(int id, String title, IconData icon, bool selected) {
     return Material(
       color: selected ? Colors.grey : Colors.transparent,
