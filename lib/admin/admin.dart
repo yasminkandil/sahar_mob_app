@@ -16,6 +16,7 @@ import 'package:sahar_mob_app/admin/view_product.dart';
 import 'package:sahar_mob_app/pages/products_all.dart';
 import 'package:sahar_mob_app/utils/color.dart';
 import 'package:sahar_mob_app/home/navbar.dart';
+import 'package:sahar_mob_app/home/home_page.dart';
 
 enum Page { dashboard, manage }
 

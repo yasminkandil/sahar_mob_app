@@ -749,7 +749,6 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "2.1.2"
-<<<<<<< HEAD
   velocity_x:
     dependency: "direct main"
     description:
@@ -764,8 +763,6 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "2.3.0"
-=======
->>>>>>> 2f48680325ef086a9204827771ebc19f422aea24
   xdg_directories:
     dependency: transitive
     description:

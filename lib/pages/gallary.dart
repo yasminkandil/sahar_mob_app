@@ -1,6 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:sahar_mob_app/pages/navbar.dart';
+import 'package:sahar_mob_app/home/navbar.dart';
 import 'package:sahar_mob_app/read%20data/get_gallery_data.dart';
 import 'package:sahar_mob_app/utils/color.dart';
 import '../widgets/app_bar.dart';

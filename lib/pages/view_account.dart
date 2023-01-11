@@ -8,7 +8,7 @@ import 'package:image_picker/image_picker.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:sahar_mob_app/models/user_model.dart';
 import 'package:sahar_mob_app/pages/edit_account.dart';
-import 'package:sahar_mob_app/pages/navbar.dart';
+import 'package:sahar_mob_app/home/navbar.dart';
 import 'package:sahar_mob_app/pages/regi_page.dart';
 import 'package:sahar_mob_app/utils/color.dart';
 import 'package:sahar_mob_app/widgets/header_container.dart';
@@ -28,6 +28,7 @@ final user = FirebaseAuth.instance.currentUser!;
 String userId = user.uid;
 Future updateUserDetails(String firstname, String lastname, String useraddress,
     String userPhoneNumber, String userImage) async {
+      try{
   final updateUser = FirebaseFirestore.instance.collection('users').doc(userId);
   updateUser.update(
     {
@@ -40,6 +41,9 @@ Future updateUserDetails(String firstname, String lastname, String useraddress,
   );
 
   print('USER UPDATED');
+      } catch (e) {
+    return e.toString();
+  }
 }
 
 class _ViewAccountPageState extends State<ViewAccountPage> {
@@ -89,6 +93,7 @@ class _ViewAccountPageState extends State<ViewAccountPage> {
                     .where('email', isEqualTo: userr.email)
                     .snapshots(),
                 builder: (context, AsyncSnapshot snapshot) {
+
                   if (snapshot.hasData) {
                     return ListView.builder(
                         itemCount: snapshot.data!.docs.length,
@@ -299,9 +304,16 @@ class _ViewAccountPageState extends State<ViewAccountPage> {
                             ],
                           );
                         });
-                  } else {
-                    return Text('loading..');
-                  }
+                  } else if  (snapshot.hasError) {
+            return Center(
+              child: Text('You need to sign in to view your account.'),
+            );
+          }
+          else{
+             
+            return Center(child: CircularProgressIndicator());
+          
+          }
                 })),
       ),
     );

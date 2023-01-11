@@ -273,6 +273,7 @@ class _RegisterPageState extends State<RegisterPage> {
                               child: ButtonWidget(
                                 btnText: "REGISTER",
                                 onClick: () async {
+                                  try{
                                   if (formKey.currentState!.validate()) {
                                     await FirebaseAuth.instance
                                         .createUserWithEmailAndPassword(
@@ -300,8 +301,19 @@ class _RegisterPageState extends State<RegisterPage> {
                                                   MyHomePage()));
                                     });
                                   }
+                              } catch (e) {
+      if (e.hashCode == 'email-already-in-use') {
+
+                      child: Text('You need to sign in to view your account.');
+
+     //   print('The email is already in use');
+      } else {
+        print(e);
+      }
+    }
+          
                                 },
-                              ),
+                      ),
                             ),
                           ),
                           InkWell(

@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:sahar_mob_app/admin/admin.dart';
 import 'package:sahar_mob_app/pages/cart.dart';
-import 'package:sahar_mob_app/pages/category.dart';
 import 'package:sahar_mob_app/pages/checkout.dart';
 import 'package:sahar_mob_app/pages/contact_us.dart';
 import 'package:sahar_mob_app/pages/edit_account.dart';
@@ -11,10 +10,8 @@ import 'package:sahar_mob_app/pages/products_all.dart';
 import 'package:sahar_mob_app/product_powerbank.dart';
 import 'package:sahar_mob_app/pages/regi_page.dart';
 import 'package:sahar_mob_app/pages/view_account.dart';
-import 'package:sahar_mob_app/product_powerbank.dart';
 import 'package:sahar_mob_app/utils/color.dart';
 import 'package:sahar_mob_app/widgets/header_container.dart';
-import 'package:sahar_mob_app/pages/components/body.dart';
 import '../controllers/search_delegate.dart';
 import '../pages/my_drawer_header.dart';
 class Navigation_bar extends StatefulWidget {
@@ -41,22 +38,7 @@ class HomeNavbar extends State<Navigation_bar> {
             },
             icon: const Icon(Icons.search),
           ),
-            IconButton(
-            onPressed: () {            
-            },
-            icon: const Icon(Icons.notifications),
-          ),
-            IconButton(
-            onPressed: () {            
-              // method to show the search bar
-              //context: context, delegate:
-              Navigator.push(
-                context,
-                MaterialPageRoute(builder: (context) => FirebaseSearchScreen()),
-              );
-            },
-            icon: const Icon(Icons.search),
-          ),
+           
           IconButton(
             onPressed: () {
               // method to show the search bar
