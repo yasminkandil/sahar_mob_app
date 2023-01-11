@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:sahar_mob_app/pages/admin.dart';
+import 'package:sahar_mob_app/admin/admin.dart';
 import 'package:sahar_mob_app/pages/cart.dart';
 import 'package:sahar_mob_app/pages/category.dart';
 import 'package:sahar_mob_app/pages/checkout.dart';
@@ -31,7 +31,7 @@ class HomeNavbar extends State<Navigation_bar> {
       appBar: AppBar(
         backgroundColor: GreyColors,
         title: Text("Menu"),
- actions: [
+        actions: [
           IconButton(
             onPressed: () {
  Navigator.push(
@@ -48,6 +48,24 @@ class HomeNavbar extends State<Navigation_bar> {
           ),
             IconButton(
             onPressed: () {            
+              // method to show the search bar
+              //context: context, delegate:
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => FirebaseSearchScreen()),
+              );
+            },
+            icon: const Icon(Icons.search),
+          ),
+          IconButton(
+            onPressed: () {
+              // method to show the search bar
+            },
+            icon: const Icon(Icons.notifications),
+          ),
+          IconButton(
+            onPressed: () {
+              // method to show the search bar
             },
             icon: const Icon(Icons.shopping_bag),
           )
@@ -73,6 +91,8 @@ class HomeNavbar extends State<Navigation_bar> {
       ),
      
   );
+    
+    // TODO: implement build
   }
   Widget MyDrawerList() {
     return Container(
@@ -125,7 +145,10 @@ class HomeNavbar extends State<Navigation_bar> {
           } else if (id == 3) {
             Navigator.push(
               context,
-              MaterialPageRoute(builder: (context) => Products()),
+              MaterialPageRoute(
+                  builder: (context) => Products(
+                        cat: 'Cables',
+                      )),
             );
             currentPage = Sections.Categories;
           } else if (id == 4) {

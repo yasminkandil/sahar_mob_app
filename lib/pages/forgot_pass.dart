@@ -7,6 +7,8 @@ import 'package:sahar_mob_app/utils/color.dart';
 import 'package:sahar_mob_app/widgets/btn_widget.dart';
 import 'package:sahar_mob_app/widgets/header_container.dart';
 
+import '../widgets/app_bar.dart';
+
 class ForgotPass extends StatefulWidget {
   const ForgotPass({Key? key}) : super(key: key);
 
@@ -20,22 +22,7 @@ class _ForgotPassState extends State<ForgotPass> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        backgroundColor: GreyColors,
-        leading: IconButton(
-            icon: Icon(
-              Icons.arrow_back,
-              color: orangeColors,
-            ),
-            onPressed: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(builder: (context) {
-                  return MyHomePage();
-                }),
-              );
-            }),
-      ),
+      appBar: CustomAppBar(text: ""),
       body: Container(
         padding: const EdgeInsets.only(bottom: 30),
         child: Column(

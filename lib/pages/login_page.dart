@@ -4,14 +4,16 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:sahar_mob_app/home/home_page.dart';
 import 'package:sahar_mob_app/models/auth_service.dart';
-import 'package:sahar_mob_app/pages/admin.dart';
+import 'package:sahar_mob_app/admin/admin.dart';
 import 'package:sahar_mob_app/pages/forgot_pass.dart';
-import 'package:sahar_mob_app/pages/products_powerbank.dart';
+
 import 'package:sahar_mob_app/pages/regi_page.dart';
 import 'package:sahar_mob_app/utils/color.dart';
 import 'package:sahar_mob_app/widgets/btn_widget.dart';
 import 'package:sahar_mob_app/widgets/header_container.dart';
 import 'package:sahar_mob_app/home/navbar.dart';
+
+import '../widgets/app_bar.dart';
 
 class LoginPage extends StatefulWidget {
   @override
@@ -53,22 +55,7 @@ class _LoginPageState extends State<LoginPage> {
     bool obscureText = true;
     return Scaffold(
       key: _scaffoldKey,
-      appBar: AppBar(
-        backgroundColor: GreyColors,
-        leading: IconButton(
-            icon: Icon(
-              Icons.arrow_back,
-              color: orangeColors,
-            ),
-            onPressed: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(builder: (context) {
-                  return MyHomePage();
-                }),
-              );
-            }),
-      ),
+      appBar: CustomAppBar(text: ""),
       body: Container(
         padding: const EdgeInsets.only(bottom: 30),
         child: Form(

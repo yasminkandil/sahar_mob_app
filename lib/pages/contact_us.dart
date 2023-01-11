@@ -3,6 +3,8 @@ import 'package:sahar_mob_app/home/home_page.dart';
 import 'package:sahar_mob_app/home/navbar.dart';
 import 'package:sahar_mob_app/utils/color.dart';
 
+import '../widgets/app_bar.dart';
+
 class ContactUs extends StatefulWidget {
   @override
   ContactUsForm createState() => ContactUsForm();

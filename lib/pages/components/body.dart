@@ -10,17 +10,18 @@ import 'package:sahar_mob_app/pages/components/item_card.dart';
 import 'package:sahar_mob_app/product_powerbank.dart';
 import 'package:sahar_mob_app/screens/details/details_screen.dart';
 
-class Body extends StatefulWidget {
-  const Body({super.key});
+class Body extends StatelessWidget {
+  String cat;
+  Body({super.key, required this.cat});
 
-  @override
-  State<Body> createState() => _BodyState();
-}
-
-class _BodyState extends State<Body> {
   List<String> prod = [];
+
   Future getDocProd() async {
-    await FirebaseFirestore.instance.collection('products').get().then(
+    await FirebaseFirestore.instance
+        .collection('products')
+        .where('category', isEqualTo: cat)
+        .get()
+        .then(
           (snapshot) => snapshot.docs.forEach((document) {
             print(document.reference);
             prod.add(document.reference.id);

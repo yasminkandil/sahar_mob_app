@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/container.dart';
@@ -7,8 +8,9 @@ import 'package:flutter/src/widgets/framework.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:path/path.dart' as p;
-import 'package:sahar_mob_app/pages/admin.dart';
+import 'package:sahar_mob_app/admin/admin.dart';
 import 'package:sahar_mob_app/utils/color.dart';
+import 'package:sahar_mob_app/widgets/app_bar.dart';
 import 'package:sahar_mob_app/widgets/header_container.dart';
 
 class AddGallery extends StatefulWidget {
@@ -16,6 +18,18 @@ class AddGallery extends StatefulWidget {
 
   @override
   State<AddGallery> createState() => _AddGalleryState();
+}
+
+Future addgalleryDetails(
+  String GImage,
+) async {
+  await FirebaseFirestore.instance.collection('homePage').doc().set(
+    {
+      'image': GImage,
+    },
+  );
+
+  print('NEW IMAGE ADDED');
 }
 
 class _AddGalleryState extends State<AddGallery> {
@@ -66,27 +80,12 @@ class _AddGalleryState extends State<AddGallery> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        backgroundColor: GreyColors,
-        leading: IconButton(
-            icon: Icon(
-              Icons.arrow_back,
-              color: orangeColors,
-            ),
-            onPressed: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(builder: (context) {
-                  return Admin();
-                }),
-              );
-            }),
-      ),
+      appBar: CustomAppBar(text: "Add HomePage Image"),
       body: Container(
         padding: EdgeInsets.only(bottom: 20),
         child: Column(
           children: <Widget>[
-            HeaderContainer("Register"),
+            HeaderContainer("Add Images To HomePage"),
             Center(
               child: Stack(
                 children: [
@@ -125,6 +124,7 @@ class _AddGalleryState extends State<AddGallery> {
                           ),
                           onPressed: () {
                             uploadImage();
+                            addgalleryDetails(greyimage);
                           },
                         )),
                   )

@@ -51,8 +51,11 @@ dependencies:
   flutter_local_notifications: ^13.0.0
   firebase_messaging: ^14.2.1
   footer: ^0.0.4
+<<<<<<< HEAD
   velocity_x: ^3.6.0
   
+=======
+>>>>>>> 2f48680325ef086a9204827771ebc19f422aea24
   firebase_helpers: ^0.6.0
   google_sign_in: ^5.4.2
   google_maps_flutter: ^2.2.2

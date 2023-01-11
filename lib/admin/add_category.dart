@@ -3,11 +3,14 @@ import 'dart:ui';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:sahar_mob_app/pages/admin.dart';
+import 'package:sahar_mob_app/admin/admin.dart';
 //import 'package:image_picker/image_picker.dart';
 
 import 'package:sahar_mob_app/utils/color.dart';
+import 'package:sahar_mob_app/widgets/app_bar.dart';
 import 'package:sahar_mob_app/widgets/btn_widget.dart';
+
+import '../widgets/textInput.dart';
 //import 'package:sahar_mob_app/widgets/header_container.dart';
 
 class AddCategPage extends StatefulWidget {
@@ -28,32 +31,7 @@ class _AddCategPageState extends State<AddCategPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text('Add Category'),
-        backgroundColor: GreyColors,
-        leading: IconButton(
-          icon: Icon(
-            Icons.arrow_back,
-            color: orangeColors,
-          ),
-          onPressed: () {
-            Navigator.push(
-              context,
-              MaterialPageRoute(builder: (context) {
-                return Admin();
-              }),
-            );
-          },
-        ),
-        actions: [
-          IconButton(
-              icon: Icon(
-                Icons.settings,
-                color: GreyColors,
-              ),
-              onPressed: () {})
-        ],
-      ),
+      appBar: CustomAppBar(text: "Add Category"),
       body: Container(
         padding: EdgeInsets.only(top: 20, bottom: 20),
         child: Column(
@@ -109,11 +87,11 @@ class _AddCategPageState extends State<AddCategPage> {
                     child: Column(
                       mainAxisSize: MainAxisSize.max,
                       children: <Widget>[
-                        _textInput(
+                        TextInput(
                             controller: _nameController,
                             hint: "Category Name",
                             icon: Icons.category),
-                        _textInput(
+                        TextInput(
                             controller: _subtitleController,
                             hint: "Category Subtitle",
                             icon: Icons.category),
@@ -149,28 +127,6 @@ class _AddCategPageState extends State<AddCategPage> {
               ),
             )
           ],
-        ),
-      ),
-    );
-  }
-
-  Widget _textInput({controller, hint, icon}) {
-    return Container(
-      margin: EdgeInsets.only(top: 8),
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.all(Radius.circular(20)),
-        color: Colors.white,
-      ),
-      padding: EdgeInsets.only(left: 10),
-      child: TextFormField(
-        controller: controller,
-        decoration: InputDecoration(
-          border: InputBorder.none,
-          hintText: hint,
-          prefixIcon: Icon(
-            icon,
-            color: Color.fromARGB(255, 249, 118, 3),
-          ),
         ),
       ),
     );

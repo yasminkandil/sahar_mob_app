@@ -43,7 +43,7 @@ class ProductTitleWithImage extends StatelessWidget {
                           color: Colors.white, fontWeight: FontWeight.bold),
                     ),
                     SizedBox(
-                      height: 15,
+                      height: 25,
                     ),
                     Row(
                       children: <Widget>[

@@ -9,6 +9,7 @@ import 'package:sahar_mob_app/screens/details/components/description.dart';
 import 'package:sahar_mob_app/screens/details/components/product_info.dart';
 import 'package:sahar_mob_app/screens/details/components/product_title_with_image.dart';
 import 'package:sahar_mob_app/screens/details/details_screen.dart';
+import 'package:sahar_mob_app/utils/color.dart';
 
 class Body extends StatefulWidget {
   final String salma;
@@ -48,7 +49,7 @@ class _BodyState extends State<Body> {
                           top: size.height * 0.12, left: 10, right: 10),
                       height: 500,
                       decoration: BoxDecoration(
-                          color: Colors.orange,
+                          color: orangeLightColors,
                           borderRadius: BorderRadius.only(
                               topLeft: Radius.circular(24),
                               topRight: Radius.circular(24))),
@@ -67,7 +68,8 @@ class _BodyState extends State<Body> {
                                   width: 58,
                                   decoration: BoxDecoration(
                                       borderRadius: BorderRadius.circular(18),
-                                      border: Border.all(color: Colors.red)),
+                                      border:
+                                          Border.all(color: GreyLightColors)),
                                   child: IconButton(
                                     icon: Icon(
                                       Icons.add_shopping_cart_outlined,
@@ -77,12 +79,12 @@ class _BodyState extends State<Body> {
                                 ),
                                 Expanded(
                                   child: SizedBox(
-                                      height: 50,
+                                      height: 38,
                                       child: FloatingActionButton(
                                         shape: RoundedRectangleBorder(
                                             borderRadius:
                                                 BorderRadius.circular(18)),
-                                        backgroundColor: Colors.red,
+                                        backgroundColor: GreyLightColors,
                                         onPressed: () {},
                                         child: Text("BUY NOW",
                                             style: TextStyle(

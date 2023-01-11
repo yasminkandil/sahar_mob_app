@@ -10,53 +10,40 @@ import 'package:image_picker/image_picker.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:sahar_mob_app/home/home_page.dart';
 import 'package:sahar_mob_app/models/uploadimage.dart';
+import 'package:sahar_mob_app/models/user_model.dart';
 import 'package:sahar_mob_app/pages/login_page.dart';
 import 'package:sahar_mob_app/home/navbar.dart';
 import 'package:sahar_mob_app/pages/view_account.dart';
-import 'package:sahar_mob_app/pages/products_powerbank.dart';
+
 import 'package:sahar_mob_app/utils/color.dart';
 import 'package:sahar_mob_app/widgets/btn_widget.dart';
 import 'package:sahar_mob_app/widgets/header_container.dart';
 import 'package:path/path.dart' as p;
+import 'package:sahar_mob_app/widgets/reg_textinput.dart';
+
+import '../widgets/app_bar.dart';
 
 class RegisterPage extends StatefulWidget {
   @override
   _RegisterPageState createState() => _RegisterPageState();
 }
 
+var imageUrl;
+var downloadUrl;
+var imagee;
+var greyimage =
+    'https://www.google.com/search?q=profile+photo+&tbm=isch&ved=2ahUKEwis27rOz_76AhVFexoKHU2PBGoQ2-cCegQIABAA&oq=profile+photo+&gs_lcp=CgNpbWcQAzIECAAQQzIFCAAQgAQyBQgAEIAEMgUIABCABDIFCAAQgAQyBQgAEIAEMgUIABCABDIFCAAQgAQyBQgAEIAEMgUIABCABDoGCAAQBxAeULwEWLwEYKoIaABwAHgAgAGZAYgBkwKSAQMwLjKYAQCgAQGqAQtnd3Mtd2l6LWltZ8ABAQ&sclient=img&ei=d4lZY-zDCsX2ac2ektAG&bih=657&biw=1366#imgrc=nfkyptoYx2OzJM';
+
 class _RegisterPageState extends State<RegisterPage> {
-  late String fnameerrormssg = "Enter First Name";
-  late String lnameerrormssg = "Enter Last Name";
-  late String emailerrormssg = "Enter Email Correctly";
-  late String addrerrormssg = "Enter Address";
-  late String mobileerrormssg = "Enter Mobile Number Correctly";
-  late String eregexp =
-      r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+";
-  late String aregexp = r'^[a-z A-Z]+$';
-  late String mregexp = r'^[+]*[(]{0,1}[0-9]{1,4}[)]{0,1}[-\s\./0-9]+$';
   final formKey = GlobalKey<FormState>();
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
 
   late DatabaseReference dbRef;
-  var imageUrl;
-  var downloadUrl;
-  var imagee;
-  var greyimage =
-      'https://www.google.com/search?q=profile+photo+&tbm=isch&ved=2ahUKEwis27rOz_76AhVFexoKHU2PBGoQ2-cCegQIABAA&oq=profile+photo+&gs_lcp=CgNpbWcQAzIECAAQQzIFCAAQgAQyBQgAEIAEMgUIABCABDIFCAAQgAQyBQgAEIAEMgUIABCABDIFCAAQgAQyBQgAEIAEMgUIABCABDoGCAAQBxAeULwEWLwEYKoIaABwAHgAgAGZAYgBkwKSAQMwLjKYAQCgAQGqAQtnd3Mtd2l6LWltZ8ABAQ&sclient=img&ei=d4lZY-zDCsX2ac2ektAG&bih=657&biw=1366#imgrc=nfkyptoYx2OzJM';
+
   @override
   void initState() {
     super.initState();
     dbRef = FirebaseDatabase.instance.ref().child("users");
-    //greyimage = imageUrl;
-    //uploadImage();
-  }
-
-  setImage(String imagee) {
-    imagee = imagee;
-  }
-
-  getImage() {
-    return imagee;
   }
 
   int randomm() {
@@ -99,57 +86,11 @@ class _RegisterPageState extends State<RegisterPage> {
     }
   }
 
-  Future addUserDetails(
-      String firstname,
-      String lastname,
-      String userEmail,
-      String useraddress,
-      String userPhoneNumber,
-      String userImage,
-      String id) async {
-    await FirebaseFirestore.instance.collection('users').doc(id).set(
-      {
-        'firstname': firstname,
-        'lastname': lastname,
-        'email': userEmail,
-        'mobile': int.parse(userPhoneNumber),
-        'address': useraddress,
-        'image': userImage,
-        'id': id,
-      },
-    );
-
-    print('NEW USER REGISTERED WITH ID:');
-  }
-
   @override
   Widget build(BuildContext context) {
-    final _emailController = TextEditingController();
-    final _passwordController = TextEditingController();
-    final _fisrtController = TextEditingController();
-    final _lastController = TextEditingController();
-    final _confirmPassController = TextEditingController();
-    final _mobileController = TextEditingController();
-    final _addrController = TextEditingController();
-
     bool obscureText = true;
     return Scaffold(
-      appBar: AppBar(
-        backgroundColor: GreyColors,
-        leading: IconButton(
-            icon: Icon(
-              Icons.arrow_back,
-              color: orangeColors,
-            ),
-            onPressed: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(builder: (context) {
-                  return MyHomePage();
-                }),
-              );
-            }),
-      ),
+      appBar: CustomAppBar(text: ""),
       body: Container(
         padding: EdgeInsets.only(bottom: 20),
         child: Form(
@@ -211,41 +152,51 @@ class _RegisterPageState extends State<RegisterPage> {
                       child: Column(
                         mainAxisSize: MainAxisSize.max,
                         children: <Widget>[
-                          _textInput(
-                              controller: _fisrtController,
-                              hint: "First Name",
-                              icon: Icons.person,
-                              torf: false,
-                              errormssg: fnameerrormssg,
-                              regexp: aregexp),
-                          _textInput(
-                              controller: _lastController,
-                              hint: "Last Name",
-                              icon: Icons.person,
-                              torf: false,
-                              errormssg: lnameerrormssg,
-                              regexp: aregexp),
-                          _textInput(
-                              controller: _emailController,
-                              hint: "Email",
-                              icon: Icons.email,
-                              torf: false,
-                              errormssg: emailerrormssg,
-                              regexp: eregexp),
-                          _textInput(
-                              controller: _mobileController,
-                              hint: "Phone Number",
-                              icon: Icons.call,
-                              torf: false,
-                              errormssg: mobileerrormssg,
-                              regexp: mregexp),
-                          _textInput(
-                              controller: _addrController,
-                              hint: "Address",
-                              icon: Icons.location_city,
-                              torf: false,
-                              errormssg: addrerrormssg,
-                              regexp: aregexp),
+                          RegTextInput(
+                            controller: fisrtController,
+                            hint: "First Name",
+                            icon: Icons.person,
+                            torf: false,
+                            errormssg: fnameerrormssg,
+                            regexp: aregexp,
+                            enable: true,
+                          ),
+                          RegTextInput(
+                            controller: lastController,
+                            hint: "Last Name",
+                            icon: Icons.person,
+                            torf: false,
+                            errormssg: lnameerrormssg,
+                            regexp: aregexp,
+                            enable: true,
+                          ),
+                          RegTextInput(
+                            controller: emailController,
+                            hint: "Email",
+                            icon: Icons.email,
+                            torf: false,
+                            errormssg: emailerrormssg,
+                            regexp: eregexp,
+                            enable: true,
+                          ),
+                          RegTextInput(
+                            controller: mobileController,
+                            hint: "Phone Number",
+                            icon: Icons.call,
+                            torf: false,
+                            errormssg: mobileerrormssg,
+                            regexp: mregexp,
+                            enable: true,
+                          ),
+                          RegTextInput(
+                            controller: addrController,
+                            hint: "Address",
+                            icon: Icons.location_city,
+                            torf: false,
+                            errormssg: addrerrormssg,
+                            regexp: aregexp,
+                            enable: true,
+                          ),
                           Container(
                             margin: const EdgeInsets.only(top: 20),
                             decoration: const BoxDecoration(
@@ -255,7 +206,7 @@ class _RegisterPageState extends State<RegisterPage> {
                             ),
                             padding: const EdgeInsets.only(left: 10),
                             child: TextFormField(
-                              controller: _passwordController,
+                              controller: passwordController,
                               obscureText: obscureText,
                               decoration: InputDecoration(
                                   border: InputBorder.none,
@@ -273,7 +224,7 @@ class _RegisterPageState extends State<RegisterPage> {
                                   )),
                               validator: (value) {
                                 if (value!.isEmpty ||
-                                    _passwordController.text.length < 6) {
+                                    passwordController.text.length < 6) {
                                   return "Password must not be less than 6 characters";
                                 } else {
                                   return null;
@@ -290,7 +241,7 @@ class _RegisterPageState extends State<RegisterPage> {
                             ),
                             padding: const EdgeInsets.only(left: 10),
                             child: TextFormField(
-                              controller: _confirmPassController,
+                              controller: confirmPassController,
                               obscureText: obscureText,
                               decoration: InputDecoration(
                                   border: InputBorder.none,
@@ -308,8 +259,8 @@ class _RegisterPageState extends State<RegisterPage> {
                                   )),
                               validator: (value) {
                                 if (value!.isEmpty ||
-                                    _passwordController.text !=
-                                        _confirmPassController.text) {
+                                    passwordController.text !=
+                                        confirmPassController.text) {
                                   return "Password and Confirm Password Don't Match";
                                 } else {
                                   return null;
@@ -325,15 +276,15 @@ class _RegisterPageState extends State<RegisterPage> {
                                   if (formKey.currentState!.validate()) {
                                     await FirebaseAuth.instance
                                         .createUserWithEmailAndPassword(
-                                            email: _emailController.text,
-                                            password: _passwordController.text);
-                                    //var uId = userr.uid;
+                                            email: emailController.text,
+                                            password: passwordController.text);
+
                                     addUserDetails(
-                                            _fisrtController.text,
-                                            _lastController.text,
-                                            _emailController.text,
-                                            _addrController.text,
-                                            _mobileController.text,
+                                            fisrtController.text,
+                                            lastController.text,
+                                            emailController.text,
+                                            addrController.text,
+                                            mobileController.text,
                                             greyimage,
                                             userId)
                                         .then((value) {
@@ -356,7 +307,7 @@ class _RegisterPageState extends State<RegisterPage> {
                           InkWell(
                             child: RichText(
                               text: TextSpan(children: [
-                                TextSpan(
+                                const TextSpan(
                                     text: "Already a member ? ",
                                     style: TextStyle(color: Colors.black)),
                                 TextSpan(
@@ -382,32 +333,4 @@ class _RegisterPageState extends State<RegisterPage> {
       ),
     );
   }
-}
-
-Widget _textInput({controller, hint, icon, torf, errormssg, regexp}) {
-  return Container(
-    margin: EdgeInsets.only(top: 5),
-    decoration: BoxDecoration(
-      borderRadius: BorderRadius.all(Radius.circular(20)),
-      color: Colors.white,
-    ),
-    padding: EdgeInsets.only(left: 10),
-    child: TextFormField(
-      obscureText: torf,
-      controller: controller,
-      decoration: InputDecoration(
-        border: InputBorder.none,
-        hintText: hint,
-        prefixIcon: Icon(icon),
-      ),
-      validator: (value) {
-        bool Valid = RegExp(regexp).hasMatch(value!);
-        if (value.isEmpty || !Valid) {
-          return errormssg;
-        } else {
-          return null;
-        }
-      },
-    ),
-  );
 }
