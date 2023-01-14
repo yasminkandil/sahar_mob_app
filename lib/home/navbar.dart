@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:sahar_mob_app/admin/admin.dart';
 import 'package:sahar_mob_app/pages/cart.dart';
@@ -13,9 +14,10 @@ import 'package:sahar_mob_app/pages/view_account.dart';
 import 'package:sahar_mob_app/utils/color.dart';
 import 'package:sahar_mob_app/widgets/header_container.dart';
 import '../controllers/search_delegate.dart';
+import '../pages/must_have_account.dart';
 import '../pages/my_drawer_header.dart';
+
 class Navigation_bar extends StatefulWidget {
-  
   @override
   HomeNavbar createState() => HomeNavbar();
 }
@@ -31,14 +33,13 @@ class HomeNavbar extends State<Navigation_bar> {
         actions: [
           IconButton(
             onPressed: () {
- Navigator.push(
-              context,
-              MaterialPageRoute(builder: (context) => FirebaseSearchScreen()),
-            );            
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => FirebaseSearchScreen()),
+              );
             },
             icon: const Icon(Icons.search),
           ),
-           
           IconButton(
             onPressed: () {
               // method to show the search bar
@@ -57,7 +58,7 @@ class HomeNavbar extends State<Navigation_bar> {
         child: Container(
           child: Column(children: <Widget>[
             HeaderContainer("Home Page"),
-            HomeScreen(salma:'salma'),
+            HomeScreen(salma: 'salma'),
           ]),
         ),
       ),
@@ -71,11 +72,11 @@ class HomeNavbar extends State<Navigation_bar> {
           ]),
         )),
       ),
-     
-  );
-    
+    );
+
     // TODO: implement build
   }
+
   Widget MyDrawerList() {
     return Container(
       padding: EdgeInsets.only(
@@ -91,34 +92,25 @@ class HomeNavbar extends State<Navigation_bar> {
               currentPage == Sections.Cart ? true : false),
           menuItem(7, "Sign Up", Icons.login_rounded,
               currentPage == Sections.Sign_Up ? true : false),
-          menuItem(1, "DashBoard", Icons.dashboard_outlined,
-              currentPage == Sections.Dashboard ? true : false),
           menuItem(2, "Contact US", Icons.people_alt_outlined,
               currentPage == Sections.contacts ? true : false),
-          menuItem(3, "Categories", Icons.category_rounded,
+          menuItem(3, "Shop", Icons.category_rounded,
               currentPage == Sections.Categories ? true : false),
           menuItem(4, " Profile", Icons.edit_attributes_rounded,
               currentPage == Sections.Edit_Profile ? true : false),
-          menuItem(5, "Notifications", Icons.notification_add_rounded,
-              currentPage == Sections.Notifications ? true : false),
           menuItem(6, "Log Out", Icons.logout_rounded,
               currentPage == Sections.Log_Out ? true : false),
         ],
       ),
     );
   }
+
   Widget menuItem(int id, String title, IconData icon, bool selected) {
     return Material(
       color: selected ? Colors.grey : Colors.transparent,
       child: InkWell(
         onTap: () {
-          if (id == 1) {
-            Navigator.push(
-              context,
-              MaterialPageRoute(builder: (context) => Admin()),
-            );
-            currentPage = Sections.Dashboard;
-          } else if (id == 2) {
+          if (id == 2) {
             Navigator.push(
               context,
               MaterialPageRoute(builder: (context) => ContactUs()),
@@ -134,11 +126,19 @@ class HomeNavbar extends State<Navigation_bar> {
             );
             currentPage = Sections.Categories;
           } else if (id == 4) {
-            Navigator.push(
-              context,
-              MaterialPageRoute(builder: (context) => ViewAccountPage()),
-            );
-            currentPage = Sections.Notifications;
+            if (FirebaseAuth.instance.currentUser == null) {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => MustHaveAccountPage()),
+              );
+            } else {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                    builder: (context) => const ViewAccountPage()),
+              );
+            }
+            currentPage = Sections.Edit_Profile;
           } else if (id == 5) {
             Navigator.push(
               context,
@@ -146,6 +146,7 @@ class HomeNavbar extends State<Navigation_bar> {
             );
             currentPage = Sections.Edit_Profile;
           } else if (id == 6) {
+            FirebaseAuth.instance.signOut();
             Navigator.push(
               context,
               MaterialPageRoute(builder: (context) => Navigation_bar()),

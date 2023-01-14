@@ -21,6 +21,7 @@ import 'package:sahar_mob_app/widgets/header_container.dart';
 import 'package:path/path.dart' as p;
 import 'package:sahar_mob_app/widgets/reg_textinput.dart';
 
+import '../widgets/alert.dart';
 import '../widgets/app_bar.dart';
 
 class RegisterPage extends StatefulWidget {
@@ -87,6 +88,20 @@ class _RegisterPageState extends State<RegisterPage> {
   }
 
   @override
+  void dispose() {
+    // * TextEditingControllers should be always disposed
+    emailController.dispose();
+    passwordController.dispose();
+    fisrtController.dispose();
+    mobileController.dispose();
+    addrController.dispose();
+    lastController.dispose();
+    confirmPassController.dispose();
+
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     bool obscureText = true;
     return Scaffold(
@@ -122,7 +137,7 @@ class _RegisterPageState extends State<RegisterPage> {
                       right: 0,
                       child: Container(
                           height: 40,
-                          width: 40,
+                          width: 50,
                           decoration: BoxDecoration(
                               shape: BoxShape.circle,
                               border: Border.all(
@@ -273,47 +288,59 @@ class _RegisterPageState extends State<RegisterPage> {
                               child: ButtonWidget(
                                 btnText: "REGISTER",
                                 onClick: () async {
-                                  try{
-                                  if (formKey.currentState!.validate()) {
-                                    await FirebaseAuth.instance
-                                        .createUserWithEmailAndPassword(
-                                            email: emailController.text,
-                                            password: passwordController.text);
-
-                                    addUserDetails(
-                                            fisrtController.text,
-                                            lastController.text,
-                                            emailController.text,
-                                            addrController.text,
-                                            mobileController.text,
-                                            greyimage,
-                                            userId)
-                                        .then((value) {
-                                      print("Created new account");
-                                      final snackBar = SnackBar(
-                                          content: Text("Account Created.."));
-                                      ScaffoldMessenger.of(context)
-                                          .showSnackBar(snackBar);
-                                      Navigator.push(
-                                          context,
-                                          MaterialPageRoute(
-                                              builder: (context) =>
-                                                  MyHomePage()));
-                                    });
+                                  try {
+                                    if (formKey.currentState!.validate()) {
+                                      await FirebaseAuth.instance
+                                          .createUserWithEmailAndPassword(
+                                              email: emailController.text,
+                                              password:
+                                                  passwordController.text);
+                                      String email =
+                                          emailController.text.trim();
+                                      final userr = await FirebaseAuth.instance
+                                          .fetchSignInMethodsForEmail(email);
+                                      // if (userr != null) {
+                                      // showAlertDialog(
+                                      //   context, "Email Already Exists");
+                                      // } //else {
+                                      addUserDetails(
+                                              fisrtController.text,
+                                              lastController.text,
+                                              emailController.text,
+                                              addrController.text,
+                                              mobileController.text,
+                                              greyimage,
+                                              userId)
+                                          .then((value) {
+                                        print("Created new account");
+                                        final snackBar = SnackBar(
+                                            content: Text("Account Created.."));
+                                        ScaffoldMessenger.of(context)
+                                            .showSnackBar(snackBar);
+                                        Navigator.push(
+                                            context,
+                                            MaterialPageRoute(
+                                                builder: (context) =>
+                                                    MyHomePage()));
+                                      });
+                                      //}
+                                    }
+                                  } catch (e) {
+                                    if (e is FirebaseAuthException) {
+                                      if (e.code == 'weak-password') {
+                                        showAlertDialog(context,
+                                            "The password provided is too weak.");
+                                      } else if (e.code ==
+                                          'email-already-in-use') {
+                                        showAlertDialog(context,
+                                            "Account already exists for that email.");
+                                      }
+                                    } else {
+                                      print(e);
+                                    }
                                   }
-                              } catch (e) {
-      if (e.hashCode == 'email-already-in-use') {
-
-                      child: Text('You need to sign in to view your account.');
-
-     //   print('The email is already in use');
-      } else {
-        print(e);
-      }
-    }
-          
                                 },
-                      ),
+                              ),
                             ),
                           ),
                           InkWell(

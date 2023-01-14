@@ -33,7 +33,7 @@ Future addUserDetails(
       'firstname': firstname,
       'lastname': lastname,
       'email': userEmail,
-      'mobile': int.parse(userPhoneNumber),
+      'mobile': userPhoneNumber,
       'address': useraddress,
       'image': userImage,
       'id': id,

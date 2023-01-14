@@ -11,7 +11,6 @@ import 'package:sahar_mob_app/pages/regi_page.dart';
 import 'package:sahar_mob_app/utils/color.dart';
 import 'package:sahar_mob_app/widgets/btn_widget.dart';
 import 'package:sahar_mob_app/widgets/header_container.dart';
-import 'package:sahar_mob_app/home/navbar.dart';
 
 import '../widgets/app_bar.dart';
 
@@ -48,6 +47,14 @@ class _LoginPageState extends State<LoginPage> {
     return user;
   }
 
+  /* @override
+  void dispose() {
+    // * TextEditingControllers should be always disposed
+    emailController.dispose();
+    passwordController.dispose();
+    super.dispose();
+  }
+*/
   @override
   Widget build(BuildContext context) {
     TextEditingController emailController = TextEditingController();

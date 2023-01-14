@@ -19,17 +19,15 @@ class _FirebaseSearchScreenState extends State<FirebaseSearchScreen> {
       searchResult = result.docs.map((e) => e.data()).toList();
     });
   }
-  
+
   @override
   Widget build(BuildContext context) {
-    
     return Scaffold(
       appBar: AppBar(
-          backgroundColor: GreyColors,
+        backgroundColor: GreyColors,
         title: const Text("Search"),
       ),
       body: Column(
-        
         children: [
           Padding(
             padding: const EdgeInsets.all(15.0),
@@ -58,5 +56,4 @@ class _FirebaseSearchScreenState extends State<FirebaseSearchScreen> {
       ),
     );
   }
-  
 }

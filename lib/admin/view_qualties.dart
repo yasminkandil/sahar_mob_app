@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:sahar_mob_app/admin/add_quality.dart';
 import 'package:sahar_mob_app/read%20data/get_qualties.dart';
 import 'package:sahar_mob_app/utils/color.dart';
-
 import '../widgets/app_bar.dart';
 
 class ViewQualitiesPage extends StatefulWidget {
@@ -56,6 +55,13 @@ class _ViewQualitiesPageState extends State<ViewQualitiesPage> {
                           children: <Widget>[
                             ListTile(
                                 title: GetQualtiesPage(quality: prod[index])),
+                            Divider(
+                              color: orangeColors,
+                              height: 10,
+                              thickness: 3,
+                              indent: 25,
+                              endIndent: 25,
+                            )
                           ],
                         ),
                       );

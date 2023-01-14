@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:sahar_mob_app/utils/color.dart';
 
 class GetOffersPage extends StatelessWidget {
   final String offer;
@@ -37,8 +38,7 @@ class GetOffersPage extends StatelessWidget {
                 TextSpan(
                     text: '${data['name']}\n',
                     style: TextStyle(
-                        color: Colors.deepOrange,
-                        fontWeight: FontWeight.normal)),
+                        color: orangeColors, fontWeight: FontWeight.normal)),
                 TextSpan(
                     text: 'Description  : ',
                     style: TextStyle(
@@ -46,8 +46,7 @@ class GetOffersPage extends StatelessWidget {
                 TextSpan(
                     text: '${data['description']}\n',
                     style: TextStyle(
-                        color: Colors.deepOrange,
-                        fontWeight: FontWeight.normal)),
+                        color: orangeColors, fontWeight: FontWeight.normal)),
                 TextSpan(
                     text: 'Percentage : ',
                     style: TextStyle(
@@ -55,8 +54,7 @@ class GetOffersPage extends StatelessWidget {
                 TextSpan(
                     text: '${data['percentage']} %\n',
                     style: TextStyle(
-                        color: Colors.deepOrange,
-                        fontWeight: FontWeight.normal)),
+                        color: orangeColors, fontWeight: FontWeight.normal)),
                 TextSpan(
                     text: 'Start Date  : ',
                     style: TextStyle(
@@ -64,8 +62,7 @@ class GetOffersPage extends StatelessWidget {
                 TextSpan(
                     text: '${data['datein']}\n',
                     style: TextStyle(
-                        color: Colors.deepOrange,
-                        fontWeight: FontWeight.normal)),
+                        color: orangeColors, fontWeight: FontWeight.normal)),
                 TextSpan(
                     text: 'End Date  : ',
                     style: TextStyle(
@@ -73,8 +70,7 @@ class GetOffersPage extends StatelessWidget {
                 TextSpan(
                     text: '${data['dateout']}\n',
                     style: TextStyle(
-                        color: Colors.deepOrange,
-                        fontWeight: FontWeight.normal)),
+                        color: orangeColors, fontWeight: FontWeight.normal)),
               ],
             ),
           );
