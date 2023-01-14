@@ -1,8 +1,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.sahar_mob_app">
+    package="com.SYKR.sahar_mob_app">
       <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />   
    <application
-        android:label="Sahar Quick Care"
+        android:label="SYKR Mobile Care"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
         
