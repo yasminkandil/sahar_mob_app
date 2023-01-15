@@ -299,10 +299,6 @@ class _RegisterPageState extends State<RegisterPage> {
                                           emailController.text.trim();
                                       final userr = await FirebaseAuth.instance
                                           .fetchSignInMethodsForEmail(email);
-                                      // if (userr != null) {
-                                      // showAlertDialog(
-                                      //   context, "Email Already Exists");
-                                      // } //else {
                                       addUserDetails(
                                               fisrtController.text,
                                               lastController.text,

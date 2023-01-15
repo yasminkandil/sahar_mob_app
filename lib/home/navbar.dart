@@ -7,6 +7,7 @@ import 'package:sahar_mob_app/pages/checkout.dart';
 import 'package:sahar_mob_app/pages/contact_us.dart';
 import 'package:sahar_mob_app/pages/edit_account.dart';
 import 'package:sahar_mob_app/home/home_screen.dart';
+import 'package:sahar_mob_app/pages/gallary.dart';
 import 'package:sahar_mob_app/pages/login_page.dart';
 import 'package:sahar_mob_app/pages/products_all.dart';
 import 'package:sahar_mob_app/product_powerbank.dart';
@@ -99,6 +100,8 @@ class HomeNavbar extends State<Navigation_bar> {
       ),
       child: Column(
         children: [
+          menuItem(1, "Gallery", Icons.image,
+              currentPage == Sections.Gallery ? true : false),
           menuItem(9, "CheckOut", Icons.check_outlined,
               currentPage == Sections.CheckOut ? true : false),
           menuItem(10, "Login", Icons.login_rounded,
@@ -125,7 +128,13 @@ class HomeNavbar extends State<Navigation_bar> {
       color: selected ? Colors.grey : Colors.transparent,
       child: InkWell(
         onTap: () {
-          if (id == 2) {
+          if (id == 1) {
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => gallery()),
+            );
+            currentPage = Sections.contacts;
+          } else if (id == 2) {
             Navigator.push(
               context,
               MaterialPageRoute(builder: (context) => ContactUs()),
@@ -232,5 +241,6 @@ enum Sections {
   Log_Out,
   Cart,
   CheckOut,
-  login
+  login,
+  Gallery
 }
