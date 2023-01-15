@@ -2,7 +2,6 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/container.dart';
 import 'package:flutter/src/widgets/framework.dart';
-import 'package:sahar_mob_app/screens/order_status.dart';
 
 class OrdersDetails extends StatelessWidget {
   const OrdersDetails({super.key, required this.salma});

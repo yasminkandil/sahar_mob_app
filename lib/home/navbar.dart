@@ -13,7 +13,7 @@ import 'package:sahar_mob_app/product_powerbank.dart';
 import 'package:sahar_mob_app/pages/regi_page.dart';
 import 'package:sahar_mob_app/pages/view_account.dart';
 import 'package:sahar_mob_app/product_powerbank.dart';
-import 'package:sahar_mob_app/screens/order_screen.dart';
+import 'package:sahar_mob_app/screens/details/order_screen.dart';
 import 'package:sahar_mob_app/utils/color.dart';
 import 'package:sahar_mob_app/widgets/header_container.dart';
 import '../controllers/search_delegate.dart';

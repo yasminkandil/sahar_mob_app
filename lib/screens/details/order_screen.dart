@@ -3,7 +3,8 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/container.dart';
 import 'package:flutter/src/widgets/framework.dart';
-import 'package:sahar_mob_app/screens/order_details.dart';
+import 'package:sahar_mob_app/screens/Orders_Screen/order_details.dart';
+import 'package:sahar_mob_app/widgets/app_bar.dart';
 
 class OrderScreen extends StatelessWidget {
   OrderScreen({super.key, required this.salma});
@@ -27,9 +28,8 @@ class OrderScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        backgroundColor: Color.fromARGB(255, 61, 61, 61),
-        title: Text("My Orders"),
+      appBar: CustomAppBar(
+        text: "My Orders",
       ),
       backgroundColor: Colors.orange,
       body: FutureBuilder(
@@ -37,9 +37,8 @@ class OrderScreen extends StatelessWidget {
         builder: (context, snapshot) {
           return ListView.builder(
             itemCount: orders.length,
-            itemBuilder: (context, index) => buildOrders(
-              salma: orders[index],
-            ),
+            itemBuilder: (context, index) =>
+                buildOrders(salma: orders[index], index: index),
           );
         },
       ),
@@ -48,8 +47,9 @@ class OrderScreen extends StatelessWidget {
 }
 
 class buildOrders extends StatelessWidget {
-  buildOrders({super.key, required this.salma});
+  buildOrders({super.key, required this.salma, required this.index});
   final String salma;
+  final int index;
   var indexx = 0;
   @override
   Widget build(BuildContext context) {
@@ -62,7 +62,7 @@ class buildOrders extends StatelessWidget {
               : <String, dynamic>{};
           return Container(
               child: ListTile(
-            leading: Icon(Icons.circle_rounded),
+            leading: Text("  ${index + 1} "),
             title: Text(" Name:  ${data["products"]}"),
             subtitle: Text("Order Price:    ${data['Total']}  " + "EGP"),
             trailing: IconButton(
