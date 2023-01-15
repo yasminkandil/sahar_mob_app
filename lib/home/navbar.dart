@@ -1,5 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:sahar_mob_app/admin/admin.dart';
 import 'package:sahar_mob_app/pages/cart.dart';
 import 'package:sahar_mob_app/pages/checkout.dart';
@@ -11,11 +12,17 @@ import 'package:sahar_mob_app/pages/products_all.dart';
 import 'package:sahar_mob_app/product_powerbank.dart';
 import 'package:sahar_mob_app/pages/regi_page.dart';
 import 'package:sahar_mob_app/pages/view_account.dart';
+<<<<<<< HEAD:lib/pages/navbar.dart
+import 'package:sahar_mob_app/product_powerbank.dart';
+import 'package:sahar_mob_app/screens/order_screen.dart';
+=======
+>>>>>>> a0198b604bb6f99486dbb39d91250a5dd9231deb:lib/home/navbar.dart
 import 'package:sahar_mob_app/utils/color.dart';
 import 'package:sahar_mob_app/widgets/header_container.dart';
 import '../controllers/search_delegate.dart';
 import '../pages/must_have_account.dart';
 import '../pages/my_drawer_header.dart';
+import 'package:sahar_mob_app/providers/themeprovider.dart';
 
 class Navigation_bar extends StatefulWidget {
   @override
@@ -26,11 +33,22 @@ class HomeNavbar extends State<Navigation_bar> {
   var currentPage = Sections.Dashboard;
   @override
   Widget build(BuildContext context) {
+    TextTheme textTheme = Theme.of(context).textTheme;
     return Scaffold(
       appBar: AppBar(
         backgroundColor: GreyColors,
         title: Text("Menu"),
         actions: [
+          Consumer<ThemeProvider>(
+            builder: (context, theme, child) {
+              return IconButton(
+                icon: Icon(Icons.brightness_6),
+                onPressed: () {
+                  theme.toggleTheme();
+                },
+              );
+            },
+          ),
           IconButton(
             onPressed: () {
               Navigator.push(
@@ -161,7 +179,7 @@ class HomeNavbar extends State<Navigation_bar> {
           } else if (id == 8) {
             Navigator.push(
               context,
-              MaterialPageRoute(builder: (context) => CartItem()),
+              MaterialPageRoute(builder: (context) => OrderScreen()),
             );
             currentPage = Sections.Cart;
           } else if (id == 9) {

@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/container.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:sahar_mob_app/pages/my_drawer_header.dart';
+import 'package:sahar_mob_app/pages/navbar.dart';
 
 import 'package:sahar_mob_app/utils/color.dart';
 import 'package:sahar_mob_app/pages/components/body.dart';
@@ -18,6 +20,16 @@ class Products extends StatelessWidget {
       appBar: CustomAppBar(text: "Shop"),
       body: Body(
         cat: cat,
+      ),
+      drawer: Drawer(
+        child: SingleChildScrollView(
+            child: Container(
+          child: Column(children: [
+            // Malhashh lazmaa walla ehhh!!!!!!!!
+            MyHeaderDrawer(),
+            HomeNavbar().MyDrawerList()
+          ]),
+        )),
       ),
     );
   }
