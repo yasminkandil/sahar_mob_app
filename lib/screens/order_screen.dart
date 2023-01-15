@@ -3,58 +3,87 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/container.dart';
 import 'package:flutter/src/widgets/framework.dart';
+import 'package:sahar_mob_app/screens/order_details.dart';
 
 class OrderScreen extends StatelessWidget {
-  const OrderScreen({super.key});
+  OrderScreen({super.key, required this.salma});
+  final String salma;
+
+  List<String> orders = [];
+
+  Future getDocord() async {
+    await FirebaseFirestore.instance
+        .collection('orders')
+        .where('orderBy', isEqualTo: FirebaseAuth.instance.currentUser?.email)
+        .get()
+        .then(
+          (snapshot) => snapshot.docs.forEach((document) {
+            print(document.reference);
+            orders.add(document.reference.id);
+          }),
+        );
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        backgroundColor: Color.fromARGB(255, 61, 61, 61),
         title: Text("My Orders"),
       ),
-      body: StreamBuilder(
-        stream: getorderList(),
-        builder: (BuildContext context, AsyncSnapshot snapshot) {
-          if (!snapshot.hasData) {
-            return Center(
-              child: CircularProgressIndicator(),
-            );
-          } else if (!snapshot.hasData) {
-            return Center(
-              child: Text("No Orders"),
-            );
-          } else {
-            return ListView.builder(
-              itemCount: snapshot.data.documents.length,
-              itemBuilder: (BuildContext context, int index) {
-                return Container(
-                  child: ListTile(
-                    leading: Text("${index + 1}"),
-                    title: Text(snapshot.data.documents[index].data["name"]),
-                    subtitle:
-                        Text(snapshot.data.documents[index].data["price"]),
-                    trailing: IconButton(
-                      icon: Icon(
-                        Icons.arrow_forward_ios_rounded,
-                        color: Colors.grey,
-                      ),
-                      onPressed: () {},
-                    ),
-                  ),
-                );
-              },
-            );
-          }
+      backgroundColor: Colors.orange,
+      body: FutureBuilder(
+        future: getDocord(),
+        builder: (context, snapshot) {
+          return ListView.builder(
+            itemCount: orders.length,
+            itemBuilder: (context, index) => buildOrders(
+              salma: orders[index],
+            ),
+          );
         },
       ),
     );
   }
+}
 
-  getorderList() {
-    return FirebaseFirestore.instance
-        .collection("orders")
-        .where('orderBy', isEqualTo: FirebaseAuth.instance.currentUser?.email)
-        .snapshots();
+class buildOrders extends StatelessWidget {
+  buildOrders({super.key, required this.salma});
+  final String salma;
+  var indexx = 0;
+  @override
+  Widget build(BuildContext context) {
+    return FutureBuilder(
+      future: FirebaseFirestore.instance.collection('orders').doc(salma).get(),
+      builder: ((context, snapshot) {
+        if (snapshot.connectionState == ConnectionState.done) {
+          Map<String, dynamic> data = snapshot.data?.data() != null
+              ? snapshot.data!.data()! as Map<String, dynamic>
+              : <String, dynamic>{};
+          return Container(
+              child: ListTile(
+            leading: Icon(Icons.circle_rounded),
+            title: Text(" Name:  ${data["products"]}"),
+            subtitle: Text("Order Price:    ${data['Total']}  " + "EGP"),
+            trailing: IconButton(
+                icon: Icon(
+                  Icons.arrow_forward_ios_rounded,
+                  color: Colors.grey,
+                ),
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => OrdersDetails(
+                        salma: salma,
+                      ),
+                    ),
+                  );
+                }),
+          ));
+        }
+        return Text("Loading..");
+      }),
+    );
   }
 }
