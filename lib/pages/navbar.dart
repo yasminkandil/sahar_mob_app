@@ -11,6 +11,7 @@ import 'package:sahar_mob_app/product_powerbank.dart';
 import 'package:sahar_mob_app/pages/regi_page.dart';
 import 'package:sahar_mob_app/pages/view_account.dart';
 import 'package:sahar_mob_app/product_powerbank.dart';
+import 'package:sahar_mob_app/screens/order_screen.dart';
 import 'package:sahar_mob_app/utils/color.dart';
 //import 'package:sahar_mob_app/widgets/footer.dart';
 import 'package:sahar_mob_app/widgets/header_container.dart';
@@ -164,7 +165,7 @@ class HomeNavbar extends State<Navigation_bar> {
           } else if (id == 8) {
             Navigator.push(
               context,
-              MaterialPageRoute(builder: (context) => CartItem()),
+              MaterialPageRoute(builder: (context) => OrderScreen()),
             );
             currentPage = Sections.Cart;
           } else if (id == 9) {
