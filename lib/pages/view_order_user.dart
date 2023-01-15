@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:sahar_mob_app/home/home_page.dart';
 import 'package:sahar_mob_app/pages/login_page.dart';
-import 'package:sahar_mob_app/pages/navbar.dart';
+import 'package:sahar_mob_app/home/navbar.dart';
 import 'package:sahar_mob_app/utils/color.dart';
 import 'package:sahar_mob_app/widgets/btn_widget.dart';
 import 'package:sahar_mob_app/widgets/header_container.dart';
@@ -25,7 +26,7 @@ class _viewOrderUserState extends State<viewOrderUser> {
               Navigator.push(
                 context,
                 MaterialPageRoute(builder: (context) {
-                  return Navigation_bar();
+                  return MyHomePage();
                 }),
               );
             }),

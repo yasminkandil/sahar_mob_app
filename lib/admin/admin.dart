@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:sahar_mob_app/admin/add_category.dart';
 import 'package:sahar_mob_app/admin/add_color.dart';
 import 'package:sahar_mob_app/admin/add_gallery.dart';
+import 'package:sahar_mob_app/admin/add_homePageImage.dart';
 import 'package:sahar_mob_app/admin/add_offer.dart';
 import 'package:sahar_mob_app/admin/add_product.dart';
 import 'package:sahar_mob_app/admin/add_quality.dart';
@@ -15,7 +16,8 @@ import 'package:sahar_mob_app/admin/users_admin.dart';
 import 'package:sahar_mob_app/admin/view_product.dart';
 import 'package:sahar_mob_app/pages/products_all.dart';
 import 'package:sahar_mob_app/utils/color.dart';
-import 'package:sahar_mob_app/pages/navbar.dart';
+import 'package:sahar_mob_app/home/navbar.dart';
+import 'package:sahar_mob_app/home/home_page.dart';
 
 enum Page { dashboard, manage }
 
@@ -42,7 +44,7 @@ class _AdminState extends State<Admin> {
                 Navigator.push(
                   context,
                   MaterialPageRoute(builder: (context) {
-                    return Navigation_bar();
+                    return MyHomePage();
                   }),
                 );
               }),
@@ -302,6 +304,14 @@ class _AdminState extends State<Admin> {
                 onTap: () => Navigator.push(
                       context,
                       MaterialPageRoute(builder: (context) => AddGallery()),
+                    )),
+            Divider(),
+            ListTile(
+                leading: Icon(Icons.add_circle_outline),
+                title: Text("Add in homepage images"),
+                onTap: () => Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => AddGalleryhome()),
                     )),
             Divider(),
             ListTile(

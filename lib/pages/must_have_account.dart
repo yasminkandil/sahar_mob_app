@@ -1,0 +1,60 @@
+import 'package:flutter/material.dart';
+import 'package:sahar_mob_app/pages/login_page.dart';
+import 'package:sahar_mob_app/pages/regi_page.dart';
+import 'package:sahar_mob_app/widgets/app_bar.dart';
+
+import '../utils/color.dart';
+
+class MustHaveAccountPage extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: CustomAppBar(text: ""),
+      body: Padding(
+        padding: const EdgeInsets.symmetric(vertical: 150.0),
+        child: Column(
+          children: [
+            Center(
+              child: Text(
+                  style: TextStyle(color: orangeColors),
+                  'Sorry...You must have an account to view this page.'),
+            ),
+            SizedBox(
+              height: 70,
+              width: 70,
+            ),
+            InkWell(
+              child: RichText(
+                text: TextSpan(children: [
+                  const TextSpan(
+                      text: "Don't have an account ? ",
+                      style: TextStyle(color: Colors.black)),
+                  TextSpan(
+                      text: "Register", style: TextStyle(color: orangeColors)),
+                ]),
+              ),
+              onTap: () => Navigator.of(context).push(
+                  MaterialPageRoute(builder: (context) => RegisterPage())),
+            ),
+            InkWell(
+              child: RichText(
+                text: TextSpan(children: [
+                  const TextSpan(
+                      text: "Already a member ? ",
+                      style: TextStyle(color: Colors.black)),
+                  TextSpan(
+                      text: "Login",
+                      style: TextStyle(
+                        color: orangeColors,
+                      )),
+                ]),
+              ),
+              onTap: () => Navigator.of(context)
+                  .push(MaterialPageRoute(builder: (context) => LoginPage())),
+            )
+          ],
+        ),
+      ),
+    );
+  }
+}

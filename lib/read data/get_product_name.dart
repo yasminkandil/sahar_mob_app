@@ -3,6 +3,7 @@ import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:sahar_mob_app/admin/add_category.dart';
 import 'package:sahar_mob_app/admin/add_product.dart';
+import 'package:sahar_mob_app/utils/color.dart';
 
 class GetProductName extends StatelessWidget {
   final String salma;
@@ -47,7 +48,7 @@ class GetProductName extends StatelessWidget {
                     TextSpan(
                         text: '${data['name']}\n',
                         style: TextStyle(
-                            color: Colors.deepOrange,
+                            color: orangeColors,
                             fontWeight: FontWeight.normal)),
 
                     TextSpan(
@@ -57,7 +58,7 @@ class GetProductName extends StatelessWidget {
                     TextSpan(
                         text: '${data['quantity']}\n',
                         style: TextStyle(
-                            color: Colors.deepOrange,
+                            color: orangeColors,
                             fontWeight: FontWeight.normal)),
                     TextSpan(
                         text: 'Price  : ',
@@ -66,7 +67,7 @@ class GetProductName extends StatelessWidget {
                     TextSpan(
                         text: '${data['price']}\n',
                         style: TextStyle(
-                            color: Colors.deepOrange,
+                            color: orangeColors,
                             fontWeight: FontWeight.normal)),
                     TextSpan(
                         text: 'Brand  : ',
@@ -75,7 +76,7 @@ class GetProductName extends StatelessWidget {
                     TextSpan(
                         text: '${data['brand']}\n',
                         style: TextStyle(
-                            color: Colors.deepOrange,
+                            color: orangeColors,
                             fontWeight: FontWeight.normal)),
                     TextSpan(
                         text: 'Category  : ',
@@ -84,7 +85,7 @@ class GetProductName extends StatelessWidget {
                     TextSpan(
                         text: '${data['category']}\n',
                         style: TextStyle(
-                            color: Colors.deepOrange,
+                            color: orangeColors,
                             fontWeight: FontWeight.normal)),
 
 /*

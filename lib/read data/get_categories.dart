@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:sahar_mob_app/utils/color.dart';
 
 class GetCategoriesPage extends StatelessWidget {
   final String category;
@@ -44,13 +45,24 @@ class GetCategoriesPage extends StatelessWidget {
                         text: 'Name : ',
                         style: TextStyle(
                             color: Colors.black, fontWeight: FontWeight.bold)),
+
                     TextSpan(
                         text: '${data['name']}',
                         style: TextStyle(
-                            color: Colors.deepOrange,
+                            color: orangeColors,
                             fontWeight: FontWeight.normal)),
                   ],
                 ),
+              ),
+              IconButton(
+                onPressed: () {
+                  final delete = FirebaseFirestore.instance
+                      .collection('categories')
+                      .doc(category)
+                      .delete()
+                      .then((value) => Navigator.pop(context));
+                },
+                icon: Icon(Icons.delete, color: Colors.red, size: 30.0),
               ),
             ],
           );

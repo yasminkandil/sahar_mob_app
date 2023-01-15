@@ -22,12 +22,12 @@ class MyHeaderDrawerState extends State<MyHeaderDrawer> {
             margin: EdgeInsets.only(
               bottom: 10,
             ),
-            height: 70,
+            height: 100,
             decoration: BoxDecoration(
               shape: BoxShape.circle,
-              // image: DecorationImage(
-              //   image: AssetImage('assets/images/Profile.png'),
-              // ),
+              image: DecorationImage(
+                image: AssetImage('assets/logoGrey.jpeg'),
+              ),
             ),
           ),
         ],

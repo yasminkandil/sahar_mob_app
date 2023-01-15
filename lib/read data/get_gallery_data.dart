@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:sahar_mob_app/admin/add_category.dart';
 import 'package:sahar_mob_app/admin/add_product.dart';
 import 'package:sahar_mob_app/pages/gallery_details_page.dart';
-import 'package:sahar_mob_app/pages/navbar.dart';
+import 'package:sahar_mob_app/home/navbar.dart';
 import 'package:sahar_mob_app/utils/color.dart';
 
 class GetGallery extends StatelessWidget {

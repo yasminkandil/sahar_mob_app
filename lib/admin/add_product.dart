@@ -85,8 +85,8 @@ class _AddProductPageState extends State<AddProductPage> {
                     right: 0,
                     bottom: 0,
                     child: Container(
-                        height: 30,
-                        width: 30,
+                        height: 40,
+                        width: 50,
                         decoration: BoxDecoration(
                             shape: BoxShape.circle,
                             border: Border.all(

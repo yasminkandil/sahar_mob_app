@@ -1,30 +1,30 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:sahar_mob_app/admin/admin.dart';
 import 'package:sahar_mob_app/pages/cart.dart';
-import 'package:sahar_mob_app/pages/category.dart';
 import 'package:sahar_mob_app/pages/checkout.dart';
 import 'package:sahar_mob_app/pages/contact_us.dart';
 import 'package:sahar_mob_app/pages/edit_account.dart';
+import 'package:sahar_mob_app/home/home_screen.dart';
 import 'package:sahar_mob_app/pages/login_page.dart';
 import 'package:sahar_mob_app/pages/products_all.dart';
 import 'package:sahar_mob_app/product_powerbank.dart';
 import 'package:sahar_mob_app/pages/regi_page.dart';
 import 'package:sahar_mob_app/pages/view_account.dart';
+<<<<<<< HEAD:lib/pages/navbar.dart
 import 'package:sahar_mob_app/product_powerbank.dart';
 import 'package:sahar_mob_app/screens/order_screen.dart';
+=======
+>>>>>>> a0198b604bb6f99486dbb39d91250a5dd9231deb:lib/home/navbar.dart
 import 'package:sahar_mob_app/utils/color.dart';
-//import 'package:sahar_mob_app/widgets/footer.dart';
 import 'package:sahar_mob_app/widgets/header_container.dart';
-//import 'package:sahar_mob_app/pages/body.dart';
-import 'package:sahar_mob_app/pages/components/body.dart';
-
 import '../controllers/search_delegate.dart';
-import 'my_drawer_header.dart';
+import '../pages/must_have_account.dart';
+import '../pages/my_drawer_header.dart';
 
 class Navigation_bar extends StatefulWidget {
   @override
   HomeNavbar createState() => HomeNavbar();
-  // TODO: implement createState
 }
 
 class HomeNavbar extends State<Navigation_bar> {
@@ -38,8 +38,6 @@ class HomeNavbar extends State<Navigation_bar> {
         actions: [
           IconButton(
             onPressed: () {
-              // method to show the search bar
-              //context: context, delegate:
               Navigator.push(
                 context,
                 MaterialPageRoute(builder: (context) => FirebaseSearchScreen()),
@@ -61,10 +59,13 @@ class HomeNavbar extends State<Navigation_bar> {
           )
         ],
       ),
-      body: Container(
-        child: Column(children: <Widget>[
-          HeaderContainer("Home Page"),
-        ]),
+      body: SingleChildScrollView(
+        child: Container(
+          child: Column(children: <Widget>[
+            HeaderContainer("Home Page"),
+            HomeScreen(salma: 'salma'),
+          ]),
+        ),
       ),
       drawer: Drawer(
         child: SingleChildScrollView(
@@ -77,6 +78,7 @@ class HomeNavbar extends State<Navigation_bar> {
         )),
       ),
     );
+
     // TODO: implement build
   }
 
@@ -95,16 +97,12 @@ class HomeNavbar extends State<Navigation_bar> {
               currentPage == Sections.Cart ? true : false),
           menuItem(7, "Sign Up", Icons.login_rounded,
               currentPage == Sections.Sign_Up ? true : false),
-          menuItem(1, "DashBoard", Icons.dashboard_outlined,
-              currentPage == Sections.Dashboard ? true : false),
           menuItem(2, "Contact US", Icons.people_alt_outlined,
               currentPage == Sections.contacts ? true : false),
-          menuItem(3, "Categories", Icons.category_rounded,
+          menuItem(3, "Shop", Icons.category_rounded,
               currentPage == Sections.Categories ? true : false),
           menuItem(4, " Profile", Icons.edit_attributes_rounded,
               currentPage == Sections.Edit_Profile ? true : false),
-          menuItem(5, "Notifications", Icons.notification_add_rounded,
-              currentPage == Sections.Notifications ? true : false),
           menuItem(6, "Log Out", Icons.logout_rounded,
               currentPage == Sections.Log_Out ? true : false),
         ],
@@ -117,13 +115,7 @@ class HomeNavbar extends State<Navigation_bar> {
       color: selected ? Colors.grey : Colors.transparent,
       child: InkWell(
         onTap: () {
-          if (id == 1) {
-            Navigator.push(
-              context,
-              MaterialPageRoute(builder: (context) => Admin()),
-            );
-            currentPage = Sections.Dashboard;
-          } else if (id == 2) {
+          if (id == 2) {
             Navigator.push(
               context,
               MaterialPageRoute(builder: (context) => ContactUs()),
@@ -139,11 +131,19 @@ class HomeNavbar extends State<Navigation_bar> {
             );
             currentPage = Sections.Categories;
           } else if (id == 4) {
-            Navigator.push(
-              context,
-              MaterialPageRoute(builder: (context) => ViewAccountPage()),
-            );
-            currentPage = Sections.Notifications;
+            if (FirebaseAuth.instance.currentUser == null) {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => MustHaveAccountPage()),
+              );
+            } else {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                    builder: (context) => const ViewAccountPage()),
+              );
+            }
+            currentPage = Sections.Edit_Profile;
           } else if (id == 5) {
             Navigator.push(
               context,
@@ -151,6 +151,7 @@ class HomeNavbar extends State<Navigation_bar> {
             );
             currentPage = Sections.Edit_Profile;
           } else if (id == 6) {
+            FirebaseAuth.instance.signOut();
             Navigator.push(
               context,
               MaterialPageRoute(builder: (context) => Navigation_bar()),
