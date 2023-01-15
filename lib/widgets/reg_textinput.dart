@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:sahar_mob_app/utils/color.dart';
 
 class RegTextInput extends StatelessWidget {
   String hint;
@@ -35,7 +36,10 @@ class RegTextInput extends StatelessWidget {
           border: InputBorder.none,
           hintText: hint,
           enabled: enable,
-          prefixIcon: Icon(icon),
+          prefixIcon: Icon(
+            icon,
+            color: orangeColors,
+          ),
         ),
         validator: (value) {
           bool Valid = RegExp(regexp).hasMatch(value!);
