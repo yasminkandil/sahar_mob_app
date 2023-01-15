@@ -2,6 +2,10 @@ import 'package:flutter/material.dart';
 
 import 'package:flutter/material.dart';
 import 'package:sahar_mob_app/widgets/header_container.dart';
+import 'package:sahar_mob_app/widgets/header_container.dart';
+import 'package:sahar_mob_app/home/home_page.dart';
+
+import '../utils/color.dart';
 
 class CartItem extends StatefulWidget {
   @override
@@ -29,111 +33,55 @@ class _CartItemState extends State<CartItem> {
     });
   }
 
+  void total() {}
+
   @override
   Widget build(BuildContext context) {
-    return Row(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: <Widget>[
-        HeaderContainer("My Cart"),
-        Container(
-          height: 80,
-          width: 80,
-          decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(10),
-              image: DecorationImage(
-                  fit: BoxFit.fill,
-                  image: NetworkImage(
-                      'https://www.styleathome.com/assets/img/default.jpg?v=1522265967'))),
-        ),
-        Container(
-          margin: EdgeInsets.only(left: 15),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.start,
-            children: <Widget>[
-              Text('Essential Kits',
-                  style: TextStyle(
-                    fontSize: 20,
-                    fontWeight: FontWeight.bold,
-                  ))
-            ],
+    return Scaffold(
+      appBar: AppBar(
+        title: Text('My cart'),
+        backgroundColor: GreyColors,
+        leading: IconButton(
+          icon: Icon(
+            Icons.arrow_back,
+            color: orangeColors,
           ),
+          onPressed: () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) {
+                return MyHomePage();
+              }),
+            );
+          },
         ),
-        Container(
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.end,
-            children: <Widget>[
-              Text(
-                '\$',
-                style: TextStyle(fontSize: 24),
-              ),
-              SizedBox(
-                height: 18,
-              ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.end,
-                children: <Widget>[
-                  Container(
-                    height: 30,
-                    width: 30,
-                    decoration: BoxDecoration(
-                        color: Colors.grey,
-                        borderRadius: BorderRadius.circular(20)),
-                    child: GestureDetector(
-                        onTap: decrementCounter,
-                        child: Icon(
-                          Icons.remove_circle,
-                          color: Colors.white,
-                          size: 30,
-                        )),
-                  ),
-                  Container(
-                      margin: EdgeInsets.only(left: 6, right: 6),
-                      child: Text(
-                        '$counter',
-                        style: TextStyle(
-                            fontSize: 20, fontWeight: FontWeight.bold),
+      ),
+      body: Column(
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: <Widget>[
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 16.0),
+            child: Column(
+              children: <Widget>[
+                SizedBox(height: 32.0),
+                Text("Your cart is empty!"),
+                SizedBox(height: 8.0),
+                MaterialButton(
+                  height: 60.0,
+                  minWidth: double.infinity,
+                  color: GreyColors,
+                  onPressed: () {},
+                  child: Text("Proceed to Checkout",
+                      style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        color: orangeColors,
                       )),
-                  Container(
-                    height: 30,
-                    width: 30,
-                    decoration: BoxDecoration(
-                        color: Colors.grey,
-                        borderRadius: BorderRadius.circular(20)),
-                    child: GestureDetector(
-                        onTap: incrementCounter,
-                        child: Icon(
-                          Icons.add_circle,
-                          color: Colors.white,
-                          size: 30,
-                        )),
-                  )
-                ],
-              )
-            ],
+                ),
+              ],
+            ),
           ),
-        ),
-      ],
+        ],
+      ),
     );
-    
   }
-  /*ListView(
-          children: const [
-            ListTile(
-              title: Text("Iphone case"),
-              subtitle: Text("200 LE"),
-              leading:
-                  Icon(Icons.arrow_forward_ios_rounded), //icon in the beginning
-            ),
-            ListTile(
-              title: Text("Airpodes"),
-              subtitle: Text("2500"),
-              trailing: Icon(Icons.auto_awesome), //icon in the end
-            ),
-            ListTile(
-              title: Text("Headphones"),
-              subtitle: Text("750"),
-              trailing: Icon(Icons.audiotrack), //icon in the end
-            ),
-          ],
-        ),*/
 }
