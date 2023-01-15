@@ -1,3 +1,4 @@
+import 'package:carousel_slider/carousel_slider.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 
@@ -64,9 +65,36 @@ class ProductTitleWithImage extends StatelessWidget {
                           width: 3,
                         ),
                         Expanded(
-                            child: Image(
-                          fit: BoxFit.fitWidth,
-                          image: NetworkImage("${data["image"]}"),
+                            child: CarouselSlider(
+                          options: CarouselOptions(
+                            height: 200.0,
+                            autoPlay: true,
+                            enlargeCenterPage: true,
+                            aspectRatio: 2.0,
+                            autoPlayCurve: Curves.fastOutSlowIn,
+                            enableInfiniteScroll: true,
+                            autoPlayAnimationDuration:
+                                Duration(milliseconds: 800),
+                            viewportFraction: 0.8,
+                          ),
+                          items: [1, 2, 3, 4, 5].map((i) {
+                            return Builder(
+                              builder: (BuildContext context) {
+                                return Container(
+                                  width: MediaQuery.of(context).size.width,
+                                  margin: EdgeInsets.symmetric(horizontal: 5.0),
+                                  decoration:
+                                      BoxDecoration(color: Colors.amber),
+                                      
+                                  child: Image.network(
+                                    "${data["image"]} ",
+                                    fit: BoxFit.cover,
+                                  ),
+                                  
+                                );
+                              },
+                            );
+                          }).toList(),
                         ))
                       ],
                     )
