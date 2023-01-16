@@ -179,25 +179,22 @@ class HomeNavbar extends State<Navigation_bar> {
             );
             currentPage = Sections.Log_Out;
           } else if (id == 7) {
-            Navigator.of(context).pushReplacement(
-             MaterialPageRoute(
-               builder: (context) => AuthService().signOut(),
-             ));
+            Navigator.of(context).pushReplacement(MaterialPageRoute(
+              builder: (context) => AuthService().signOut(),
+            ));
             currentPage = Sections.Sign_Up;
           } else if (id == 8) {
             Navigator.push(
               context,
-              MaterialPageRoute(
-                  builder: (context) => OrderScreen(
-                        salma: 'salma',
-                      )),
+              MaterialPageRoute(builder: (context) => CartItem()),
             );
             currentPage = Sections.Cart;
           } else if (id == 9) {
+            /*
             Navigator.push(
               context,
               MaterialPageRoute(builder: (context) => checkout()),
-            );
+            );*/
             currentPage = Sections.CheckOut;
           } else if (id == 10) {
             Navigator.push(
