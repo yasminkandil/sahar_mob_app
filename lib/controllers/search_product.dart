@@ -10,7 +10,7 @@ class FirebaseSearchScreen extends StatefulWidget {
 
 class _FirebaseSearchScreenState extends State<FirebaseSearchScreen> {
   List searchResult = [];
-  void searchFromFirebase(String query) async {
+  void searchForProduct(String query) async {
     final result = await FirebaseFirestore.instance
         .collection('products')
         .where('name', isGreaterThanOrEqualTo: query)
@@ -19,7 +19,8 @@ class _FirebaseSearchScreenState extends State<FirebaseSearchScreen> {
       searchResult = result.docs.map((e) => e.data()).toList();
     });
   }
-
+  
+  
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -37,7 +38,7 @@ class _FirebaseSearchScreenState extends State<FirebaseSearchScreen> {
                 hintText: "Search Here",
               ),
               onChanged: (query) {
-                searchFromFirebase(query);
+                searchForProduct(query);
               },
             ),
           ),

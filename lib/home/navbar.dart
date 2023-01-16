@@ -2,24 +2,24 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:sahar_mob_app/admin/admin.dart';
+import 'package:sahar_mob_app/models/auth_service.dart';
 import 'package:sahar_mob_app/pages/cart.dart';
 import 'package:sahar_mob_app/pages/checkout.dart';
 import 'package:sahar_mob_app/pages/contact_us.dart';
 import 'package:sahar_mob_app/pages/edit_account.dart';
 import 'package:sahar_mob_app/home/home_screen.dart';
+import 'package:sahar_mob_app/pages/gallary.dart';
 import 'package:sahar_mob_app/pages/login_page.dart';
 import 'package:sahar_mob_app/pages/products_all.dart';
 import 'package:sahar_mob_app/product_powerbank.dart';
 import 'package:sahar_mob_app/pages/regi_page.dart';
 import 'package:sahar_mob_app/pages/view_account.dart';
-<<<<<<< HEAD:lib/pages/navbar.dart
 import 'package:sahar_mob_app/product_powerbank.dart';
-import 'package:sahar_mob_app/screens/order_screen.dart';
-=======
->>>>>>> a0198b604bb6f99486dbb39d91250a5dd9231deb:lib/home/navbar.dart
+import 'package:sahar_mob_app/screens/details/order_screen.dart';
 import 'package:sahar_mob_app/utils/color.dart';
 import 'package:sahar_mob_app/widgets/header_container.dart';
-import '../controllers/search_delegate.dart';
+import '../controllers/search_product.dart';
+//import '../controllers/search_delegate.dart';
 import '../pages/must_have_account.dart';
 import '../pages/my_drawer_header.dart';
 import 'package:sahar_mob_app/providers/themeprovider.dart';
@@ -102,6 +102,8 @@ class HomeNavbar extends State<Navigation_bar> {
       ),
       child: Column(
         children: [
+          menuItem(1, "Gallery", Icons.image,
+              currentPage == Sections.Gallery ? true : false),
           menuItem(9, "CheckOut", Icons.check_outlined,
               currentPage == Sections.CheckOut ? true : false),
           menuItem(10, "Login", Icons.login_rounded,
@@ -128,7 +130,13 @@ class HomeNavbar extends State<Navigation_bar> {
       color: selected ? Colors.grey : Colors.transparent,
       child: InkWell(
         onTap: () {
-          if (id == 2) {
+          if (id == 1) {
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => gallery()),
+            );
+            currentPage = Sections.contacts;
+          } else if (id == 2) {
             Navigator.push(
               context,
               MaterialPageRoute(builder: (context) => ContactUs()),
@@ -171,15 +179,18 @@ class HomeNavbar extends State<Navigation_bar> {
             );
             currentPage = Sections.Log_Out;
           } else if (id == 7) {
-            Navigator.push(
-              context,
-              MaterialPageRoute(builder: (context) => RegisterPage()),
-            );
+            Navigator.of(context).pushReplacement(
+             MaterialPageRoute(
+               builder: (context) => AuthService().signOut(),
+             ));
             currentPage = Sections.Sign_Up;
           } else if (id == 8) {
             Navigator.push(
               context,
-              MaterialPageRoute(builder: (context) => OrderScreen()),
+              MaterialPageRoute(
+                  builder: (context) => OrderScreen(
+                        salma: 'salma',
+                      )),
             );
             currentPage = Sections.Cart;
           } else if (id == 9) {
@@ -232,5 +243,6 @@ enum Sections {
   Log_Out,
   Cart,
   CheckOut,
-  login
+  login,
+  Gallery
 }
