@@ -6,6 +6,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:sahar_mob_app/home/home_page.dart';
@@ -273,47 +274,51 @@ class _RegisterPageState extends State<RegisterPage> {
                               child: ButtonWidget(
                                 btnText: "REGISTER",
                                 onClick: () async {
-                                  try{
-                                  if (formKey.currentState!.validate()) {
-                                    await FirebaseAuth.instance
-                                        .createUserWithEmailAndPassword(
-                                            email: emailController.text,
-                                            password: passwordController.text);
+                                  try {
+                                    if (formKey.currentState!.validate()) {
+                                      await FirebaseAuth.instance
+                                          .createUserWithEmailAndPassword(
+                                              email: emailController.text,
+                                              password:
+                                                  passwordController.text);
 
-                                    addUserDetails(
-                                            fisrtController.text,
-                                            lastController.text,
-                                            emailController.text,
-                                            addrController.text,
-                                            mobileController.text,
-                                            greyimage,
-                                            userId)
-                                        .then((value) {
-                                      print("Created new account");
-                                      final snackBar = SnackBar(
-                                          content: Text("Account Created.."));
-                                      ScaffoldMessenger.of(context)
-                                          .showSnackBar(snackBar);
-                                      Navigator.push(
-                                          context,
-                                          MaterialPageRoute(
-                                              builder: (context) =>
-                                                  MyHomePage()));
-                                    });
+                                      addUserDetails(
+                                              fisrtController.text,
+                                              lastController.text,
+                                              emailController.text,
+                                              addrController.text,
+                                              mobileController.text,
+                                              greyimage,
+                                              userId)
+                                          .then((value) {
+                                        print("Created new account");
+                                        final snackBar = SnackBar(
+                                            content: Text("Account Created.."));
+                                        ScaffoldMessenger.of(context)
+                                            .showSnackBar(snackBar);
+                                        Navigator.push(
+                                            context,
+                                            MaterialPageRoute(
+                                                builder: (context) =>
+                                                    MyHomePage()));
+                                      });
+                                    }
+                                  } catch (e) {
+                                    if (e.hashCode == 'email-already-in-use') {
+                                      Fluttertoast.showToast(
+                                          msg: "This email already exists.",
+                                          toastLength: Toast.LENGTH_SHORT,
+                                          gravity: ToastGravity.CENTER,
+                                          timeInSecForIosWeb: 1,
+                                          backgroundColor: Colors.red,
+                                          textColor: Colors.white,
+                                          fontSize: 16.0);
+                                    } else {
+                                      print(e);
+                                    }
                                   }
-                              } catch (e) {
-      if (e.hashCode == 'email-already-in-use') {
-
-                      child: Text('You need to sign in to view your account.');
-
-     //   print('The email is already in use');
-      } else {
-        print(e);
-      }
-    }
-          
                                 },
-                      ),
+                              ),
                             ),
                           ),
                           InkWell(

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:sahar_mob_app/admin/admin.dart';
+import 'package:sahar_mob_app/models/auth_service.dart';
 import 'package:sahar_mob_app/pages/cart.dart';
 import 'package:sahar_mob_app/pages/checkout.dart';
 import 'package:sahar_mob_app/pages/contact_us.dart';
@@ -12,7 +13,7 @@ import 'package:sahar_mob_app/pages/regi_page.dart';
 import 'package:sahar_mob_app/pages/view_account.dart';
 import 'package:sahar_mob_app/utils/color.dart';
 import 'package:sahar_mob_app/widgets/header_container.dart';
-import '../controllers/search_delegate.dart';
+import '../controllers/search_product.dart';
 import '../pages/my_drawer_header.dart';
 class Navigation_bar extends StatefulWidget {
   
@@ -152,10 +153,10 @@ class HomeNavbar extends State<Navigation_bar> {
             );
             currentPage = Sections.Log_Out;
           } else if (id == 7) {
-            Navigator.push(
-              context,
-              MaterialPageRoute(builder: (context) => RegisterPage()),
-            );
+            Navigator.of(context).pushReplacement(
+             MaterialPageRoute(
+               builder: (context) => AuthService().signOut(),
+             ));
             currentPage = Sections.Sign_Up;
           } else if (id == 8) {
             Navigator.push(
