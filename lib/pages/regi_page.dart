@@ -296,14 +296,11 @@ class _RegisterPageState extends State<RegisterPage> {
                                               email: emailController.text,
                                               password:
                                                   passwordController.text);
-<<<<<<< HEAD
 
-=======
                                       String email =
                                           emailController.text.trim();
                                       final userr = await FirebaseAuth.instance
                                           .fetchSignInMethodsForEmail(email);
->>>>>>> 0cfbe9438f9df81f3b93c717b17ccc823097892b
                                       addUserDetails(
                                               fisrtController.text,
                                               lastController.text,
@@ -324,19 +321,6 @@ class _RegisterPageState extends State<RegisterPage> {
                                                 builder: (context) =>
                                                     MyHomePage()));
                                       });
-<<<<<<< HEAD
-                                    }
-                                  } catch (e) {
-                                    if (e.hashCode == 'email-already-in-use') {
-                                      Fluttertoast.showToast(
-                                          msg: "This email already exists.",
-                                          toastLength: Toast.LENGTH_SHORT,
-                                          gravity: ToastGravity.CENTER,
-                                          timeInSecForIosWeb: 1,
-                                          backgroundColor: Colors.red,
-                                          textColor: Colors.white,
-                                          fontSize: 16.0);
-=======
                                       //}
                                     }
                                   } catch (e) {
@@ -349,7 +333,6 @@ class _RegisterPageState extends State<RegisterPage> {
                                         showAlertDialog(context,
                                             "Account already exists for that email.");
                                       }
->>>>>>> 0cfbe9438f9df81f3b93c717b17ccc823097892b
                                     } else {
                                       print(e);
                                     }

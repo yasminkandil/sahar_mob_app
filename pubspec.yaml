@@ -56,13 +56,8 @@ dependencies:
   dio: ^4.0.6
   flutter_polyline_points: ^1.0.0
   flutter_launcher_icons: ^0.11.0
-<<<<<<< HEAD
   provider: ^6.0.5
   carousel_slider: ^4.2.1
-=======
-  carousel_slider: ^4.2.1
-  provider: ^6.0.5
->>>>>>> 1bbc17bbeb27f6ab996558b0f22a18f5f082aeb7
 
 flutter_icons:
   android: true

@@ -5,7 +5,7 @@ import 'package:sahar_mob_app/utils/color.dart';
 import 'package:velocity_x/velocity_x.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
-final pro = FirebaseFirestore.instance.collection('gallery');
+final pro = FirebaseFirestore.instance.collection('homePage');
 
 class HomeScreen extends StatefulWidget {
   final String salma;
@@ -21,7 +21,7 @@ class _HomeScreenState extends State<HomeScreen> {
 //Connection to Gallery
     List<String> imageList = [];
     Future getDocImage() async {
-      await FirebaseFirestore.instance.collection('gallery').get().then(
+      await FirebaseFirestore.instance.collection('homePage').get().then(
             (snapshot) => snapshot.docs.forEach((document) {
               print(document.reference);
               imageList.add(document.reference.id);
@@ -48,11 +48,12 @@ class _HomeScreenState extends State<HomeScreen> {
             autoPlay: true,
             height: 150,
             enlargeCenterPage: true,
-            itemCount: imageList.length,
+            itemCount: 7,
             itemBuilder: (context, index) {
               getDocImage();
               builder:
               (context, snapshot) {
+                
                 Map<String, dynamic> data = snapshot.data?.data() != null
                     ? snapshot.data!.data()! as Map<String, dynamic>
                     : <String, dynamic>{};
@@ -202,7 +203,14 @@ class _HomeScreenState extends State<HomeScreen> {
                 title: 'Flash Sales',
               ),
             ),
-          ),
+         
+
+       ),
+       Column(
+  children: [
+    Image.asset('assets/pro.png'), 
+  ],
+)
         ]),
       ),
     );
