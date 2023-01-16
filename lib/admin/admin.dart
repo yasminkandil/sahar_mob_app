@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:sahar_mob_app/admin/add_category.dart';
 import 'package:sahar_mob_app/admin/add_color.dart';
 import 'package:sahar_mob_app/admin/add_gallery.dart';
+import 'package:sahar_mob_app/admin/add_homePageImage.dart';
 import 'package:sahar_mob_app/admin/add_offer.dart';
 import 'package:sahar_mob_app/admin/add_product.dart';
 import 'package:sahar_mob_app/admin/add_quality.dart';
@@ -306,6 +307,14 @@ class _AdminState extends State<Admin> {
                     )),
             Divider(),
             ListTile(
+                leading: Icon(Icons.add_circle_outline),
+                title: Text("Add in homepage images"),
+                onTap: () => Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => AddGalleryhome()),
+                    )),
+            Divider(),
+            ListTile(
                 leading: Icon(Icons.library_books),
                 title: Text("Orders List"),
                 onTap: () => Navigator.push(
@@ -320,6 +329,7 @@ class _AdminState extends State<Admin> {
                       context,
                       MaterialPageRoute(builder: (context) => ViewUsersPage()),
                     )),
+           
           ],
         );
     }

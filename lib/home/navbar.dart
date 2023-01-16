@@ -1,4 +1,6 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:sahar_mob_app/admin/admin.dart';
 import 'package:sahar_mob_app/models/auth_service.dart';
 import 'package:sahar_mob_app/pages/cart.dart';
@@ -6,17 +8,23 @@ import 'package:sahar_mob_app/pages/checkout.dart';
 import 'package:sahar_mob_app/pages/contact_us.dart';
 import 'package:sahar_mob_app/pages/edit_account.dart';
 import 'package:sahar_mob_app/home/home_screen.dart';
+import 'package:sahar_mob_app/pages/gallary.dart';
 import 'package:sahar_mob_app/pages/login_page.dart';
 import 'package:sahar_mob_app/pages/products_all.dart';
 import 'package:sahar_mob_app/product_powerbank.dart';
 import 'package:sahar_mob_app/pages/regi_page.dart';
 import 'package:sahar_mob_app/pages/view_account.dart';
+import 'package:sahar_mob_app/product_powerbank.dart';
+import 'package:sahar_mob_app/screens/details/order_screen.dart';
 import 'package:sahar_mob_app/utils/color.dart';
 import 'package:sahar_mob_app/widgets/header_container.dart';
 import '../controllers/search_product.dart';
+//import '../controllers/search_delegate.dart';
+import '../pages/must_have_account.dart';
 import '../pages/my_drawer_header.dart';
+import 'package:sahar_mob_app/providers/themeprovider.dart';
+
 class Navigation_bar extends StatefulWidget {
-  
   @override
   HomeNavbar createState() => HomeNavbar();
 }
@@ -25,21 +33,31 @@ class HomeNavbar extends State<Navigation_bar> {
   var currentPage = Sections.Dashboard;
   @override
   Widget build(BuildContext context) {
+    TextTheme textTheme = Theme.of(context).textTheme;
     return Scaffold(
       appBar: AppBar(
         backgroundColor: GreyColors,
         title: Text("Menu"),
         actions: [
+          Consumer<ThemeProvider>(
+            builder: (context, theme, child) {
+              return IconButton(
+                icon: Icon(Icons.brightness_6),
+                onPressed: () {
+                  theme.toggleTheme();
+                },
+              );
+            },
+          ),
           IconButton(
             onPressed: () {
- Navigator.push(
-              context,
-              MaterialPageRoute(builder: (context) => FirebaseSearchScreen()),
-            );            
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => FirebaseSearchScreen()),
+              );
             },
             icon: const Icon(Icons.search),
           ),
-           
           IconButton(
             onPressed: () {
               // method to show the search bar
@@ -58,7 +76,7 @@ class HomeNavbar extends State<Navigation_bar> {
         child: Container(
           child: Column(children: <Widget>[
             HeaderContainer("Home Page"),
-            HomeScreen(salma:'salma'),
+            HomeScreen(salma: 'salma'),
           ]),
         ),
       ),
@@ -72,11 +90,11 @@ class HomeNavbar extends State<Navigation_bar> {
           ]),
         )),
       ),
-     
-  );
-    
+    );
+
     // TODO: implement build
   }
+
   Widget MyDrawerList() {
     return Container(
       padding: EdgeInsets.only(
@@ -84,6 +102,8 @@ class HomeNavbar extends State<Navigation_bar> {
       ),
       child: Column(
         children: [
+          menuItem(1, "Gallery", Icons.image,
+              currentPage == Sections.Gallery ? true : false),
           menuItem(9, "CheckOut", Icons.check_outlined,
               currentPage == Sections.CheckOut ? true : false),
           menuItem(10, "Login", Icons.login_rounded,
@@ -92,22 +112,19 @@ class HomeNavbar extends State<Navigation_bar> {
               currentPage == Sections.Cart ? true : false),
           menuItem(7, "Sign Up", Icons.login_rounded,
               currentPage == Sections.Sign_Up ? true : false),
-          menuItem(1, "DashBoard", Icons.dashboard_outlined,
-              currentPage == Sections.Dashboard ? true : false),
           menuItem(2, "Contact US", Icons.people_alt_outlined,
               currentPage == Sections.contacts ? true : false),
-          menuItem(3, "Categories", Icons.category_rounded,
+          menuItem(3, "Shop", Icons.category_rounded,
               currentPage == Sections.Categories ? true : false),
           menuItem(4, " Profile", Icons.edit_attributes_rounded,
               currentPage == Sections.Edit_Profile ? true : false),
-          menuItem(5, "Notifications", Icons.notification_add_rounded,
-              currentPage == Sections.Notifications ? true : false),
           menuItem(6, "Log Out", Icons.logout_rounded,
               currentPage == Sections.Log_Out ? true : false),
         ],
       ),
     );
   }
+
   Widget menuItem(int id, String title, IconData icon, bool selected) {
     return Material(
       color: selected ? Colors.grey : Colors.transparent,
@@ -116,9 +133,9 @@ class HomeNavbar extends State<Navigation_bar> {
           if (id == 1) {
             Navigator.push(
               context,
-              MaterialPageRoute(builder: (context) => Admin()),
+              MaterialPageRoute(builder: (context) => gallery()),
             );
-            currentPage = Sections.Dashboard;
+            currentPage = Sections.contacts;
           } else if (id == 2) {
             Navigator.push(
               context,
@@ -135,11 +152,19 @@ class HomeNavbar extends State<Navigation_bar> {
             );
             currentPage = Sections.Categories;
           } else if (id == 4) {
-            Navigator.push(
-              context,
-              MaterialPageRoute(builder: (context) => ViewAccountPage()),
-            );
-            currentPage = Sections.Notifications;
+            if (FirebaseAuth.instance.currentUser == null) {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => MustHaveAccountPage()),
+              );
+            } else {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                    builder: (context) => const ViewAccountPage()),
+              );
+            }
+            currentPage = Sections.Edit_Profile;
           } else if (id == 5) {
             Navigator.push(
               context,
@@ -147,6 +172,7 @@ class HomeNavbar extends State<Navigation_bar> {
             );
             currentPage = Sections.Edit_Profile;
           } else if (id == 6) {
+            FirebaseAuth.instance.signOut();
             Navigator.push(
               context,
               MaterialPageRoute(builder: (context) => Navigation_bar()),
@@ -161,7 +187,10 @@ class HomeNavbar extends State<Navigation_bar> {
           } else if (id == 8) {
             Navigator.push(
               context,
-              MaterialPageRoute(builder: (context) => CartItem()),
+              MaterialPageRoute(
+                  builder: (context) => OrderScreen(
+                        salma: 'salma',
+                      )),
             );
             currentPage = Sections.Cart;
           } else if (id == 9) {
@@ -214,5 +243,6 @@ enum Sections {
   Log_Out,
   Cart,
   CheckOut,
-  login
+  login,
+  Gallery
 }

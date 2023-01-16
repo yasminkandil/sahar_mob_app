@@ -1,4 +1,4 @@
-package com.example.sahar_mob_app
+package com.SYKR.sahar_mob_app
 
 import io.flutter.embedding.android.FlutterActivity
 

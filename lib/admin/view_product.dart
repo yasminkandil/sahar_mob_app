@@ -1,13 +1,9 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:sahar_mob_app/admin/add_product.dart';
-import 'package:sahar_mob_app/pages/edit_account.dart';
 import 'package:sahar_mob_app/admin/edit_product.dart';
 import 'package:sahar_mob_app/read%20data/get_product_name.dart';
 import 'package:sahar_mob_app/utils/color.dart';
-import 'package:sahar_mob_app/widgets/header_container.dart';
-
 import '../widgets/app_bar.dart';
 
 class ViewProductPage extends StatefulWidget {
@@ -16,6 +12,7 @@ class ViewProductPage extends StatefulWidget {
   @override
   _ViewProductPageState createState() => _ViewProductPageState();
 }
+
 class _ViewProductPageState extends State<ViewProductPage> {
   final pro = FirebaseFirestore.instance.collection('products');
   List<String> prod = [];
@@ -27,11 +24,13 @@ class _ViewProductPageState extends State<ViewProductPage> {
           }),
         );
   }
+
   @override
   void initState() {
     super.initState();
     setState(() {});
   }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -40,11 +39,6 @@ class _ViewProductPageState extends State<ViewProductPage> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            /* MaterialButton(
-              onPressed: () {},
-              color: Colors.deepPurple,
-              child: Text('Products'),
-            ),*/
             Expanded(
               child: FutureBuilder(
                 future: getDocProd(),
@@ -90,11 +84,11 @@ class _ViewProductPageState extends State<ViewProductPage> {
                             ),
                             ListTile(title: GetProductName(salma: prod[index])),
                             Divider(
-                              color: orangeColors, //color of divider
-                              height: 10, //height spacing of divider
-                              thickness: 3, //thickness of divier line
-                              indent: 25, //spacing at the start of divider
-                              endIndent: 25, //spacing at the end of divider
+                              color: orangeColors,
+                              height: 10,
+                              thickness: 3,
+                              indent: 25,
+                              endIndent: 25,
                             )
                           ],
                         ),

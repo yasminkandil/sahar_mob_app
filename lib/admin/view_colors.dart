@@ -59,11 +59,11 @@ class _ViewcolorsPageState extends State<ViewcolorsPage> {
                           children: <Widget>[
                             ListTile(title: GetColorsPage(color: prod[index])),
                             Divider(
-                              color: orangeColors, //color of divider
-                              height: 10, //height spacing of divider
-                              thickness: 3, //thickness of divier line
-                              indent: 25, //spacing at the start of divider
-                              endIndent: 25, //spacing at the end of divider
+                              color: orangeColors,
+                              height: 10,
+                              thickness: 3,
+                              indent: 25,
+                              endIndent: 25,
                             )
                           ],
                         ),

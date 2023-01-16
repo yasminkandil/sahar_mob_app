@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:sahar_mob_app/admin/admin.dart';
+import 'package:sahar_mob_app/admin/search_user.dart';
 import 'package:sahar_mob_app/models/user_model.dart';
 import 'package:sahar_mob_app/providers/user_provider.dart';
 
@@ -13,7 +14,38 @@ class ViewUsersPage extends ConsumerWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       home: Scaffold(
-        appBar: CustomAppBar(text: "Users List"),
+        appBar: AppBar(
+          backgroundColor: GreyColors,
+          title: Text("Users List"),
+          leading: IconButton(
+              icon: Icon(
+                Icons.arrow_back,
+                color: orangeColors,
+              ),
+              onPressed: () {
+                Navigator.pop(context);
+              }),
+          actions: [
+            IconButton(
+              onPressed: () {
+                // method to show the search bar
+                //context: context, delegate:
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => const FirebaseSearchUserScreen()),
+                );
+              },
+              icon: const Icon(Icons.search),
+            ),
+            IconButton(
+              onPressed: () {
+                // method to show the search bar
+              },
+              icon: const Icon(Icons.notifications),
+            ),
+          ],
+        ),
         body: SafeArea(
           child: Consumer(
             builder: (context, watch, _) {

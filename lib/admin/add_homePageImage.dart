@@ -13,14 +13,14 @@ import 'package:sahar_mob_app/utils/color.dart';
 import 'package:sahar_mob_app/widgets/app_bar.dart';
 import 'package:sahar_mob_app/widgets/header_container.dart';
 
-class AddGallery extends StatefulWidget {
-  const AddGallery({super.key});
+class AddGalleryhome extends StatefulWidget {
+  const AddGalleryhome({super.key});
 
   @override
-  State<AddGallery> createState() => _AddGalleryState();
+  State<AddGalleryhome> createState() => _AddGalleryhomeState();
 }
 
-Future addgalleryDetails(
+Future AddGalleryhomeDetails(
   String GImage,
 ) async {
   await FirebaseFirestore.instance.collection('homePage').doc().set(
@@ -32,7 +32,7 @@ Future addgalleryDetails(
   print('NEW IMAGE ADDED');
 }
 
-class _AddGalleryState extends State<AddGallery> {
+class _AddGalleryhomeState extends State<AddGalleryhome> {
   var imageUrl;
   var downloadUrl;
   var imagee;
@@ -124,7 +124,7 @@ class _AddGalleryState extends State<AddGallery> {
                           ),
                           onPressed: () {
                             uploadImage();
-                            addgalleryDetails(greyimage);
+                            AddGalleryhomeDetails(greyimage);
                           },
                         )),
                   )

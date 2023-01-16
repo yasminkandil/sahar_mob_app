@@ -1,4 +1,6 @@
+import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
+import 'package:sahar_mob_app/models/checkout_model.dart';
 import 'package:sahar_mob_app/pages/regi_page.dart';
 import 'package:sahar_mob_app/utils/color.dart';
 import 'package:sahar_mob_app/widgets/btn_widget.dart';
@@ -12,6 +14,17 @@ class checkout extends StatefulWidget {
 }
 
 class _CheckoutState extends State<checkout> {
+  final formKey = GlobalKey<FormState>();
+  final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
+
+  late DatabaseReference dbRef;
+
+  @override
+  void initState() {
+    super.initState();
+    dbRef = FirebaseDatabase.instance.ref().child("orders");
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -28,14 +41,15 @@ class _CheckoutState extends State<checkout> {
                 child: Column(
                   mainAxisSize: MainAxisSize.max,
                   children: <Widget>[
-                    _textInput(hint: "Address", icon: Icons.home),
+                    _textInput(hint: "Name", icon: Icons.person),
                     _textInput(hint: "Phone Number", icon: Icons.phone),
+                    _textInput(hint: "Address", icon: Icons.home),
                     TextButton(
                       style: TextButton.styleFrom(
                         primary: Colors.orange,
                       ),
                       onPressed: () {},
-                      child: Text('Cash on delivery'),
+                      child: Text('In case of visa fill this'),
                     ),
                     _textInput(
                         hint: "Credit Card Number", icon: Icons.credit_card),
@@ -44,22 +58,27 @@ class _CheckoutState extends State<checkout> {
                     Container(
                       margin: EdgeInsets.only(top: 10),
                       alignment: Alignment.centerRight,
-                      child: Text(
-                        "",
+                      child: TextButton(
+                        style: TextButton.styleFrom(
+                          primary: Color.fromARGB(255, 8, 2, 2),
+                        ),
+                        onPressed: () {
+/*
+orders(namesController.text,
+ addressController.text,
+  phoneController.text,
+   paymentMController.text,
+    ccnController.text, ccvController.text, expdateController.text).then((value) {
+      print("Order placed succesfully");
+      final SnackBar=SnackBar(content: Text("Order Placed"));
+      
+    }*/
+                        },
+                        child: Text('Checkout'),
                       ),
                     ),
                     Expanded(
-                      child: Center(
-                        child: ButtonWidget(
-                          onClick: () {
-                            // Navigator
-                            // context,
-                            //MaterialPageRoute(),
-                            //builder: (context) =>
-                          },
-                          btnText: "Confirm Order",
-                        ),
-                      ),
+                      child: Center(),
                     ),
                   ],
                 ),

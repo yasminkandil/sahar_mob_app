@@ -22,6 +22,7 @@ import 'package:sahar_mob_app/widgets/header_container.dart';
 import 'package:path/path.dart' as p;
 import 'package:sahar_mob_app/widgets/reg_textinput.dart';
 
+import '../widgets/alert.dart';
 import '../widgets/app_bar.dart';
 
 class RegisterPage extends StatefulWidget {
@@ -88,6 +89,20 @@ class _RegisterPageState extends State<RegisterPage> {
   }
 
   @override
+  void dispose() {
+    // * TextEditingControllers should be always disposed
+    emailController.dispose();
+    passwordController.dispose();
+    fisrtController.dispose();
+    mobileController.dispose();
+    addrController.dispose();
+    lastController.dispose();
+    confirmPassController.dispose();
+
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     bool obscureText = true;
     return Scaffold(
@@ -123,7 +138,7 @@ class _RegisterPageState extends State<RegisterPage> {
                       right: 0,
                       child: Container(
                           height: 40,
-                          width: 40,
+                          width: 50,
                           decoration: BoxDecoration(
                               shape: BoxShape.circle,
                               border: Border.all(
@@ -281,7 +296,14 @@ class _RegisterPageState extends State<RegisterPage> {
                                               email: emailController.text,
                                               password:
                                                   passwordController.text);
+<<<<<<< HEAD
 
+=======
+                                      String email =
+                                          emailController.text.trim();
+                                      final userr = await FirebaseAuth.instance
+                                          .fetchSignInMethodsForEmail(email);
+>>>>>>> 0cfbe9438f9df81f3b93c717b17ccc823097892b
                                       addUserDetails(
                                               fisrtController.text,
                                               lastController.text,
@@ -302,6 +324,7 @@ class _RegisterPageState extends State<RegisterPage> {
                                                 builder: (context) =>
                                                     MyHomePage()));
                                       });
+<<<<<<< HEAD
                                     }
                                   } catch (e) {
                                     if (e.hashCode == 'email-already-in-use') {
@@ -313,6 +336,20 @@ class _RegisterPageState extends State<RegisterPage> {
                                           backgroundColor: Colors.red,
                                           textColor: Colors.white,
                                           fontSize: 16.0);
+=======
+                                      //}
+                                    }
+                                  } catch (e) {
+                                    if (e is FirebaseAuthException) {
+                                      if (e.code == 'weak-password') {
+                                        showAlertDialog(context,
+                                            "The password provided is too weak.");
+                                      } else if (e.code ==
+                                          'email-already-in-use') {
+                                        showAlertDialog(context,
+                                            "Account already exists for that email.");
+                                      }
+>>>>>>> 0cfbe9438f9df81f3b93c717b17ccc823097892b
                                     } else {
                                       print(e);
                                     }

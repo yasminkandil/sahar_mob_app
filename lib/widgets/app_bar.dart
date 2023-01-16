@@ -16,6 +16,14 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
     return AppBar(
       backgroundColor: GreyColors,
       title: Text(text),
+      leading: IconButton(
+          icon: Icon(
+            Icons.arrow_back,
+            color: orangeColors,
+          ),
+          onPressed: () {
+            Navigator.pop(context);
+          }),
       actions: [
         IconButton(
           onPressed: () {
@@ -23,7 +31,8 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
             //context: context, delegate:
             Navigator.push(
               context,
-              MaterialPageRoute(builder: (context) => FirebaseSearchScreen()),
+              MaterialPageRoute(
+                  builder: (context) => const FirebaseSearchScreen()),
             );
           },
           icon: const Icon(Icons.search),
