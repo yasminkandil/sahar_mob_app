@@ -1,11 +1,13 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:sahar_mob_app/models/cart_model2.dart';
 import 'package:sahar_mob_app/pages/checkout.dart';
+import 'package:sahar_mob_app/pages/products_all.dart';
 import 'package:sahar_mob_app/widgets/header_container.dart';
 import 'package:sahar_mob_app/widgets/header_container.dart';
 import 'package:sahar_mob_app/home/home_page.dart';
@@ -40,6 +42,7 @@ class _CartItemState extends State<CartItem> {
         .collection(uid)
         .snapshots()
         .listen((event) {
+      allPrices = 0;
       event.docs.forEach((element) {
         CartModel2 cartModel2 = CartModel2.fromJson(element.data());
         int m = int.parse("${cartModel2.totalPrice}");
@@ -51,7 +54,7 @@ class _CartItemState extends State<CartItem> {
 
   void getAllCart() {
     setState(() {
-      isLoading = true;
+      isLoading = true; // Loading => haygeb al data
     });
     String uid = FirebaseAuth.instance.currentUser!.uid;
     FirebaseFirestore.instance
@@ -76,119 +79,108 @@ class _CartItemState extends State<CartItem> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text('My cart'),
-        backgroundColor: GreyColors,
-        leading: IconButton(
-          icon: Icon(
-            Icons.arrow_back,
-            color: orangeColors,
+        appBar: AppBar(
+          title: Text('My cart'),
+          backgroundColor: GreyColors,
+          leading: IconButton(
+            icon: Icon(
+              Icons.arrow_back,
+              color: orangeColors,
+            ),
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                    builder: (context) => Products(
+                          cat: 'Cables',
+                        )),
+              );
+            },
           ),
-          onPressed: () {
-            Navigator.push(
-              context,
-              MaterialPageRoute(builder: (context) {
-                return MyHomePage();
-              }),
-            );
-          },
         ),
-      ),
-      body: isLoading
-          ? const Center(
-              child: CircularProgressIndicator(),
-            )
-          : Column(
-              children: [
-                SizedBox(height: 15),
-                Expanded(
-                  child: ListView.separated(
-                    physics: BouncingScrollPhysics(),
-                    itemBuilder: (context, index) {
-                      return CustomCartItem(cartList[index]);
-                    },
-                    separatorBuilder: (context, index) =>
-                        const SizedBox(height: 10),
-                    itemCount: cartList.length,
+        body: isLoading
+            ? const Center(
+                child: CupertinoActivityIndicator(),
+              )
+            : Column(
+                children: [
+                  SizedBox(height: 15),
+                  Expanded(
+                    child: cartList.isEmpty
+                        ? Center(
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              children: const [
+                                Icon(Icons.remove_shopping_cart,
+                                    size: 100, color: Colors.grey),
+                                Text(" Your Cart Is Empty 😓",
+                                    style: TextStyle(
+                                        color: Colors.grey,
+                                        fontWeight: FontWeight.bold,
+                                        fontSize: 30)),
+                              ],
+                            ),
+                          )
+                        : ListView.separated(
+                            physics: BouncingScrollPhysics(),
+                            itemBuilder: (context, index) {
+                              return CustomCartItem(cartList[index]);
+                            },
+                            separatorBuilder: (context, index) =>
+                                const SizedBox(height: 10),
+                            itemCount: cartList.length,
+                          ),
                   ),
-                ),
-                SizedBox(height: 10),
-                Container(
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(20),
-                    color: Colors.grey[500],
-                  ),
-                  child: Column(
-                    children: [
-                      SizedBox(height: 10),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Text("Total Price:  $allPrices EGP",
+                  SizedBox(height: 10),
+                  Container(
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(20),
+                      color: Colors.grey[500],
+                    ),
+                    child: Column(
+                      children: [
+                        SizedBox(height: 10),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Text("Total Price:  $allPrices EGP",
+                                style: TextStyle(
+                                    color: Colors.white,
+                                    fontWeight: FontWeight.bold,
+                                    fontSize: 22)),
+                          ],
+                        ),
+                        SizedBox(height: 10),
+                        MaterialButton(
+                          height: 60.0,
+                          minWidth: double.infinity,
+                          color: GreyColors,
+                          onPressed: () {
+                            if (cartList.isEmpty) {
+                              Fluttertoast.showToast(
+                                  msg: "Sorry your cart is Empty 😇",
+                                  backgroundColor: Colors.red);
+                            } else {
+                              Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) => checkout(
+                                            products: productsName,
+                                            totalPrice: allPrices,
+                                          )));
+                            }
+                          },
+                          child: Text("Proceed to Checkout",
                               style: TextStyle(
-                                  color: Colors.white,
-                                  fontWeight: FontWeight.bold,
-                                  fontSize: 22)),
-                        ],
-                      ),
-                      SizedBox(height: 10),
-                      MaterialButton(
-                        height: 60.0,
-                        minWidth: double.infinity,
-                        color: GreyColors,
-                        onPressed: () {
-                          if (cartList.isEmpty) {
-                            Fluttertoast.showToast(
-                                msg: "Sorry Cart is Empty",
-                                backgroundColor: Colors.red);
-                          } else {
-                            Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) => checkout(
-                                          products: productsName,
-                                          totalPrice: allPrices,
-                                        )));
-                          }
-                        },
-                        child: Text("Proceed to Checkout",
-                            style: TextStyle(
-                              fontWeight: FontWeight.bold,
-                              color: orangeColors,
-                            )),
-                      ),
-                    ],
+                                fontWeight: FontWeight.bold,
+                                color: orangeColors,
+                              )),
+                        ),
+                      ],
+                    ),
                   ),
-                ),
-              ],
-            )
-      /*Column(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: <Widget>[
-                Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 16.0),
-                  child: Column(
-                    children: <Widget>[
-                      SizedBox(height: 32.0),
-                      Text("Your cart is empty!"),
-                      SizedBox(height: 8.0),
-                      MaterialButton(
-                        height: 60.0,
-                        minWidth: double.infinity,
-                        color: GreyColors,
-                        onPressed: () {},
-                        child: Text("Proceed to Checkout",
-                            style: TextStyle(
-                              fontWeight: FontWeight.bold,
-                              color: orangeColors,
-                            )),
-                      ),
-                    ],
-                  ),
-                ),
-              ],
-            )*/
-      ,
-    );
+                ],
+              ));
   }
 }
