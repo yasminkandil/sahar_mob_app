@@ -9,7 +9,7 @@ import 'package:sahar_mob_app/admin/add_quality.dart';
 import 'package:sahar_mob_app/admin/orders_admin.dart';
 import 'package:sahar_mob_app/admin/view_categories.dart';
 import 'package:sahar_mob_app/admin/view_colors.dart';
-import 'package:sahar_mob_app/admin/view_messages.dart';
+//import 'package:sahar_mob_app/admin/view_messages.dart';
 import 'package:sahar_mob_app/admin/view_offers.dart';
 import 'package:sahar_mob_app/admin/view_qualties.dart';
 //import 'package:sahar_mob_app/pages/products_powerbank.dart';
