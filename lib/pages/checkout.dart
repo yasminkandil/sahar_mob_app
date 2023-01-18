@@ -117,7 +117,7 @@ class _CheckoutState extends State<checkout> {
                                   _textInput(
                                       controller: ccnController,
                                       type: TextInputType.number,
-                                      hint: "CCN : XXXX XXXX XXXX XXXX",
+                                      hint: "Credit Card Number",
                                       validate: isCash[1]
                                           ? (String? value) {
                                               if (value!.isEmpty) {
@@ -177,13 +177,6 @@ class _CheckoutState extends State<checkout> {
                                             isCash[0] ? "Cash" : "Visa",
                                         products: widget.products);
 
-                                    //hagrb a7ot mastercard logo
-                                    Image.network(
-                                      'https://upload.wikimedia.org/wikipedia/commons/thumb/2/2a/Mastercard-logo.svg/800px-Mastercard-logo.svg.png',
-                                      height: 30,
-                                      width: 30,
-                                    );
-
                                     FirebaseFirestore.instance
                                         .collection("orders")
                                         .doc(FirebaseAuth
@@ -201,7 +194,7 @@ class _CheckoutState extends State<checkout> {
                                     });
                                   }
                                 },
-                                child: Text('Checkout'),
+                                child: Text('place Order'),
                               ),
                             ),
                           ],
