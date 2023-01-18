@@ -9,6 +9,10 @@ import 'package:sahar_mob_app/admin/add_quality.dart';
 import 'package:sahar_mob_app/admin/orders_admin.dart';
 import 'package:sahar_mob_app/admin/view_categories.dart';
 import 'package:sahar_mob_app/admin/view_colors.dart';
+<<<<<<< HEAD
+//import 'package:sahar_mob_app/admin/view_messages.dart';
+=======
+>>>>>>> 7cfea88c35987819379db4b6dcbe51bd9f4ddd1a
 import 'package:sahar_mob_app/admin/view_offers.dart';
 import 'package:sahar_mob_app/admin/view_qualties.dart';
 //import 'package:sahar_mob_app/pages/products_powerbank.dart';
