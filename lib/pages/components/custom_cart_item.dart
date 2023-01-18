@@ -98,19 +98,21 @@ class _CustomCartItemState extends State<CustomCartItem> {
                                   .then((value) {
                                 CartModel2 model =
                                     CartModel2.fromJson(value.data() ?? {});
-                                int countNew = model.count! - 1;
-                                int oldPrice = model.price!;
-                                int newPrice = countNew * oldPrice;
 
-                                FirebaseFirestore.instance
-                                    .collection("cart")
-                                    .doc(uid)
-                                    .collection(uid)
-                                    .doc(widget.cartModel.id)
-                                    .update({
-                                  "count": countNew,
-                                  "totalPrice": newPrice
-                                });
+                                if (model.count! > 1) {
+                                  int countNew = model.count! - 1;
+                                  int oldPrice = model.price!;
+                                  int newPrice = countNew * oldPrice;
+                                  FirebaseFirestore.instance
+                                      .collection("cart")
+                                      .doc(uid)
+                                      .collection(uid)
+                                      .doc(widget.cartModel.id)
+                                      .update({
+                                    "count": countNew,
+                                    "totalPrice": newPrice
+                                  });
+                                }
                               });
                             }),
                             icon: Icon(Icons.remove)),

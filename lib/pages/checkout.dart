@@ -159,7 +159,7 @@ class _CheckoutState extends State<checkout> {
                               alignment: Alignment.centerRight,
                               child: TextButton(
                                 style: TextButton.styleFrom(
-                                  primary: Color.fromARGB(255, 8, 2, 2),
+                                  primary: Color.fromARGB(255, 237, 149, 17),
                                 ),
                                 onPressed: () {
                                   if (formKey.currentState!.validate()) {
@@ -194,7 +194,7 @@ class _CheckoutState extends State<checkout> {
                                     });
                                   }
                                 },
-                                child: Text('Checkout'),
+                                child: Text('Click to place Order☑️'),
                               ),
                             ),
                           ],
