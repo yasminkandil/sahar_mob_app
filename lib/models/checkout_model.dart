@@ -3,7 +3,6 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 TextEditingController nameController = TextEditingController();
-TextEditingController namesController = TextEditingController();
 TextEditingController addressController = TextEditingController();
 TextEditingController phoneController = TextEditingController();
 TextEditingController paymentMController = TextEditingController();
