@@ -118,7 +118,7 @@ class OrderDetailsPage extends StatelessWidget {
                                   color: Colors.black,
                                   fontWeight: FontWeight.bold)),
                           TextSpan(
-                              text: '${data['Total']}\n',
+                              text: '${data['totalPrice']}\n',
                               style: TextStyle(
                                   color: Colors.deepOrange,
                                   fontWeight: FontWeight.normal)),

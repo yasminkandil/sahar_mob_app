@@ -84,12 +84,7 @@ class _CartItemState extends State<CartItem> {
             color: orangeColors,
           ),
           onPressed: () {
-            Navigator.push(
-              context,
-              MaterialPageRoute(builder: (context) {
-                return MyHomePage();
-              }),
-            );
+            Navigator.pushNamed(context, 'home');
           },
         ),
       ),

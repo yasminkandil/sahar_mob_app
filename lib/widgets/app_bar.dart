@@ -29,11 +29,7 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
           onPressed: () {
             // method to show the search bar
             //context: context, delegate:
-            Navigator.push(
-              context,
-              MaterialPageRoute(
-                  builder: (context) => const FirebaseSearchScreen()),
-            );
+            Navigator.pushNamed(context, 'search_products');
           },
           icon: const Icon(Icons.search),
         ),

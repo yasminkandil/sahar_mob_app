@@ -30,11 +30,7 @@ class ViewUsersPage extends ConsumerWidget {
               onPressed: () {
                 // method to show the search bar
                 //context: context, delegate:
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                      builder: (context) => const FirebaseSearchUserScreen()),
-                );
+                Navigator.pushNamed(context, 'search_users');
               },
               icon: const Icon(Icons.search),
             ),

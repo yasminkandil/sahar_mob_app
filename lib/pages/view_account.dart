@@ -7,7 +7,6 @@ import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:sahar_mob_app/models/user_model.dart';
-import 'package:sahar_mob_app/home/navbar.dart';
 import 'package:sahar_mob_app/pages/regi_page.dart';
 import 'package:sahar_mob_app/utils/color.dart';
 import 'package:sahar_mob_app/widgets/reg_textinput.dart';
@@ -289,11 +288,8 @@ class _ViewAccountPageState extends State<ViewAccountPage> {
                                                     ScaffoldMessenger.of(
                                                             context)
                                                         .showSnackBar(snackBar);
-                                                    Navigator.push(
-                                                        context,
-                                                        MaterialPageRoute(
-                                                            builder: (context) =>
-                                                                Navigation_bar()));
+                                                    Navigator.pushNamed(
+                                                        context, 'home');
                                                   },
                                                 );
                                               },

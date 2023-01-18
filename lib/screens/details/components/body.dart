@@ -232,11 +232,8 @@ class _BodyState extends State<Body> {
                                             Fluttertoast.showToast(
                                                 msg: "Please Sign-In first.",
                                                 backgroundColor: Colors.red);
-                                            Navigator.push(
-                                                context,
-                                                MaterialPageRoute(
-                                                    builder: (context) =>
-                                                        LoginPage()));
+                                            Navigator.pushNamed(
+                                                context, 'login');
                                           }
                                         },
                                         child: Text("Add to cart",

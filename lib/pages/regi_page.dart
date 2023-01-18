@@ -1,21 +1,14 @@
 import 'dart:io';
 import 'dart:math';
-
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
-import 'package:fluttertoast/fluttertoast.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:permission_handler/permission_handler.dart';
-import 'package:sahar_mob_app/home/home_page.dart';
-import 'package:sahar_mob_app/models/uploadimage.dart';
 import 'package:sahar_mob_app/models/user_model.dart';
-import 'package:sahar_mob_app/pages/login_page.dart';
-import 'package:sahar_mob_app/home/navbar.dart';
 import 'package:sahar_mob_app/pages/view_account.dart';
-
 import 'package:sahar_mob_app/utils/color.dart';
 import 'package:sahar_mob_app/widgets/btn_widget.dart';
 import 'package:sahar_mob_app/widgets/header_container.dart';
@@ -88,7 +81,7 @@ class _RegisterPageState extends State<RegisterPage> {
     }
   }
 
-  @override
+  /*@override
   void dispose() {
     // * TextEditingControllers should be always disposed
     emailController.dispose();
@@ -100,7 +93,7 @@ class _RegisterPageState extends State<RegisterPage> {
     confirmPassController.dispose();
 
     super.dispose();
-  }
+  }*/
 
   @override
   Widget build(BuildContext context) {
@@ -227,7 +220,10 @@ class _RegisterPageState extends State<RegisterPage> {
                               decoration: InputDecoration(
                                   border: InputBorder.none,
                                   hintText: "Password",
-                                  prefixIcon: const Icon(Icons.vpn_key),
+                                  prefixIcon: const Icon(
+                                    Icons.vpn_key,
+                                    color: Color.fromARGB(255, 249, 118, 3),
+                                  ),
                                   suffixIcon: InkWell(
                                     onTap: () {
                                       setState(() {
@@ -261,8 +257,11 @@ class _RegisterPageState extends State<RegisterPage> {
                               obscureText: obscureText,
                               decoration: InputDecoration(
                                   border: InputBorder.none,
-                                  hintText: "Password",
-                                  prefixIcon: const Icon(Icons.vpn_key),
+                                  hintText: "Confirm Password",
+                                  prefixIcon: const Icon(
+                                    Icons.vpn_key,
+                                    color: Color.fromARGB(255, 249, 118, 3),
+                                  ),
                                   suffixIcon: InkWell(
                                     onTap: () {
                                       setState(() {
@@ -315,11 +314,7 @@ class _RegisterPageState extends State<RegisterPage> {
                                             content: Text("Account Created.."));
                                         ScaffoldMessenger.of(context)
                                             .showSnackBar(snackBar);
-                                        Navigator.push(
-                                            context,
-                                            MaterialPageRoute(
-                                                builder: (context) =>
-                                                    MyHomePage()));
+                                        Navigator.pushNamed(context, 'home');
                                       });
                                       //}
                                     }
@@ -354,9 +349,7 @@ class _RegisterPageState extends State<RegisterPage> {
                                     )),
                               ]),
                             ),
-                            onTap: () => Navigator.of(context).push(
-                                MaterialPageRoute(
-                                    builder: (context) => LoginPage())),
+                            onTap: () => Navigator.pushNamed(context, 'login'),
                           )
                         ],
                       ),
