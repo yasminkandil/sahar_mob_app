@@ -3,6 +3,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:sahar_mob_app/models/cart_model2.dart';
 import 'package:sahar_mob_app/pages/checkout.dart';
 import 'package:sahar_mob_app/widgets/header_container.dart';
@@ -135,13 +136,21 @@ class _CartItemState extends State<CartItem> {
                         height: 60.0,
                         minWidth: double.infinity,
                         color: GreyColors,
-                        onPressed: () => Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => checkout(
-                                      products: productsName,
-                                      totalPrice: allPrices,
-                                    ))),
+                        onPressed: () {
+                          if (cartList.isEmpty) {
+                            Fluttertoast.showToast(
+                                msg: "Sorry Cart is Empty",
+                                backgroundColor: Colors.red);
+                          } else {
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => checkout(
+                                          products: productsName,
+                                          totalPrice: allPrices,
+                                        )));
+                          }
+                        },
                         child: Text("Proceed to Checkout",
                             style: TextStyle(
                               fontWeight: FontWeight.bold,
