@@ -6,6 +6,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:sahar_mob_app/home/home_page.dart';
@@ -295,6 +296,7 @@ class _RegisterPageState extends State<RegisterPage> {
                                               email: emailController.text,
                                               password:
                                                   passwordController.text);
+
                                       String email =
                                           emailController.text.trim();
                                       final userr = await FirebaseAuth.instance

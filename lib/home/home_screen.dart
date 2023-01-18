@@ -1,13 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:sahar_mob_app/home/home_button.dart';
-import 'package:sahar_mob_app/pages/view_order_user.dart';
 import 'package:sahar_mob_app/read%20data/get_home_data.dart';
 import 'package:sahar_mob_app/utils/color.dart';
 import 'package:velocity_x/velocity_x.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import '../screens/details/details_screen.dart';
 
-final pro = FirebaseFirestore.instance.collection('gallery');
+final pro = FirebaseFirestore.instance.collection('homePage');
 
 class HomeScreen extends StatefulWidget {
   final String salma;
@@ -23,22 +21,22 @@ class _HomeScreenState extends State<HomeScreen> {
 //Connection to Gallery
     List<String> imageList = [];
     Future getDocImage() async {
-      await FirebaseFirestore.instance.collection('gallery').get().then(
+      await FirebaseFirestore.instance.collection('homePage').get().then(
             (snapshot) => snapshot.docs.forEach((document) {
               print(document.reference);
               imageList.add(document.reference.id);
             }),
           );
     }
+
 //Connection to offers
-    List<String> OfferImageList = [];
-    Future getDocImageOffers() async {
-      await FirebaseFirestore.instance.collection('products').get().then(
-            (snapshot) => snapshot.docs.forEach((document) {
-              print(document.reference);
-              OfferImageList.add(document.reference.id);
-            }),
-          );
+    CollectionReference off = FirebaseFirestore.instance.collection('products');
+    Future<QuerySnapshot> retrieveLastFiveItems() async {
+      return await FirebaseFirestore.instance
+          .collection("products")
+          .orderBy("Date", descending: true)
+          .limit(5)
+          .get();
     }
 
     return Padding(
@@ -50,11 +48,12 @@ class _HomeScreenState extends State<HomeScreen> {
             autoPlay: true,
             height: 150,
             enlargeCenterPage: true,
-            itemCount: imageList.length,
+            itemCount: 7,
             itemBuilder: (context, index) {
               getDocImage();
               builder:
               (context, snapshot) {
+                
                 Map<String, dynamic> data = snapshot.data?.data() != null
                     ? snapshot.data!.data()! as Map<String, dynamic>
                     : <String, dynamic>{};
@@ -89,59 +88,108 @@ class _HomeScreenState extends State<HomeScreen> {
                           fontWeight: FontWeight.bold,
                           fontSize: 30)),*/
                   SizedBox(
-                     // height: size.height,
                       child: Stack(children: <Widget>[
-                        Container(
-                          margin: EdgeInsets.only(top: size.height * 0.01),
-                          padding: EdgeInsets.only(
-                              top: size.height * 0.000001, left: 10, right: 10),
-                          height: 500,
-                          child: Column(
-                            children: <Widget>[
-                              Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
-                                children: <Widget>[],
-                              ),
-                              SizedBox(
-                                height: 20,
-                              ),
-                              Expanded(
-                                child: FutureBuilder(
-                                  future: getDocImageOffers(),
-                                  builder: (context, snapshot) {
-                                    Map<String, dynamic> data =
-                                        snapshot.data?.data() != null
-                                            ? snapshot.data!.data()!
-                                                as Map<String, dynamic>
-                                            : <String, dynamic>{};
-
-                                    return Container(
-                                      child: ListView.builder(
-                                        itemCount: 4,
-                                        itemBuilder: (context, index) {
-                                          return Container(
-                                            child: GetOffersData(
-                                                offersimage:
-                                                    OfferImageList[index],
-                                                press: () => Navigator.push(
-                                                    context,
-                                                    MaterialPageRoute(
-                                                        builder: (context) =>
-                                                            DetailScreen(
-                                                                salma: OfferImageList[
-                                                                    index])))),
-                                          );
-                                        },
-                                      ),
-                                    );
-                                  },
-                                ),
-                              )
-                            ],
+                    Container(
+                      margin: EdgeInsets.only(top: size.height * 0.01),
+                      padding: EdgeInsets.only(
+                          top: size.height * 0.000001, left: 10, right: 10),
+                      height: 500,
+                      child: Column(
+                        children: <Widget>[
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            // children: <Widget>[],
                           ),
-                        )
-                      ])),
+                          SizedBox(
+                            height: 20,
+                          ),
+                        
+                          FutureBuilder(
+                              future: retrieveLastFiveItems(),
+                              builder: (context,
+                                  AsyncSnapshot<QuerySnapshot> snapshot) {
+                                return Expanded(
+                                  child: ListView.builder(
+                                      itemCount: snapshot.data?.docs.length,
+                                      itemBuilder: (context, index) {
+                                        return Padding(
+                                          padding: const EdgeInsets.symmetric(
+                                              horizontal: 15),
+                                          child: Column(
+                                              crossAxisAlignment:
+                                                  CrossAxisAlignment.start,
+                                              children: [
+                                                Row(
+                                                  children: <Widget>[
+                                                    Expanded(
+                                                      child: Column(
+                                                        children: [
+                                                          Container(
+                                                            padding:
+                                                                EdgeInsets.all(
+                                                                    35),
+                                                            height: 200,
+                                                            width: 200,
+                                                            decoration:
+                                                                BoxDecoration(
+                                                              color:
+                                                                  Colors.black,
+                                                              //borderRadius: BorderRadius.circular(16)
+                                                            ),
+                                                            child: Image(
+                                                                fit: BoxFit
+                                                                    .fitWidth,
+                                                                image: NetworkImage(
+                                                                    "${snapshot.data?.docs[index].get('image')}")),
+                                                          ),
+                                                          Container(
+                                                            padding:
+                                                                EdgeInsets.all(
+                                                                    35),
+                                                            width: 200,
+                                                            decoration:
+                                                                BoxDecoration(
+                                                              color:
+                                                                  Colors.black,
+                                                            ),
+                                                            child: Text(
+                                                                snapshot
+                                                                        .data
+                                                                        ?.docs[
+                                                                            index]
+                                                                        .get(
+                                                                            'name') +
+                                                                    snapshot
+                                                                        .data
+                                                                        ?.docs[
+                                                                            index]
+                                                                        .get(
+                                                                            'brand'),
+                                                                style: TextStyle(
+                                                                    fontWeight:
+                                                                        FontWeight
+                                                                            .bold,
+                                                                    color: Colors
+                                                                        .white)),
+                                                          ),
+                                                          SizedBox(
+                                                            width: 3,
+                                                            height: 10,
+                                                          ),
+                                                        ],
+                                                      ),
+                                                    ),
+                                                  ],
+                                                )
+                                              ]),
+                                        );
+                                      }),
+                                );
+                              })
+                        ],
+                      ),
+                    )
+                  ])),
                 ]),
           ),
           Row(
@@ -149,13 +197,20 @@ class _HomeScreenState extends State<HomeScreen> {
             children: List.generate(
               1,
               (index) => homeButton(
-                  width: context.screenWidth / 1.5,
-                  height: context.screenHeight * 0.12,
-                  icon: Icons.new_releases_sharp,
-                  title: 'Flash Sales',
-                ),
+                width: context.screenWidth / 1.5,
+                height: context.screenHeight * 0.12,
+                icon: Icons.new_releases_sharp,
+                title: 'Flash Sales',
+              ),
             ),
-          ),
+         
+
+       ),
+       Column(
+  children: [
+    Image.asset('assets/pro.png'), 
+  ],
+)
         ]),
       ),
     );

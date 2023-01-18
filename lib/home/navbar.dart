@@ -2,6 +2,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:sahar_mob_app/admin/admin.dart';
+import 'package:sahar_mob_app/models/auth_service.dart';
 import 'package:sahar_mob_app/pages/cart.dart';
 import 'package:sahar_mob_app/pages/checkout.dart';
 import 'package:sahar_mob_app/pages/contact_us.dart';
@@ -17,7 +18,8 @@ import 'package:sahar_mob_app/product_powerbank.dart';
 import 'package:sahar_mob_app/screens/Orders_Screen/order_screen.dart';
 import 'package:sahar_mob_app/utils/color.dart';
 import 'package:sahar_mob_app/widgets/header_container.dart';
-import '../controllers/search_delegate.dart';
+import '../controllers/search_product.dart';
+//import '../controllers/search_delegate.dart';
 import '../pages/must_have_account.dart';
 import '../pages/my_drawer_header.dart';
 import 'package:sahar_mob_app/providers/themeprovider.dart';
@@ -177,25 +179,22 @@ class HomeNavbar extends State<Navigation_bar> {
             );
             currentPage = Sections.Log_Out;
           } else if (id == 7) {
-            Navigator.push(
-              context,
-              MaterialPageRoute(builder: (context) => RegisterPage()),
-            );
+            Navigator.of(context).pushReplacement(MaterialPageRoute(
+              builder: (context) => AuthService().signOut(),
+            ));
             currentPage = Sections.Sign_Up;
           } else if (id == 8) {
             Navigator.push(
               context,
-              MaterialPageRoute(
-                  builder: (context) => OrderScreen(
-                        salma: 'salma',
-                      )),
+              MaterialPageRoute(builder: (context) => CartItem()),
             );
             currentPage = Sections.Cart;
           } else if (id == 9) {
+            /*
             Navigator.push(
               context,
               MaterialPageRoute(builder: (context) => checkout()),
-            );
+            );*/
             currentPage = Sections.CheckOut;
           } else if (id == 10) {
             Navigator.push(

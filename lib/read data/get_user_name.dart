@@ -22,8 +22,16 @@ GetUserName({required this.documentId});
               as Map<String,dynamic>:<String,dynamic>{}; 
              return Text('First Name : ${data['firstname']}');
        }
-       return Text('loading..'); 
-    }),
+else if  (snapshot.hasError) {
+            return Center(
+              child: Text('You need to sign in to view your account.'),
+            );
+          }
+          else{
+             
+            return Center(child: CircularProgressIndicator());
+          
+          }    }),
     );
   }
 }
