@@ -51,10 +51,14 @@ class HomeNavbar extends State<Navigation_bar> {
           ),
           IconButton(
             onPressed: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(builder: (context) => FirebaseSearchScreen()),
-              );
+              Future<void> ProdSearch() async {
+                await showSearch(
+                  context: context,
+                  delegate: ProductSearch(),
+                );
+              }
+
+              ProdSearch();
             },
             icon: const Icon(Icons.search),
           ),
@@ -179,10 +183,9 @@ class HomeNavbar extends State<Navigation_bar> {
             );
             currentPage = Sections.Log_Out;
           } else if (id == 7) {
-            Navigator.of(context).pushReplacement(
-             MaterialPageRoute(
-               builder: (context) => AuthService().signOut(),
-             ));
+            Navigator.of(context).pushReplacement(MaterialPageRoute(
+              builder: (context) => AuthService().signOut(),
+            ));
             currentPage = Sections.Sign_Up;
           } else if (id == 8) {
             Navigator.push(
