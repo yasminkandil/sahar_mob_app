@@ -1,19 +1,10 @@
-import 'dart:math';
-import 'dart:ui';
-
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:sahar_mob_app/admin/add_product.dart';
-import 'package:sahar_mob_app/admin/admin.dart';
-//import 'package:image_picker/image_picker.dart';
-
-import 'package:sahar_mob_app/utils/color.dart';
 import 'package:sahar_mob_app/widgets/app_bar.dart';
 import 'package:sahar_mob_app/widgets/btn_widget.dart';
-
 import '../models/product_model.dart';
 import '../widgets/reg_textinput.dart';
-import '../widgets/textInput.dart';
 //import 'package:sahar_mob_app/widgets/header_container.dart';
 
 class AddCategPage extends StatefulWidget {
@@ -120,8 +111,14 @@ class _AddCategPageState extends State<AddCategPage> {
                                         if (formKey.currentState!.validate()) {
                                           addCategory(_nameController.text,
                                                   _subtitleController.text)
-                                              .then((value) =>
-                                                  Navigator.pop(context));
+                                              .then((value) {
+                                            final snackBar = SnackBar(
+                                                content:
+                                                    Text("Category added.."));
+                                            ScaffoldMessenger.of(context)
+                                                .showSnackBar(snackBar);
+                                            Navigator.pop(context);
+                                          });
                                         }
                                       },
                                     ),

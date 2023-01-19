@@ -67,7 +67,11 @@ class _AddReviewState extends State<AddReview> {
           ElevatedButton(
             onPressed: () {
               addrate(FirebaseAuth.instance.currentUser?.email,
-                  comment.text.trim(), rating, widget.ratee!);
+                      comment.text.trim(), rating, widget.ratee!)
+                  .then((value) {
+                final snackBar = SnackBar(content: Text("Review added.."));
+                ScaffoldMessenger.of(context).showSnackBar(snackBar);
+              });
             },
             child: Text("Submit"),
           ),
