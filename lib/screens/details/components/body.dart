@@ -277,6 +277,12 @@ class _BodyState extends State<Body> {
                                                               GreyLightColors);
                                                     });
                                                   }
+
+                                                  Fluttertoast.showToast(
+                                                      msg:
+                                                          "Product added to cart sucessfully ✔️",
+                                                      backgroundColor:
+                                                          Colors.red);
                                                 });
                                               } else {
                                                 Fluttertoast.showToast(

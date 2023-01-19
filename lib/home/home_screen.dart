@@ -53,12 +53,23 @@ class _HomeScreenState extends State<HomeScreen> {
               getDocImage();
               builder:
               (context, snapshot) {
+                if (snapshot.hasError) {
+          return Center(child: CircularProgressIndicator());
+        }
+        if (snapshot.connectionState == ConnectionState.waiting) {
+          return Text("Loading");
+        }
+       
                 
                 Map<String, dynamic> data = snapshot.data?.data() != null
                     ? snapshot.data!.data()! as Map<String, dynamic>
+             
                     : <String, dynamic>{};
+                    
               };
+              
               return Container(
+                
                   child: GetHomePhoto(homeimage: imageList[index]));
             },
           ),
@@ -108,6 +119,13 @@ class _HomeScreenState extends State<HomeScreen> {
                               future: retrieveLastFiveItems(),
                               builder: (context,
                                   AsyncSnapshot<QuerySnapshot> snapshot) {
+                                    if (snapshot.hasError) {
+          return Center(child: CircularProgressIndicator());
+        }
+        if (snapshot.connectionState == ConnectionState.waiting) {
+          return Text("Loading");
+        }
+       
                                 return Expanded(
                                   child: ListView.builder(
                                       itemCount: snapshot.data?.docs.length,
