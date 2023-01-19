@@ -14,27 +14,49 @@ class productinfo extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Row(
-      children: <Widget>[
-        Column(
-          children: <Widget>[],
-        ),
-        Expanded(
-          child: RichText(
-            text: TextSpan(
-                style: TextStyle(color: Color.fromARGB(225, 0, 0, 0)),
-                children: [
-                  TextSpan(text: "Capacity\n"),
-                  TextSpan(
-                      text: "${productModel2.quantity}",
-                      style: Theme.of(context)
-                          .textTheme
-                          .headline5
-                          ?.copyWith(fontWeight: FontWeight.bold))
-                ]),
+    var count = productModel2.quantity;
+
+    return Container(
+      child: Row(
+        children: <Widget>[
+          Column(
+            children: <Widget>[],
           ),
-        ),
-      ],
+          Expanded(
+            child: productModel2.quantity != "0"
+                ? RichText(
+                    text: TextSpan(
+                        style: TextStyle(color: Color.fromARGB(225, 0, 0, 0)),
+                        children: [
+                          TextSpan(text: "Capacity\n"),
+                          TextSpan(
+                              text: "In Stock",
+                              style: Theme.of(context)
+                                  .textTheme
+                                  .headline5
+                                  ?.copyWith(
+                                      fontWeight: FontWeight.bold,
+                                      color: Colors.green))
+                        ]),
+                  )
+                : RichText(
+                    text: TextSpan(
+                        style: TextStyle(color: Color.fromARGB(225, 0, 0, 0)),
+                        children: [
+                          TextSpan(text: "Capacity\n"),
+                          TextSpan(
+                              text: "Out of stock",
+                              style: Theme.of(context)
+                                  .textTheme
+                                  .headline5
+                                  ?.copyWith(
+                                      fontWeight: FontWeight.bold,
+                                      color: Colors.red))
+                        ]),
+                  ),
+          ),
+        ],
+      ),
     );
   }
 }

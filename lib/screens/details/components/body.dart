@@ -11,6 +11,7 @@ import 'package:sahar_mob_app/pages/view_account.dart';
 import 'package:sahar_mob_app/screens/details/components/description.dart';
 import 'package:sahar_mob_app/screens/details/components/product_info.dart';
 import 'package:sahar_mob_app/screens/details/components/product_title_with_image.dart';
+import 'package:sahar_mob_app/screens/details/components/review_product.dart';
 import 'package:sahar_mob_app/utils/color.dart';
 
 class Body extends StatefulWidget {
@@ -108,8 +109,8 @@ class _BodyState extends State<Body> {
                                     });
                                   },
                                   icon: (_isFavorited
-                                      ? Icon(Icons.star)
-                                      : Icon(Icons.star_border)),
+                                      ? Icon(Icons.favorite)
+                                      : Icon(Icons.favorite_border)),
                                   color: Colors.red[500],
                                 ),
                               ),
@@ -246,6 +247,30 @@ class _BodyState extends State<Body> {
                                                 color: Colors.white)),
                                       )),
                                 ),
+                                Column(
+                                  children: [
+                                    ElevatedButton(
+                                        style: ElevatedButton.styleFrom(
+                                            primary: GreyLightColors,
+                                            shape: RoundedRectangleBorder(
+                                                borderRadius:
+                                                    BorderRadius.circular(18))),
+                                        onPressed: () {
+                                          Navigator.push(
+                                              context,
+                                              MaterialPageRoute(
+                                                  builder: (context) =>
+                                                      Review()));
+                                        },
+                                        child: Text(
+                                          "Add Review",
+                                          style: TextStyle(
+                                              fontSize: 17,
+                                              fontWeight: FontWeight.bold,
+                                              color: Colors.white),
+                                        )),
+                                  ],
+                                )
                               ],
                             ),
                           )
