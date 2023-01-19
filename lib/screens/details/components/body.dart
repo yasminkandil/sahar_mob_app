@@ -264,13 +264,13 @@ class _BodyState extends State<Body> {
                                                       "count": newCount,
                                                       "totalPrice": newPrice,
                                                     });
-
-                                                    Fluttertoast.showToast(
-                                                        msg:
-                                                            "Product added to cart sucessfully ✔️",
-                                                        backgroundColor:
-                                                            Colors.red);
                                                   }
+
+                                                  Fluttertoast.showToast(
+                                                      msg:
+                                                          "Product added to cart sucessfully ✔️",
+                                                      backgroundColor:
+                                                          Colors.red);
                                                 });
                                               } else {
                                                 Fluttertoast.showToast(
