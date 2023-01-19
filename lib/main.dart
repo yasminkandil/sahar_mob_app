@@ -11,6 +11,7 @@ import 'package:sahar_mob_app/admin/add_quality.dart';
 import 'package:sahar_mob_app/admin/admin.dart';
 import 'package:sahar_mob_app/admin/orders_admin.dart';
 import 'package:sahar_mob_app/admin/users_admin.dart';
+import 'package:sahar_mob_app/admin/view_messages.dart';
 import 'package:sahar_mob_app/admin/view_product.dart';
 import 'package:sahar_mob_app/controllers/search_product.dart';
 import 'package:sahar_mob_app/home/home_page.dart';
@@ -25,8 +26,8 @@ import 'package:sahar_mob_app/pages/order_history.dart';
 import 'package:sahar_mob_app/pages/products_all.dart';
 import 'package:sahar_mob_app/pages/regi_page.dart';
 import 'package:sahar_mob_app/pages/view_account.dart';
-import 'package:sahar_mob_app/pages/view_messages.dart';
-import 'package:sahar_mob_app/screens/details/order_screen.dart';
+
+import 'package:sahar_mob_app/screens/Orders_Screen/order_screen.dart';
 
 import 'admin/add_product.dart';
 import 'admin/search_user.dart';
@@ -81,7 +82,6 @@ class MyApp extends StatelessWidget {
         'add_homeimage': (context) => const AddGalleryhome(),
         'add_gallery': (context) => const AddGallery(),
         'search_users': (context) => const FirebaseSearchUserScreen(),
-        'search_products': (context) => const FirebaseSearchScreen(),
         'forgot_pass': (context) => const ForgotPass(),
       },
     );

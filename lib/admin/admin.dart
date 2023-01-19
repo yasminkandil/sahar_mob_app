@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-<<<<<<< HEAD
 import 'package:sahar_mob_app/admin/add_category.dart';
 import 'package:sahar_mob_app/admin/add_color.dart';
 import 'package:sahar_mob_app/admin/add_gallery.dart';
@@ -16,8 +15,6 @@ import 'package:sahar_mob_app/admin/view_qualties.dart';
 import 'package:sahar_mob_app/admin/users_admin.dart';
 import 'package:sahar_mob_app/admin/view_product.dart';
 import 'package:sahar_mob_app/pages/products_all.dart';
-=======
->>>>>>> 82b03952b86d220d374927e934dcfccc8f32cecc
 import 'package:sahar_mob_app/utils/color.dart';
 import 'package:sahar_mob_app/home/home_page.dart';
 
@@ -289,59 +286,9 @@ class _AdminState extends State<Admin> {
                 onTap: () => Navigator.pushNamed(context, 'view_users')),
             const Divider(),
             ListTile(
-<<<<<<< HEAD
-                leading: Icon(Icons.add_circle_outline),
-                title: Text("Add Quality"),
-                onTap: () => Navigator.push(
-                      context,
-                      MaterialPageRoute(builder: (context) => AddQualityPage()),
-                    )),
-            Divider(),
-            ListTile(
-              leading: Icon(Icons.library_books),
-              title: Text("Qualities List"),
-              onTap: () => Navigator.push(
-                context,
-                MaterialPageRoute(builder: (context) => ViewQualitiesPage()),
-              ),
-            ),
-            Divider(),
-            ListTile(
-                leading: Icon(Icons.add_circle_outline),
-                title: Text("Add in gallery"),
-                onTap: () => Navigator.push(
-                      context,
-                      MaterialPageRoute(builder: (context) => AddGallery()),
-                    )),
-            Divider(),
-            ListTile(
-                leading: Icon(Icons.add_circle_outline),
-                title: Text("Add in homepage images"),
-                onTap: () => Navigator.push(
-                      context,
-                      MaterialPageRoute(builder: (context) => AddGalleryhome()),
-                    )),
-            Divider(),
-            ListTile(
-                leading: Icon(Icons.library_books),
-                title: Text("Orders List"),
-                onTap: () => Navigator.push(
-                      context,
-                      MaterialPageRoute(builder: (context) => ViewOrdersPage()),
-                    )),
-            Divider(),
-            ListTile(
-                leading: Icon(Icons.library_books),
-                title: Text("Users List"),
-                onTap: () => Navigator.push(
-                      context,
-                      MaterialPageRoute(builder: (context) => ViewUsersPage()),
-                    )),
-=======
                 leading: const Icon(Icons.library_books),
                 title: const Text("Messages List"),
                 onTap: () => Navigator.pushNamed(context, 'view_messages')),
->>>>>>> 82b03952b86d220d374927e934dcfccc8f32cecc
           ],
         );
     }

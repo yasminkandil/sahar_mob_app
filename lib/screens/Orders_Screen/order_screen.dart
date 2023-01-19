@@ -64,7 +64,7 @@ class buildOrders extends StatelessWidget {
               child: ListTile(
             leading: Text("  ${index + 1} "),
             title: Text(" Name:  ${data["products"]}"),
-            subtitle: Text("Order Price:    ${data['Total']}  " + "EGP"),
+            subtitle: Text("Order Price:    ${data['totalPrice']}  " + "EGP"),
             trailing: IconButton(
                 icon: Icon(
                   Icons.arrow_forward_ios_rounded,
