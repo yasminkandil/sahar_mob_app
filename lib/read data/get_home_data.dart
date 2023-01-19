@@ -14,7 +14,15 @@ class GetHomePhoto extends StatelessWidget {
     return FutureBuilder<DocumentSnapshot>(
       future: products.doc(homeimage).get(),
       builder: ((context, snapshot) {
-        if (snapshot.connectionState == ConnectionState.done) {
+        // if (snapshot.hasError) {
+        //   return Center(child: CircularProgressIndicator());
+        // }
+        if (snapshot.connectionState == ConnectionState.waiting) {
+          return Center(child: CircularProgressIndicator());
+        }
+       
+       else if (snapshot.connectionState == ConnectionState.done) {
+          
           Map<String, dynamic> data = snapshot.data?.data() != null
               ? snapshot.data!.data()! as Map<String, dynamic>
               : <String, dynamic>{};
@@ -28,9 +36,7 @@ class GetHomePhoto extends StatelessWidget {
             ),
           );
         }
-        if (snapshot.connectionState == ConnectionState.waiting) {
-          return const Center(child: CircularProgressIndicator());
-        } else {
+        else {
           return const Center(child: CircularProgressIndicator());
         }
       }),
