@@ -1,6 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:sahar_mob_app/admin/add_category.dart';
 import 'package:sahar_mob_app/admin/add_color.dart';
@@ -15,6 +16,7 @@ import 'package:sahar_mob_app/admin/view_messages.dart';
 import 'package:sahar_mob_app/admin/view_product.dart';
 import 'package:sahar_mob_app/controllers/search_product.dart';
 import 'package:sahar_mob_app/home/home_page.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
 
 import 'package:sahar_mob_app/home/navbar.dart';
 import 'package:sahar_mob_app/pages/cart.dart';
@@ -26,6 +28,9 @@ import 'package:sahar_mob_app/pages/order_history.dart';
 import 'package:sahar_mob_app/pages/products_all.dart';
 import 'package:sahar_mob_app/pages/regi_page.dart';
 import 'package:sahar_mob_app/pages/view_account.dart';
+import 'package:sahar_mob_app/admin/view_messages.dart';
+import 'package:sahar_mob_app/screens/Orders_Screen/order_screen.dart';
+//import 'package:sahar_mob_app/screens/details/order_screen.dart';
 
 import 'package:sahar_mob_app/screens/Orders_Screen/order_screen.dart';
 
@@ -39,14 +44,59 @@ import 'pages/forgot_pass.dart';
 
 //import 'pages/cart_view.dart';
 //import 'pages/calendar.dart';
+
+
+
+const AndroidNotificationChannel channel = AndroidNotificationChannel(
+    'high_importance_channel', // id
+    'High Importance Notifications', // title
+    description:
+        'This channel is used for important notifications.', // description
+    importance: Importance.high,
+    playSound: true);
+
+final FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin =
+    FlutterLocalNotificationsPlugin();
+
+Future<void> _firebaseMessagingBackgroundHandler(RemoteMessage message) async {
+  await Firebase.initializeApp();
+  print('A bg message just showed up :  ${message.messageId}');
+}
+
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
+    FirebaseMessaging.onBackgroundMessage(_firebaseMessagingBackgroundHandler);
+ await flutterLocalNotificationsPlugin
+      .resolvePlatformSpecificImplementation<
+          AndroidFlutterLocalNotificationsPlugin>()
+      ?.createNotificationChannel(channel);
+
+  await FirebaseMessaging.instance.setForegroundNotificationPresentationOptions(
+    alert: true,
+    badge: true,
+    sound: true,
+  );
   runApp(const ProviderScope(child: MyApp()));
 }
 
-class MyApp extends StatelessWidget {
+class MyApp extends StatefulWidget {
   const MyApp({Key? key}) : super(key: key);
+
+  @override
+  State<MyApp> createState() => _MyAppState();
+}
+
+class _MyAppState extends State<MyApp> {
+
+  @override
+  void initState() {
+    super.initState();
+   
+  }
+
+
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -54,6 +104,7 @@ class MyApp extends StatelessWidget {
       title: 'Sahar',
       initialRoute: "homepage",
       routes: {
+        
         "homepage": (context) => const MyHomePage(),
         "navbar": (context) => Navigation_bar(),
         'login': (context) => LoginPage(),
@@ -81,8 +132,10 @@ class MyApp extends StatelessWidget {
         'add_homeimage': (context) => const AddGalleryhome(),
         'add_gallery': (context) => const AddGallery(),
         'search_users': (context) => const FirebaseSearchUserScreen(),
+        //'search_products': (context) => const ProductSearch(),
         'forgot_pass': (context) => const ForgotPass(),
       },
+      
     );
   }
 }
