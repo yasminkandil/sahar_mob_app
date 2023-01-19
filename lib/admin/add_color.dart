@@ -1,19 +1,10 @@
-import 'dart:math';
-import 'dart:ui';
-
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:sahar_mob_app/admin/add_product.dart';
-import 'package:sahar_mob_app/admin/admin.dart';
-//import 'package:image_picker/image_picker.dart';
-
-import 'package:sahar_mob_app/utils/color.dart';
 import 'package:sahar_mob_app/widgets/btn_widget.dart';
-
 import '../models/product_model.dart';
 import '../widgets/app_bar.dart';
 import '../widgets/reg_textinput.dart';
-import '../widgets/textInput.dart';
 //import 'package:sahar_mob_app/widgets/header_container.dart';
 
 class AddColorPage extends StatefulWidget {
@@ -66,8 +57,14 @@ class _AddColorPageState extends State<AddColorPage> {
                                   btnText: "Add Color",
                                   onClick: () {
                                     if (formKey.currentState!.validate()) {
-                                      addColor(_colorController.text).then(
-                                          (value) => Navigator.pop(context));
+                                      addColor(_colorController.text)
+                                          .then((value) {
+                                        final snackBar = SnackBar(
+                                            content: Text("Color added.."));
+                                        ScaffoldMessenger.of(context)
+                                            .showSnackBar(snackBar);
+                                        Navigator.pop(context);
+                                      });
                                     }
                                   },
                                 ),

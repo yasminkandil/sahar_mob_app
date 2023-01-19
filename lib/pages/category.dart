@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:sahar_mob_app/pages/login_page.dart';
-import 'package:sahar_mob_app/pages/regi_page.dart';
+import 'package:sahar_mob_app/pages/products_all.dart';
 import 'package:sahar_mob_app/utils/color.dart';
 import 'package:sahar_mob_app/style/style.dart';
-import 'package:sahar_mob_app/style/colors.dart';
 
 class CategoryPage extends StatelessWidget {
   const CategoryPage({super.key});
@@ -81,10 +79,6 @@ class CategoryPage extends StatelessWidget {
                   const SizedBox(
                     width: 30,
                   ),
-                  Text(
-                    "Recommended",
-                    style: AppStyle.m12bt,
-                  ),
                 ],
               ),
               Padding(
@@ -95,42 +89,68 @@ class CategoryPage extends StatelessWidget {
                   children: [
                     Column(
                       children: [
-                        shortproducts(
+                        const SizedBox(height: 70),
+                        GestureDetector(
+                          onTap: () {
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) =>
+                                        Products(cat: 'Covers')));
+                          },
+                          child: const shortproducts(
                             background: Color.fromARGB(255, 68, 69, 71),
                             title: 'Cover Cases',
-                            subtitle: "12 Products",
-                            image: 'assets/covercase.png'),
-                        longproducts(
-                            background: Color.fromARGB(255, 79, 75, 75),
-                            title: 'Power Banks',
-                            subtitle: "10 Products",
-                            image: 'assets/powerbank.png'),
-                        SizedBox(height: 12),
-                        shortbottomproducts(
-                            background: Color.fromARGB(255, 73, 69, 69),
-                            title: 'Head Phones',
-                            subtitle: "8 Products",
-                            image: 'assets/headphone.png')
+                            image: 'assets/covercase.png',
+                          ),
+                        ),
+                        const SizedBox(height: 12),
+                        GestureDetector(
+                          onTap: () {
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) =>
+                                        Products(cat: 'Powerbank')));
+                          },
+                          child: const longproducts(
+                              background: Color.fromARGB(255, 79, 75, 75),
+                              title: 'Power Banks',
+                              image: 'assets/powerbank.png'),
+                        ),
+                        const SizedBox(height: 70),
                       ],
                     ),
                     Column(
                       children: [
-                        shortproducts(
+                        GestureDetector(
+                          onTap: () {
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) =>
+                                        Products(cat: 'Headphones')));
+                          },
+                          child: const shortproducts(
                             background: Color.fromARGB(255, 60, 57, 57),
-                            title: 'Screen Protectors',
-                            subtitle: "4 Products",
-                            image: 'assets/protector.png'),
-                        longproducts(
-                            background: Color.fromARGB(255, 66, 63, 63),
-                            title: 'EarPhones',
-                            subtitle: "8 Products",
-                            image: 'assets/headphones.png'),
-                        SizedBox(height: 12),
-                        shortbottomproducts(
-                            background: Color.fromARGB(255, 63, 60, 60),
-                            title: 'Cables',
-                            subtitle: "8 Products",
-                            image: 'assets/cables.png')
+                            title: 'Head Phones',
+                            image: 'assets/headphone.png',
+                          ),
+                        ),
+                        const SizedBox(height: 12),
+                        GestureDetector(
+                          onTap: () {
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) =>
+                                        Products(cat: 'Cables')));
+                          },
+                          child: const longproducts(
+                              background: Color.fromARGB(255, 63, 60, 60),
+                              title: 'Cables',
+                              image: 'assets/cables.png'),
+                        )
                       ],
                     )
                   ],
@@ -147,13 +167,11 @@ class CategoryPage extends StatelessWidget {
 class longproducts extends StatelessWidget {
   final Color background;
   final String title;
-  final String subtitle;
   final String image;
   const longproducts(
       {super.key,
       required this.background,
       required this.title,
-      required this.subtitle,
       required this.image});
 
   @override
@@ -166,14 +184,14 @@ class longproducts extends StatelessWidget {
           borderRadius: BorderRadius.circular(24),
           border: Border.all(color: Colors.white, width: 2),
           boxShadow: [
-            BoxShadow(blurRadius: 50, color: Color(0xFF0B0C2A).withOpacity(.1))
+            BoxShadow(
+                blurRadius: 50, color: const Color(0xFF0B0C2A).withOpacity(.1))
           ]),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          SizedBox(height: 16),
+          const SizedBox(height: 16),
           Text(title, style: AppStyle.m12w),
-          Text(subtitle, style: AppStyle.r10wt),
           Expanded(child: Image.asset(image))
         ],
       ),
@@ -184,14 +202,13 @@ class longproducts extends StatelessWidget {
 class shortproducts extends StatelessWidget {
   final Color background;
   final String title;
-  final String subtitle;
   final String image;
   const shortproducts(
       {super.key,
       required this.background,
       required this.title,
-      required this.subtitle,
-      required this.image});
+      required this.image,
+      requiredonPress});
 
   @override
   Widget build(BuildContext context) {
@@ -204,56 +221,15 @@ class shortproducts extends StatelessWidget {
           borderRadius: BorderRadius.circular(24),
           border: Border.all(color: Colors.white, width: 2),
           boxShadow: [
-            BoxShadow(blurRadius: 50, color: Color(0xFF0B0C2A).withOpacity(.1))
+            BoxShadow(
+                blurRadius: 50, color: const Color(0xFF0B0C2A).withOpacity(.1))
           ]),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           const SizedBox(height: 16),
           Text(title, style: AppStyle.m12w),
-          Text(subtitle, style: AppStyle.r10wt),
           Expanded(child: Image.asset(image))
-        ],
-      ),
-    );
-  }
-}
-
-class shortbottomproducts extends StatelessWidget {
-  final Color background;
-  final String title;
-  final String subtitle;
-  final String image;
-  const shortbottomproducts(
-      {super.key,
-      required this.background,
-      required this.title,
-      required this.subtitle,
-      required this.image});
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      margin: const EdgeInsets.only(bottom: 14),
-      width: 155,
-      height: 140,
-      decoration: BoxDecoration(
-          color: background,
-          borderRadius: BorderRadius.circular(34),
-          border: Border.all(color: Colors.white, width: 2),
-          boxShadow: [
-            BoxShadow(blurRadius: 50, color: Color(0xFF0B0C2A).withOpacity(.1))
-          ]),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: [
-          const SizedBox(height: 18),
-          Expanded(child: Image.asset(image)),
-          Text(title, style: AppStyle.m12w),
-          Text(subtitle, style: AppStyle.r10wt),
-          const SizedBox(
-            height: 13,
-          )
         ],
       ),
     );

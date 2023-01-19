@@ -17,6 +17,7 @@ import '../widgets/app_bar.dart';
 import '../widgets/reg_textinput.dart';
 
 final formKey = GlobalKey<FormState>();
+String mregexp = r'^[+]*[(]{0,1}[0-9]{1,4}[)]{0,1}[-\s\./0-9]+$';
 
 class AddProductPage extends StatefulWidget {
   @override
@@ -155,7 +156,7 @@ class _AddProductPageState extends State<AddProductPage> {
                               icon: Icons.money,
                               torf: false,
                               errormssg: errormssg,
-                              regexp: aregexp,
+                              regexp: mregexp,
                               enable: true),
                           RegTextInput(
                               controller: pp.quantityController,
@@ -163,7 +164,7 @@ class _AddProductPageState extends State<AddProductPage> {
                               icon: Icons.numbers,
                               torf: false,
                               errormssg: errormssg,
-                              regexp: aregexp,
+                              regexp: mregexp,
                               enable: true),
                           RegTextInput(
                               controller: pp.colorController,
@@ -225,8 +226,13 @@ class _AddProductPageState extends State<AddProductPage> {
                                               pp.priceController.text,
                                               pp.quantityController.text,
                                               pp.greyimage)
-                                          .then((value) =>
-                                              Navigator.pop(context));
+                                          .then((value) {
+                                        final snackBar = SnackBar(
+                                            content: Text("Product added.."));
+                                        ScaffoldMessenger.of(context)
+                                            .showSnackBar(snackBar);
+                                        Navigator.pop(context);
+                                      });
                                     } else {
                                       return showAlertDialog(
                                           context, "Please choose category");

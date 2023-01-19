@@ -265,6 +265,12 @@ class _BodyState extends State<Body> {
                                                       "totalPrice": newPrice,
                                                     });
                                                   }
+
+                                                  Fluttertoast.showToast(
+                                                      msg:
+                                                          "Product added to cart sucessfully ✔️",
+                                                      backgroundColor:
+                                                          Colors.red);
                                                 });
                                               } else {
                                                 Fluttertoast.showToast(
