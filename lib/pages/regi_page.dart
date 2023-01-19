@@ -97,7 +97,7 @@ class _RegisterPageState extends State<RegisterPage> {
 
   @override
   Widget build(BuildContext context) {
-    bool obscureText = true;
+    bool _obscureText = true;
     return Scaffold(
       appBar: CustomAppBar(text: ""),
       body: Container(
@@ -216,7 +216,7 @@ class _RegisterPageState extends State<RegisterPage> {
                             padding: const EdgeInsets.only(left: 10),
                             child: TextFormField(
                               controller: passwordController,
-                              obscureText: obscureText,
+                              obscureText: _obscureText,
                               decoration: InputDecoration(
                                   border: InputBorder.none,
                                   hintText: "Password",
@@ -227,10 +227,10 @@ class _RegisterPageState extends State<RegisterPage> {
                                   suffixIcon: InkWell(
                                     onTap: () {
                                       setState(() {
-                                        obscureText = !obscureText;
+                                        _obscureText = ! _obscureText;
                                       });
                                     },
-                                    child: Icon(obscureText
+                                    child: Icon(_obscureText
                                         ? Icons.visibility
                                         : Icons.visibility_off),
                                   )),
@@ -254,7 +254,7 @@ class _RegisterPageState extends State<RegisterPage> {
                             padding: const EdgeInsets.only(left: 10),
                             child: TextFormField(
                               controller: confirmPassController,
-                              obscureText: obscureText,
+                              obscureText: _obscureText,
                               decoration: InputDecoration(
                                   border: InputBorder.none,
                                   hintText: "Confirm Password",
@@ -265,10 +265,10 @@ class _RegisterPageState extends State<RegisterPage> {
                                   suffixIcon: InkWell(
                                     onTap: () {
                                       setState(() {
-                                        obscureText = !obscureText;
+                                        _obscureText = ! _obscureText;
                                       });
                                     },
-                                    child: Icon(obscureText
+                                    child: Icon(_obscureText
                                         ? Icons.visibility
                                         : Icons.visibility_off),
                                   )),

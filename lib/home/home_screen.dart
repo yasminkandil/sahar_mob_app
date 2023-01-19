@@ -93,7 +93,7 @@ class _HomeScreenState extends State<HomeScreen> {
                       margin: EdgeInsets.only(top: size.height * 0.01),
                       padding: EdgeInsets.only(
                           top: size.height * 0.000001, left: 10, right: 10),
-                      height: 500,
+                      height: 400,
                       child: Column(
                         children: <Widget>[
                           Row(
@@ -101,7 +101,7 @@ class _HomeScreenState extends State<HomeScreen> {
                             // children: <Widget>[],
                           ),
                           SizedBox(
-                            height: 20,
+                            height: 5,
                           ),
                         
                           FutureBuilder(
@@ -128,8 +128,8 @@ class _HomeScreenState extends State<HomeScreen> {
                                                             padding:
                                                                 EdgeInsets.all(
                                                                     35),
-                                                            height: 200,
-                                                            width: 200,
+                                                            height: 280,
+                                                            width: 240,
                                                             decoration:
                                                                 BoxDecoration(
                                                               color:
@@ -146,7 +146,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                                             padding:
                                                                 EdgeInsets.all(
                                                                     35),
-                                                            width: 200,
+                                                            width: 240,
                                                             decoration:
                                                                 BoxDecoration(
                                                               color:
@@ -166,15 +166,18 @@ class _HomeScreenState extends State<HomeScreen> {
                                                                         .get(
                                                                             'brand'),
                                                                 style: TextStyle(
+                                                                    fontSize:
+                                                                        20,
                                                                     fontWeight:
                                                                         FontWeight
                                                                             .bold,
                                                                     color: Colors
                                                                         .white)),
                                                           ),
+                                                          
                                                           SizedBox(
                                                             width: 3,
-                                                            height: 10,
+                                                            height: 15,
                                                           ),
                                                         ],
                                                       ),
