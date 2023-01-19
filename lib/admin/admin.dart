@@ -1,4 +1,20 @@
 import 'package:flutter/material.dart';
+import 'package:sahar_mob_app/admin/add_category.dart';
+import 'package:sahar_mob_app/admin/add_color.dart';
+import 'package:sahar_mob_app/admin/add_gallery.dart';
+import 'package:sahar_mob_app/admin/add_homePageImage.dart';
+import 'package:sahar_mob_app/admin/add_offer.dart';
+import 'package:sahar_mob_app/admin/add_product.dart';
+import 'package:sahar_mob_app/admin/add_quality.dart';
+import 'package:sahar_mob_app/admin/orders_admin.dart';
+import 'package:sahar_mob_app/admin/view_categories.dart';
+import 'package:sahar_mob_app/admin/view_colors.dart';
+import 'package:sahar_mob_app/admin/view_offers.dart';
+import 'package:sahar_mob_app/admin/view_qualties.dart';
+//import 'package:sahar_mob_app/pages/products_powerbank.dart';
+import 'package:sahar_mob_app/admin/users_admin.dart';
+import 'package:sahar_mob_app/admin/view_product.dart';
+import 'package:sahar_mob_app/pages/products_all.dart';
 import 'package:sahar_mob_app/utils/color.dart';
 import 'package:sahar_mob_app/home/home_page.dart';
 
@@ -227,11 +243,6 @@ class _AdminState extends State<Admin> {
                 leading: const Icon(Icons.library_books),
                 title: const Text("Colors List"),
                 onTap: () => Navigator.pushNamed(context, 'view_colors')),
-            const Divider(),
-            ListTile(
-                leading: const Icon(Icons.add_circle_outline),
-                title: const Text("Add Offer"),
-                onTap: () => Navigator.pushNamed(context, 'add_offer')),
             const Divider(),
             ListTile(
               leading: const Icon(Icons.library_books),

@@ -12,6 +12,7 @@ import 'package:sahar_mob_app/admin/add_quality.dart';
 import 'package:sahar_mob_app/admin/admin.dart';
 import 'package:sahar_mob_app/admin/orders_admin.dart';
 import 'package:sahar_mob_app/admin/users_admin.dart';
+import 'package:sahar_mob_app/admin/view_messages.dart';
 import 'package:sahar_mob_app/admin/view_product.dart';
 import 'package:sahar_mob_app/controllers/search_product.dart';
 import 'package:sahar_mob_app/home/home_page.dart';
@@ -30,6 +31,8 @@ import 'package:sahar_mob_app/pages/view_account.dart';
 import 'package:sahar_mob_app/admin/view_messages.dart';
 import 'package:sahar_mob_app/screens/Orders_Screen/order_screen.dart';
 //import 'package:sahar_mob_app/screens/details/order_screen.dart';
+
+import 'package:sahar_mob_app/screens/Orders_Screen/order_screen.dart';
 
 import 'admin/add_product.dart';
 import 'admin/search_user.dart';
@@ -126,7 +129,6 @@ class _MyAppState extends State<MyApp> {
         'add_color': (context) => AddColorPage(),
         'add_quality': (context) => AddQualityPage(),
         'add_category': (context) => AddCategPage(),
-        'add_offer': (context) => AddOfferPage(),
         'add_homeimage': (context) => const AddGalleryhome(),
         'add_gallery': (context) => const AddGallery(),
         'search_users': (context) => const FirebaseSearchUserScreen(),

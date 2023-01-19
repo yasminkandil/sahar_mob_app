@@ -3,8 +3,6 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:sahar_mob_app/admin/add_product.dart';
-import 'package:sahar_mob_app/admin/admin.dart';
-import 'package:sahar_mob_app/utils/color.dart';
 import 'package:sahar_mob_app/widgets/app_bar.dart';
 import 'package:sahar_mob_app/widgets/btn_widget.dart';
 import 'package:sahar_mob_app/widgets/reg_textinput.dart';
@@ -12,6 +10,8 @@ import '../models/product_model.dart';
 import '../widgets/textInput.dart';
 
 class AddOfferPage extends StatefulWidget {
+  const AddOfferPage({super.key, required this.prodid});
+  final String prodid;
   @override
   _AddOfferPageState createState() => _AddOfferPageState();
 }
@@ -22,11 +22,13 @@ class _AddOfferPageState extends State<AddOfferPage> {
   final _nameController = TextEditingController();
   final _descriptionController = TextEditingController();
   final _percentageController = TextEditingController();
+  String mregexp = r'^[+]*[(]{0,1}[0-9]{1,4}[)]{0,1}[-\s\./0-9]+$';
 
-  Future addOffer(String name, String description, String percentage,
-      String datein, String dateout) async {
+  Future addOffer(String name, String productId, String description,
+      String percentage, String datein, String dateout) async {
     await FirebaseFirestore.instance.collection('offers').doc().set({
       'name': name,
+      'productId': productId,
       'description': description,
       'percentage': int.parse(percentage),
       'datein': datein,
@@ -117,7 +119,7 @@ class _AddOfferPageState extends State<AddOfferPage> {
                               icon: Icons.percent,
                               torf: false,
                               errormssg: errormssg,
-                              regexp: aregexp,
+                              regexp: mregexp,
                               enable: true),
                           TextField(
                             controller: dateIn,
@@ -195,6 +197,7 @@ class _AddOfferPageState extends State<AddOfferPage> {
                                   if (formKey.currentState!.validate()) {
                                     addOffer(
                                             _nameController.text,
+                                            widget.prodid,
                                             _descriptionController.text,
                                             _percentageController.text,
                                             dateIn.text,

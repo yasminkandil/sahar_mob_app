@@ -47,7 +47,7 @@ class OrdersDetails extends StatelessWidget {
                       style: TextStyle(
                           fontWeight: FontWeight.bold, fontSize: 18, height: 2),
                     ),
-                    Text("Total Paid:${data['Total']}" + "EGP",
+                    Text("Total Paid:${data['totalPrice']}" + "EGP",
                         style: TextStyle(
                             fontWeight: FontWeight.bold,
                             fontSize: 18,

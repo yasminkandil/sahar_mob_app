@@ -97,7 +97,7 @@ class _ViewOffersPageState extends State<ViewOffersPage> {
                 },
               ),
             ),
-            Center(
+            /*Center(
               child: InkWell(
                 child: RichText(
                   text: TextSpan(children: [
@@ -112,7 +112,7 @@ class _ViewOffersPageState extends State<ViewOffersPage> {
                 onTap: () => Navigator.of(context).push(
                     MaterialPageRoute(builder: (context) => AddOfferPage())),
               ),
-            )
+            )*/
           ],
         ),
       ),

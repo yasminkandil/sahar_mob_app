@@ -1,5 +1,8 @@
 class ProductModel2 {
   String? image;
+  String? image2;
+  String? image3;
+
   String? name;
   String? quantity;
   String? price;
@@ -11,6 +14,8 @@ class ProductModel2 {
 
   ProductModel2({
     required this.image,
+    required this.image2,
+    required this.image3,
     required this.quantity,
     required this.price,
     required this.description,
@@ -22,6 +27,8 @@ class ProductModel2 {
 
   ProductModel2.fromJson(Map<String, dynamic> json) {
     image = json["image"];
+    image2 = json["image2"];
+    image3 = json["image3"];
     name = json["name"];
     quantity = json["quantity"];
     price = json["price"];

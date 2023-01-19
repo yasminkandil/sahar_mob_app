@@ -60,15 +60,16 @@ class ProductTitleWithImage extends StatelessWidget {
                     autoPlayAnimationDuration: Duration(milliseconds: 800),
                     viewportFraction: 0.8,
                   ),
-                  items: [1, 2, 3, 4, 5].map((i) {
+                  items: [productModel2.image, productModel2.image2].map((i) {
                     return Builder(
                       builder: (BuildContext context) {
                         return Container(
                           width: MediaQuery.of(context).size.width,
                           margin: EdgeInsets.symmetric(horizontal: 5.0),
-                          decoration: BoxDecoration(color: Colors.amber),
+                          decoration: BoxDecoration(
+                              color: Colors.amber.withOpacity(0.0)),
                           child: Image.network(
-                            "${productModel2.image} ",
+                            "${i} ",
                             fit: BoxFit.cover,
                           ),
                         );
