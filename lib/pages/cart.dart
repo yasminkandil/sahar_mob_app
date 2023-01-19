@@ -90,10 +90,7 @@ class _CartItemState extends State<CartItem> {
             onPressed: () {
               Navigator.push(
                 context,
-                MaterialPageRoute(
-                    builder: (context) => Products(
-                          cat: 'Cables',
-                        )),
+                MaterialPageRoute(builder: (context) => MyHomePage()),
               );
             },
           ),
