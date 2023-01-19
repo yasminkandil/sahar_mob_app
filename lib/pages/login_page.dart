@@ -99,7 +99,10 @@ class _LoginPageState extends State<LoginPage> {
                               decoration: InputDecoration(
                                   border: InputBorder.none,
                                   hintText: "Password",
-                                  prefixIcon: const Icon(Icons.vpn_key),
+                                  prefixIcon: const Icon(
+                                    Icons.vpn_key,
+                                    color: Color.fromARGB(255, 249, 118, 3),
+                                  ),
                                   suffixIcon: InkWell(
                                     onTap: () {
                                       setState(() {
@@ -130,12 +133,7 @@ class _LoginPageState extends State<LoginPage> {
                                             Color.fromARGB(255, 232, 127, 14)),
                                     "Forgot Password?"),
                                 onPressed: () {
-                                  Navigator.push(
-                                    context,
-                                    MaterialPageRoute(builder: (context) {
-                                      return const ForgotPass();
-                                    }),
-                                  );
+                                  Navigator.pushNamed(context, 'forgot_pass');
                                 }),
                           ),
                           Expanded(
@@ -211,9 +209,8 @@ class _LoginPageState extends State<LoginPage> {
                                     style: TextStyle(color: orangeColors)),
                               ]),
                             ),
-                            onTap: () => Navigator.of(context).push(
-                                MaterialPageRoute(
-                                    builder: (context) => RegisterPage())),
+                            onTap: () =>
+                                Navigator.pushNamed(context, 'register'),
                           )
                         ],
                       ),
@@ -242,7 +239,10 @@ class _LoginPageState extends State<LoginPage> {
         decoration: InputDecoration(
           border: InputBorder.none,
           hintText: hint,
-          prefixIcon: Icon(icon),
+          prefixIcon: Icon(
+            icon,
+            color: Color.fromARGB(255, 249, 118, 3),
+          ),
         ),
         validator: (value) {
           bool emailValid = RegExp(

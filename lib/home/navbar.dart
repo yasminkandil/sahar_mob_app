@@ -1,28 +1,11 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
-import 'package:sahar_mob_app/admin/admin.dart';
-import 'package:sahar_mob_app/models/auth_service.dart';
-import 'package:sahar_mob_app/pages/cart.dart';
-import 'package:sahar_mob_app/pages/checkout.dart';
-import 'package:sahar_mob_app/pages/contact_us.dart';
-import 'package:sahar_mob_app/pages/edit_account.dart';
 import 'package:sahar_mob_app/home/home_screen.dart';
-import 'package:sahar_mob_app/pages/gallary.dart';
-import 'package:sahar_mob_app/pages/login_page.dart';
-import 'package:sahar_mob_app/pages/products_all.dart';
-import 'package:sahar_mob_app/product_powerbank.dart';
-import 'package:sahar_mob_app/pages/regi_page.dart';
-import 'package:sahar_mob_app/pages/view_account.dart';
-import 'package:sahar_mob_app/product_powerbank.dart';
-import 'package:sahar_mob_app/screens/Orders_Screen/order_screen.dart';
 import 'package:sahar_mob_app/utils/color.dart';
+import 'package:sahar_mob_app/widgets/app_bar.dart';
 import 'package:sahar_mob_app/widgets/header_container.dart';
 import '../controllers/search_product.dart';
-//import '../controllers/search_delegate.dart';
-import '../pages/must_have_account.dart';
 import '../pages/my_drawer_header.dart';
-import 'package:sahar_mob_app/providers/themeprovider.dart';
 
 class Navigation_bar extends StatefulWidget {
   @override
@@ -39,7 +22,7 @@ class HomeNavbar extends State<Navigation_bar> {
         backgroundColor: GreyColors,
         title: Text("Menu"),
         actions: [
-          Consumer<ThemeProvider>(
+          /*Consumer<ThemeProvider>(
             builder: (context, theme, child) {
               return IconButton(
                 icon: Icon(Icons.brightness_6),
@@ -48,13 +31,17 @@ class HomeNavbar extends State<Navigation_bar> {
                 },
               );
             },
-          ),
+          ),*/
           IconButton(
             onPressed: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(builder: (context) => FirebaseSearchScreen()),
-              );
+              Future<void> ProdSearch() async {
+                await showSearch(
+                  context: context,
+                  delegate: ProductSearch(),
+                );
+              }
+
+              ProdSearch();
             },
             icon: const Icon(Icons.search),
           ),
@@ -104,8 +91,6 @@ class HomeNavbar extends State<Navigation_bar> {
         children: [
           menuItem(1, "Gallery", Icons.image,
               currentPage == Sections.Gallery ? true : false),
-          menuItem(9, "CheckOut", Icons.check_outlined,
-              currentPage == Sections.CheckOut ? true : false),
           menuItem(10, "Login", Icons.login_rounded,
               currentPage == Sections.login ? true : false),
           menuItem(8, "Cart", Icons.shop_two_outlined,
@@ -118,6 +103,8 @@ class HomeNavbar extends State<Navigation_bar> {
               currentPage == Sections.Categories ? true : false),
           menuItem(4, " Profile", Icons.edit_attributes_rounded,
               currentPage == Sections.Edit_Profile ? true : false),
+          menuItem(9, "Order History", Icons.history,
+              currentPage == Sections.order_history ? true : false),
           menuItem(6, "Log Out", Icons.logout_rounded,
               currentPage == Sections.Log_Out ? true : false),
         ],
@@ -131,76 +118,48 @@ class HomeNavbar extends State<Navigation_bar> {
       child: InkWell(
         onTap: () {
           if (id == 1) {
-            Navigator.push(
-              context,
-              MaterialPageRoute(builder: (context) => gallery()),
-            );
-            currentPage = Sections.contacts;
+            Navigator.pushNamed(context, 'gallery');
+            currentPage = Sections.Gallery;
           } else if (id == 2) {
-            Navigator.push(
-              context,
-              MaterialPageRoute(builder: (context) => ContactUs()),
-            );
+            if (FirebaseAuth.instance.currentUser == null) {
+              Navigator.pushNamed(context, 'must_have_account');
+            } else {
+              Navigator.pushNamed(context, 'contact_us');
+            }
             currentPage = Sections.contacts;
           } else if (id == 3) {
-            Navigator.push(
-              context,
-              MaterialPageRoute(
-                  builder: (context) => Products(
-                        cat: 'Cables',
-                      )),
-            );
+            Navigator.pushNamed(context, 'shop');
             currentPage = Sections.Categories;
           } else if (id == 4) {
             if (FirebaseAuth.instance.currentUser == null) {
-              Navigator.push(
-                context,
-                MaterialPageRoute(builder: (context) => MustHaveAccountPage()),
-              );
+              Navigator.pushNamed(context, 'must_have_account');
             } else {
-              Navigator.push(
-                context,
-                MaterialPageRoute(
-                    builder: (context) => const ViewAccountPage()),
-              );
+              Navigator.pushNamed(context, 'profile');
             }
             currentPage = Sections.Edit_Profile;
-          } else if (id == 5) {
-            Navigator.push(
-              context,
-              MaterialPageRoute(builder: (context) => EditProfileUI()),
-            );
-            currentPage = Sections.Edit_Profile;
+          } else if (id == 9) {
+            if (FirebaseAuth.instance.currentUser == null) {
+              Navigator.pushNamed(context, 'must_have_account');
+            } else {
+              Navigator.pushNamed(context, 'order_history');
+            }
+            currentPage = Sections.order_history;
           } else if (id == 6) {
             FirebaseAuth.instance.signOut();
-            Navigator.push(
-              context,
-              MaterialPageRoute(builder: (context) => Navigation_bar()),
-            );
+            Navigator.pushNamed(context, 'home');
             currentPage = Sections.Log_Out;
           } else if (id == 7) {
-            Navigator.of(context).pushReplacement(MaterialPageRoute(
-              builder: (context) => AuthService().signOut(),
-            ));
+            Navigator.pushNamed(context, 'register');
             currentPage = Sections.Sign_Up;
           } else if (id == 8) {
-            Navigator.push(
-              context,
-              MaterialPageRoute(builder: (context) => CartItem()),
-            );
+            if (FirebaseAuth.instance.currentUser == null) {
+              Navigator.pushNamed(context, 'must_have_account');
+            } else {
+              Navigator.pushNamed(context, 'cart');
+            }
             currentPage = Sections.Cart;
-          } else if (id == 9) {
-            /*
-            Navigator.push(
-              context,
-              MaterialPageRoute(builder: (context) => checkout()),
-            );*/
-            currentPage = Sections.CheckOut;
           } else if (id == 10) {
-            Navigator.push(
-              context,
-              MaterialPageRoute(builder: (context) => LoginPage()),
-            );
+            Navigator.pushNamed(context, 'login');
             currentPage = Sections.login;
           }
         },
@@ -241,5 +200,6 @@ enum Sections {
   Cart,
   CheckOut,
   login,
-  Gallery
+  Gallery,
+  order_history
 }

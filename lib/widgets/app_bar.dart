@@ -13,6 +13,13 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
 
   @override
   Widget build(BuildContext context) {
+    Future<void> ProdSearch() async {
+      await showSearch(
+        context: context,
+        delegate: ProductSearch(),
+      );
+    }
+
     return AppBar(
       backgroundColor: GreyColors,
       title: Text(text),
@@ -27,13 +34,7 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
       actions: [
         IconButton(
           onPressed: () {
-            // method to show the search bar
-            //context: context, delegate:
-            Navigator.push(
-              context,
-              MaterialPageRoute(
-                  builder: (context) => const FirebaseSearchScreen()),
-            );
+            ProdSearch();
           },
           icon: const Icon(Icons.search),
         ),

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+<<<<<<< HEAD
 import 'package:sahar_mob_app/admin/add_category.dart';
 import 'package:sahar_mob_app/admin/add_color.dart';
 import 'package:sahar_mob_app/admin/add_gallery.dart';
@@ -15,13 +16,16 @@ import 'package:sahar_mob_app/admin/view_qualties.dart';
 import 'package:sahar_mob_app/admin/users_admin.dart';
 import 'package:sahar_mob_app/admin/view_product.dart';
 import 'package:sahar_mob_app/pages/products_all.dart';
+=======
+>>>>>>> 82b03952b86d220d374927e934dcfccc8f32cecc
 import 'package:sahar_mob_app/utils/color.dart';
-import 'package:sahar_mob_app/home/navbar.dart';
 import 'package:sahar_mob_app/home/home_page.dart';
 
 enum Page { dashboard, manage }
 
 class Admin extends StatefulWidget {
+  const Admin({super.key});
+
   @override
   _AdminState createState() => _AdminState();
 }
@@ -44,7 +48,7 @@ class _AdminState extends State<Admin> {
                 Navigator.push(
                   context,
                   MaterialPageRoute(builder: (context) {
-                    return MyHomePage();
+                    return const MyHomePage();
                   }),
                 );
               }),
@@ -55,24 +59,24 @@ class _AdminState extends State<Admin> {
                   child: ElevatedButton.icon(
                       style: ButtonStyle(
                         backgroundColor: MaterialStateProperty.all(
-                            Color.fromARGB(255, 234, 119, 18)),
+                            const Color.fromARGB(255, 234, 119, 18)),
                       ),
                       onPressed: () {
                         setState(() => _selectedPage = Page.dashboard);
                       },
-                      icon: Icon(Icons.dashboard, color: Colors.white),
-                      label: Text('Dashboard'))),
+                      icon: const Icon(Icons.dashboard, color: Colors.white),
+                      label: const Text('Dashboard'))),
               Expanded(
                   child: ElevatedButton.icon(
                       style: ButtonStyle(
                         backgroundColor: MaterialStateProperty.all(
-                            Color.fromARGB(255, 234, 119, 18)),
+                            const Color.fromARGB(255, 234, 119, 18)),
                       ),
                       onPressed: () {
                         setState(() => _selectedPage = Page.manage);
                       },
-                      icon: Icon(Icons.sort, color: Colors.white),
-                      label: Text('Manage'))),
+                      icon: const Icon(Icons.sort, color: Colors.white),
+                      label: const Text('Manage'))),
             ],
           ),
           //elevation: 0.0,
@@ -89,7 +93,7 @@ class _AdminState extends State<Admin> {
             ListTile(
               subtitle: ElevatedButton.icon(
                 onPressed: null,
-                icon: Icon(
+                icon: const Icon(
                   Icons.attach_money,
                   size: 30.0,
                   color: Colors.black,
@@ -98,7 +102,7 @@ class _AdminState extends State<Admin> {
                     textAlign: TextAlign.center,
                     style: TextStyle(fontSize: 30.0, color: orangeColors)),
               ),
-              title: Text(
+              title: const Text(
                 'Revenue',
                 textAlign: TextAlign.center,
                 style: TextStyle(fontSize: 24.0, color: Colors.black),
@@ -106,7 +110,7 @@ class _AdminState extends State<Admin> {
             ),
             Expanded(
               child: GridView(
-                gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                     crossAxisCount: 2),
                 children: <Widget>[
                   Padding(
@@ -115,8 +119,8 @@ class _AdminState extends State<Admin> {
                       child: ListTile(
                           title: ElevatedButton.icon(
                               onPressed: null,
-                              icon: Icon(Icons.people_outline),
-                              label: Text("Users")),
+                              icon: const Icon(Icons.people_outline),
+                              label: const Text("Users")),
                           subtitle: Text(
                             '700',
                             textAlign: TextAlign.center,
@@ -131,8 +135,8 @@ class _AdminState extends State<Admin> {
                       child: ListTile(
                           title: ElevatedButton.icon(
                               onPressed: null,
-                              icon: Icon(Icons.category),
-                              label: Text("Categorie")),
+                              icon: const Icon(Icons.category),
+                              label: const Text("Categorie")),
                           subtitle: Text(
                             '23',
                             textAlign: TextAlign.center,
@@ -147,8 +151,8 @@ class _AdminState extends State<Admin> {
                       child: ListTile(
                           title: ElevatedButton.icon(
                               onPressed: null,
-                              icon: Icon(Icons.track_changes),
-                              label: Text("Products")),
+                              icon: const Icon(Icons.track_changes),
+                              label: const Text("Products")),
                           subtitle: Text(
                             '120',
                             textAlign: TextAlign.center,
@@ -163,8 +167,8 @@ class _AdminState extends State<Admin> {
                       child: ListTile(
                           title: ElevatedButton.icon(
                               onPressed: null,
-                              icon: Icon(Icons.date_range),
-                              label: Text("In Fix")),
+                              icon: const Icon(Icons.date_range),
+                              label: const Text("In Fix")),
                           subtitle: Text(
                             '13',
                             textAlign: TextAlign.center,
@@ -179,8 +183,8 @@ class _AdminState extends State<Admin> {
                       child: ListTile(
                           title: ElevatedButton.icon(
                               onPressed: null,
-                              icon: Icon(Icons.shopping_cart),
-                              label: Text("Orders")),
+                              icon: const Icon(Icons.shopping_cart),
+                              label: const Text("Orders")),
                           subtitle: Text(
                             '500',
                             textAlign: TextAlign.center,
@@ -195,10 +199,10 @@ class _AdminState extends State<Admin> {
                       child: ListTile(
                           title: ElevatedButton.icon(
                               onPressed: null,
-                              icon: Icon(Icons.close),
-                              label: Text("Return")),
+                              icon: const Icon(Icons.close),
+                              label: const Text("Messages")),
                           subtitle: Text(
-                            '0',
+                            '20',
                             textAlign: TextAlign.center,
                             style:
                                 TextStyle(color: orangeColors, fontSize: 50.0),
@@ -214,74 +218,78 @@ class _AdminState extends State<Admin> {
         return ListView(
           children: <Widget>[
             ListTile(
-                leading: Icon(Icons.add_circle_outline),
-                title: Text("Add product"),
-                onTap: () => Navigator.push(
-                      context,
-                      MaterialPageRoute(builder: (context) => AddProductPage()),
-                    )),
-            Divider(),
+                leading: const Icon(Icons.add_circle_outline),
+                title: const Text("Add product"),
+                onTap: () => Navigator.pushNamed(context, 'add_product')),
+            const Divider(),
             ListTile(
-              leading: Icon(Icons.library_books),
-              title: Text("Products list"),
-              onTap: () => Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                      builder: (context) => const ViewProductPage())),
+                leading: const Icon(Icons.library_books),
+                title: const Text("Products list"),
+                onTap: () => Navigator.pushNamed(context, 'view_products')),
+            const Divider(),
+            ListTile(
+                leading: const Icon(Icons.add_circle_outline),
+                title: const Text("Add category"),
+                onTap: () => Navigator.pushNamed(context, 'add_category')),
+            const Divider(),
+            ListTile(
+                leading: const Icon(Icons.library_books),
+                title: const Text("Category list"),
+                onTap: () => Navigator.pushNamed(context, 'view_categories')),
+            const Divider(),
+            ListTile(
+                leading: const Icon(Icons.add_circle_outline),
+                title: const Text("Add Color"),
+                onTap: () => Navigator.pushNamed(context, 'add_color')),
+            const Divider(),
+            ListTile(
+                leading: const Icon(Icons.library_books),
+                title: const Text("Colors List"),
+                onTap: () => Navigator.pushNamed(context, 'view_colors')),
+            const Divider(),
+            ListTile(
+                leading: const Icon(Icons.add_circle_outline),
+                title: const Text("Add Offer"),
+                onTap: () => Navigator.pushNamed(context, 'add_offer')),
+            const Divider(),
+            ListTile(
+              leading: const Icon(Icons.library_books),
+              title: const Text("Offers List"),
+              onTap: () => Navigator.pushNamed(context, 'view_offers'),
             ),
-            Divider(),
+            const Divider(),
             ListTile(
-                leading: Icon(Icons.add_circle_outline),
-                title: Text("Add category"),
-                onTap: () => Navigator.push(
-                      context,
-                      MaterialPageRoute(builder: (context) => AddCategPage()),
-                    )),
-            Divider(),
+                leading: const Icon(Icons.add_circle_outline),
+                title: const Text("Add Quality"),
+                onTap: () => Navigator.pushNamed(context, 'add_quality')),
+            const Divider(),
             ListTile(
-              leading: Icon(Icons.library_books),
-              title: Text("Category list"),
-              onTap: () => Navigator.push(
-                context,
-                MaterialPageRoute(builder: (context) => ViewCategoriesPage()),
-              ),
-            ),
-            Divider(),
+                leading: const Icon(Icons.library_books),
+                title: const Text("Qualities List"),
+                onTap: () => Navigator.pushNamed(context, 'view_qualties')),
+            const Divider(),
             ListTile(
-                leading: Icon(Icons.add_circle_outline),
-                title: Text("Add Color"),
-                onTap: () => Navigator.push(
-                      context,
-                      MaterialPageRoute(builder: (context) => AddColorPage()),
-                    )),
-            Divider(),
+                leading: const Icon(Icons.add_circle_outline),
+                title: const Text("Add in gallery"),
+                onTap: () => Navigator.pushNamed(context, 'add_gallery')),
+            const Divider(),
             ListTile(
-              leading: Icon(Icons.library_books),
-              title: Text("Colors List"),
-              onTap: () => Navigator.push(
-                context,
-                MaterialPageRoute(builder: (context) => ViewcolorsPage()),
-              ),
-            ),
-            Divider(),
+                leading: const Icon(Icons.add_circle_outline),
+                title: const Text("Add in homepage images"),
+                onTap: () => Navigator.pushNamed(context, 'add_homeimage')),
+            const Divider(),
             ListTile(
-                leading: Icon(Icons.add_circle_outline),
-                title: Text("Add Offer"),
-                onTap: () => Navigator.push(
-                      context,
-                      MaterialPageRoute(builder: (context) => AddOfferPage()),
-                    )),
-            Divider(),
+                leading: const Icon(Icons.library_books),
+                title: const Text("Orders List"),
+                onTap: () => Navigator.pushNamed(context, 'view_orders')),
+            const Divider(),
             ListTile(
-              leading: Icon(Icons.library_books),
-              title: Text("Offers List"),
-              onTap: () => Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                      builder: (context) => const ViewOffersPage())),
-            ),
-            Divider(),
+                leading: const Icon(Icons.library_books),
+                title: const Text("Users List"),
+                onTap: () => Navigator.pushNamed(context, 'view_users')),
+            const Divider(),
             ListTile(
+<<<<<<< HEAD
                 leading: Icon(Icons.add_circle_outline),
                 title: Text("Add Quality"),
                 onTap: () => Navigator.push(
@@ -329,6 +337,11 @@ class _AdminState extends State<Admin> {
                       context,
                       MaterialPageRoute(builder: (context) => ViewUsersPage()),
                     )),
+=======
+                leading: const Icon(Icons.library_books),
+                title: const Text("Messages List"),
+                onTap: () => Navigator.pushNamed(context, 'view_messages')),
+>>>>>>> 82b03952b86d220d374927e934dcfccc8f32cecc
           ],
         );
     }

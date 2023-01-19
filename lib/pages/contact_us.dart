@@ -29,16 +29,11 @@ class ContactUsForm extends State<ContactUs> {
             color: orangeColors,
           ),
           onPressed: () {
-            Navigator.push(
-              context,
-              MaterialPageRoute(builder: (context) {
-                return MyHomePage();
-              }),
-            );
+            Navigator.pushNamed(context, 'home');
           },
         ),
       ),
-      body:  SingleChildScrollView(
+      body: SingleChildScrollView(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
           children: <Widget>[
@@ -81,10 +76,7 @@ class ContactUsForm extends State<ContactUs> {
                         final snackBar =
                             SnackBar(content: Text("Message Sent.."));
                         ScaffoldMessenger.of(context).showSnackBar(snackBar);
-                        Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => MyHomePage()));
+                        Navigator.pushNamed(context, 'home');
                       });
                     },
                     child: Text("SUBMIT",

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:sahar_mob_app/utils/color.dart';
 
 class TextInput extends StatelessWidget {
   String hint;
@@ -27,7 +28,7 @@ class TextInput extends StatelessWidget {
           hintText: hint,
           prefixIcon: Icon(
             icon,
-            color: Color.fromARGB(255, 249, 118, 3),
+            color: orangeColors,
           ),
         ),
       ),

@@ -131,19 +131,7 @@ class ProductModel {
       description: data["description"],
       price: data!["price"],
       capacity: data["capacity"],
-      /*  uid: data["uid"],
-      images: data["images"].map<String>((i) => i as String).toList(),
-      like: data["like"] == null
-          ? []
-          : data["like"].map<String>((i) => i as String).toList(),
-      favories: data["favories"] == null
-          ? []
-          : data["favories"].map<String>((i) => i as String).toList(),
-      dislike: data["dislike"] == null
-          ? []
-          : data["dislike"].map<String>((i) => i as String).toList()
-    //  type: map["type"] == "car" ? CarType.car : CarType.moto
-      */
+     
     );
   }
 
