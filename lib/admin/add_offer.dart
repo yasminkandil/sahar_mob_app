@@ -1,36 +1,87 @@
+import 'dart:io';
 import 'dart:ui';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:intl/intl.dart';
+import 'package:permission_handler/permission_handler.dart';
 import 'package:sahar_mob_app/admin/add_product.dart';
-import 'package:sahar_mob_app/admin/admin.dart';
 import 'package:sahar_mob_app/utils/color.dart';
 import 'package:sahar_mob_app/widgets/app_bar.dart';
 import 'package:sahar_mob_app/widgets/btn_widget.dart';
 import 'package:sahar_mob_app/widgets/reg_textinput.dart';
 import '../models/product_model.dart';
 import '../widgets/textInput.dart';
+import "package:path/path.dart" as p;
 
 class AddOfferPage extends StatefulWidget {
+  const AddOfferPage({super.key, required this.prodid});
+  final String prodid;
   @override
   _AddOfferPageState createState() => _AddOfferPageState();
 }
 
 class _AddOfferPageState extends State<AddOfferPage> {
+  uploadImage() async {
+    final _storage = FirebaseStorage.instance;
+    final _picker = ImagePicker();
+    PickedFile? image;
+
+    //Check Permissions
+    await Permission.photos.request();
+
+    var permissionStatus = await Permission.photos.status;
+
+    //Select Image
+    image = await _picker.getImage(source: ImageSource.gallery);
+    var file = File(image!.path);
+
+    if (image != null) {
+      //Upload to Firebase
+      var snapshot =
+          await _storage.ref().child(p.basename(image.path)).putFile(file);
+
+      var downloadUrl = await snapshot.ref.getDownloadURL();
+
+      setState(() {
+        imageUrl = downloadUrl;
+        greyimage = imageUrl;
+        setImage(imageUrl);
+        getImage();
+      });
+    } else {
+      print('No Path Received');
+    }
+  }
+
   TextEditingController dateIn = TextEditingController();
   TextEditingController dateOut = TextEditingController();
   final _nameController = TextEditingController();
   final _descriptionController = TextEditingController();
   final _percentageController = TextEditingController();
+  final _newpController = TextEditingController();
+  String mregexp = r'^[+]*[(]{0,1}[0-9]{1,4}[)]{0,1}[-\s\./0-9]+$';
 
-  Future addOffer(String name, String description, String percentage,
-      String datein, String dateout) async {
+  Future addOffer(
+      String name,
+      String productId,
+      String description,
+      String percentage,
+      String newp,
+      String datein,
+      String dateout,
+      String image) async {
     await FirebaseFirestore.instance.collection('offers').doc().set({
       'name': name,
+      'productId': productId,
       'description': description,
       'percentage': int.parse(percentage),
+      'newPrice': newp,
       'datein': datein,
       'dateout': dateout,
+      'image': image,
     });
   }
 
@@ -62,25 +113,31 @@ class _AddOfferPageState extends State<AddOfferPage> {
                           shape: BoxShape.circle,
                           image: DecorationImage(
                               fit: BoxFit.cover,
-                              image: NetworkImage(
-                                  'https://www.google.com/search?q=profile+photo+&tbm=isch&ved=2ahUKEwis27rOz_76AhVFexoKHU2PBGoQ2-cCegQIABAA&oq=profile+photo+&gs_lcp=CgNpbWcQAzIECAAQQzIFCAAQgAQyBQgAEIAEMgUIABCABDIFCAAQgAQyBQgAEIAEMgUIABCABDIFCAAQgAQyBQgAEIAEMgUIABCABDoGCAAQBxAeULwEWLwEYKoIaABwAHgAgAGZAYgBkwKSAQMwLjKYAQCgAQGqAQtnd3Mtd2l6LWltZ8ABAQ&sclient=img&ei=d4lZY-zDCsX2ac2ektAG&bih=657&biw=1366#imgrc=nfkyptoYx2OzJM'))),
+                              image: NetworkImage(greyimage))),
                     ),
                     Positioned(
                       right: 0,
                       bottom: 0,
                       child: Container(
-                          height: 30,
-                          width: 30,
+                          height: 40,
+                          width: 40,
                           decoration: BoxDecoration(
                               shape: BoxShape.circle,
                               border: Border.all(
                                 width: 2,
                                 color: Colors.white,
                               ),
-                              color: Colors.orange),
-                          child: Icon(
-                            Icons.upload,
-                            color: Colors.white,
+                              color: orangeColors),
+                          child: TextButton(
+                            child: Center(
+                              child: Icon(
+                                Icons.upload,
+                                color: Colors.white,
+                              ),
+                            ),
+                            onPressed: () {
+                              uploadImage();
+                            },
                           )),
                     )
                   ],
@@ -117,7 +174,15 @@ class _AddOfferPageState extends State<AddOfferPage> {
                               icon: Icons.percent,
                               torf: false,
                               errormssg: errormssg,
-                              regexp: aregexp,
+                              regexp: mregexp,
+                              enable: true),
+                          RegTextInput(
+                              controller: _newpController,
+                              hint: "New Price",
+                              icon: Icons.money,
+                              torf: false,
+                              errormssg: errormssg,
+                              regexp: mregexp,
                               enable: true),
                           TextField(
                             controller: dateIn,
@@ -195,12 +260,20 @@ class _AddOfferPageState extends State<AddOfferPage> {
                                   if (formKey.currentState!.validate()) {
                                     addOffer(
                                             _nameController.text,
+                                            widget.prodid,
                                             _descriptionController.text,
                                             _percentageController.text,
+                                            _newpController.text,
                                             dateIn.text,
-                                            dateOut.text)
-                                        .then(
-                                            (value) => Navigator.pop(context));
+                                            dateOut.text,
+                                            greyimage)
+                                        .then((value) {
+                                      final snackBar = SnackBar(
+                                          content: Text("Offer added.."));
+                                      ScaffoldMessenger.of(context)
+                                          .showSnackBar(snackBar);
+                                      Navigator.pop(context);
+                                    });
                                   }
                                 },
                               ),

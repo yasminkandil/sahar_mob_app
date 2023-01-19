@@ -245,11 +245,6 @@ class _AdminState extends State<Admin> {
                 onTap: () => Navigator.pushNamed(context, 'view_colors')),
             const Divider(),
             ListTile(
-                leading: const Icon(Icons.add_circle_outline),
-                title: const Text("Add Offer"),
-                onTap: () => Navigator.pushNamed(context, 'add_offer')),
-            const Divider(),
-            ListTile(
               leading: const Icon(Icons.library_books),
               title: const Text("Offers List"),
               onTap: () => Navigator.pushNamed(context, 'view_offers'),

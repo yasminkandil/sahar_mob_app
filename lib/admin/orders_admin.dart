@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:sahar_mob_app/admin/order_details.dart';
 import 'package:sahar_mob_app/read%20data/get_orders.dart';
 import 'package:sahar_mob_app/utils/color.dart';
+import 'package:sahar_mob_app/widgets/adminappbar.dart';
 import '../widgets/app_bar.dart';
 
 class ViewOrdersPage extends StatelessWidget {
@@ -23,7 +24,7 @@ class ViewOrdersPage extends StatelessWidget {
   Widget build(BuildContext context) {
     // TODO: implement build
     return Scaffold(
-      appBar: CustomAppBar(text: "Orders List"),
+      appBar: AdminAppBar(text: "Orders List"),
       body: FutureBuilder(
         future: getDocorder(),
         builder: (context, snapshot) {

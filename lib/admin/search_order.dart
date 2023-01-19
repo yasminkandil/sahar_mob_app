@@ -1,11 +1,12 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:sahar_mob_app/screens/details/details_screen.dart';
 import 'package:sahar_mob_app/utils/color.dart';
 
-class ProductSearch extends SearchDelegate {
+import 'order_details.dart';
+
+class OrderSearch extends SearchDelegate {
   CollectionReference products =
-      FirebaseFirestore.instance.collection('products');
+      FirebaseFirestore.instance.collection('orders');
   @override
   List<Widget>? buildActions(BuildContext context) {
     return <Widget>[
@@ -32,21 +33,19 @@ class ProductSearch extends SearchDelegate {
   Widget buildResults(BuildContext context) {
     return StreamBuilder<QuerySnapshot>(
       stream: products.snapshots().asBroadcastStream(),
-      builder: (BuildContext context, 
-      AsyncSnapshot<QuerySnapshot> snapshot) {
+      builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
         if (snapshot.hasError) {
           return Center(child: CircularProgressIndicator());
         }
         if (snapshot.connectionState == ConnectionState.waiting) {
           return Text("Loading");
-        }
-       
-        else {
+        } else {
           if (snapshot.data!.docs
-              .where((QueryDocumentSnapshot<Object?> element) => element['name']
-                  .toString()
-                  .toLowerCase()
-                  .contains(query.toLowerCase()))
+              .where((QueryDocumentSnapshot<Object?> element) =>
+                  element['orderBy']
+                      .toString()
+                      .toLowerCase()
+                      .contains(query.toLowerCase()))
               .isEmpty) {
             return Center(
                 child: Text(
@@ -58,24 +57,23 @@ class ProductSearch extends SearchDelegate {
               ),
             ));
           }
-          return ListView(
-            children: [
+          return ListView(children: [
             ...snapshot.data!.docs
                 .where((QueryDocumentSnapshot<Object?> element) =>
-                    element['name']
+                    element['orderBy']
                         .toString()
                         .toLowerCase()
                         .contains(query.toLowerCase()))
                 .map((QueryDocumentSnapshot<Object?> data) {
               final String name = data.get('name');
-              final String brand = data.get('brand');
+              final String brand = data.get('orderBy');
               return ListTile(
                   onTap: (() {
                     Navigator.push(
                         context,
                         MaterialPageRoute(
-                            builder: (context) => DetailScreen(
-                                  salma: data.id,
+                            builder: (context) => OrderDetailsPage(
+                                  orderss: data.id,
                                 )));
                   }),
                   title: Text(
@@ -114,4 +112,3 @@ class ProductSearch extends SearchDelegate {
     ));
   }
 }
-  

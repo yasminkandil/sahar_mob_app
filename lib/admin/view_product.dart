@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:sahar_mob_app/admin/add_offer.dart';
 import 'package:sahar_mob_app/admin/add_product.dart';
 import 'package:sahar_mob_app/admin/edit_product.dart';
 import 'package:sahar_mob_app/read%20data/get_product_name.dart';
@@ -89,7 +90,7 @@ class _ViewProductPageState extends State<ViewProductPage> {
                               thickness: 3,
                               indent: 25,
                               endIndent: 25,
-                            )
+                            ),
                           ],
                         ),
                       );
