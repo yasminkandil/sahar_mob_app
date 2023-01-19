@@ -78,7 +78,6 @@ class MyApp extends StatelessWidget {
         'add_color': (context) => AddColorPage(),
         'add_quality': (context) => AddQualityPage(),
         'add_category': (context) => AddCategPage(),
-        'add_offer': (context) => AddOfferPage(),
         'add_homeimage': (context) => const AddGalleryhome(),
         'add_gallery': (context) => const AddGallery(),
         'search_users': (context) => const FirebaseSearchUserScreen(),

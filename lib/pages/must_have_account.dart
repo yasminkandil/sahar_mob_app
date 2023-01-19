@@ -15,6 +15,16 @@ class MustHaveAccountPage extends StatelessWidget {
         child: Column(
           children: [
             Center(
+                child: Container(
+              child: Image.asset('assets/6712526.jpg'),
+              height: 140,
+              width: 140,
+            )),
+            SizedBox(
+              height: 30,
+              width: 30,
+            ),
+            Center(
               child: Text(
                   style: TextStyle(color: orangeColors),
                   'Sorry...You must have an account to view this page.'),

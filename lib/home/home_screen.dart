@@ -53,7 +53,6 @@ class _HomeScreenState extends State<HomeScreen> {
               getDocImage();
               builder:
               (context, snapshot) {
-                
                 Map<String, dynamic> data = snapshot.data?.data() != null
                     ? snapshot.data!.data()! as Map<String, dynamic>
                     : <String, dynamic>{};
@@ -103,7 +102,6 @@ class _HomeScreenState extends State<HomeScreen> {
                           SizedBox(
                             height: 20,
                           ),
-                        
                           FutureBuilder(
                               future: retrieveLastFiveItems(),
                               builder: (context,
@@ -165,14 +163,14 @@ class _HomeScreenState extends State<HomeScreen> {
                                                                             index]
                                                                         .get(
                                                                             'brand'),
-                                                                style: TextStyle(
+                                                                style: const TextStyle(
                                                                     fontWeight:
                                                                         FontWeight
                                                                             .bold,
                                                                     color: Colors
                                                                         .white)),
                                                           ),
-                                                          SizedBox(
+                                                          const SizedBox(
                                                             width: 3,
                                                             height: 10,
                                                           ),
@@ -203,14 +201,12 @@ class _HomeScreenState extends State<HomeScreen> {
                 title: 'Flash Sales',
               ),
             ),
-         
-
-       ),
-       Column(
-  children: [
-    Image.asset('assets/pro.png'), 
-  ],
-)
+          ),
+          Column(
+            children: [
+              Image.asset('assets/pro.png'),
+            ],
+          )
         ]),
       ),
     );
