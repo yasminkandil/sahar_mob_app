@@ -126,8 +126,7 @@ class _MyAppState extends State<MyApp> {
         'search_users': (context) => const FirebaseSearchUserScreen(),
         //'search_products': (context) => const ProductSearch(),
         'forgot_pass': (context) => const ForgotPass(),
-                'araf': (context) =>  Offerrphoto(),
-
+        'araf': (context) => Offerrphoto(),
       },
     );
   }

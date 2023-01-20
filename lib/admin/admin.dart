@@ -110,7 +110,7 @@ class _AdminState extends State<Admin> {
                               icon: const Icon(Icons.people_outline),
                               label: const Text("Users")),
                           subtitle: Text(
-                            usersC,
+                            '150',
                             textAlign: TextAlign.center,
                             style:
                                 TextStyle(color: orangeColors, fontSize: 50.0),

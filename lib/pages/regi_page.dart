@@ -316,7 +316,8 @@ class _RegisterPageState extends State<RegisterPage> {
                                             content: Text("Account Created.."));
                                         ScaffoldMessenger.of(context)
                                             .showSnackBar(snackBar);
-                                        Navigator.pushNamed(context, 'home');
+                                        Navigator.pushNamed(
+                                            context, 'homepage');
                                       });
                                       //}
                                     }

@@ -10,33 +10,36 @@ import 'package:velocity_x/velocity_x.dart';
 import '../widgets/app_bar.dart';
 
 class Offerrphoto extends StatefulWidget {
-   Offerrphoto({super.key});
+  Offerrphoto({super.key});
 
   @override
   State<Offerrphoto> createState() => _OfferrphotoState();
 }
 
 class _OfferrphotoState extends State<Offerrphoto> {
-      List<String> offershome = [];
+  List<String> offershome = [];
 
   final pro = FirebaseFirestore.instance.collection('products');
 
   Future Offeraraff() async {
     await FirebaseFirestore.instance
-          .collection('products')
-          .where('onSale', isEqualTo: true)
-          .get()
-          .then(
-            (snapshot) => snapshot.docs.forEach((document) {
-              print(document.reference);
-              offershome.add(document.reference.id);
-            }),
-          );
+        .collection('products')
+        .where('onSale', isEqualTo: true)
+        .get()
+        .then(
+          (snapshot) => snapshot.docs.forEach((document) {
+            print(document.reference);
+            offershome.add(document.reference.id);
+          }),
+        );
   }
 
   @override
   Widget build(BuildContext context) {
-    return  Center(
+    return Container(
+      height: 160,
+      width: double.infinity,
+      child: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
@@ -50,46 +53,43 @@ class _OfferrphotoState extends State<Offerrphoto> {
                   return ListView.builder(
                     itemCount: 1,
                     itemBuilder: (context, index) {
-
-                    return   Container(
-            width: double.infinity,
-            decoration: BoxDecoration(color: orangeColors),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                SingleChildScrollView(
-                  scrollDirection: Axis.horizontal,
-                  
-                  child:  Row(
-                        children: List.generate(offershome.length, (index) => 
-                        Column(
-                           crossAxisAlignment:CrossAxisAlignment.start,
-                  
-                          children:<Widget>[
-                            
-                             OffersData(offersitemss: offershome[index]),
-                          
+                      return Container(
+                        width: double.infinity,
+                        decoration: BoxDecoration(color: orangeColors),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            SingleChildScrollView(
+                                scrollDirection: Axis.horizontal,
+                                child: Row(
+                                  children: List.generate(
+                                      offershome.length,
+                                      (index) => Column(
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.start,
+                                            children: <Widget>[
+                                              OffersData(
+                                                  offersitemss:
+                                                      offershome[index]),
+                                            ],
+                                          )
+                                              .box
+                                              .gray300
+                                              .rounded
+                                              .padding(const EdgeInsets.all(5))
+                                              .make()),
+                                ))
                           ],
-                                  
-                        ).box.gray300.rounded.
-                        padding(const EdgeInsets.all(5)).make()),
-                                  
-                      )
-                                      
-                )
-              ],
-            ),
-          );
- 
+                        ),
+                      );
                     },
                   );
                 },
               ),
             ),
-           
           ],
         ),
-      );
-    
+      ),
+    );
   }
 }

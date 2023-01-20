@@ -12,43 +12,45 @@ class CategoryPage extends StatelessWidget {
     return Scaffold(
         body: Stack(
       children: [
-        Container(
-          padding: const EdgeInsets.only(left: 6),
-          height: size.height,
-          width: size.width,
-          decoration: const BoxDecoration(
-            color: Color.fromARGB(255, 50, 49, 48),
-          ),
-          child: SafeArea(
-            child: Align(
-              alignment: Alignment.topCenter,
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Row(
-                    children: [
-                      Image.asset(
-                        'assets/noBack.png',
-                        height: 150,
-                        width: 150,
-                      ),
-                      const SizedBox(
-                        width: 20,
-                      ),
-                      Text(
-                        'Category',
-                        style: AppStyle.r12w,
-                      )
-                    ],
-                  ),
-                  const SizedBox(
-                    height: 30,
-                  ),
-                  Text(
-                    'Shop Now',
-                    style: AppStyle.b32w,
-                  ),
-                ],
+        SingleChildScrollView(
+          child: Container(
+            padding: const EdgeInsets.only(left: 6),
+            height: size.height,
+            width: size.width,
+            decoration: const BoxDecoration(
+              color: Color.fromARGB(255, 50, 49, 48),
+            ),
+            child: SafeArea(
+              child: Align(
+                alignment: Alignment.topCenter,
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Row(
+                      children: [
+                        Image.asset(
+                          'assets/noBack.png',
+                          height: 150,
+                          width: 150,
+                        ),
+                        const SizedBox(
+                          width: 20,
+                        ),
+                        Text(
+                          'Category',
+                          style: AppStyle.r12w,
+                        )
+                      ],
+                    ),
+                    const SizedBox(
+                      height: 30,
+                    ),
+                    Text(
+                      'Shop Now',
+                      style: AppStyle.b32w,
+                    ),
+                  ],
+                ),
               ),
             ),
           ),

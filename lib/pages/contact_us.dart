@@ -62,7 +62,7 @@ class ContactUsForm extends State<ContactUs> {
                         final snackBar =
                             const SnackBar(content: Text("Message Sent.."));
                         ScaffoldMessenger.of(context).showSnackBar(snackBar);
-                        Navigator.pushNamed(context, 'home');
+                        Navigator.pushNamed(context, 'homepage');
                       });
                     },
                     child: Text("SUBMIT",
