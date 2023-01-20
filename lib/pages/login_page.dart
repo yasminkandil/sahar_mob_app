@@ -14,6 +14,9 @@ import 'package:sahar_mob_app/widgets/header_container.dart';
 
 import '../widgets/app_bar.dart';
 
+TextEditingController emailController = TextEditingController();
+TextEditingController passwordController = TextEditingController();
+
 class LoginPage extends StatefulWidget {
   @override
   _LoginPageState createState() => _LoginPageState();
@@ -55,11 +58,15 @@ class _LoginPageState extends State<LoginPage> {
     super.dispose();
   }
 */
+  bool obscureText = true;
+  void _togglePasswordVisibility() {
+    setState(() {
+      obscureText = !obscureText;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
-    TextEditingController emailController = TextEditingController();
-    TextEditingController passwordController = TextEditingController();
-    bool obscureText = true;
     return Scaffold(
       key: _scaffoldKey,
       appBar: CustomAppBar(text: ""),
@@ -97,22 +104,19 @@ class _LoginPageState extends State<LoginPage> {
                               controller: passwordController,
                               obscureText: obscureText,
                               decoration: InputDecoration(
-                                  border: InputBorder.none,
-                                  hintText: "Password",
-                                  prefixIcon: const Icon(
-                                    Icons.vpn_key,
-                                    color: Color.fromARGB(255, 249, 118, 3),
-                                  ),
-                                  suffixIcon: InkWell(
-                                    onTap: () {
-                                      setState(() {
-                                        obscureText = !obscureText;
-                                      });
-                                    },
-                                    child: Icon(obscureText
-                                        ? Icons.visibility
-                                        : Icons.visibility_off),
-                                  )),
+                                border: InputBorder.none,
+                                hintText: "Password",
+                                prefixIcon: const Icon(
+                                  Icons.vpn_key,
+                                  color: Color.fromARGB(255, 249, 118, 3),
+                                ),
+                                suffixIcon: GestureDetector(
+                                  onTap: _togglePasswordVisibility,
+                                  child: obscureText
+                                      ? Icon(Icons.visibility)
+                                      : Icon(Icons.visibility_off),
+                                ),
+                              ),
                               validator: (value) {
                                 if (value!.isEmpty ||
                                     passwordController.text.length < 6) {
@@ -130,7 +134,7 @@ class _LoginPageState extends State<LoginPage> {
                                 child: const Text(
                                     style: TextStyle(
                                         color:
-                                            Color.fromARGB(255, 232, 127, 14)),
+                                            Color.fromARGB(255, 249, 118, 3)),
                                     "Forgot Password?"),
                                 onPressed: () {
                                   Navigator.pushNamed(context, 'forgot_pass');
