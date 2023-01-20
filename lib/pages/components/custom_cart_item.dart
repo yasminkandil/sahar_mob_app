@@ -44,7 +44,7 @@ class _CustomCartItemState extends State<CustomCartItem> {
                   width: MediaQuery.of(context).size.height * 0.12,
                   child: Image.network("${widget.cartModel.image}",
                       fit: BoxFit.cover)),
-              SizedBox(
+              const SizedBox(
                 width: 8,
               ),
               Container(
@@ -101,8 +101,15 @@ class _CustomCartItemState extends State<CustomCartItem> {
 
                                 if (model.count! > 1) {
                                   int countNew = model.count! - 1;
-                                  int oldPrice = model.price!;
+                                  int oldPrice = model.onSale == true
+                                      ? model.price2!
+                                      : model.price!;
                                   int newPrice = countNew * oldPrice;
+
+                                  print(countNew);
+                                  print(oldPrice);
+                                  print(newPrice);
+
                                   FirebaseFirestore.instance
                                       .collection("cart")
                                       .doc(uid)
@@ -141,7 +148,9 @@ class _CustomCartItemState extends State<CustomCartItem> {
                                 CartModel2 model =
                                     CartModel2.fromJson(value.data() ?? {});
                                 int countNew = model.count! + 1;
-                                int oldPrice = model.price!;
+                                int oldPrice = model.onSale == true
+                                    ? model.price2!
+                                    : model.price!;
                                 int newPrice = countNew * oldPrice;
 
                                 FirebaseFirestore.instance

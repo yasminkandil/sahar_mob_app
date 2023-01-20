@@ -173,17 +173,28 @@ class _BodyState extends State<Body> {
                                             backgroundColor: GreyLightColors,
                                             onPressed: () async {
                                               CartModel2 cartModel = CartModel2(
-                                                productModel2!.id,
-                                                productModel2!.name,
-                                                productModel2!.description,
-                                                productModel2!.image,
-                                                numofItems *
-                                                    int.parse(
-                                                        productModel2!.price ??
-                                                            ""),
-                                                numofItems,
-                                                int.parse(
+                                                description:
+                                                    productModel2!.description,
+                                                id: productModel2!.id,
+                                                name: productModel2!.name,
+                                                image: productModel2!.image,
+                                                onSale: productModel2!.onSale,
+                                                price: int.parse(
                                                     "${productModel2!.price}"),
+                                                price2: int.parse(
+                                                    "${productModel2!.price2}"),
+                                                totalPrice: productModel2!
+                                                            .onSale ==
+                                                        true
+                                                    ? numofItems *
+                                                        int.parse(productModel2!
+                                                                .price2 ??
+                                                            "")
+                                                    : numofItems *
+                                                        int.parse(productModel2!
+                                                                .price ??
+                                                            ""),
+                                                count: numofItems,
                                               );
                                               if (FirebaseAuth
                                                       .instance.currentUser !=
@@ -236,6 +247,12 @@ class _BodyState extends State<Body> {
                                                           .doc(val.id)
                                                           .update(
                                                               {"id": val.id});
+                                                    }).then((value) {
+                                                      Fluttertoast.showToast(
+                                                          msg:
+                                                              "Product added to cart sucessfully ✔️",
+                                                          backgroundColor:
+                                                              GreyLightColors);
                                                     });
                                                   } else {
                                                     int oldPrice = contain
@@ -263,21 +280,21 @@ class _BodyState extends State<Body> {
                                                         .update({
                                                       "count": newCount,
                                                       "totalPrice": newPrice,
+                                                    }).then((value) {
+                                                      Fluttertoast.showToast(
+                                                          msg:
+                                                              "Product added to cart sucessfully ✔️",
+                                                          backgroundColor:
+                                                              GreyLightColors);
                                                     });
                                                   }
-
-                                                  Fluttertoast.showToast(
-                                                      msg:
-                                                          "Product added to cart sucessfully ✔️",
-                                                      backgroundColor:
-                                                          Colors.red);
                                                 });
                                               } else {
                                                 Fluttertoast.showToast(
                                                     msg:
                                                         "Please Sign-In first.",
                                                     backgroundColor:
-                                                        Colors.red);
+                                                        GreyLightColors);
                                                 Navigator.pushNamed(
                                                     context, 'login');
                                               }
