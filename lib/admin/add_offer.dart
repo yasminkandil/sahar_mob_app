@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:sahar_mob_app/admin/add_product.dart';
 import 'package:sahar_mob_app/widgets/app_bar.dart';
 import 'package:sahar_mob_app/widgets/btn_widget.dart';
@@ -77,10 +78,9 @@ class _AddOfferPageState extends State<AddOfferPage> {
                                             'onSale': true,
                                           },
                                         ).then((value) {
-                                          final snackBar = SnackBar(
-                                              content: Text("Offer added.."));
-                                          ScaffoldMessenger.of(context)
-                                              .showSnackBar(snackBar);
+                                         Fluttertoast.showToast(
+                                          msg: "Offer addedd...",
+                                          backgroundColor: orangeColors);
                                           Navigator.pop(context);
                                         });
                                       }

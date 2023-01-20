@@ -1,5 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:sahar_mob_app/pages/view_account.dart';
 import 'package:sahar_mob_app/utils/color.dart';
 import '../models/contact_us_model.dart';
@@ -39,13 +40,18 @@ class ContactUsForm extends State<ContactUs> {
                     ),
                   ),
                   const SizedBox(height: 8.0),
+
+              
                   TextField(
+
                     controller: messageController,
                     maxLines: 7,
                     decoration: InputDecoration(
+
                       filled: true,
                       fillColor: orangeColors,
-                      hintText: "Message",
+
+                      hintText: "Your Message",
                       border: InputBorder.none,
                     ),
                   ),
@@ -59,9 +65,9 @@ class ContactUsForm extends State<ContactUs> {
                       addMessages(userEm!, messageController.text, userId)
                           .then((value) {
                         print("Message Sent");
-                        final snackBar =
-                            const SnackBar(content: Text("Message Sent.."));
-                        ScaffoldMessenger.of(context).showSnackBar(snackBar);
+                       Fluttertoast.showToast(
+                                          msg: "Message sent...",
+                                          backgroundColor: orangeColors);
                         Navigator.pushNamed(context, 'home');
                       });
                     },

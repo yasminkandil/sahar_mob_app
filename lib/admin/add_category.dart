@@ -1,6 +1,8 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:sahar_mob_app/admin/add_product.dart';
+import 'package:sahar_mob_app/utils/color.dart';
 import 'package:sahar_mob_app/widgets/app_bar.dart';
 import 'package:sahar_mob_app/widgets/btn_widget.dart';
 import '../models/product_model.dart';
@@ -112,11 +114,9 @@ class _AddCategPageState extends State<AddCategPage> {
                                           addCategory(_nameController.text,
                                                   _subtitleController.text)
                                               .then((value) {
-                                            final snackBar = SnackBar(
-                                                content:
-                                                    Text("Category added.."));
-                                            ScaffoldMessenger.of(context)
-                                                .showSnackBar(snackBar);
+                                           Fluttertoast.showToast(
+                                          msg: "Category addedd...",
+                                          backgroundColor: orangeColors);
                                             Navigator.pop(context);
                                           });
                                         }

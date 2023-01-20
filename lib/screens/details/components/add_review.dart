@@ -4,6 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/container.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
+import 'package:fluttertoast/fluttertoast.dart';
+import 'package:sahar_mob_app/utils/color.dart';
 import 'package:sahar_mob_app/widgets/app_bar.dart';
 
 Future addrate(
@@ -69,8 +71,9 @@ class _AddReviewState extends State<AddReview> {
               addrate(FirebaseAuth.instance.currentUser?.email,
                       comment.text.trim(), rating, widget.ratee!)
                   .then((value) {
-                final snackBar = SnackBar(content: Text("Review added.."));
-                ScaffoldMessenger.of(context).showSnackBar(snackBar);
+                 Fluttertoast.showToast(
+                                          msg: "Review addedd...",
+                                          backgroundColor: orangeColors);
               });
             },
             child: Text("Submit"),

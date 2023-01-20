@@ -5,6 +5,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:sahar_mob_app/models/user_model.dart';
@@ -312,10 +313,9 @@ class _RegisterPageState extends State<RegisterPage> {
                                               userId)
                                           .then((value) {
                                         print("Created new account");
-                                        final snackBar = SnackBar(
-                                            content: Text("Account Created.."));
-                                        ScaffoldMessenger.of(context)
-                                            .showSnackBar(snackBar);
+                                        Fluttertoast.showToast(
+                                          msg: "Account created...",
+                                          backgroundColor: orangeColors);
                                         Navigator.pushNamed(context, 'home');
                                       });
                                       //}

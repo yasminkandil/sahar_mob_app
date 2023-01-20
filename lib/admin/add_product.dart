@@ -3,6 +3,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:sahar_mob_app/admin/admin.dart';
@@ -227,10 +228,9 @@ class _AddProductPageState extends State<AddProductPage> {
                                               pp.quantityController.text,
                                               pp.greyimage)
                                           .then((value) {
-                                        final snackBar = SnackBar(
-                                            content: Text("Product added.."));
-                                        ScaffoldMessenger.of(context)
-                                            .showSnackBar(snackBar);
+                                        Fluttertoast.showToast(
+                                          msg: "Product addedd...",
+                                          backgroundColor: orangeColors);
                                         Navigator.pop(context);
                                       });
                                     } else {

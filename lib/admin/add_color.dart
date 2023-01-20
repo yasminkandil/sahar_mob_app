@@ -1,6 +1,8 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:sahar_mob_app/admin/add_product.dart';
+import 'package:sahar_mob_app/utils/color.dart';
 import 'package:sahar_mob_app/widgets/btn_widget.dart';
 import '../models/product_model.dart';
 import '../widgets/app_bar.dart';
@@ -59,10 +61,9 @@ class _AddColorPageState extends State<AddColorPage> {
                                     if (formKey.currentState!.validate()) {
                                       addColor(_colorController.text)
                                           .then((value) {
-                                        final snackBar = SnackBar(
-                                            content: Text("Color added.."));
-                                        ScaffoldMessenger.of(context)
-                                            .showSnackBar(snackBar);
+                                        Fluttertoast.showToast(
+                                          msg: "Color addedd...",
+                                          backgroundColor: orangeColors);
                                         Navigator.pop(context);
                                       });
                                     }

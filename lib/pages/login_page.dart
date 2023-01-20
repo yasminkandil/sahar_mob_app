@@ -2,6 +2,7 @@
 
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:sahar_mob_app/home/home_page.dart';
 import 'package:sahar_mob_app/models/auth_service.dart';
 import 'package:sahar_mob_app/admin/admin.dart';
@@ -39,12 +40,14 @@ class _LoginPageState extends State<LoginPage> {
     } on FirebaseAuthException catch (e) {
       if (e.code == "user-not-found") {
         print("No user found");
-        final snackBar = SnackBar(content: const Text('No user found!'));
-        ScaffoldMessenger.of(context).showSnackBar(snackBar);
+         Fluttertoast.showToast(
+                                          msg: "No User Found",
+                                          backgroundColor: orangeColors);
       } else if (e.code == 'wrong-password') {
         print("wrong password");
-        final snackBar = SnackBar(content: const Text('Wrong Password!'));
-        ScaffoldMessenger.of(context).showSnackBar(snackBar);
+       Fluttertoast.showToast(
+                                          msg: "Wrong Password",
+                                          backgroundColor: orangeColors);
       }
     }
     return user;
@@ -162,10 +165,9 @@ class _LoginPageState extends State<LoginPage> {
                                                 MyHomePage()));
                                   }
                                   if (formKey.currentState!.validate()) {
-                                    final snackBar =
-                                        SnackBar(content: Text("Logging in.."));
-                                    ScaffoldMessenger.of(context)
-                                        .showSnackBar(snackBar);
+                                     Fluttertoast.showToast(
+                                          msg: "Logging in...",
+                                          backgroundColor: orangeColors);
                                   }
                                 },
                                 btnText: "LOGIN",

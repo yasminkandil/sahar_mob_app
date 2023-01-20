@@ -5,6 +5,8 @@ import 'package:sahar_mob_app/pages/contact_us.dart';
 import 'package:sahar_mob_app/pages/products_all.dart';
 import 'package:sahar_mob_app/product_powerbank.dart';
 
+import '../../home/home_page.dart';
+
 class Categorie extends StatefulWidget {
   const Categorie({super.key});
 
@@ -39,6 +41,7 @@ class _CategorieState extends State<Categorie> {
                     buildCategory(category: prod[indexx], index: indexx),
               ),
             ),
+           //Container(child: MyHomePage()),
           );
         });
   }
@@ -130,10 +133,10 @@ class buildCategory extends StatelessWidget {
                       color: selected == data[index]
                           ? Colors.black
                           : Colors.transparent,
-                    )
-                  ],
+   )
+  ],
                 ),
-              ),
+ ),
             );
           }
           return Text("Loading...");

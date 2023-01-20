@@ -89,22 +89,22 @@ class HomeNavbar extends State<Navigation_bar> {
       ),
       child: Column(
         children: [
-          menuItem(1, "Gallery", Icons.image,
-              currentPage == Sections.Gallery ? true : false),
-          menuItem(10, "Login", Icons.login_rounded,
-              currentPage == Sections.login ? true : false),
-          menuItem(8, "Cart", Icons.shop_two_outlined,
-              currentPage == Sections.Cart ? true : false),
           menuItem(7, "Sign Up", Icons.login_rounded,
               currentPage == Sections.Sign_Up ? true : false),
-          menuItem(2, "Contact US", Icons.people_alt_outlined,
-              currentPage == Sections.contacts ? true : false),
+          menuItem(10, "Login", Icons.login_rounded,
+              currentPage == Sections.login ? true : false),
           menuItem(3, "Shop", Icons.category_rounded,
               currentPage == Sections.Categories ? true : false),
-          menuItem(4, " Profile", Icons.edit_attributes_rounded,
-              currentPage == Sections.Edit_Profile ? true : false),
+          menuItem(8, "Cart", Icons.shop_two_outlined,
+              currentPage == Sections.Cart ? true : false),
+          menuItem(1, "Gallery", Icons.image,
+              currentPage == Sections.Gallery ? true : false),
           menuItem(9, "Order History", Icons.history,
               currentPage == Sections.order_history ? true : false),
+          menuItem(2, "Contact US", Icons.people_alt_outlined,
+              currentPage == Sections.contacts ? true : false),
+          menuItem(4, " Profile", Icons.edit_attributes_rounded,
+              currentPage == Sections.Edit_Profile ? true : false),
           menuItem(6, "Log Out", Icons.logout_rounded,
               currentPage == Sections.Log_Out ? true : false),
         ],
@@ -117,9 +117,9 @@ class HomeNavbar extends State<Navigation_bar> {
       color: selected ? Colors.grey : Colors.transparent,
       child: InkWell(
         onTap: () {
-          if (id == 1) {
-            Navigator.pushNamed(context, 'gallery');
-            currentPage = Sections.Gallery;
+          if (id == 7) {
+            Navigator.pushNamed(context, 'register');
+            currentPage = Sections.Sign_Up;
           } else if (id == 2) {
             if (FirebaseAuth.instance.currentUser == null) {
               Navigator.pushNamed(context, 'must_have_account');
@@ -148,9 +148,9 @@ class HomeNavbar extends State<Navigation_bar> {
             FirebaseAuth.instance.signOut();
             Navigator.pushNamed(context, 'home');
             currentPage = Sections.Log_Out;
-          } else if (id == 7) {
-            Navigator.pushNamed(context, 'register');
-            currentPage = Sections.Sign_Up;
+          } else if (id == 1) {
+            Navigator.pushNamed(context, 'gallery');
+            currentPage = Sections.Gallery;
           } else if (id == 8) {
             if (FirebaseAuth.instance.currentUser == null) {
               Navigator.pushNamed(context, 'must_have_account');
