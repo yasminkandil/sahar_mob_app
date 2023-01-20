@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:sahar_mob_app/home/home_button.dart';
+import 'package:sahar_mob_app/home/offerhomefile.dart';
 import 'package:sahar_mob_app/read%20data/get_home_data.dart';
 import 'package:sahar_mob_app/utils/color.dart';
 import 'package:velocity_x/velocity_x.dart';
@@ -54,22 +55,18 @@ class _HomeScreenState extends State<HomeScreen> {
               builder:
               (context, snapshot) {
                 if (snapshot.hasError) {
-          return Center(child: CircularProgressIndicator());
-        }
-        if (snapshot.connectionState == ConnectionState.waiting) {
-          return Text("Loading");
-        }
-       
-                
+                  return Center(child: CircularProgressIndicator());
+                }
+                if (snapshot.connectionState == ConnectionState.waiting) {
+                  return Text("Loading");
+                }
+
                 Map<String, dynamic> data = snapshot.data?.data() != null
                     ? snapshot.data!.data()! as Map<String, dynamic>
-             
                     : <String, dynamic>{};
-                    
               };
-              
+
               return Container(
-                
                   child: GetHomePhoto(homeimage: imageList[index]));
             },
           ),
@@ -114,18 +111,19 @@ class _HomeScreenState extends State<HomeScreen> {
                           SizedBox(
                             height: 5,
                           ),
-                        
                           FutureBuilder(
                               future: retrieveLastFiveItems(),
                               builder: (context,
                                   AsyncSnapshot<QuerySnapshot> snapshot) {
-                                    if (snapshot.hasError) {
-          return Center(child: CircularProgressIndicator());
-        }
-        if (snapshot.connectionState == ConnectionState.waiting) {
-          return Text("Loading");
-        }
-       
+                                if (snapshot.hasError) {
+                                  return Center(
+                                      child: CircularProgressIndicator());
+                                }
+                                if (snapshot.connectionState ==
+                                    ConnectionState.waiting) {
+                                  return Text("Loading");
+                                }
+
                                 return Expanded(
                                   child: ListView.builder(
                                       itemCount: snapshot.data?.docs.length,
@@ -192,7 +190,6 @@ class _HomeScreenState extends State<HomeScreen> {
                                                                     color: Colors
                                                                         .white)),
                                                           ),
-                                                          
                                                           SizedBox(
                                                             width: 3,
                                                             height: 15,
@@ -224,14 +221,10 @@ class _HomeScreenState extends State<HomeScreen> {
                 title: 'Flash Sales',
               ),
             ),
-         
-
-       ),
-       Column(
-  children: [
-    Image.asset('assets/pro.png'), 
-  ],
-)
+          ),
+          // Column(
+          //   children: [Offerrphoto()],
+          // )
         ]),
       ),
     );

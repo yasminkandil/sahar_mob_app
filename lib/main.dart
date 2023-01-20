@@ -19,6 +19,7 @@ import 'package:sahar_mob_app/home/home_page.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 
 import 'package:sahar_mob_app/home/navbar.dart';
+import 'package:sahar_mob_app/home/offerhomefile.dart';
 import 'package:sahar_mob_app/pages/cart.dart';
 import 'package:sahar_mob_app/pages/contact_us.dart';
 import 'package:sahar_mob_app/pages/gallary.dart';
@@ -134,6 +135,8 @@ class _MyAppState extends State<MyApp> {
         'search_users': (context) => const FirebaseSearchUserScreen(),
         //'search_products': (context) => const ProductSearch(),
         'forgot_pass': (context) => const ForgotPass(),
+                'araf': (context) =>  Offerrphoto(),
+
       },
       
     );

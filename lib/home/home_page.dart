@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:sahar_mob_app/controllers/home_controller.dart';
+import 'package:sahar_mob_app/home/offerhomefile.dart';
 import 'package:sahar_mob_app/pages/category.dart';
 import 'package:sahar_mob_app/pages/view_account.dart';
 import 'package:sahar_mob_app/utils/color.dart';
@@ -23,7 +24,7 @@ class _MyHomePageState extends State<MyHomePage> {
       BottomNavigationBarItem(
           icon: const Icon(Icons.shopping_bag), label: 'Cart'),
       BottomNavigationBarItem(
-          icon: const Icon(Icons.category), label: 'Categories'),
+          icon: const Icon(Icons.category), label: 'araf'),
     ];
     var navBody = [
       Container(child: Navigation_bar()),
@@ -37,7 +38,7 @@ class _MyHomePageState extends State<MyHomePage> {
       ),
       Container(
         color: Colors.lightBlue,
-        child: CategoryPage(),
+        child: Offerrphoto(),
       ),
     ];
     return Scaffold(
