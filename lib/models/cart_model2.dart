@@ -5,13 +5,27 @@ class CartModel2 {
   String? image;
   int? totalPrice;
   int? price;
+  int? price2;
+  bool? onSale;
   int? count;
 
-  CartModel2(this.id, this.name, this.description, this.image, this.totalPrice,
-      this.count, this.price);
+  CartModel2(
+      {required this.id,
+      required this.name,
+      required this.description,
+      required this.image,
+      required this.totalPrice,
+      required this.count,
+      required this.price,
+      required this.onSale,
+      required this.price2});
 
   CartModel2.fromJson(Map<String, dynamic> map) {
     id = map['id'];
+
+    price2 = map['price2'];
+    print("  ${price2}");
+    onSale = map['onSale'];
     name = map['name'];
     description = map['description'];
     image = map['image'];
@@ -23,6 +37,8 @@ class CartModel2 {
   Map<String, dynamic> toMap() {
     return {
       "id": id,
+      "price2": price2,
+      "onSale": onSale,
       "name": name,
       "description": description,
       "image": image,

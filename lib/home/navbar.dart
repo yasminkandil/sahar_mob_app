@@ -146,7 +146,7 @@ class HomeNavbar extends State<Navigation_bar> {
             currentPage = Sections.order_history;
           } else if (id == 6) {
             FirebaseAuth.instance.signOut();
-            Navigator.pushNamed(context, 'home');
+            Navigator.pushNamed(context, 'homepage');
             currentPage = Sections.Log_Out;
           } else if (id == 1) {
             Navigator.pushNamed(context, 'gallery');
