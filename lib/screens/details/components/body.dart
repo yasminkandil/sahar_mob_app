@@ -236,6 +236,12 @@ class _BodyState extends State<Body> {
                                                           .doc(val.id)
                                                           .update(
                                                               {"id": val.id});
+                                                    }).then((value) {
+                                                      Fluttertoast.showToast(
+                                                          msg:
+                                                              "Product added to cart sucessfully ✔️",
+                                                          backgroundColor:
+                                                              GreyLightColors);
                                                     });
                                                   } else {
                                                     int oldPrice = contain
@@ -263,6 +269,12 @@ class _BodyState extends State<Body> {
                                                         .update({
                                                       "count": newCount,
                                                       "totalPrice": newPrice,
+                                                    }).then((value) {
+                                                      Fluttertoast.showToast(
+                                                          msg:
+                                                              "Product added to cart sucessfully ✔️",
+                                                          backgroundColor:
+                                                              GreyLightColors);
                                                     });
                                                   }
 
