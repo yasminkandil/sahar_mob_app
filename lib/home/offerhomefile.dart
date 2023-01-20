@@ -4,9 +4,9 @@ import 'package:sahar_mob_app/admin/add_offer.dart';
 import 'package:sahar_mob_app/admin/add_product.dart';
 import 'package:sahar_mob_app/admin/edit_product.dart';
 import 'package:sahar_mob_app/read%20data/get_home_data.dart';
-import 'package:sahar_mob_app/read%20data/get_product_name.dart';
-import 'package:sahar_mob_app/utils/color.dart';
 import 'package:velocity_x/velocity_x.dart';
+import '../read data/getofferdata.dart';
+import '../screens/details/details_screen.dart';
 import '../widgets/app_bar.dart';
 
 class Offerrphoto extends StatefulWidget {
@@ -19,7 +19,7 @@ class Offerrphoto extends StatefulWidget {
 class _OfferrphotoState extends State<Offerrphoto> {
   List<String> offershome = [];
 
-  final pro = FirebaseFirestore.instance.collection('products');
+  //final pro = FirebaseFirestore.instance.collection('products');
 
   Future Offeraraff() async {
     await FirebaseFirestore.instance
@@ -37,8 +37,7 @@ class _OfferrphotoState extends State<Offerrphoto> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 160,
-      width: double.infinity,
+      height: 250,
       child: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
@@ -54,10 +53,11 @@ class _OfferrphotoState extends State<Offerrphoto> {
                     itemCount: 1,
                     itemBuilder: (context, index) {
                       return Container(
+                        height: 220,
                         width: double.infinity,
-                        decoration: BoxDecoration(color: orangeColors),
+                        // decoration: BoxDecoration(color: GreyColors),
                         child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
+                          crossAxisAlignment: CrossAxisAlignment.center,
                           children: [
                             SingleChildScrollView(
                                 scrollDirection: Axis.horizontal,
@@ -66,17 +66,17 @@ class _OfferrphotoState extends State<Offerrphoto> {
                                       offershome.length,
                                       (index) => Column(
                                             crossAxisAlignment:
-                                                CrossAxisAlignment.start,
+                                                CrossAxisAlignment.center,
                                             children: <Widget>[
                                               OffersData(
-                                                  offersitemss:
-                                                      offershome[index]),
+                                                offersitemss: offershome[index],
+                                              ),
                                             ],
                                           )
                                               .box
-                                              .gray300
+                                              .orange400
                                               .rounded
-                                              .padding(const EdgeInsets.all(5))
+                                              .padding(const EdgeInsets.all(10))
                                               .make()),
                                 ))
                           ],
