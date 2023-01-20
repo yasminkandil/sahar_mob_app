@@ -41,7 +41,7 @@ class _CategorieState extends State<Categorie> {
                     buildCategory(category: prod[indexx], index: indexx),
               ),
             ),
-           //Container(child: MyHomePage()),
+            //Container(child: MyHomePage()),
           );
         });
   }
@@ -53,16 +53,6 @@ class buildCategory extends StatelessWidget {
   final int index;
   @override
   Widget build(BuildContext context) {
-    List<String> prod = [];
-    Future getDocProd() async {
-      await FirebaseFirestore.instance.collection('categories').get().then(
-            (snapshot) => snapshot.docs.forEach((document) {
-              print(document.reference);
-              prod.add(document.reference.id);
-            }),
-          );
-    }
-
     List arkam = [index];
     int selected = 0;
     return FutureBuilder(
@@ -133,10 +123,10 @@ class buildCategory extends StatelessWidget {
                       color: selected == data[index]
                           ? Colors.black
                           : Colors.transparent,
-   )
-  ],
+                    )
+                  ],
                 ),
- ),
+              ),
             );
           }
           return Text("Loading...");

@@ -8,8 +8,8 @@ import 'package:sahar_mob_app/utils/color.dart';
 import 'package:sahar_mob_app/widgets/app_bar.dart';
 
 class OrderScreen extends StatelessWidget {
-  OrderScreen({super.key, required this.salma});
-  final String salma;
+  OrderScreen({super.key, required this.ord});
+  final String ord;
 
   List<String> orders = [];
 
@@ -39,7 +39,7 @@ class OrderScreen extends StatelessWidget {
           return ListView.builder(
             itemCount: orders.length,
             itemBuilder: (context, index) =>
-                buildOrders(salma: orders[index], index: index),
+                buildOrders(ord: orders[index], index: index),
           );
         },
       ),
@@ -48,14 +48,14 @@ class OrderScreen extends StatelessWidget {
 }
 
 class buildOrders extends StatelessWidget {
-  buildOrders({super.key, required this.salma, required this.index});
-  final String salma;
+  buildOrders({super.key, required this.ord, required this.index});
+  final String ord;
   final int index;
   var indexx = 0;
   @override
   Widget build(BuildContext context) {
     return FutureBuilder(
-      future: FirebaseFirestore.instance.collection('orders').doc(salma).get(),
+      future: FirebaseFirestore.instance.collection('orders').doc(ord).get(),
       builder: ((context, snapshot) {
         if (snapshot.connectionState == ConnectionState.done) {
           Map<String, dynamic> data = snapshot.data?.data() != null
@@ -80,7 +80,7 @@ class buildOrders extends StatelessWidget {
                     context,
                     MaterialPageRoute(
                       builder: (context) => OrdersDetails(
-                        salma: salma,
+                        ord: ord,
                       ),
                     ),
                   );

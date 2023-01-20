@@ -4,8 +4,8 @@ import 'package:sahar_mob_app/utils/color.dart';
 import 'package:sahar_mob_app/widgets/app_bar.dart';
 
 class OrdersDetails extends StatelessWidget {
-  const OrdersDetails({super.key, required this.salma});
-  final String salma;
+  const OrdersDetails({super.key, required this.ord});
+  final String ord;
 
   @override
   Widget build(BuildContext context) {
@@ -15,10 +15,8 @@ class OrdersDetails extends StatelessWidget {
         ),
         //backgroundColor: Colors.orange,
         body: FutureBuilder(
-            future: FirebaseFirestore.instance
-                .collection('orders')
-                .doc(salma)
-                .get(),
+            future:
+                FirebaseFirestore.instance.collection('orders').doc(ord).get(),
             builder: ((context, snapshot) {
               if (snapshot.connectionState == ConnectionState.done) {
                 Map<String, dynamic> data = snapshot.data?.data() != null
