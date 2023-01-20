@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:sahar_mob_app/models/product_model.dart';
 import 'package:sahar_mob_app/utils/color.dart';
 
 import '../home/home_screen.dart';
@@ -44,7 +45,8 @@ class GetHomePhoto extends StatelessWidget {
 
 class OffersData extends StatelessWidget {
   final String offersitemss;
-  OffersData({required this.offersitemss});
+  final Function press;
+  OffersData({required this.offersitemss, required this. press});
   @override
   Widget build(BuildContext context) {
     CollectionReference products =
@@ -62,10 +64,12 @@ class OffersData extends StatelessWidget {
               Row(
                 children: [
                   Container(
-                    height: 90,
-                    width: 90,
-                    child: Image.network(data['image']),
+                    height: 250,
+                    width: 160,
+                    child: Image.network(data['image'],
+                        fit: BoxFit.scaleDown, width: 10, height: 100),
                   ),
+                 
                   RichText(
                     textScaleFactor: 1.5,
                     text: TextSpan(
@@ -82,7 +86,7 @@ class OffersData extends StatelessWidget {
                         TextSpan(
                             text: '${data['name']}\n',
                             style: TextStyle(
-                                color: orangeColors,
+                                color: GreyColors,
                                 fontWeight: FontWeight.normal)),
 
                     
@@ -92,9 +96,9 @@ class OffersData extends StatelessWidget {
                                 color: Colors.black,
                                 fontWeight: FontWeight.bold)),
                         TextSpan(
-                            text: '${data['price']}\n',
+                            text: '${data['price']}' + ' LE\n',
                             style: TextStyle(
-                                color: orangeColors,
+                                color: GreyColors,
                                 fontWeight: FontWeight.normal)),
                         TextSpan(
                             text: 'Brand  : ',
@@ -104,7 +108,7 @@ class OffersData extends StatelessWidget {
                         TextSpan(
                             text: '${data['brand']}\n',
                             style: TextStyle(
-                                color: orangeColors,
+                                color: GreyColors,
                                 fontWeight: FontWeight.normal)),
                     
                       ],

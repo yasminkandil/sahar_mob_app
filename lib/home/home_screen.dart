@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:sahar_mob_app/home/home_button.dart';
+import 'package:sahar_mob_app/widgets/home_button.dart';
 import 'package:sahar_mob_app/home/offerhomefile.dart';
 import 'package:sahar_mob_app/read%20data/get_home_data.dart';
 import 'package:sahar_mob_app/utils/color.dart';
@@ -32,7 +32,7 @@ class _HomeScreenState extends State<HomeScreen> {
 
 //Connection to offers
     CollectionReference off = FirebaseFirestore.instance.collection('products');
-    Future<QuerySnapshot> retrieveLastFiveItems() async {
+    Future<QuerySnapshot> NewArrival() async {
       return await FirebaseFirestore.instance
           .collection("products")
           .orderBy("Date", descending: true)
@@ -85,16 +85,15 @@ class _HomeScreenState extends State<HomeScreen> {
           Container(
 //3shan yeb2oo fe center
             width: double.infinity,
-            decoration: BoxDecoration(color: orangeColors),
+            decoration: BoxDecoration(
+              color: orangeColors,
+              borderRadius: BorderRadius.all(Radius.circular(20)),
+            ),
             padding: const EdgeInsets.all(12),
             child: Column(
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: <Widget>[
-                  /*Text('NEW COLLECTIONS ',
-                      style: TextStyle(
-                          color: Colors.white,
-                          fontWeight: FontWeight.bold,
-                          fontSize: 30)),*/
+                 
                   SizedBox(
                       child: Stack(children: <Widget>[
                     Container(
@@ -112,7 +111,7 @@ class _HomeScreenState extends State<HomeScreen> {
                             height: 5,
                           ),
                           FutureBuilder(
-                              future: retrieveLastFiveItems(),
+                              future: NewArrival(),
                               builder: (context,
                                   AsyncSnapshot<QuerySnapshot> snapshot) {
                                 if (snapshot.hasError) {
@@ -222,9 +221,7 @@ class _HomeScreenState extends State<HomeScreen> {
               ),
             ),
           ),
-          // Column(
-          //   children: [Offerrphoto()],
-          // )
+          Offerrphoto(),
         ]),
       ),
     );

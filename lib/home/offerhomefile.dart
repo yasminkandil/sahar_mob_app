@@ -4,9 +4,8 @@ import 'package:sahar_mob_app/admin/add_offer.dart';
 import 'package:sahar_mob_app/admin/add_product.dart';
 import 'package:sahar_mob_app/admin/edit_product.dart';
 import 'package:sahar_mob_app/read%20data/get_home_data.dart';
-import 'package:sahar_mob_app/read%20data/get_product_name.dart';
-import 'package:sahar_mob_app/utils/color.dart';
 import 'package:velocity_x/velocity_x.dart';
+import '../screens/details/details_screen.dart';
 import '../widgets/app_bar.dart';
 
 class Offerrphoto extends StatefulWidget {
@@ -19,7 +18,7 @@ class Offerrphoto extends StatefulWidget {
 class _OfferrphotoState extends State<Offerrphoto> {
       List<String> offershome = [];
 
-  final pro = FirebaseFirestore.instance.collection('products');
+  //final pro = FirebaseFirestore.instance.collection('products');
 
   Future Offeraraff() async {
     await FirebaseFirestore.instance
@@ -36,60 +35,72 @@ class _OfferrphotoState extends State<Offerrphoto> {
 
   @override
   Widget build(BuildContext context) {
-    return  Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Expanded(
-              child: FutureBuilder(
-                future: Offeraraff(),
-                builder: (context, snapshot) {
-                  Map<String, dynamic> data = snapshot.data?.data() != null
-                      ? snapshot.data!.data()! as Map<String, dynamic>
-                      : <String, dynamic>{};
-                  return ListView.builder(
-                    itemCount: 1,
-                    itemBuilder: (context, index) {
+    return  Container(
+      height: 280,
+      child: Center(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Expanded(
+                child: FutureBuilder(
+                  future: Offeraraff(),
+                  builder: (context, snapshot) {
+                    Map<String, dynamic> data = snapshot.data?.data() != null
+                        ? snapshot.data!.data()! as Map<String, dynamic>
+                        : <String, dynamic>{};
+                    return ListView.builder(
+                      itemCount: 1,
+                      itemBuilder: (context, index) {
 
-                    return   Container(
-            width: double.infinity,
-            decoration: BoxDecoration(color: orangeColors),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                SingleChildScrollView(
-                  scrollDirection: Axis.horizontal,
-                  
-                  child:  Row(
-                        children: List.generate(offershome.length, (index) => 
-                        Column(
-                           crossAxisAlignment:CrossAxisAlignment.start,
-                  
-                          children:<Widget>[
+                      return   Container(
+                      //  height: 220,
+              width: double.infinity,
+             // decoration: BoxDecoration(color: GreyColors),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.center,
+              
+                children: [
+                  SingleChildScrollView(
+                    scrollDirection: Axis.horizontal,
+                    
+                    child:  Row(
+                          children: List.generate(offershome.length, (index) => 
+                          Column(               
+
+                             crossAxisAlignment:CrossAxisAlignment.center,
+                    
+                            children:<Widget>[
+                              
+
+                              
+                               OffersData(offersitemss: offershome[index],  press: () => Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) =>
+                                  DetailScreen(salma: offershome[index]))),),
                             
-                             OffersData(offersitemss: offershome[index]),
-                          
-                          ],
-                                  
-                        ).box.gray300.rounded.
-                        padding(const EdgeInsets.all(5)).make()),
-                                  
-                      )
-                                      
-                )
-              ],
-            ),
-          );
- 
-                    },
-                  );
-                },
+                            ],
+                                    
+                          ).box.orange400.rounded.
+                          padding(const EdgeInsets.all(10)).make()),
+                                    
+                        )
+                                        
+                  )
+                ],
               ),
-            ),
-           
-          ],
+            );
+ 
+                      },
+                    );
+                  },
+                ),
+              ),
+             
+            ],
+          ),
         ),
-      );
+    );
     
   }
 }
