@@ -35,8 +35,8 @@ class _CategorieState extends State<Categorie> {
               child: ListView.builder(
                 scrollDirection: Axis.horizontal,
                 itemCount: prod.length,
-                itemBuilder: (context, index) =>
-                    buildCategory(salma: prod[index], index: index),
+                itemBuilder: (context, indexx) =>
+                    buildCategory(category: prod[indexx], index: indexx),
               ),
             ),
           );
@@ -45,8 +45,8 @@ class _CategorieState extends State<Categorie> {
 }
 
 class buildCategory extends StatelessWidget {
-  const buildCategory({super.key, required this.salma, required this.index});
-  final String salma;
+  const buildCategory({super.key, required this.category, required this.index});
+  final String category;
   final int index;
   @override
   Widget build(BuildContext context) {
@@ -60,11 +60,12 @@ class buildCategory extends StatelessWidget {
           );
     }
 
-    int? selectedIndex;
+    List arkam = [index];
+    int selected = 0;
     return FutureBuilder(
         future: FirebaseFirestore.instance
             .collection('categories')
-            .doc(salma)
+            .doc(category)
             .get(),
         builder: ((context, snapshot) {
           if (snapshot.connectionState == ConnectionState.done) {
@@ -73,7 +74,6 @@ class buildCategory extends StatelessWidget {
                 : <String, dynamic>{};
             return GestureDetector(
               onTap: () {
-                selectedIndex = index;
                 if (data['name'] == "Powerbank") {
                   Navigator.push(
                     context,
@@ -120,14 +120,14 @@ class buildCategory extends StatelessWidget {
                     Text("${data['name']}",
                         style: TextStyle(
                             fontWeight: FontWeight.bold,
-                            color: index == data['name']
+                            color: selected == data[index]
                                 ? Color.fromARGB(72, 0, 0, 0)
                                 : Color.fromARGB(72, 0, 0, 0))),
                     Container(
                       margin: EdgeInsets.only(top: 15 / 4),
                       height: 2,
                       width: 30,
-                      color: index == data['name']
+                      color: selected == data[index]
                           ? Colors.black
                           : Colors.transparent,
                     )
