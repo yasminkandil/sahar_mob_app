@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:sahar_mob_app/home/home_button.dart';
 import 'package:sahar_mob_app/home/offerhomefile.dart';
 import 'package:sahar_mob_app/read%20data/get_home_data.dart';
+import 'package:sahar_mob_app/screens/details/details_screen.dart';
 import 'package:sahar_mob_app/utils/color.dart';
 import 'package:velocity_x/velocity_x.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -140,55 +141,81 @@ class _HomeScreenState extends State<HomeScreen> {
                                                     Expanded(
                                                       child: Column(
                                                         children: [
-                                                          Container(
-                                                            padding:
-                                                                EdgeInsets.all(
-                                                                    35),
-                                                            height: 280,
-                                                            width: 240,
-                                                            decoration:
-                                                                BoxDecoration(
-                                                              color:
-                                                                  Colors.black,
-                                                              //borderRadius: BorderRadius.circular(16)
+                                                          GestureDetector(
+                                                            onTap: () {
+                                                              Navigator.push(
+                                                                  context,
+                                                                  MaterialPageRoute(
+                                                                      builder: (context) => DetailScreen(
+                                                                          salma: snapshot
+                                                                              .data!
+                                                                              .docs[index]
+                                                                              .id
+                                                                              .toString())));
+                                                            },
+                                                            child: Container(
+                                                              padding:
+                                                                  EdgeInsets
+                                                                      .all(35),
+                                                              height: 280,
+                                                              width: 240,
+                                                              decoration:
+                                                                  BoxDecoration(
+                                                                color: Colors
+                                                                    .black,
+                                                                //borderRadius: BorderRadius.circular(16)
+                                                              ),
+                                                              child: Image(
+                                                                  fit: BoxFit
+                                                                      .fitWidth,
+                                                                  image: NetworkImage(
+                                                                      "${snapshot.data?.docs[index].get('image')}")),
                                                             ),
-                                                            child: Image(
-                                                                fit: BoxFit
-                                                                    .fitWidth,
-                                                                image: NetworkImage(
-                                                                    "${snapshot.data?.docs[index].get('image')}")),
                                                           ),
-                                                          Container(
-                                                            padding:
-                                                                EdgeInsets.all(
-                                                                    35),
-                                                            width: 240,
-                                                            decoration:
-                                                                BoxDecoration(
-                                                              color:
-                                                                  Colors.black,
+                                                          GestureDetector(
+                                                            onTap: () {
+                                                              Navigator.push(
+                                                                  context,
+                                                                  MaterialPageRoute(
+                                                                      builder: (context) => DetailScreen(
+                                                                          salma: snapshot
+                                                                              .data!
+                                                                              .docs[index]
+                                                                              .id
+                                                                              .toString())));
+                                                            },
+                                                            child: Container(
+                                                              padding:
+                                                                  EdgeInsets
+                                                                      .all(35),
+                                                              width: 240,
+                                                              decoration:
+                                                                  BoxDecoration(
+                                                                color: Colors
+                                                                    .black,
+                                                              ),
+                                                              child: Text(
+                                                                  snapshot
+                                                                          .data
+                                                                          ?.docs[
+                                                                              index]
+                                                                          .get(
+                                                                              'name') +
+                                                                      snapshot
+                                                                          .data
+                                                                          ?.docs[
+                                                                              index]
+                                                                          .get(
+                                                                              'brand'),
+                                                                  style: TextStyle(
+                                                                      fontSize:
+                                                                          20,
+                                                                      fontWeight:
+                                                                          FontWeight
+                                                                              .bold,
+                                                                      color: Colors
+                                                                          .white)),
                                                             ),
-                                                            child: Text(
-                                                                snapshot
-                                                                        .data
-                                                                        ?.docs[
-                                                                            index]
-                                                                        .get(
-                                                                            'name') +
-                                                                    snapshot
-                                                                        .data
-                                                                        ?.docs[
-                                                                            index]
-                                                                        .get(
-                                                                            'brand'),
-                                                                style: TextStyle(
-                                                                    fontSize:
-                                                                        20,
-                                                                    fontWeight:
-                                                                        FontWeight
-                                                                            .bold,
-                                                                    color: Colors
-                                                                        .white)),
                                                           ),
                                                           SizedBox(
                                                             width: 3,
@@ -222,9 +249,7 @@ class _HomeScreenState extends State<HomeScreen> {
               ),
             ),
           ),
-          // Column(
-          //   children: [Offerrphoto()],
-          // )
+          Offerrphoto(),
         ]),
       ),
     );

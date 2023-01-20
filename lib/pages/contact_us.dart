@@ -1,11 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:sahar_mob_app/home/home_page.dart';
-import 'package:sahar_mob_app/home/navbar.dart';
-import 'package:sahar_mob_app/models/user_model.dart';
 import 'package:sahar_mob_app/pages/view_account.dart';
 import 'package:sahar_mob_app/utils/color.dart';
-
 import '../models/contact_us_model.dart';
 import '../widgets/app_bar.dart';
 
@@ -20,18 +16,8 @@ class ContactUsForm extends State<ContactUs> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text('Contact Us'),
-        backgroundColor: GreyColors,
-        leading: IconButton(
-          icon: Icon(
-            Icons.arrow_back,
-            color: orangeColors,
-          ),
-          onPressed: () {
-            Navigator.pushNamed(context, 'home');
-          },
-        ),
+      appBar: CustomAppBar(
+        text: 'Contact Us',
       ),
       body: SingleChildScrollView(
         child: Column(
@@ -41,7 +27,7 @@ class ContactUsForm extends State<ContactUs> {
               padding: const EdgeInsets.symmetric(horizontal: 16.0),
               child: Column(
                 children: <Widget>[
-                  SizedBox(height: 32.0),
+                  const SizedBox(height: 32.0),
                   TextField(
                     controller: emaillController,
                     decoration: InputDecoration(
@@ -52,7 +38,7 @@ class ContactUsForm extends State<ContactUs> {
                       border: InputBorder.none,
                     ),
                   ),
-                  SizedBox(height: 8.0),
+                  const SizedBox(height: 8.0),
                   TextField(
                     controller: messageController,
                     maxLines: 7,
@@ -63,7 +49,7 @@ class ContactUsForm extends State<ContactUs> {
                       border: InputBorder.none,
                     ),
                   ),
-                  SizedBox(height: 8.0),
+                  const SizedBox(height: 8.0),
                   MaterialButton(
                     height: 60.0,
                     minWidth: double.infinity,
@@ -74,7 +60,7 @@ class ContactUsForm extends State<ContactUs> {
                           .then((value) {
                         print("Message Sent");
                         final snackBar =
-                            SnackBar(content: Text("Message Sent.."));
+                            const SnackBar(content: Text("Message Sent.."));
                         ScaffoldMessenger.of(context).showSnackBar(snackBar);
                         Navigator.pushNamed(context, 'home');
                       });
