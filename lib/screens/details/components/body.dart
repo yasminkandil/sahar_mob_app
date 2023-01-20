@@ -277,19 +277,13 @@ class _BodyState extends State<Body> {
                                                               GreyLightColors);
                                                     });
                                                   }
-
-                                                  Fluttertoast.showToast(
-                                                      msg:
-                                                          "Product added to cart sucessfully ✔️",
-                                                      backgroundColor:
-                                                          Colors.red);
                                                 });
                                               } else {
                                                 Fluttertoast.showToast(
                                                     msg:
                                                         "Please Sign-In first.",
                                                     backgroundColor:
-                                                        Colors.red);
+                                                        GreyLightColors);
                                                 Navigator.pushNamed(
                                                     context, 'login');
                                               }
