@@ -54,7 +54,8 @@ class _AddProductPageState extends State<AddProductPage> {
         pp.getImage();
       });
     } else {
-      print('No Path Received');
+      Fluttertoast.showToast(msg: 'Grant Permissions and try again');
+      return null;
     }
   }
 
@@ -319,8 +320,8 @@ class _AddProductPageState extends State<AddProductPage> {
                                       )
                                           .then((value) {
                                         Fluttertoast.showToast(
-                                          msg: "Product addedd...",
-                                          backgroundColor: orangeColors);
+                                            msg: "Product addedd...",
+                                            backgroundColor: orangeColors);
                                         Navigator.pop(context);
                                       });
                                     } else {

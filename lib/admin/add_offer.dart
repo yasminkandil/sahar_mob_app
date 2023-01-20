@@ -78,9 +78,9 @@ class _AddOfferPageState extends State<AddOfferPage> {
                                             'onSale': true,
                                           },
                                         ).then((value) {
-                                         Fluttertoast.showToast(
-                                          msg: "Offer addedd...",
-                                          backgroundColor: orangeColors);
+                                          Fluttertoast.showToast(
+                                              msg: "Offer addedd...",
+                                              backgroundColor: orangeColors);
                                           Navigator.pop(context);
                                         });
                                       }
@@ -101,10 +101,9 @@ class _AddOfferPageState extends State<AddOfferPage> {
                                             'onSale': false,
                                           },
                                         ).then((value) {
-                                          final snackBar = SnackBar(
-                                              content: Text("Offer removed.."));
-                                          ScaffoldMessenger.of(context)
-                                              .showSnackBar(snackBar);
+                                          Fluttertoast.showToast(
+                                              msg: "Offer Deleted...",
+                                              backgroundColor: orangeColors);
                                           Navigator.pop(context);
                                         });
                                       }),
