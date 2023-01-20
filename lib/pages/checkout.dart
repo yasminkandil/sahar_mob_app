@@ -159,7 +159,7 @@ class _CheckoutState extends State<checkout> {
                               alignment: Alignment.centerRight,
                               child: TextButton(
                                 style: TextButton.styleFrom(
-                                  primary: Color.fromARGB(255, 237, 149, 17),
+                                  primary: Color.fromARGB(255, 249, 118, 3),
                                 ),
                                 onPressed: () {
                                   if (formKey.currentState!.validate()) {
@@ -179,8 +179,7 @@ class _CheckoutState extends State<checkout> {
 
                                     FirebaseFirestore.instance
                                         .collection("orders")
-                                        .doc(FirebaseAuth
-                                            .instance.currentUser!.uid)
+                                        .doc()
                                         .set(model.toMap())
                                         .then((value) async {
                                       await FirebaseFirestore.instance

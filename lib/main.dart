@@ -39,14 +39,11 @@ import 'admin/add_product.dart';
 import 'admin/search_user.dart';
 import 'admin/view_categories.dart';
 import 'admin/view_colors.dart';
-import 'admin/view_offers.dart';
 import 'admin/view_qualties.dart';
 import 'pages/forgot_pass.dart';
 
 //import 'pages/cart_view.dart';
 //import 'pages/calendar.dart';
-
-
 
 const AndroidNotificationChannel channel = AndroidNotificationChannel(
     'high_importance_channel', // id
@@ -67,8 +64,8 @@ Future<void> _firebaseMessagingBackgroundHandler(RemoteMessage message) async {
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
-    FirebaseMessaging.onBackgroundMessage(_firebaseMessagingBackgroundHandler);
- await flutterLocalNotificationsPlugin
+  FirebaseMessaging.onBackgroundMessage(_firebaseMessagingBackgroundHandler);
+  await flutterLocalNotificationsPlugin
       .resolvePlatformSpecificImplementation<
           AndroidFlutterLocalNotificationsPlugin>()
       ?.createNotificationChannel(channel);
@@ -89,14 +86,10 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
-
   @override
   void initState() {
     super.initState();
-   
   }
-
-
 
   @override
   Widget build(BuildContext context) {
@@ -105,7 +98,6 @@ class _MyAppState extends State<MyApp> {
       title: 'Sahar',
       initialRoute: "homepage",
       routes: {
-        
         "homepage": (context) => const MyHomePage(),
         "navbar": (context) => Navigation_bar(),
         'login': (context) => LoginPage(),
@@ -124,7 +116,6 @@ class _MyAppState extends State<MyApp> {
         'view_products': (context) => const ViewProductPage(),
         'view_colors': (context) => const ViewcolorsPage(),
         'view_qualties': (context) => const ViewQualitiesPage(),
-        'view_offers': (context) => const ViewOffersPage(),
         'view_categories': (context) => const ViewCategoriesPage(),
         'add_product': (context) => AddProductPage(),
         'add_color': (context) => AddColorPage(),
@@ -138,7 +129,6 @@ class _MyAppState extends State<MyApp> {
                 'araf': (context) =>  Offerrphoto(),
 
       },
-      
     );
   }
 }
