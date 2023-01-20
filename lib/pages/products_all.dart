@@ -21,16 +21,6 @@ class Products extends StatelessWidget {
       body: Body(
         cat: cat,
       ),
-      drawer: Drawer(
-        child: SingleChildScrollView(
-            child: Container(
-          child: Column(children: [
-            // Malhashh lazmaa walla ehhh!!!!!!!!
-            MyHeaderDrawer(),
-            HomeNavbar().MyDrawerList()
-          ]),
-        )),
-      ),
     );
   }
 

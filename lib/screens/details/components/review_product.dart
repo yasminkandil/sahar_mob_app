@@ -79,9 +79,7 @@ class _ReviewState extends State<Review> {
                                   color: Colors.amber,
                                 ),
                                 onRatingUpdate: (rating) {
-                                  setState(() {
-                                    this.rating = rating;
-                                  });
+                                  setState(() {});
                                 },
                               ),
                               SizedBox(

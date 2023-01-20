@@ -109,7 +109,7 @@ class _MyAppState extends State<MyApp> {
         'contact_us': (context) => ContactUs(),
         'gallery': (context) => gallery(),
         'must_have_account': (context) => MustHaveAccountPage(),
-        'order_history': (context) => OrderScreen(salma: 'salma'),
+        'order_history': (context) => OrderScreen(ord: 'salma'),
         'view_users': (context) => ViewUsersPage(),
         'view_orders': (context) => ViewOrdersPage(),
         'view_messages': (context) => ViewMessagesPage(),
