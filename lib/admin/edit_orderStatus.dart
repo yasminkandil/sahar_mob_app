@@ -11,7 +11,6 @@ import '../widgets/app_bar.dart';
 class EditStatus extends StatelessWidget {
   final String ord;
   EditStatus({required this.ord});
-  TextEditingController orderstatus = TextEditingController();
   final CollectionReference _products =
       FirebaseFirestore.instance.collection('orders');
 
@@ -27,6 +26,9 @@ class EditStatus extends StatelessWidget {
           Map<String, dynamic> data = snapshot.data?.data() != null
               ? snapshot.data!.data()! as Map<String, dynamic>
               : <String, dynamic>{};
+          TextEditingController orderstatus =
+              TextEditingController(text: data['orderStatus']);
+
           return Scaffold(
             appBar: CustomAppBar(text: "Edit order Status"),
             //backgroundColor: Color.fromARGB(255, 103, 101, 101),

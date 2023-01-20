@@ -1,7 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/container.dart';
-import 'package:flutter/src/widgets/framework.dart';
+import 'package:sahar_mob_app/utils/color.dart';
+import 'package:sahar_mob_app/widgets/app_bar.dart';
 
 class OrdersDetails extends StatelessWidget {
   const OrdersDetails({super.key, required this.salma});
@@ -10,11 +10,10 @@ class OrdersDetails extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(
-          backgroundColor: Color.fromARGB(255, 61, 61, 61),
-          title: Text("My Orders Details"),
+        appBar: CustomAppBar(
+          text: "Order Details",
         ),
-        backgroundColor: Colors.orange,
+        //backgroundColor: Colors.orange,
         body: FutureBuilder(
             future: FirebaseFirestore.instance
                 .collection('orders')
@@ -25,42 +24,92 @@ class OrdersDetails extends StatelessWidget {
                 Map<String, dynamic> data = snapshot.data?.data() != null
                     ? snapshot.data!.data()! as Map<String, dynamic>
                     : <String, dynamic>{};
-                return ListView(
-                  children: [
-                    Text("Email:  ${data['orderBy']} ",
-                        style: TextStyle(
-                            fontWeight: FontWeight.bold,
-                            fontSize: 18,
-                            height: 2)),
-                    Text("Date: ${data['orderDate']}",
-                        style: TextStyle(
-                            fontWeight: FontWeight.bold,
-                            fontSize: 18,
-                            height: 2)),
-                    Text("Order Status: ${data['orderStatus']}",
-                        style: TextStyle(
-                            fontWeight: FontWeight.bold,
-                            fontSize: 18,
-                            height: 2)),
-                    Text(
-                      "Product Name: ${data['products']}",
-                      style: TextStyle(
-                          fontWeight: FontWeight.bold, fontSize: 18, height: 2),
+                return Padding(
+                  padding: const EdgeInsets.all(10),
+                  child: Container(
+                    child: Center(
+                      child: ListView(
+                        children: [
+                          Text("Email: ",
+                              style: TextStyle(
+                                  fontWeight: FontWeight.bold,
+                                  color: orangeColors,
+                                  fontSize: 18,
+                                  height: 2)),
+                          Text("${data['orderBy']} ",
+                              style: const TextStyle(
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 18,
+                                  height: 2)),
+                          Text("Date:",
+                              style: TextStyle(
+                                  fontWeight: FontWeight.bold,
+                                  color: orangeColors,
+                                  fontSize: 18,
+                                  height: 2)),
+                          Text("${data['orderDate']}",
+                              style: const TextStyle(
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 18,
+                                  height: 2)),
+                          Text("Order Status:",
+                              style: TextStyle(
+                                fontWeight: FontWeight.bold,
+                                fontSize: 18,
+                                height: 2,
+                                color: orangeColors,
+                              )),
+                          Text(" ${data['orderStatus']}",
+                              style: const TextStyle(
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 18,
+                                  height: 2)),
+                          Text(
+                            "Product Name:",
+                            style: TextStyle(
+                                color: orangeColors,
+                                fontWeight: FontWeight.bold,
+                                fontSize: 18,
+                                height: 2),
+                          ),
+                          Text(
+                            "${data['products']}",
+                            style: const TextStyle(
+                                fontWeight: FontWeight.bold,
+                                fontSize: 18,
+                                height: 2),
+                          ),
+                          Text("Total Paid:",
+                              style: TextStyle(
+                                fontWeight: FontWeight.bold,
+                                fontSize: 18,
+                                height: 2,
+                                color: orangeColors,
+                              )),
+                          Text("${data['totalPrice']}" + "EGP",
+                              style: const TextStyle(
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 18,
+                                  height: 2)),
+                          Text("Payment Method:",
+                              style: TextStyle(
+                                fontWeight: FontWeight.bold,
+                                fontSize: 18,
+                                height: 2,
+                                color: orangeColors,
+                              )),
+                          Text("${data['paymentMethod']}",
+                              style: const TextStyle(
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 18,
+                                  height: 2)),
+                        ],
+                      ),
                     ),
-                    Text("Total Paid:${data['totalPrice']}" + "EGP",
-                        style: TextStyle(
-                            fontWeight: FontWeight.bold,
-                            fontSize: 18,
-                            height: 2)),
-                    Text("Paument Method: ${data['paymentMethod']}",
-                        style: TextStyle(
-                            fontWeight: FontWeight.bold,
-                            fontSize: 18,
-                            height: 2)),
-                  ],
+                  ),
                 );
               }
-              return Text("Loading...");
+              return const Text("Loading...");
             })));
   }
 }

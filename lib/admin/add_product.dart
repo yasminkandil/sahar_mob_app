@@ -57,6 +57,38 @@ class _AddProductPageState extends State<AddProductPage> {
     }
   }
 
+  uploadImage2() async {
+    final _storage2 = FirebaseStorage.instance;
+    final _picker2 = ImagePicker();
+    PickedFile? image2;
+
+    //Check Permissions
+    await Permission.photos.request();
+
+    var permissionStatus = await Permission.photos.status;
+
+    //Select Image
+    image2 = await _picker2.getImage(source: ImageSource.gallery);
+    var file = File(image2!.path);
+
+    if (image2 != null) {
+      //Upload to Firebase
+      var snapshot =
+          await _storage2.ref().child(p.basename(image2.path)).putFile(file);
+
+      var downloadUrl2 = await snapshot.ref.getDownloadURL();
+
+      setState(() {
+        pp.imageUrl2 = downloadUrl2;
+        pp.greyimage2 = pp.imageUrl2;
+        pp.setImage2(pp.imageUrl2);
+        pp.getImage2();
+      });
+    } else {
+      print('No Path Received');
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     Widget colorr;
@@ -68,50 +100,105 @@ class _AddProductPageState extends State<AddProductPage> {
         padding: EdgeInsets.only(bottom: 5),
         child: Column(
           children: <Widget>[
-            Center(
-              child: Stack(
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: [
-                  Container(
-                    width: 140,
-                    height: 110,
-                    decoration: BoxDecoration(
-                        border: Border.all(width: 4, color: Colors.white),
-                        boxShadow: [
-                          BoxShadow(
-                              spreadRadius: 2,
-                              blurRadius: 10,
-                              color: Colors.black.withOpacity(0.1))
-                        ],
-                        shape: BoxShape.circle,
-                        image: DecorationImage(
-                            fit: BoxFit.cover,
-                            image: NetworkImage(pp.greyimage))),
+                  Center(
+                    child: Stack(
+                      children: [
+                        Container(
+                          width: 140,
+                          height: 110,
+                          decoration: BoxDecoration(
+                              border: Border.all(width: 4, color: Colors.white),
+                              boxShadow: [
+                                BoxShadow(
+                                    spreadRadius: 2,
+                                    blurRadius: 10,
+                                    color: Colors.black.withOpacity(0.1))
+                              ],
+                              shape: BoxShape.circle,
+                              image: DecorationImage(
+                                  fit: BoxFit.cover,
+                                  image: NetworkImage(pp.greyimage))),
+                        ),
+                        Positioned(
+                          right: 0,
+                          bottom: 0,
+                          child: Container(
+                              height: 40,
+                              width: 50,
+                              decoration: BoxDecoration(
+                                  shape: BoxShape.circle,
+                                  border: Border.all(
+                                    width: 2,
+                                    color: Colors.white,
+                                  ),
+                                  color: orangeColors),
+                              child: TextButton(
+                                child: Center(
+                                  child: Icon(
+                                    Icons.upload,
+                                    color: Colors.white,
+                                  ),
+                                ),
+                                onPressed: () {
+                                  uploadImage();
+                                },
+                              )),
+                        )
+                      ],
+                    ),
                   ),
-                  Positioned(
-                    right: 0,
-                    bottom: 0,
-                    child: Container(
-                        height: 40,
-                        width: 50,
-                        decoration: BoxDecoration(
-                            shape: BoxShape.circle,
-                            border: Border.all(
-                              width: 2,
-                              color: Colors.white,
-                            ),
-                            color: orangeColors),
-                        child: TextButton(
-                          child: Center(
-                            child: Icon(
-                              Icons.upload,
-                              color: Colors.white,
-                            ),
-                          ),
-                          onPressed: () {
-                            uploadImage();
-                          },
-                        )),
-                  )
+                  Center(
+                    child: Stack(
+                      children: [
+                        Container(
+                          width: 140,
+                          height: 110,
+                          decoration: BoxDecoration(
+                              border: Border.all(width: 4, color: Colors.white),
+                              boxShadow: [
+                                BoxShadow(
+                                    spreadRadius: 2,
+                                    blurRadius: 10,
+                                    color: Colors.black.withOpacity(0.1))
+                              ],
+                              shape: BoxShape.circle,
+                              image: DecorationImage(
+                                  fit: BoxFit.cover,
+                                  image: NetworkImage(pp.greyimage2))),
+                        ),
+                        Positioned(
+                          right: 0,
+                          bottom: 0,
+                          child: Container(
+                              height: 40,
+                              width: 50,
+                              decoration: BoxDecoration(
+                                  shape: BoxShape.circle,
+                                  border: Border.all(
+                                    width: 2,
+                                    color: Colors.white,
+                                  ),
+                                  color: orangeColors),
+                              child: TextButton(
+                                child: Center(
+                                  child: Icon(
+                                    Icons.upload,
+                                    color: Colors.white,
+                                  ),
+                                ),
+                                onPressed: () {
+                                  uploadImage2();
+                                },
+                              )),
+                        )
+                      ],
+                    ),
+                  ),
                 ],
               ),
             ),
@@ -217,15 +304,18 @@ class _AddProductPageState extends State<AddProductPage> {
                                     if (pp.getCategValue() != null) {
                                       pp
                                           .addProduct(
-                                              pp.nameController.text,
-                                              pp.descriptionController.text,
-                                              pp.aboutController.text,
-                                              pp.qualityController.text,
-                                              pp.colorController.text,
-                                              pp.getCategValue(),
-                                              pp.priceController.text,
-                                              pp.quantityController.text,
-                                              pp.greyimage)
+                                        pp.nameController.text,
+                                        pp.descriptionController.text,
+                                        pp.aboutController.text,
+                                        pp.qualityController.text,
+                                        pp.colorController.text,
+                                        pp.getCategValue(),
+                                        pp.priceController.text,
+                                        pp.quantityController.text,
+                                        pp.greyimage,
+                                        DateTime.now().toString(),
+                                        pp.greyimage2,
+                                      )
                                           .then((value) {
                                         final snackBar = SnackBar(
                                             content: Text("Product added.."));

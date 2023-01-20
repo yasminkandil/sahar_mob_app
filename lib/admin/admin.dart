@@ -1,24 +1,14 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
-import 'package:sahar_mob_app/admin/add_category.dart';
-import 'package:sahar_mob_app/admin/add_color.dart';
-import 'package:sahar_mob_app/admin/add_gallery.dart';
-import 'package:sahar_mob_app/admin/add_homePageImage.dart';
-import 'package:sahar_mob_app/admin/add_offer.dart';
-import 'package:sahar_mob_app/admin/add_product.dart';
-import 'package:sahar_mob_app/admin/add_quality.dart';
-import 'package:sahar_mob_app/admin/orders_admin.dart';
-import 'package:sahar_mob_app/admin/view_categories.dart';
-import 'package:sahar_mob_app/admin/view_colors.dart';
-import 'package:sahar_mob_app/admin/view_offers.dart';
-import 'package:sahar_mob_app/admin/view_qualties.dart';
-//import 'package:sahar_mob_app/pages/products_powerbank.dart';
-import 'package:sahar_mob_app/admin/users_admin.dart';
-import 'package:sahar_mob_app/admin/view_product.dart';
-import 'package:sahar_mob_app/pages/products_all.dart';
 import 'package:sahar_mob_app/utils/color.dart';
 import 'package:sahar_mob_app/home/home_page.dart';
 
 enum Page { dashboard, manage }
+
+var usersC =
+    FirebaseFirestore.instance.collection("users").count().get().toString();
 
 class Admin extends StatefulWidget {
   const Admin({super.key});
@@ -31,6 +21,7 @@ class _AdminState extends State<Admin> {
   Page _selectedPage = Page.dashboard;
   MaterialColor active = Colors.orange;
   MaterialColor notActive = Colors.grey;
+  int count = 0;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -56,7 +47,7 @@ class _AdminState extends State<Admin> {
                   child: ElevatedButton.icon(
                       style: ButtonStyle(
                         backgroundColor: MaterialStateProperty.all(
-                            const Color.fromARGB(255, 234, 119, 18)),
+                            Color.fromARGB(255, 249, 118, 3)),
                       ),
                       onPressed: () {
                         setState(() => _selectedPage = Page.dashboard);
@@ -67,7 +58,7 @@ class _AdminState extends State<Admin> {
                   child: ElevatedButton.icon(
                       style: ButtonStyle(
                         backgroundColor: MaterialStateProperty.all(
-                            const Color.fromARGB(255, 234, 119, 18)),
+                            Color.fromARGB(255, 249, 118, 3)),
                       ),
                       onPressed: () {
                         setState(() => _selectedPage = Page.manage);
@@ -119,7 +110,7 @@ class _AdminState extends State<Admin> {
                               icon: const Icon(Icons.people_outline),
                               label: const Text("Users")),
                           subtitle: Text(
-                            '700',
+                            '150',
                             textAlign: TextAlign.center,
                             style:
                                 TextStyle(color: orangeColors, fontSize: 50.0),
@@ -243,12 +234,6 @@ class _AdminState extends State<Admin> {
                 leading: const Icon(Icons.library_books),
                 title: const Text("Colors List"),
                 onTap: () => Navigator.pushNamed(context, 'view_colors')),
-            const Divider(),
-            ListTile(
-              leading: const Icon(Icons.library_books),
-              title: const Text("Offers List"),
-              onTap: () => Navigator.pushNamed(context, 'view_offers'),
-            ),
             const Divider(),
             ListTile(
                 leading: const Icon(Icons.add_circle_outline),

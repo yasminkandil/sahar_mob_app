@@ -2,6 +2,7 @@ import 'dart:ui';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:sahar_mob_app/models/product_model.dart';
 import 'package:sahar_mob_app/utils/color.dart';
 import 'package:sahar_mob_app/widgets/btn_widget.dart';
@@ -27,6 +28,16 @@ class EditProductPage extends StatelessWidget {
           Map<String, dynamic> data = snapshot.data?.data() != null
               ? snapshot.data!.data()! as Map<String, dynamic>
               : <String, dynamic>{};
+          TextEditingController nameeController =
+              TextEditingController(text: data['name']);
+          TextEditingController descriptionnController =
+              TextEditingController(text: data['description']);
+          TextEditingController abouttController =
+              TextEditingController(text: data['brand']);
+          TextEditingController priceeController =
+              TextEditingController(text: data['price']);
+          TextEditingController quantityyController =
+              TextEditingController(text: data['quantity']);
           return Scaffold(
             appBar: CustomAppBar(text: "Edit Product"),
             //backgroundColor: Color.fromARGB(255, 103, 101, 101),
@@ -124,17 +135,25 @@ class EditProductPage extends StatelessWidget {
                                               .doc(salma)
                                               .update(
                                             {
-                                              'name': nameeController.text,
-                                              'brand': abouttController.text,
+                                              'name':
+                                                  nameeController.text.trim(),
+                                              'brand':
+                                                  abouttController.text.trim(),
                                               'description':
-                                                  descriptionnController.text,
-                                              'price': int.parse(
-                                                  priceeController.text),
-                                              'quantity': int.parse(
-                                                  quantityController.text),
+                                                  descriptionnController.text
+                                                      .trim(),
+                                              'price':
+                                                  priceeController.text.trim(),
+                                              'quantity': quantityyController
+                                                  .text
+                                                  .trim(),
                                             },
-                                          ).then((value) =>
-                                                  Navigator.pop(context));
+                                          ).then((value) {
+                                            Fluttertoast.showToast(
+                                                msg: "Updated SuccessFully",
+                                                backgroundColor: Colors.green);
+                                            Navigator.pop(context);
+                                          });
                                         },
                                       ),
                                     ),

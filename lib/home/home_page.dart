@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:sahar_mob_app/controllers/home_controller.dart';
+import 'package:sahar_mob_app/home/offerhomefile.dart';
 import 'package:sahar_mob_app/pages/category.dart';
+import 'package:sahar_mob_app/pages/components/componentsCategory.dart';
 import 'package:sahar_mob_app/pages/view_account.dart';
 import 'package:sahar_mob_app/utils/color.dart';
 import 'package:get/get.dart';
@@ -28,15 +30,12 @@ class _MyHomePageState extends State<MyHomePage> {
     var navBody = [
       Container(child: Navigation_bar()),
       Container(
-        color: Colors.white10,
         child: ViewAccountPage(),
       ),
       Container(
-        color: Colors.white30,
         child: CartItem(),
       ),
       Container(
-        color: Colors.lightBlue,
         child: CategoryPage(),
       ),
     ];

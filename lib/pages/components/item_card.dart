@@ -54,10 +54,37 @@ class Itemcard extends StatelessWidget {
                   Padding(
                       padding: const EdgeInsets.symmetric(vertical: 10 / 4),
                       child: Text("${data['name']}")),
-                  Text(
-                    "${data['price']}" + "LE",
-                    style: TextStyle(fontWeight: FontWeight.bold),
-                  )
+                  data['onSale'] == true
+                      ? RichText(
+                          text: TextSpan(children: [
+                            TextSpan(
+                                text: "${data['price']} LE ",
+                                style: TextStyle(
+                                    color: Colors.red,
+                                    decoration: TextDecoration.lineThrough)),
+                            TextSpan(
+                                text: "${data['price2']} LE ",
+                                style: Theme.of(context)
+                                    .textTheme
+                                    .headline4
+                                    ?.copyWith(
+                                        color: Color.fromARGB(255, 5, 5, 5),
+                                        fontSize: 11,
+                                        fontWeight: FontWeight.bold)),
+                          ]),
+                        )
+                      : RichText(
+                          text: TextSpan(children: [
+                            TextSpan(
+                                text: "${data['price']} LE",
+                                style: Theme.of(context)
+                                    .textTheme
+                                    .headline4
+                                    ?.copyWith(
+                                        color: Color.fromARGB(255, 8, 8, 8),
+                                        fontSize: 14)),
+                          ]),
+                        ),
                 ],
               ),
             );

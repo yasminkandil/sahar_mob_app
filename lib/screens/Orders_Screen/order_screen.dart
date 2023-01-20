@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/container.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:sahar_mob_app/screens/Orders_Screen/order_details.dart';
+import 'package:sahar_mob_app/utils/color.dart';
 import 'package:sahar_mob_app/widgets/app_bar.dart';
 
 class OrderScreen extends StatelessWidget {
@@ -31,7 +32,7 @@ class OrderScreen extends StatelessWidget {
       appBar: CustomAppBar(
         text: "My Orders",
       ),
-      backgroundColor: Colors.orange,
+      //backgroundColor: Colors.orange,
       body: FutureBuilder(
         future: getDocord(),
         builder: (context, snapshot) {
@@ -62,13 +63,17 @@ class buildOrders extends StatelessWidget {
               : <String, dynamic>{};
           return Container(
               child: ListTile(
-            leading: Text("  ${index + 1} "),
-            title: Text(" Name:  ${data["products"]}"),
-            subtitle: Text("Order Price:    ${data['totalPrice']}  " + "EGP"),
+            leading: Text(
+              "  ${index + 1} ",
+              style: TextStyle(color: orangeColors),
+            ),
+            title: Text(" Products:  ${data["products"]}"),
+            subtitle: Text("Order Price:    ${data['totalPrice']}  " + "EGP",
+                style: TextStyle(color: orangeColors)),
             trailing: IconButton(
                 icon: Icon(
                   Icons.arrow_forward_ios_rounded,
-                  color: Colors.grey,
+                  color: Colors.orange,
                 ),
                 onPressed: () {
                   Navigator.push(

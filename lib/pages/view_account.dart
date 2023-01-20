@@ -6,8 +6,8 @@ import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:permission_handler/permission_handler.dart';
+import 'package:sahar_mob_app/models/uploadimage.dart';
 import 'package:sahar_mob_app/models/user_model.dart';
-import 'package:sahar_mob_app/pages/regi_page.dart';
 import 'package:sahar_mob_app/utils/color.dart';
 import 'package:sahar_mob_app/widgets/reg_textinput.dart';
 import 'package:path/path.dart' as p;
@@ -25,14 +25,11 @@ class ViewAccountPage extends StatefulWidget {
 final formKey = GlobalKey<FormState>();
 final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
 TextEditingController _emailController = TextEditingController();
-TextEditingController _fisrtController = TextEditingController();
-TextEditingController _lastController = TextEditingController();
-TextEditingController _mobileController = TextEditingController();
-TextEditingController _addrController = TextEditingController();
+
 final user = FirebaseAuth.instance.currentUser!;
 String userId = user.uid;
 Future updateUserDetails(String firstname, String lastname, String useraddress,
-    String userPhoneNumber, String userImage) async {
+    String userPhoneNumber) async {
   try {
     final updateUser =
         FirebaseFirestore.instance.collection('users').doc(userId);
@@ -40,9 +37,8 @@ Future updateUserDetails(String firstname, String lastname, String useraddress,
       {
         'firstname': firstname.trim(),
         'lastname': lastname.trim(),
-        'mobile': int.parse(userPhoneNumber.trim()),
+        'mobile': userPhoneNumber.trim(),
         'address': useraddress.trim(),
-        'image': userImage,
       },
     );
 
@@ -53,42 +49,9 @@ Future updateUserDetails(String firstname, String lastname, String useraddress,
 }
 
 class _ViewAccountPageState extends State<ViewAccountPage> {
-  uploadImage() async {
-    final _storage = FirebaseStorage.instance;
-    final _picker = ImagePicker();
-    PickedFile? image;
-
-    //Check Permissions
-    await Permission.photos.request();
-
-    var permissionStatus = await Permission.photos.status;
-
-    //Select Image
-    image = await _picker.getImage(source: ImageSource.gallery);
-    var file = File(image!.path);
-
-    if (image != null) {
-      //Upload to Firebase
-      var snapshot =
-          await _storage.ref().child(p.basename(image.path)).putFile(file);
-
-      downloadUrl = await snapshot.ref.getDownloadURL();
-
-      setState(() {
-        imageUrl = downloadUrl;
-        greyimage = imageUrl;
-        setImage(imageUrl);
-      });
-    } else {
-      print('No Path Received');
-    }
-  }
-
   @override
   Widget build(BuildContext context) {
     final userr = FirebaseAuth.instance.currentUser!;
-    final snackBar = SnackBar(
-        content: const Text('You need to sign in to view your account.'));
 
     return Scaffold(
       key: _scaffoldKey,
@@ -109,6 +72,15 @@ class _ViewAccountPageState extends State<ViewAccountPage> {
                           itemCount: snapshot.data!.docs.length,
                           itemBuilder: (context, index) {
                             var data = snapshot.data!.docs[index];
+                            TextEditingController _fisrtController =
+                                TextEditingController(text: data['firstname']);
+                            TextEditingController _lastController =
+                                TextEditingController(text: data['lastname']);
+                            TextEditingController _mobileController =
+                                TextEditingController(text: data['mobile']);
+                            TextEditingController _addrController =
+                                TextEditingController(text: data['address']);
+                            greyimage = data['image'];
                             return Column(
                               crossAxisAlignment: CrossAxisAlignment.center,
                               mainAxisAlignment: MainAxisAlignment.center,
@@ -135,8 +107,8 @@ class _ViewAccountPageState extends State<ViewAccountPage> {
                                             shape: BoxShape.circle,
                                             image: DecorationImage(
                                                 fit: BoxFit.cover,
-                                                image: NetworkImage(
-                                                    '${data['image']}'))),
+                                                image:
+                                                    NetworkImage(greyimage))),
                                       ),
                                       Positioned(
                                         bottom: 0,
@@ -156,8 +128,56 @@ class _ViewAccountPageState extends State<ViewAccountPage> {
                                                 Icons.edit,
                                                 color: Colors.white,
                                               ),
-                                              onPressed: () {
-                                                uploadImage();
+                                              onPressed: () async {
+                                                final _storage =
+                                                    FirebaseStorage.instance;
+                                                final _picker = ImagePicker();
+                                                PickedFile? image;
+
+                                                //Check Permissions
+                                                await Permission.photos
+                                                    .request();
+
+                                                var permissionStatus =
+                                                    await Permission
+                                                        .photos.status;
+
+                                                //Select Image
+                                                image = await _picker.getImage(
+                                                    source:
+                                                        ImageSource.gallery);
+                                                var file = File(image!.path);
+
+                                                if (image != null) {
+                                                  //Upload to Firebase
+                                                  var snapshot = await _storage
+                                                      .ref()
+                                                      .child(p
+                                                          .basename(image.path))
+                                                      .putFile(file);
+
+                                                  downloadUrl = await snapshot
+                                                      .ref
+                                                      .getDownloadURL();
+
+                                                  setState(
+                                                    () {
+                                                      imageUrl = downloadUrl;
+                                                      greyimage = imageUrl;
+                                                      setImage(imageUrl);
+                                                      FirebaseFirestore.instance
+                                                          .collection('users')
+                                                          .doc(userId)
+                                                          .update(
+                                                        {
+                                                          'image': greyimage,
+                                                        },
+                                                      );
+                                                    },
+                                                  );
+                                                } else {
+                                                  print('No Path Received');
+                                                }
                                               },
                                             )),
                                       )
@@ -274,22 +294,21 @@ class _ViewAccountPageState extends State<ViewAccountPage> {
                                               btnText: "Edit Account",
                                               onClick: () {
                                                 updateUserDetails(
-                                                        _fisrtController.text,
-                                                        _lastController.text,
-                                                        _addrController.text,
-                                                        _mobileController.text,
-                                                        '${data['image']}')
-                                                    .then(
+                                                  _fisrtController.text,
+                                                  _lastController.text,
+                                                  _addrController.text,
+                                                  _mobileController.text,
+                                                ).then(
                                                   (value) {
                                                     print("updated account");
                                                     final snackBar = SnackBar(
                                                         content: const Text(
-                                                            'Wrong Password!'));
+                                                            'Accont updated..'));
                                                     ScaffoldMessenger.of(
                                                             context)
                                                         .showSnackBar(snackBar);
                                                     Navigator.pushNamed(
-                                                        context, 'home');
+                                                        context, 'homepage');
                                                   },
                                                 );
                                               },

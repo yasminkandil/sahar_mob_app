@@ -107,13 +107,14 @@ class GetProductName extends StatelessWidget {
                         style: TextStyle(
                             color: Color.fromARGB(255, 249, 118, 3),
                             fontSize: 15),
-                        "Add Offer"),
+                        "Add/delete Offer"),
                     onPressed: () {
                       Navigator.push(
                           context,
                           MaterialPageRoute(
                               builder: (context) => AddOfferPage(
                                     prodid: salma,
+                                    p2: data['price2'],
                                   )));
                     }),
               )

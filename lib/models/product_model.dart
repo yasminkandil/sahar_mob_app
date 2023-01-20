@@ -15,18 +15,18 @@ TextEditingController qualityController = TextEditingController();
 TextEditingController quantityController = TextEditingController();
 TextEditingController colorController = TextEditingController();
 TextEditingController categController = TextEditingController();
-TextEditingController nameeController = TextEditingController();
-TextEditingController descriptionnController = TextEditingController();
-TextEditingController abouttController = TextEditingController();
-TextEditingController priceeController = TextEditingController();
-TextEditingController quantityyController = TextEditingController();
+
 var imageUrl;
 var downloadUrl;
 var imagee;
 var greyimage =
     'https://www.google.com/search?q=profile+photo+&tbm=isch&ved=2ahUKEwis27rOz_76AhVFexoKHU2PBGoQ2-cCegQIABAA&oq=profile+photo+&gs_lcp=CgNpbWcQAzIECAAQQzIFCAAQgAQyBQgAEIAEMgUIABCABDIFCAAQgAQyBQgAEIAEMgUIABCABDIFCAAQgAQyBQgAEIAEMgUIABCABDoGCAAQBxAeULwEWLwEYKoIaABwAHgAgAGZAYgBkwKSAQMwLjKYAQCgAQGqAQtnd3Mtd2l6LWltZ8ABAQ&sclient=img&ei=d4lZY-zDCsX2ac2ektAG&bih=657&biw=1366#imgrc=nfkyptoYx2OzJM';
 late String Cvalue;
-
+var imageUrl2;
+var downloadUrl2;
+var imagee2;
+var greyimage2 =
+    'https://www.google.com/search?q=profile+photo+&tbm=isch&ved=2ahUKEwis27rOz_76AhVFexoKHU2PBGoQ2-cCegQIABAA&oq=profile+photo+&gs_lcp=CgNpbWcQAzIECAAQQzIFCAAQgAQyBQgAEIAEMgUIABCABDIFCAAQgAQyBQgAEIAEMgUIABCABDIFCAAQgAQyBQgAEIAEMgUIABCABDoGCAAQBxAeULwEWLwEYKoIaABwAHgAgAGZAYgBkwKSAQMwLjKYAQCgAQGqAQtnd3Mtd2l6LWltZ8ABAQ&sclient=img&ei=d4lZY-zDCsX2ac2ektAG&bih=657&biw=1366#imgrc=nfkyptoYx2OzJM';
 String getCValue() {
   return Cvalue;
 }
@@ -51,6 +51,14 @@ getImage() {
   return imagee;
 }
 
+setImage2(String imagee2) {
+  imagee2 = imagee2;
+}
+
+getImage2() {
+  return imagee2;
+}
+
 List Listcolors = ['Black', 'Blue'];
 List ListCateg = [
   'Headphones',
@@ -72,7 +80,9 @@ Future addProduct(
     String category,
     String price,
     String quantity,
-    String prodimage) async {
+    String prodimage,
+    String date,
+    String img2) async {
   await FirebaseFirestore.instance.collection('products').doc().set({
     'name': name,
     'description': description,
@@ -80,75 +90,24 @@ Future addProduct(
     'quality': quality,
     'color': color,
     'category': category,
-    'price': int.parse(price),
-    'quantity': int.parse(quantity),
+    'price': price,
+    'quantity': quantity,
     'image': prodimage,
+    'Date': date,
+    'image2': img2,
   });
 }
 
 class ProductModel {
-  //List<String> images;
-  //List<String> like;
-  //List<String> dislike;
-  //List<String> favories;
   String name;
   String description;
   String price;
   String capacity;
 
-  //String uid;
-  // CarType type;
-  //String id;
   ProductModel({
     required this.capacity,
-    // required this.images,
     required this.name,
     required this.description,
     required this.price,
-    // required this.type,
-    //  required this.id,
-    // required this.uid,
-    // required   this.dislike,
-    //required   this.like,
-    //required   this.favories
   });
-
-  toJson() {
-    return {
-      name: ["name"],
-      description: ["description"],
-      price: ["price"],
-      capacity: ["capacity"],
-    };
-  }
-
-  factory ProductModel.fromSnapshot(
-      DocumentSnapshot<Map<String, dynamic>> document) {
-    final data = document.data();
-    return ProductModel(
-      //  id:document.id,
-      name: data!["name"],
-      description: data["description"],
-      price: data!["price"],
-      capacity: data["capacity"],
-     
-    );
-  }
-
-  Map<String, dynamic> toMap() {
-    return {
-      //  "type": type == CarType.car ? "car" : "moto",
-      // "images": images,
-      "name": name,
-      "description": description,
-      "capacity": capacity,
-      "prix": price,
-      // "uid": uid,
-      //"like": like,
-      // "dislike": dislike,
-      // "favories": favories
-    };
-  }
 }
-
-//enum CarType { car, moto }

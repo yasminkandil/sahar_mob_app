@@ -94,10 +94,15 @@ class _RegisterPageState extends State<RegisterPage> {
 
     super.dispose();
   }*/
+  bool _obscureText = true;
+  void _togglePasswordVisibility() {
+    setState(() {
+      _obscureText = !_obscureText;
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
-    bool _obscureText = true;
     return Scaffold(
       appBar: CustomAppBar(text: ""),
       body: Container(
@@ -227,7 +232,7 @@ class _RegisterPageState extends State<RegisterPage> {
                                   suffixIcon: InkWell(
                                     onTap: () {
                                       setState(() {
-                                        _obscureText = ! _obscureText;
+                                        _obscureText = !_obscureText;
                                       });
                                     },
                                     child: Icon(_obscureText
@@ -256,22 +261,19 @@ class _RegisterPageState extends State<RegisterPage> {
                               controller: confirmPassController,
                               obscureText: _obscureText,
                               decoration: InputDecoration(
-                                  border: InputBorder.none,
-                                  hintText: "Confirm Password",
-                                  prefixIcon: const Icon(
-                                    Icons.vpn_key,
-                                    color: Color.fromARGB(255, 249, 118, 3),
-                                  ),
-                                  suffixIcon: InkWell(
-                                    onTap: () {
-                                      setState(() {
-                                        _obscureText = ! _obscureText;
-                                      });
-                                    },
-                                    child: Icon(_obscureText
-                                        ? Icons.visibility
-                                        : Icons.visibility_off),
-                                  )),
+                                border: InputBorder.none,
+                                hintText: "Confirm Password",
+                                prefixIcon: const Icon(
+                                  Icons.vpn_key,
+                                  color: Color.fromARGB(255, 249, 118, 3),
+                                ),
+                                suffixIcon: GestureDetector(
+                                  onTap: _togglePasswordVisibility,
+                                  child: _obscureText
+                                      ? Icon(Icons.visibility)
+                                      : Icon(Icons.visibility_off),
+                                ),
+                              ),
                               validator: (value) {
                                 if (value!.isEmpty ||
                                     passwordController.text !=
@@ -314,7 +316,8 @@ class _RegisterPageState extends State<RegisterPage> {
                                             content: Text("Account Created.."));
                                         ScaffoldMessenger.of(context)
                                             .showSnackBar(snackBar);
-                                        Navigator.pushNamed(context, 'home');
+                                        Navigator.pushNamed(
+                                            context, 'homepage');
                                       });
                                       //}
                                     }

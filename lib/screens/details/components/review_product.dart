@@ -15,18 +15,6 @@ class Review extends StatefulWidget {
 }
 
 class _ReviewState extends State<Review> {
-  Future addrate(
-      String? email, String comment, double rate, String productID) async {
-    await FirebaseFirestore.instance.collection('rate').doc().set(
-      {
-        'comment': comment,
-        'email': email,
-        'rate': rate,
-        'productID': productID,
-      },
-    );
-  }
-
   List<String> rev = [];
 
   Future getDocreview() async {
@@ -70,6 +58,7 @@ class _ReviewState extends State<Review> {
                             snapshot.data?.data() != null
                                 ? snapshot.data?.data() as Map<String, dynamic>
                                 : {};
+
                         return SingleChildScrollView(
                           child: Column(
                             children: [
@@ -106,6 +95,7 @@ class _ReviewState extends State<Review> {
                           ),
                         );
                       }
+
                       return Text("Loading....");
                     },
                   ),
