@@ -2,16 +2,10 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-
-import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:sahar_mob_app/models/cart_model2.dart';
 import 'package:sahar_mob_app/pages/checkout.dart';
-import 'package:sahar_mob_app/pages/products_all.dart';
-import 'package:sahar_mob_app/widgets/header_container.dart';
-import 'package:sahar_mob_app/widgets/header_container.dart';
 import 'package:sahar_mob_app/home/home_page.dart';
-
 import '../utils/color.dart';
 import 'components/custom_cart_item.dart';
 
@@ -120,7 +114,7 @@ class _CartItemState extends State<CartItem> {
                             ),
                           )
                         : ListView.separated(
-                            physics: BouncingScrollPhysics(),
+                            physics: const BouncingScrollPhysics(),
                             itemBuilder: (context, index) {
                               return CustomCartItem(cartList[index]);
                             },
