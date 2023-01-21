@@ -41,22 +41,20 @@ class _HomeScreenState extends State<HomeScreen> {
             aspectRatio: 16 / 5,
             autoPlay: true,
             height: 150,
-            enlargeCenterPage: true,
             itemCount: 7,
+            enlargeCenterPage: true,
             itemBuilder: (context, index) {
               getDocImage();
               builder:
-              (context, snapshot) {
+              (context, snapshot) {    
+                        itemCount: snapshot.data.length;
+
                 if (snapshot.hasError) {
                   return Center(child: CircularProgressIndicator());
                 }
                 if (snapshot.connectionState == ConnectionState.waiting) {
                   return Text("Loading");
-                }
-
-                Map<String, dynamic> data = snapshot.data?.data() != null
-                    ? snapshot.data!.data()! as Map<String, dynamic>
-                    : <String, dynamic>{};
+                }               
               };
 
               return Container(

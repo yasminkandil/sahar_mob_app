@@ -9,10 +9,18 @@ import '../models/contact_us_model.dart';
 import '../providers/messages_provider.dart';
 import '../utils/color.dart';
 import '../widgets/app_bar.dart';
+import 'search_messages.dart';
 
 class ViewMessagesPage extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+     Future<void> MsgSearch() async {
+      await showSearch(
+        context: context,
+        delegate: MessageSearch(),
+      );
+    }
+
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       home: Scaffold(
@@ -32,11 +40,8 @@ class ViewMessagesPage extends ConsumerWidget {
               onPressed: () {
                 // method to show the search bar
                 //context: context, delegate:
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                      builder: (context) => const FirebaseSearchUserScreen()),
-                );
+                MsgSearch();
+               
               },
               icon: const Icon(Icons.search),
             ),
