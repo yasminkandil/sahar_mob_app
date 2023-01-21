@@ -7,8 +7,8 @@ import 'package:sahar_mob_app/home/home_page.dart';
 
 enum Page { dashboard, manage }
 
-var usersC =
-    FirebaseFirestore.instance.collection("users").count().get().toString();
+//var usersC =
+//  FirebaseFirestore.instance.collection("users").count().get().toString();
 
 class Admin extends StatefulWidget {
   const Admin({super.key});

@@ -52,14 +52,13 @@ TextEditingController mobileController = TextEditingController();
 TextEditingController addrController = TextEditingController();
 
 class UserModel {
- 
   String firstname;
   String lastname;
   String email;
   String address;
   String mobile;
   String image;
-  
+
   UserModel({
     required this.firstname,
     // required this.images,
@@ -69,26 +68,6 @@ class UserModel {
     required this.mobile,
     required this.image,
   });
-
-  Future getUserName() async {
-    String userName;
-    final DocumentSnapshot documentSnapshot =
-        await FirebaseFirestore.instance.collection('users').doc().get();
-    userName = documentSnapshot.get('firstname');
-    return userName;
-  }
-
-
-  Map<String, dynamic> toMap() {
-    return {
-     
-      "firstname": firstname,
-      "lastname": lastname,
-      "email": email,
-      "address": address,
-     
-    };
-  }
 }
 
 class UsersData {

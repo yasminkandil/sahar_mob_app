@@ -19,19 +19,12 @@ class MyHomePage extends StatelessWidget {
     var navbarItem = [
       BottomNavigationBarItem(icon: const Icon(Icons.home), label: 'Home'),
       BottomNavigationBarItem(icon: const Icon(Icons.photo), label: 'Gallery'),
-      // BottomNavigationBarItem(
-      //     icon: const Icon(Icons.shopping_bag), label: 'Cart'),
-      BottomNavigationBarItem(
-          icon: const Icon(Icons.category), label: 'Categories'),
       BottomNavigationBarItem(icon: const Icon(Icons.shop), label: 'Shop'),
     ];
     var navBody = [
       Container(child: Navigation_bar()),
       Container(
         child: gallery(),
-      ),
-      Container(
-        child: CartItem(),
       ),
       Container(
         child: CategoryPage(),

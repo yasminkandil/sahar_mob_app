@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:sahar_mob_app/controllers/search_product.dart';
 import 'package:sahar_mob_app/utils/color.dart';
@@ -40,13 +41,11 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
         ),
         IconButton(
           onPressed: () {
-            // method to show the search bar
-          },
-          icon: const Icon(Icons.notifications),
-        ),
-        IconButton(
-          onPressed: () {
-            // method to show the search bar
+            if (FirebaseAuth.instance.currentUser == null) {
+              Navigator.pushNamed(context, 'must_have_account');
+            } else {
+              Navigator.pushNamed(context, 'cart');
+            }
           },
           icon: const Icon(Icons.shopping_bag),
         )

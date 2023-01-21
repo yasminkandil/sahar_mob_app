@@ -34,12 +34,6 @@ class ViewUsersPage extends ConsumerWidget {
               },
               icon: const Icon(Icons.search),
             ),
-            IconButton(
-              onPressed: () {
-                // method to show the search bar
-              },
-              icon: const Icon(Icons.notifications),
-            ),
           ],
         ),
         body: SafeArea(

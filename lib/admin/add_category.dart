@@ -1,6 +1,12 @@
+import 'dart:io';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:get/get.dart';
+import 'package:image_picker/image_picker.dart';
+import 'package:permission_handler/permission_handler.dart';
 import 'package:sahar_mob_app/admin/add_product.dart';
 import 'package:sahar_mob_app/utils/color.dart';
 import 'package:sahar_mob_app/widgets/app_bar.dart';
@@ -15,6 +21,33 @@ class AddCategPage extends StatefulWidget {
 }
 
 class _AddCategPageState extends State<AddCategPage> {
+  uploadImage() async {
+    final _storage = FirebaseStorage.instance;
+    final _picker = ImagePicker();
+    PickedFile? image;
+    await Permission.photos.request();
+    var permissionStatus = await Permission.photos.status;
+    image = await _picker.getImage(source: ImageSource.gallery);
+    var file = File(image!.path);
+    if (permissionStatus.isGranted) {
+      var snapshot = await _storage
+          .ref()
+          .child('categories/${_nameController.text}')
+          .putFile(file);
+      var downloadUrl = await snapshot.ref.getDownloadURL();
+      setState(() {
+        imageUrl = downloadUrl;
+        greyimage = imageUrl;
+        setImage(imageUrl);
+        getImage();
+      });
+      return downloadUrl;
+    } else {
+      Fluttertoast.showToast(msg: 'Grant Permissions and try again');
+      return null;
+    }
+  }
+
   final _nameController = TextEditingController();
   final _subtitleController = TextEditingController();
   Future addCategory(String name, String subtitle) async {
@@ -34,7 +67,6 @@ class _AddCategPageState extends State<AddCategPage> {
           padding: EdgeInsets.only(top: 20, bottom: 20),
           child: Column(
             children: <Widget>[
-              // HeaderContainer("Register"),
               Center(
                 child: Stack(
                   children: [
@@ -52,27 +84,32 @@ class _AddCategPageState extends State<AddCategPage> {
                           shape: BoxShape.circle,
                           image: DecorationImage(
                               fit: BoxFit.cover,
-                              image: NetworkImage(
-                                  'https://www.google.com/search?q=profile+photo+&tbm=isch&ved=2ahUKEwis27rOz_76AhVFexoKHU2PBGoQ2-cCegQIABAA&oq=profile+photo+&gs_lcp=CgNpbWcQAzIECAAQQzIFCAAQgAQyBQgAEIAEMgUIABCABDIFCAAQgAQyBQgAEIAEMgUIABCABDIFCAAQgAQyBQgAEIAEMgUIABCABDoGCAAQBxAeULwEWLwEYKoIaABwAHgAgAGZAYgBkwKSAQMwLjKYAQCgAQGqAQtnd3Mtd2l6LWltZ8ABAQ&sclient=img&ei=d4lZY-zDCsX2ac2ektAG&bih=657&biw=1366#imgrc=nfkyptoYx2OzJM'))),
+                              image: NetworkImage(greyimage))),
                     ),
                     Positioned(
-                      right: 0,
-                      bottom: 0,
-                      child: Container(
-                          height: 30,
-                          width: 30,
-                          decoration: BoxDecoration(
-                              shape: BoxShape.circle,
-                              border: Border.all(
-                                width: 2,
-                                color: Colors.white,
+                        right: 0,
+                        bottom: 0,
+                        child: Container(
+                            height: 30,
+                            width: 30,
+                            decoration: BoxDecoration(
+                                shape: BoxShape.circle,
+                                border: Border.all(
+                                  width: 2,
+                                  color: Colors.white,
+                                ),
+                                color: Colors.orange),
+                            child: TextButton(
+                              child: Center(
+                                child: Icon(
+                                  Icons.upload,
+                                  color: Colors.white,
+                                ),
                               ),
-                              color: Colors.orange),
-                          child: Icon(
-                            Icons.upload,
-                            color: Colors.white,
-                          )),
-                    )
+                              onPressed: () {
+                                uploadImage();
+                              },
+                            )))
                   ],
                 ),
               ),
@@ -114,9 +151,9 @@ class _AddCategPageState extends State<AddCategPage> {
                                           addCategory(_nameController.text,
                                                   _subtitleController.text)
                                               .then((value) {
-                                           Fluttertoast.showToast(
-                                          msg: "Category addedd...",
-                                          backgroundColor: orangeColors);
+                                            Fluttertoast.showToast(
+                                                msg: "Category addedd...",
+                                                backgroundColor: orangeColors);
                                             Navigator.pop(context);
                                           });
                                         }
