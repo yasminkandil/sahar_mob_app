@@ -16,9 +16,9 @@ import 'package:sahar_mob_app/screens/details/components/review_product.dart';
 import 'package:sahar_mob_app/utils/color.dart';
 
 class Body extends StatefulWidget {
-  final String salma;
+  final String prod;
 
-  const Body({super.key, required this.salma});
+  const Body({super.key, required this.prod});
 
   @override
   State<Body> createState() => _BodyState();
@@ -130,7 +130,7 @@ class _BodyState extends State<Body> {
                                           MaterialPageRoute(
                                               builder: (context) => Review(
                                                     ratee:
-                                                        widget.salma.toString(),
+                                                        widget.prod.toString(),
                                                   )));
                                     }),
                               ),
@@ -324,7 +324,7 @@ class _BodyState extends State<Body> {
                                                 MaterialPageRoute(
                                                     builder: (context) =>
                                                         AddReview(
-                                                          ratee: widget.salma
+                                                          ratee: widget.prod
                                                               .toString(),
                                                         )));
                                           }
@@ -357,7 +357,7 @@ class _BodyState extends State<Body> {
   void getProducatInfo() {
     FirebaseFirestore.instance
         .collection("products")
-        .doc(widget.salma)
+        .doc(widget.prod)
         .get()
         .then((value) {
       setState(() {

@@ -14,7 +14,7 @@ class Body extends StatelessWidget {
   String cat;
   Body({super.key, required this.cat});
 
-  List<String> prod = [];
+  List<String> products = [];
 
   Future getDocProd() async {
     await FirebaseFirestore.instance
@@ -24,7 +24,7 @@ class Body extends StatelessWidget {
         .then(
           (snapshot) => snapshot.docs.forEach((document) {
             print(document.reference);
-            prod.add(document.reference.id);
+            products.add(document.reference.id);
           }),
         );
   }
@@ -42,17 +42,17 @@ class Body extends StatelessWidget {
                 return Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 15),
                   child: GridView.builder(
-                    itemCount: prod.length,
+                    itemCount: products.length,
                     gridDelegate:
                         const SliverGridDelegateWithFixedCrossAxisCount(
                             crossAxisCount: 2, childAspectRatio: 0.75),
                     itemBuilder: (context, index) => Itemcard(
-                      salma: prod[index],
+                      prod: products[index],
                       press: () => Navigator.push(
                           context,
                           MaterialPageRoute(
                               builder: (context) =>
-                                  DetailScreen(salma: prod[index]))),
+                                  DetailScreen(prod: products[index]))),
                     ),
                   ),
                 );

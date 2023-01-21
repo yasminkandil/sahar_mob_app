@@ -32,16 +32,13 @@ class ProductSearch extends SearchDelegate {
   Widget buildResults(BuildContext context) {
     return StreamBuilder<QuerySnapshot>(
       stream: products.snapshots().asBroadcastStream(),
-      builder: (BuildContext context, 
-      AsyncSnapshot<QuerySnapshot> snapshot) {
+      builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
         if (snapshot.hasError) {
           return Center(child: CircularProgressIndicator());
         }
         if (snapshot.connectionState == ConnectionState.waiting) {
           return Text("Loading");
-        }
-       
-        else {
+        } else {
           if (snapshot.data!.docs
               .where((QueryDocumentSnapshot<Object?> element) => element['name']
                   .toString()
@@ -58,8 +55,7 @@ class ProductSearch extends SearchDelegate {
               ),
             ));
           }
-          return ListView(
-            children: [
+          return ListView(children: [
             ...snapshot.data!.docs
                 .where((QueryDocumentSnapshot<Object?> element) =>
                     element['name']
@@ -75,7 +71,7 @@ class ProductSearch extends SearchDelegate {
                         context,
                         MaterialPageRoute(
                             builder: (context) => DetailScreen(
-                                  salma: data.id,
+                                  prod: data.id,
                                 )));
                   }),
                   title: Text(
@@ -114,4 +110,3 @@ class ProductSearch extends SearchDelegate {
     ));
   }
 }
-  

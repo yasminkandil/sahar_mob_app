@@ -7,8 +7,8 @@ import 'package:sahar_mob_app/screens/details/components/body.dart';
 import 'package:sahar_mob_app/utils/color.dart';
 
 class DetailScreen extends StatelessWidget {
-  final String salma;
-  const DetailScreen({super.key, required this.salma});
+  final String prod;
+  const DetailScreen({super.key, required this.prod});
 
   @override
   Widget build(BuildContext context) {
@@ -16,7 +16,7 @@ class DetailScreen extends StatelessWidget {
       backgroundColor: GreyLightColors,
       appBar: buildAppBar(context),
       body: Body(
-        salma: salma,
+        prod: prod,
       ),
     );
   }

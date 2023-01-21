@@ -30,7 +30,7 @@ class OffersData extends StatelessWidget {
                           context,
                           MaterialPageRoute(
                               builder: (context) =>
-                                  DetailScreen(salma: offersitemss)));
+                                  DetailScreen(prod: offersitemss)));
                     },
                     child: Container(
                       height: 200,
@@ -45,7 +45,7 @@ class OffersData extends StatelessWidget {
                           context,
                           MaterialPageRoute(
                               builder: (context) =>
-                                  DetailScreen(salma: offersitemss)));
+                                  DetailScreen(prod: offersitemss)));
                     },
                     child: RichText(
                       textScaleFactor: 1.5,

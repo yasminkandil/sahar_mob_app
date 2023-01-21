@@ -7,9 +7,9 @@ import 'package:sahar_mob_app/screens/details/details_screen.dart';
 
 class Itemcard extends StatelessWidget {
   final Function press;
-  final String salma;
+  final String prod;
   const Itemcard({
-    required this.salma,
+    required this.prod,
     required this.press,
   });
 
@@ -21,7 +21,7 @@ class Itemcard extends StatelessWidget {
 
     return FutureBuilder<DocumentSnapshot>(
         future:
-            FirebaseFirestore.instance.collection('products').doc(salma).get(),
+            FirebaseFirestore.instance.collection('products').doc(prod).get(),
         builder: ((context, snapshot) {
           if (snapshot.connectionState == ConnectionState.done) {
             Map<String, dynamic> data = snapshot.data?.data() != null
@@ -31,7 +31,7 @@ class Itemcard extends StatelessWidget {
               onTap: () {
                 Navigator.push(context, MaterialPageRoute(builder: (context) {
                   return DetailScreen(
-                    salma: salma,
+                    prod: prod,
                   );
                 }));
               },
